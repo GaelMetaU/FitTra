@@ -10,6 +10,7 @@
 static NSString * const BODY_ZONE_CLASS = @"BodyZone";
 static NSString * const SAVED_EXERCISE_CLASS= @"SavedExercise";
 
+
 @implementation ParseAPIManager
 
 +(void)logIn:(NSString *)username
@@ -134,6 +135,17 @@ static NSString * const SAVED_EXERCISE_CLASS= @"SavedExercise";
     };
     
     [newRoutine saveInBackgroundWithBlock:block];
+}
+
+
++ (void)fetchHomeTimelineRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion{
+    PFQuery *query = [PFQuery queryWithClassName:ROUTINE_CLASS];
+    
+    ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
+        completion(elements, error);
+    };
+    
+    [query findObjectsInBackgroundWithBlock:block];
 }
 
 

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5386A4E74F9A4613D5B1BC69 /* Pods_GymBuddies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A552040E1859E2C0F57C5F /* Pods_GymBuddies.framework */; };
 		8E10A454288720C600DA1D9A /* Routine.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E10A453288720C600DA1D9A /* Routine.m */; };
+		8E10A457288887A700DA1D9A /* GoogleMapsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E10A456288887A700DA1D9A /* GoogleMapsView.m */; };
 		8E70890128775751008B4238 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E70890028775751008B4238 /* AppDelegate.m */; };
 		8E70890428775751008B4238 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E70890328775751008B4238 /* SceneDelegate.m */; };
 		8E70890A28775751008B4238 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E70890828775751008B4238 /* Main.storyboard */; };
@@ -66,6 +67,8 @@
 		81A552040E1859E2C0F57C5F /* Pods_GymBuddies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymBuddies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E10A452288720C600DA1D9A /* Routine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Routine.h; sourceTree = "<group>"; };
 		8E10A453288720C600DA1D9A /* Routine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Routine.m; sourceTree = "<group>"; };
+		8E10A455288887A700DA1D9A /* GoogleMapsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleMapsView.h; sourceTree = "<group>"; };
+		8E10A456288887A700DA1D9A /* GoogleMapsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoogleMapsView.m; sourceTree = "<group>"; };
 		8E7088FC28775751008B4238 /* GymBuddies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymBuddies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E7088FF28775751008B4238 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8E70890028775751008B4238 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -287,6 +290,8 @@
 				8E832EA02880B1D000BF0024 /* AddExerciseTableViewCell.m */,
 				8EF822652885E5FF0000DED9 /* ExerciseInCreateRoutineTableViewCell.h */,
 				8EF822662885E5FF0000DED9 /* ExerciseInCreateRoutineTableViewCell.m */,
+				8E10A455288887A700DA1D9A /* GoogleMapsView.h */,
+				8E10A456288887A700DA1D9A /* GoogleMapsView.m */,
 			);
 			path = ViewCells;
 			sourceTree = "<group>";
@@ -313,6 +318,7 @@
 				8E7088F928775751008B4238 /* Frameworks */,
 				8E7088FA28775751008B4238 /* Resources */,
 				1EB55B2B3C6DA7204970C5E8 /* [CP] Embed Pods Frameworks */,
+				C0D2BD6F0E46264B2652C300 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -351,6 +357,7 @@
 				8E70891E28775752008B4238 /* Frameworks */,
 				8E70891F28775752008B4238 /* Resources */,
 				3DAB65179CF380079AFC104B /* [CP] Embed Pods Frameworks */,
+				7D2B899EC2B78EBB7C5ACF72 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -467,6 +474,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GymBuddies-GymBuddiesUITests/Pods-GymBuddies-GymBuddiesUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		7D2B899EC2B78EBB7C5ACF72 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GymBuddies-GymBuddiesUITests/Pods-GymBuddies-GymBuddiesUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GymBuddies-GymBuddiesUITests/Pods-GymBuddies-GymBuddiesUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GymBuddies-GymBuddiesUITests/Pods-GymBuddies-GymBuddiesUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		B59300ECE281C12B8FCC0C44 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -487,6 +511,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C0D2BD6F0E46264B2652C300 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GymBuddies/Pods-GymBuddies-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GymBuddies/Pods-GymBuddies-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GymBuddies/Pods-GymBuddies-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CBCFEB249CCEE1BD6C3481BD /* [CP] Check Pods Manifest.lock */ = {
@@ -547,6 +588,8 @@
 				8E70894428779209008B4238 /* RegisterViewController.m in Sources */,
 				8E7089512878EBFE008B4238 /* ProfileViewController.m in Sources */,
 				8E708961287CEF40008B4238 /* BodyZone.m in Sources */,
+				8E10A457288887A700DA1D9A /* GoogleMapsView.m in Sources */,
+				8E832E9E28809DF200BF0024 /* SavedExercise.m in Sources */,
 				8E708964287CEF5A008B4238 /* Exercise.m in Sources */,
 				8E70890128775751008B4238 /* AppDelegate.m in Sources */,
 				8E70895D287CDBF4008B4238 /* CreateExerciseViewController.m in Sources */,
@@ -737,6 +780,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GymBuddies/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Need camera access to take video";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We want your location to recommend you the best places to workout around you";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need library access to upload images";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -767,6 +811,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GymBuddies/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Need camera access to take video";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We want your location to recommend you the best places to workout around you";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need library access to upload images";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

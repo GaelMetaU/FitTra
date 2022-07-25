@@ -41,6 +41,8 @@ typedef void (^ParseManagerFetchingDataRowsCompletionBlock) (NSArray *elements, 
 
 + (void)postRoutine:(Routine *)routine completion:(ParseManagerCreateCompletionBlock) completion;
 
++ (void)fetchHomeTimelineRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion;
+
 + (PFFileObject *)getPFFileFromURL:(NSURL *)video videoName:(NSString *)videoName;
 
 + (PFFileObject *)getPFFileFromImage:(UIImage *)image imageName:(NSString *)imageName;
