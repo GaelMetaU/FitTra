@@ -70,7 +70,7 @@ static NSString * const SAVED_EXERCISE_CLASS= @"SavedExercise";
         }
     };
     
-    [newExercise.image saveInBackgroundWithBlock:checkBlock progressBlock:^(int percentDone) {
+    [newExercise.video saveInBackgroundWithBlock:checkBlock progressBlock:^(int percentDone) {
             [progress setProgress: percentDone / 100];
     }];
     
