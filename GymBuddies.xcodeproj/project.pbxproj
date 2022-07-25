@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5386A4E74F9A4613D5B1BC69 /* Pods_GymBuddies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A552040E1859E2C0F57C5F /* Pods_GymBuddies.framework */; };
+		8E10A454288720C600DA1D9A /* Routine.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E10A453288720C600DA1D9A /* Routine.m */; };
 		8E70890128775751008B4238 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E70890028775751008B4238 /* AppDelegate.m */; };
 		8E70890428775751008B4238 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E70890328775751008B4238 /* SceneDelegate.m */; };
 		8E70890A28775751008B4238 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E70890828775751008B4238 /* Main.storyboard */; };
@@ -30,9 +31,10 @@
 		8E708964287CEF5A008B4238 /* Exercise.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E708963287CEF5A008B4238 /* Exercise.m */; };
 		8E832E98287F351300BF0024 /* BodyZoneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E832E97287F351300BF0024 /* BodyZoneCollectionViewCell.m */; };
 		8E832E9B287F4B9200BF0024 /* CommonValidations.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E832E9A287F4B9200BF0024 /* CommonValidations.m */; };
-		8E832E9E28809DF200BF0024 /* SavedExercise.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E832E9D28809DF200BF0024 /* SavedExercise.m */; };
 		8E832EA12880B1D000BF0024 /* AddExerciseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E832EA02880B1D000BF0024 /* AddExerciseTableViewCell.m */; };
 		8EF8226428820CCE0000DED9 /* AlertCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF8226328820CCE0000DED9 /* AlertCreator.m */; };
+		8EF822672885E5FF0000DED9 /* ExerciseInCreateRoutineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF822662885E5FF0000DED9 /* ExerciseInCreateRoutineTableViewCell.m */; };
+		8EF8226A28861F9A0000DED9 /* ExerciseInRoutine.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF8226928861F9A0000DED9 /* ExerciseInRoutine.m */; };
 		DC9627D1E793C6AF8B7EB821 /* Pods_GymBuddies_GymBuddiesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 981C81EFFE7710F342AC177A /* Pods_GymBuddies_GymBuddiesUITests.framework */; };
 		F6FC2A8384B8A8A5B0EC6986 /* Pods_GymBuddiesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF314264FFF381257F8E7EB /* Pods_GymBuddiesTests.framework */; };
 /* End PBXBuildFile section */
@@ -62,6 +64,8 @@
 		5AF314264FFF381257F8E7EB /* Pods_GymBuddiesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymBuddiesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		601CC9BC3CF99C0875C26FC4 /* Pods-GymBuddies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddies.debug.xcconfig"; path = "Target Support Files/Pods-GymBuddies/Pods-GymBuddies.debug.xcconfig"; sourceTree = "<group>"; };
 		81A552040E1859E2C0F57C5F /* Pods_GymBuddies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymBuddies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E10A452288720C600DA1D9A /* Routine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Routine.h; sourceTree = "<group>"; };
+		8E10A453288720C600DA1D9A /* Routine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Routine.m; sourceTree = "<group>"; };
 		8E7088FC28775751008B4238 /* GymBuddies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymBuddies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E7088FF28775751008B4238 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8E70890028775751008B4238 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -103,12 +107,14 @@
 		8E832E97287F351300BF0024 /* BodyZoneCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BodyZoneCollectionViewCell.m; sourceTree = "<group>"; };
 		8E832E99287F4B9200BF0024 /* CommonValidations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonValidations.h; sourceTree = "<group>"; };
 		8E832E9A287F4B9200BF0024 /* CommonValidations.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonValidations.m; sourceTree = "<group>"; };
-		8E832E9C28809DF200BF0024 /* SavedExercise.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SavedExercise.h; sourceTree = "<group>"; };
-		8E832E9D28809DF200BF0024 /* SavedExercise.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SavedExercise.m; sourceTree = "<group>"; };
 		8E832E9F2880B1D000BF0024 /* AddExerciseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddExerciseTableViewCell.h; sourceTree = "<group>"; };
 		8E832EA02880B1D000BF0024 /* AddExerciseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddExerciseTableViewCell.m; sourceTree = "<group>"; };
 		8EF8226228820CCE0000DED9 /* AlertCreator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertCreator.h; sourceTree = "<group>"; };
 		8EF8226328820CCE0000DED9 /* AlertCreator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertCreator.m; sourceTree = "<group>"; };
+		8EF822652885E5FF0000DED9 /* ExerciseInCreateRoutineTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExerciseInCreateRoutineTableViewCell.h; sourceTree = "<group>"; };
+		8EF822662885E5FF0000DED9 /* ExerciseInCreateRoutineTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExerciseInCreateRoutineTableViewCell.m; sourceTree = "<group>"; };
+		8EF8226828861F9A0000DED9 /* ExerciseInRoutine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExerciseInRoutine.h; sourceTree = "<group>"; };
+		8EF8226928861F9A0000DED9 /* ExerciseInRoutine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExerciseInRoutine.m; sourceTree = "<group>"; };
 		981C81EFFE7710F342AC177A /* Pods_GymBuddies_GymBuddiesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymBuddies_GymBuddiesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A78856D56610EA9C5B4F401 /* Pods-GymBuddiesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddiesTests.debug.xcconfig"; path = "Target Support Files/Pods-GymBuddiesTests/Pods-GymBuddiesTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -264,8 +270,10 @@
 				8E708960287CEF40008B4238 /* BodyZone.m */,
 				8E708962287CEF5A008B4238 /* Exercise.h */,
 				8E708963287CEF5A008B4238 /* Exercise.m */,
-				8E832E9C28809DF200BF0024 /* SavedExercise.h */,
-				8E832E9D28809DF200BF0024 /* SavedExercise.m */,
+				8EF8226828861F9A0000DED9 /* ExerciseInRoutine.h */,
+				8EF8226928861F9A0000DED9 /* ExerciseInRoutine.m */,
+				8E10A452288720C600DA1D9A /* Routine.h */,
+				8E10A453288720C600DA1D9A /* Routine.m */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -277,6 +285,8 @@
 				8E832E97287F351300BF0024 /* BodyZoneCollectionViewCell.m */,
 				8E832E9F2880B1D000BF0024 /* AddExerciseTableViewCell.h */,
 				8E832EA02880B1D000BF0024 /* AddExerciseTableViewCell.m */,
+				8EF822652885E5FF0000DED9 /* ExerciseInCreateRoutineTableViewCell.h */,
+				8EF822662885E5FF0000DED9 /* ExerciseInCreateRoutineTableViewCell.m */,
 			);
 			path = ViewCells;
 			sourceTree = "<group>";
@@ -532,17 +542,19 @@
 			files = (
 				8E832E98287F351300BF0024 /* BodyZoneCollectionViewCell.m in Sources */,
 				8EF8226428820CCE0000DED9 /* AlertCreator.m in Sources */,
+				8E10A454288720C600DA1D9A /* Routine.m in Sources */,
 				8E70893D28777BF4008B4238 /* LoginViewController.m in Sources */,
 				8E70894428779209008B4238 /* RegisterViewController.m in Sources */,
 				8E7089512878EBFE008B4238 /* ProfileViewController.m in Sources */,
 				8E708961287CEF40008B4238 /* BodyZone.m in Sources */,
-				8E832E9E28809DF200BF0024 /* SavedExercise.m in Sources */,
 				8E708964287CEF5A008B4238 /* Exercise.m in Sources */,
 				8E70890128775751008B4238 /* AppDelegate.m in Sources */,
 				8E70895D287CDBF4008B4238 /* CreateExerciseViewController.m in Sources */,
 				8E70895A287CDB8C008B4238 /* AddExerciseViewController.m in Sources */,
+				8EF822672885E5FF0000DED9 /* ExerciseInCreateRoutineTableViewCell.m in Sources */,
 				8E70891228775752008B4238 /* main.m in Sources */,
 				8E708957287CDB69008B4238 /* CreateRoutineViewController.m in Sources */,
+				8EF8226A28861F9A0000DED9 /* ExerciseInRoutine.m in Sources */,
 				8E70890428775751008B4238 /* SceneDelegate.m in Sources */,
 				8E7089472878DD81008B4238 /* HomeViewController.m in Sources */,
 				8E832E9B287F4B9200BF0024 /* CommonValidations.m in Sources */,

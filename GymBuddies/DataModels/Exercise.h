@@ -13,12 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Exercise : PFObject<PFSubclassing>
 @property (nonatomic, strong) PFUser *author;
 @property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *caption;
 @property (nonatomic, strong) PFFileObject *video;
 @property (nonatomic, strong) PFFileObject *image;
 @property (nonatomic, strong) BodyZone *bodyZoneTag;
 +(Exercise *) initWithAttributes:(NSString *)exerciseTitle
-                         caption:(NSString *)exerciseCaption
                           author:(PFUser *)exerciseAuthor
                            video:(PFFileObject *)exerciseVideo
                            image:(PFFileObject *)exerciseImage

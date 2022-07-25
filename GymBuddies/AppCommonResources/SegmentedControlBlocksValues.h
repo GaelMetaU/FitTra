@@ -20,4 +20,10 @@ typedef NS_ENUM(NSInteger, WorkoutPlace){
     WorkoutPlaceGym
 };
 
+typedef NS_ENUM(NSInteger, ExerciseAmountUnits){
+    ExerciseAmountUnitSeconds,
+    ExerciseAmountUnitMinutes,
+    ExerciseAmountUnitReps
+};
+
 #endif /* SegmentedControlBlocksValues_h */

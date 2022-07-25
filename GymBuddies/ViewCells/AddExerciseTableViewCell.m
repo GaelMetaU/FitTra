@@ -7,23 +7,22 @@
 
 #import "AddExerciseTableViewCell.h"
 
+static NSString * const PROIFILE_PICTURE_KEY = @"profilePicture";
+
 @implementation AddExerciseTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 -(void)setExercise:(Exercise *)exercise{
     self.exerciseImage.file = exercise.image;
     self.bodyZoneIcon.file = exercise.bodyZoneTag.icon;
-    self.authorProfilePicture.file = exercise.author[@"profilePicture"];
+    self.authorProfilePicture.file = exercise.author[PROIFILE_PICTURE_KEY];
     
     [self.exerciseImage loadInBackground];
     [self.bodyZoneIcon loadInBackground];

@@ -20,9 +20,10 @@
 @property (strong, nonatomic) UIImagePickerController *mediaPicker;
 @property (weak, nonatomic) IBOutlet PFImageView *imagePreview;
 @property (weak, nonatomic) IBOutlet UITextView *titleField;
-@property (weak, nonatomic) IBOutlet UITextView *captionField;
 @property (strong, nonatomic) NSArray *bodyZones;
 @property (weak, nonatomic) IBOutlet UICollectionView *bodyZoneCollectionView;
+@property (weak, nonatomic) IBOutlet UIProgressView *postProgressView;
+@property (weak, nonatomic) IBOutlet UIButton *doneButton;
 
 @property (strong, nonatomic) NSString *exerciseTitle;
 @property (strong, nonatomic) NSString *exerciseCaption;
@@ -36,6 +37,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.postProgressView.hidden = YES;
     // Media picker set up
     self.mediaPicker = [UIImagePickerController new];
     self.mediaPicker.delegate = self;
@@ -44,52 +46,51 @@
     self.bodyZoneCollectionView.dataSource = self;
     self.bodyZoneCollectionView.delegate = self;
     [self fetchBodyZones];
-    
 }
 
 
 #pragma mark - Saving exercise query and validations
 
-- (IBAction)didTapSave:(id)sender {
+- (IBAction)didTapDone:(id)sender {
+    self.doneButton.userInteractionEnabled = NO;
+    self.postProgressView.hidden = NO;
+    
     if(self.exerciseBodyZoneTag.title == nil){
         [self _emptyBodyZoneTagAlert];
         return;
     }
-    
     // Sets the fields value to the posts, set default values if empty
-    [self _setTitleCaptionValues];
+    [self _setTitleValue];
     
-    Exercise *exercise = [Exercise initWithAttributes:self.exerciseTitle caption:self.exerciseCaption author:[PFUser currentUser] video:self.exerciseVideo image:self.exerciseImage bodyZoneTag:self.exerciseBodyZoneTag];
-    
-    // When saving the object, it reasigns itself to include the objectID from Parse
-    exercise = [ParseAPIManager createExercise:exercise completion:^(BOOL succeeded, NSError * _Nonnull error) {
+    Exercise *exercise = [Exercise initWithAttributes:self.exerciseTitle author:[PFUser currentUser] video:self.exerciseVideo image:self.exerciseImage bodyZoneTag:self.exerciseBodyZoneTag];
+    // When uploading the object, it reasigns itself to include the objectID from Parse
+    exercise = [ParseAPIManager postExercise:exercise progress:self.postProgressView completion:^(BOOL succeeded, NSError * _Nullable error) {
             if(!succeeded){
                 [self _failedSavingAlert:error.localizedDescription];
                 return;
+            } else{
+                [self.delegate didCreateExercise:exercise];
+                [self.navigationController popViewControllerAnimated:YES];
             }
+            self.postProgressView.hidden = YES;
+            self.doneButton.userInteractionEnabled = YES;
     }];
     
-    [self.delegate didCreateExercise:exercise];
-    [self.navigationController popViewControllerAnimated:YES];
+
 }
 
 
--(void)_setTitleCaptionValues{
+-(void)_setTitleValue{
     NSString *title = [CommonValidations standardizeUserAuthInput:self.titleField.text];
-    NSString *caption = [CommonValidations standardizeUserAuthInput:self.captionField.text];
     if(title.length == 0){
         title = [NSString stringWithFormat:@"%@ Exercise", self.exerciseBodyZoneTag.title];
     }
-    if(caption.length == 0){
-        caption = [NSString stringWithFormat:@"%@ Exercise", self.exerciseBodyZoneTag.title];
-    }
-    
+
     self.exerciseTitle = title;
-    self.exerciseCaption = caption;
 }
 
 
-#pragma mark -Collection View Data
+#pragma mark -Collection View Methods
 
 -(void)fetchBodyZones{
     [ParseAPIManager fetchBodyZones:^(NSArray * _Nonnull elements, NSError * _Nonnull error) {
@@ -106,9 +107,7 @@
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     BodyZoneCollectionViewCell *cell = [self.bodyZoneCollectionView dequeueReusableCellWithReuseIdentifier:@"BodyZoneCollectionViewCell" forIndexPath:indexPath];
     BodyZone *bodyZone = self.bodyZones[indexPath.item];
-    cell.iconView.file = bodyZone[@"icon"];
-    [cell.iconView loadInBackground];
-    cell.titleLabel.text = bodyZone[@"title"];
+    [cell setCellContent:bodyZone];
     
     return cell;
 }
@@ -155,16 +154,24 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info{
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+    
     if([mediaType isEqualToString:(NSString*)kUTTypeMovie] ||  [mediaType isEqualToString:(NSString*)kUTTypeAVIMovie] || [mediaType isEqualToString:(NSString*)kUTTypeVideo] || [mediaType isEqualToString:(NSString*)kUTTypeMPEG4]){
         NSURL *urlVideo = [info objectForKey:UIImagePickerControllerMediaURL];
-        PFFileObject *video = [ParseAPIManager getPFFileFromURL:urlVideo];
+        NSString *videoName = [urlVideo.lastPathComponent componentsSeparatedByString:@"."][1];
+        NSString *videoExtension = urlVideo.pathExtension;
+        NSString *videoFullName = [NSString stringWithFormat:@"%@.%@", videoName, videoExtension];;
+        PFFileObject *video = [ParseAPIManager getPFFileFromURL:urlVideo videoName:videoFullName];
         self.exerciseVideo = video;
     } else {
+        NSURL *urlImage = [info objectForKey:UIImagePickerControllerImageURL];
+        NSString *imageName = urlImage.lastPathComponent;
+//        NSString *imageFullName = [NSString stringWithFormat:@"%@.%@", imageName, imageExtension];;
         self.imagePreview.image = [info objectForKey:UIImagePickerControllerOriginalImage];
-        PFFileObject *image = [ParseAPIManager getPFFileFromImage:self.imagePreview.image];
+        PFFileObject *image = [ParseAPIManager getPFFileFromImage:self.imagePreview.image imageName:imageName];
         self.exerciseImage = image;
-        [self dismissViewControllerAnimated:YES completion:nil];
     }
+    [self dismissViewControllerAnimated:YES completion:nil];
+
 }
 
 
@@ -199,15 +206,5 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-/*
- 
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
