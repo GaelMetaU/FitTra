@@ -10,7 +10,6 @@
 @implementation Exercise
 
 @dynamic title;
-@dynamic caption;
 @dynamic image;
 @dynamic video;
 @dynamic author;
@@ -21,7 +20,6 @@
 }
 
 +(Exercise *) initWithAttributes:(NSString *)exerciseTitle
-                         caption:(NSString *)exerciseCaption
                           author:(PFUser *)exerciseAuthor
                            video:(PFFileObject *)exerciseVideo
                            image:(PFFileObject *)exerciseImage
@@ -29,7 +27,6 @@
     Exercise *exercise = [Exercise new];
     exercise.title = exerciseTitle;
     exercise.image = exerciseImage;
-    exercise.caption = exerciseCaption;
     exercise.author = exerciseAuthor;
     exercise.video = exerciseVideo;
     exercise.bodyZoneTag = exerciseBodyZoneTag;
