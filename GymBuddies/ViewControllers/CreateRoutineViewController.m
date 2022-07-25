@@ -17,21 +17,27 @@
 
 static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 
-@interface CreateRoutineViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource, AddExerciseViewControllerDelegate>
+@interface CreateRoutineViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource, AddExerciseViewControllerDelegate>
 @property (nonatomic, strong) NSMutableArray *exerciseList;
 @property (nonatomic, strong) NSMutableArray *bodyZoneList;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet PFImageView *routineImage;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextView *captionField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *trainingLevelSegmentedControl;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *workoutPlaceSegmentedControl;
 @property (strong, nonatomic) Routine *routine;
+@property (strong, nonatomic) UIImagePickerController *mediaPicker;
 @end
 
 @implementation CreateRoutineViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.mediaPicker = [UIImagePickerController new];
+    self.mediaPicker.delegate = self;
+    self.mediaPicker.allowsEditing = YES;
     
     self.exerciseList = [[NSMutableArray alloc]init];
     self.bodyZoneList = [[NSMutableArray alloc]init];
@@ -104,6 +110,17 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 }
 
 
+#pragma mark - Uploading a photo
+
+- (IBAction)uploadImage:(id)sender {
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
+        self.mediaPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        self.mediaPicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+        [self presentViewController:self.mediaPicker animated:YES completion:nil];
+    }
+}
+
+
 #pragma mark - Collection view methods
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -116,6 +133,18 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
     BodyZone *bodyZone = self.bodyZoneList[indexPath.item];
     [cell setCellContent:bodyZone];
     return cell;
+}
+
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info{
+    NSURL *urlImage = [info objectForKey:UIImagePickerControllerImageURL];
+    NSString *imageName = urlImage.lastPathComponent;
+    self.routineImage.image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    PFFileObject *image = [ParseAPIManager getPFFileFromImage:self.routineImage.image imageName:imageName];
+    self.routineImage.file = image;
+    [self.routineImage loadInBackground];
+    [self dismissViewControllerAnimated:YES completion:nil];
+
 }
 
 

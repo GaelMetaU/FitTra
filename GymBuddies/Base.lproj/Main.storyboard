@@ -285,12 +285,19 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="392"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZiX-E1-lai">
-                                            <rect key="frame" x="20" y="20" width="128" height="128"/>
+                                        <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZiX-E1-lai" customClass="PFImageView">
+                                            <rect key="frame" x="20" y="20.5" width="128" height="126"/>
+                                            <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                            <color key="tintColor" systemColor="systemBackgroundColor"/>
+                                            <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="140" id="VPo-Wi-3wZ"/>
                                                 <constraint firstAttribute="width" secondItem="ZiX-E1-lai" secondAttribute="height" multiplier="1:1" id="Xg9-Tx-2MM"/>
                                             </constraints>
+                                            <imageReference key="image" image="camera" catalog="system" symbolScale="default"/>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="KJ7-Zw-5rs" appends="YES" id="Br8-0l-LMW"/>
+                                            </connections>
                                         </imageView>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fLT-bt-cwe">
                                             <rect key="frame" x="168" y="45" width="226" height="103"/>
@@ -567,12 +574,18 @@
                     <connections>
                         <outlet property="captionField" destination="fLT-bt-cwe" id="WfP-7G-unC"/>
                         <outlet property="collectionView" destination="vJ3-vh-dyQ" id="DDt-LH-SDq"/>
+                        <outlet property="routineImage" destination="ZiX-E1-lai" id="0zd-QH-sFq"/>
                         <outlet property="tableView" destination="QVi-6L-d8L" id="soK-wD-0Hm"/>
                         <outlet property="trainingLevelSegmentedControl" destination="fNz-bG-nUJ" id="lgx-ix-by3"/>
                         <outlet property="workoutPlaceSegmentedControl" destination="mRh-JM-4Wt" id="qFH-dA-Pp7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JEP-Xd-vfC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="KJ7-Zw-5rs">
+                    <connections>
+                        <action selector="uploadImage:" destination="qY7-1U-Eu8" id="SCa-bn-7WG"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-1462.3188405797102" y="2236.6071428571427"/>
         </scene>
@@ -954,6 +967,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="camera" catalog="system" width="128" height="94"/>
         <image name="camera.circle.fill" catalog="system" width="128" height="121"/>
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="person" catalog="system" width="128" height="117"/>
@@ -967,6 +981,9 @@
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
