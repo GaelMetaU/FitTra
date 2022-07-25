@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSNumber *trainingLevel;
 @property (nonatomic, strong) NSNumber *saveCount;
 @property (nonatomic, strong) PFUser *author;
+@property (nonatomic, strong) PFFileObject *image;
 @property (nonatomic, strong) NSString *caption;
 @property (nonatomic, strong) NSMutableArray *exerciseList;
 @property (nonatomic, strong) NSMutableArray *bodyZoneList;
@@ -21,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 +(Routine *)initWithAttributes:(PFUser *)author
                   exerciseList:(NSMutableArray *)exerciseList
                   bodyZoneList:(NSMutableArray *)bodyZoneList
+                         image:(PFFileObject *)image
                        caption:(NSString *)caption
                  trainingLevel:(NSNumber *)trainingLevel
                   workoutPlace:(NSNumber *)workoutPlace;

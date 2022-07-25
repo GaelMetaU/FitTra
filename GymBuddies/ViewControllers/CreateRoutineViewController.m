@@ -80,6 +80,7 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
     self.routine.caption = caption;
     self.routine.trainingLevel = [NSNumber numberWithLong:trainingLevel];
     self.routine.workoutPlace = [NSNumber numberWithLong:workoutPlace];
+    self.routine.image = self.routineImage.file;
 }
 
 // Retrieves the data sources and user to add the to the routine object
@@ -121,6 +122,17 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 }
 
 
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info{
+    NSURL *urlImage = [info objectForKey:UIImagePickerControllerImageURL];
+    NSString *imageName = urlImage.lastPathComponent;
+    self.routineImage.image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    PFFileObject *image = [ParseAPIManager getPFFileFromImage:self.routineImage.image imageName:imageName];
+    self.routineImage.file = image;
+    [self dismissViewControllerAnimated:YES completion:nil];
+
+}
+
+
 #pragma mark - Collection view methods
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -133,18 +145,6 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
     BodyZone *bodyZone = self.bodyZoneList[indexPath.item];
     [cell setCellContent:bodyZone];
     return cell;
-}
-
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info{
-    NSURL *urlImage = [info objectForKey:UIImagePickerControllerImageURL];
-    NSString *imageName = urlImage.lastPathComponent;
-    self.routineImage.image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    PFFileObject *image = [ParseAPIManager getPFFileFromImage:self.routineImage.image imageName:imageName];
-    self.routineImage.file = image;
-    [self.routineImage loadInBackground];
-    [self dismissViewControllerAnimated:YES completion:nil];
-
 }
 
 
