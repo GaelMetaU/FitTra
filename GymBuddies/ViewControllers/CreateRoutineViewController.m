@@ -22,7 +22,6 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 @property (nonatomic, strong) NSMutableArray *bodyZoneList;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UITextView *titleField;
 @property (weak, nonatomic) IBOutlet UITextView *captionField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *trainingLevelSegmentedControl;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *workoutPlaceSegmentedControl;
@@ -67,16 +66,11 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 
 // Retrieves and standarizes all user input fields and adds them to the routine object
 -(void)_collectUserInputFields{
-    NSString *title = [CommonValidations standardizeUserAuthInput:self.titleField.text];
     NSString *caption = [CommonValidations standardizeUserAuthInput:self.captionField.text];
-    if(title.length == 0){
-        title = [NSString stringWithFormat:@"%@'s Routine", [PFUser currentUser].username];
-    }
-    
+
     TrainingLevels trainingLevel = [self.trainingLevelSegmentedControl selectedSegmentIndex];
     WorkoutPlace workoutPlace = [self.workoutPlaceSegmentedControl selectedSegmentIndex];
     
-    self.routine.title = title;
     self.routine.caption = caption;
     self.routine.trainingLevel = [NSNumber numberWithLong:trainingLevel];
     self.routine.workoutPlace = [NSNumber numberWithLong:workoutPlace];
@@ -97,7 +91,6 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 
 // Clears off all fields after completing a post
 -(void)_resetScreen{
-    self.titleField.text = @"";
     self.captionField.text = @"";
     
     self.trainingLevelSegmentedControl.selectedSegmentIndex = TrainingLevelBeginner;
@@ -129,19 +122,15 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 #pragma mark - TableView methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.exerciseList.count+1;
+    return self.exerciseList.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.row == [self.tableView numberOfRowsInSection:indexPath.section]-1){
-        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"AddExerciseTableViewCell"];
-        return cell;
-    } else{
-        ExerciseInCreateRoutineTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"ExerciseInCreateRoutineTableViewCell"];
-        [cell setCellContent:self.exerciseList[indexPath.row]];
-        return cell;
-    }
+    ExerciseInCreateRoutineTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"ExerciseInCreateRoutineTableViewCell"];
+    [cell setCellContent:self.exerciseList[indexPath.row]];
+    return cell;
+    
 }
 
 // Allows user to delete an exercise from the table view by swiping left
