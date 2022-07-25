@@ -39,9 +39,9 @@ typedef void (^ParseManagerFetchingDataRowsCompletionBlock) (NSArray *elements, 
 
 + (void)postRoutine:(Routine *)routine completion:(ParseManagerCreateCompletionBlock) completion;
 
-+ (PFFileObject *)getPFFileFromURL:(NSURL *)video;
++ (PFFileObject *)getPFFileFromURL:(NSURL *)video videoName:(NSString *)videoName;
 
-+ (PFFileObject *)getPFFileFromImage:(UIImage *)image;
++ (PFFileObject *)getPFFileFromImage:(UIImage *)image imageName:(NSString *)imageName;
 
 @end
 

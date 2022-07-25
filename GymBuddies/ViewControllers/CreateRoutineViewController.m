@@ -192,8 +192,8 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    BOOL isCreateExerciseSegue = [segue.identifier isEqualToString:ADD_EXERCISE_SEGUE_IDENTIFIER];
-    if(isCreateExerciseSegue){
+    BOOL isAddExerciseSegue = [segue.identifier isEqualToString:ADD_EXERCISE_SEGUE_IDENTIFIER];
+    if(isAddExerciseSegue){
         AddExerciseViewController *addExerciseViewController = [segue destinationViewController];
         addExerciseViewController.delegate = self;
     }

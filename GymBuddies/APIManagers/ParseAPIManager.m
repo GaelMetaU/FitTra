@@ -7,6 +7,8 @@
 
 #import "ParseAPIManager.h"
 
+static NSString * const BODY_ZONE_CLASS = @"BodyZone";
+static NSString * const SAVED_EXERCISE_CLASS= @"SavedExercise";
 
 @implementation ParseAPIManager
 
@@ -45,7 +47,7 @@
 
 
 +(void)fetchBodyZones:(ParseManagerFetchingDataRowsCompletionBlock) completion{
-    PFQuery *query = [PFQuery queryWithClassName:@"BodyZone"];
+    PFQuery *query = [PFQuery queryWithClassName:BODY_ZONE_CLASS];
     
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
         completion(elements, error);
@@ -76,7 +78,7 @@
 
 
 + (void)saveExercise:(Exercise *)exercise completion:(ParseManagerCreateCompletionBlock)completion{
-    PFObject *savedExercise = [PFObject objectWithClassName:@"SavedExercise"];
+    PFObject *savedExercise = [PFObject objectWithClassName:SAVED_EXERCISE_CLASS];
     
     savedExercise[@"author"] = exercise.author;
     savedExercise[@"exercise"] = exercise;
@@ -93,12 +95,15 @@
 
 
 + (void)fetchUsersExercises:(ParseManagerFetchingDataRowsCompletionBlock) completion{
-    PFQuery *query = [PFQuery queryWithClassName:@"SavedExercise"];
+    PFQuery *query = [PFQuery queryWithClassName:SAVED_EXERCISE_CLASS];
     [query includeKeys:@[@"exercise", @"exercise.author", @"exercise.bodyZoneTag", @"exercise.image"]];
-    [query whereKey:@"user" equalTo:[PFUser currentUser]];
+    [query whereKey:@"author" equalTo:[PFUser currentUser]];
 
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
         completion(elements, error);
+        for(PFObject *exercise in elements){
+            NSLog(@"%@", exercise);
+        }
     };
     
     [query findObjectsInBackgroundWithBlock:block];
@@ -119,7 +124,7 @@
 }
 
 
-+ (PFFileObject *)getPFFileFromURL:(NSURL *)video{
++ (PFFileObject *)getPFFileFromURL:(NSURL *)video videoName:(NSString *)videoName{
     if(!video){
         return nil;
     }
@@ -128,21 +133,21 @@
     if (!videoData) {
         return nil;
     }
-    return [PFFileObject fileObjectWithName:@"video.mov" data:videoData];
+    return [PFFileObject fileObjectWithName:videoName data:videoData];
 }
 
 
-+ (PFFileObject *)getPFFileFromImage:(UIImage *)image{
++ (PFFileObject *)getPFFileFromImage:(UIImage *)image imageName:(NSString *)imageName{
     if(!image){
         return nil;
     }
-    NSData *imageData = UIImagePNGRepresentation(image);
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.75);
     // get image data and check if that is not nil
     if (!imageData) {
         return nil;
     }
     
-    return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
+    return [PFFileObject fileObjectWithName:imageName data:imageData];
 }
 
 @end

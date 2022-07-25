@@ -59,16 +59,18 @@
     [self _setTitleCaptionValues];
     
     Exercise *exercise = [Exercise initWithAttributes:self.exerciseTitle caption:self.exerciseCaption author:[PFUser currentUser] video:self.exerciseVideo image:self.exerciseImage bodyZoneTag:self.exerciseBodyZoneTag];
+    NSLog(@"%@", exercise);
     // When uploading the object, it reasigns itself to include the objectID from Parse
     exercise = [ParseAPIManager postExercise:exercise completion:^(BOOL succeeded, NSError * _Nonnull error) {
             if(!succeeded){
                 [self _failedSavingAlert:error.localizedDescription];
                 return;
+            } else{
+                [self.delegate didCreateExercise:exercise];
+                [self.navigationController popViewControllerAnimated:YES];
             }
     }];
-    
-    [self.delegate didCreateExercise:exercise];
-    [self.navigationController popViewControllerAnimated:YES];
+
 }
 
 
@@ -151,16 +153,24 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info{
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+    
     if([mediaType isEqualToString:(NSString*)kUTTypeMovie] ||  [mediaType isEqualToString:(NSString*)kUTTypeAVIMovie] || [mediaType isEqualToString:(NSString*)kUTTypeVideo] || [mediaType isEqualToString:(NSString*)kUTTypeMPEG4]){
         NSURL *urlVideo = [info objectForKey:UIImagePickerControllerMediaURL];
-        PFFileObject *video = [ParseAPIManager getPFFileFromURL:urlVideo];
+        NSString *videoName = [urlVideo.lastPathComponent componentsSeparatedByString:@"."][1];
+        NSString *videoExtension = urlVideo.pathExtension;
+        NSString *videoFullName = [NSString stringWithFormat:@"%@.%@", videoName, videoExtension];;
+        PFFileObject *video = [ParseAPIManager getPFFileFromURL:urlVideo videoName:videoFullName];
         self.exerciseVideo = video;
     } else {
+        NSURL *urlImage = [info objectForKey:UIImagePickerControllerImageURL];
+        NSString *imageName = urlImage.lastPathComponent;
+//        NSString *imageFullName = [NSString stringWithFormat:@"%@.%@", imageName, imageExtension];;
         self.imagePreview.image = [info objectForKey:UIImagePickerControllerOriginalImage];
-        PFFileObject *image = [ParseAPIManager getPFFileFromImage:self.imagePreview.image];
+        PFFileObject *image = [ParseAPIManager getPFFileFromImage:self.imagePreview.image imageName:imageName];
         self.exerciseImage = image;
-        [self dismissViewControllerAnimated:YES completion:nil];
     }
+    [self dismissViewControllerAnimated:YES completion:nil];
+
 }
 
 
