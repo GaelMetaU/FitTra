@@ -112,56 +112,57 @@ https://www.figma.com/file/rEp679zAVBdmXpQH7HhDaI/Untitled?node-id=3%3A3
 
 **User**
 
-| Property      | Type   | Description                               |
-| ------------- | ------ | ----------------------------------------- |
-| objectID      | String | User Identifier (default)                 |
-| createdAt     | Date   | Creation date (default)                   |
-| updatedAt     | Date   | Last modification date (default)          |
-| email         | String | Email associated to the account (default) |
-| username      | String | User's nickname on screen                 |
-| password      | String | User's account password (default)         |
-| likedRoutines | Array  | User's saved routines                     |
-| exercises     | Array  | User's saved exercises                    |
-| skillLevel    | String | User's skill level                        |
-| workoutPlace  | String | User's preferred workout place            |
+| Property           | Type   | Description                               |
+| ------------------ | ------ | ----------------------------------------- |
+| objectID           | String | User Identifier (default)                 |
+| createdAt          | Date   | Creation date (default)                   |
+| updatedAt          | Date   | Last modification date (default)          |
+| email              | String | Email associated to the account (default) |
+| username           | String | User's nickname on screen                 |
+| password           | String | User's account password (default)         |
+| likedRoutines      | Array  | User's saved routines                     |
+| exercisesInRoutine | Array  | User's saved exercises                    |
+| skillLevel         | Int    | User's skill level                        |
+| workoutPlace       | Int    | User's preferred workout place            |
 
 
 **Routine**
 
-| Property     | Type       | Description                                        |
-| ------------ | ---------- | -------------------------------------------------- |
-| objectID     | String     | User Identifier (default)                          |
-| createdAt    | Date       | Creation date (default)                            |
-| updatedAt    | Date       | Last modification date (default)                   |
-| author       | String     | Reference to the routine's creator                 |
-| likeCount    | Int        | Number of users who liked the post                 |
-| bodyZoneTags | Array      | Tags to the bodyzone the routine is focused        |
-| title        | String     | Name or identifier of the routine                  |
-| caption      | String     | Any comment or note the author leaves              |
-| exercises    | Array      | Array of exercises that compose the routine        |
-| placeTag     | String     | Tag to say if the routine is for gym, home or park |
+| Property      | Type           | Description                                        |
+| ------------- | -------------- | -------------------------------------------------- |
+| objectID      | String         | User Identifier (default)                          |
+| createdAt     | Date           | Creation date (default)                            |
+| updatedAt     | Date           | Last modification date (default)                   |
+| author        | Pointer <User> | Reference to the routine's creator                 |
+| likeCount     | Int            | Number of users who liked the post                 |
+| bodyZoneTags  | Array          | Tags to the bodyzone the routine is focused        |
+| title         | String         | Name or identifier of the routine                  |
+| caption       | String         | Any comment or note the author leaves              |
+| exercises     | Array          | Array of exercises that compose the routine        |
+| workoutPlace  | Int            | Tag to say if the routine is for gym, home or park |
+| trainingLevel | Int            | Tag to say if the routine is for gym, home or park |
 
 
 **ExcerciseInRoutine**
 
-| Property     | Type       | Description                                        |
-| ------------ | ---------- | -------------------------------------------------- |
-| Reps         | Bool       | True for reps, false for time                      |
-| amountUnit   | String     | Specify seconds, minutes or reps                   |
-| amount       | Integer    | Amount of either seconds, minutes or reps          |
-| ResourceID   | String     | Tag to the exercise model to get videos, name, etc |
+| Property     | Type               | Description                                        |
+| ------------ | ------------------ | -------------------------------------------------- |
+| Reps         | Bool               | True for reps, false for time                      |
+| amountUnit   | String             | Specify seconds, minutes or reps                   |
+| amount       | Integer            | Amount of either seconds, minutes or reps          |
+| baseExercise | Pointer <Exercise> | Tag to the exercise model to get videos, name, etc |
 
 
 **Exercises**
 
-| Property     | Type       | Description                                        |
-| ------------ | ---------- | -------------------------------------------------- |
-| objectID     | String     | User Identifier (default)                          |
-| createdAt    | Date       | Creation date (default)                            |
-| updatedAt    | Date       | Last modification date (default)                   |
-| author       | String     | Reference to the exercise's creator                |
-| video        | String     | URL to the video                                   |
-| bodyZoneTag  | String     | Tags to the bodyzone the exercise is focused       |
+| Property     | Type                  | Description                                        |
+| ------------ | --------------------- | -------------------------------------------------- |
+| objectID     | String                | User Identifier (default)                          |
+| createdAt    | Date                  | Creation date (default)                            |
+| updatedAt    | Date                  | Last modification date (default)                   |
+| author       | Pointer <User>        | Reference to the exercise's creator                |
+| video        | String                | URL to the video                                   |
+| bodyZoneTag  | Pointer <BodyZoneTag> | Tags to the bodyzone the exercise is focused       |
 
 
 **BodyZones**
@@ -175,23 +176,30 @@ https://www.figma.com/file/rEp679zAVBdmXpQH7HhDaI/Untitled?node-id=3%3A3
 | title        | String     | Name of the body zone                              |
 
 
+
 ### Networking
 ##### Requests by screen
 * Login
     * User authentication
 * Home
     * Get recommended routines
+    * Get Google Maps View
 * Profile
     * Get user's information
     * Get user's routines
     * Get user's liked routines
-* Create
-    * Getting body zones icons
-    * Adding a routine to the database
+    * User Log out
 * Details
-    * All data will come from the home feed, so no requests here.
+    * All data will come from the home feed, so no requests here
 * Search
     * Get user's request results based on the algortihm or system designed
+* Create Routine
+    * Adding a routine to the database
+* Add Exercise
+    * Get user's exercises
+* Create Exercise
+    * Get body zone icons
+    * Adding an exercise to the database
     
 ##### API's to be used
 * Google Maps API: Allows displaying a map and pinging locations. It also has better synergy with the Places API
