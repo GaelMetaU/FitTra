@@ -9,6 +9,8 @@
 #import "ParseAPIManager.h"
 #import "GoogleMapsView.h"
 #import "AlertCreator.h"
+#import "TimelineRoutineTableViewCell.h"
+
 
 @interface HomeViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -49,12 +51,13 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.routineFeed.count;
+    //return self.routineFeed.count;
+    return 0;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"GoogleMapsTableViewCell"];
+    TimelineRoutineTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"GoogleMapsTableViewCell"];
     return cell;
 }
 

@@ -30,6 +30,7 @@
 		8E70895D287CDBF4008B4238 /* CreateExerciseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E70895C287CDBF4008B4238 /* CreateExerciseViewController.m */; };
 		8E708961287CEF40008B4238 /* BodyZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E708960287CEF40008B4238 /* BodyZone.m */; };
 		8E708964287CEF5A008B4238 /* Exercise.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E708963287CEF5A008B4238 /* Exercise.m */; };
+		8E72DEDA288F17BA00605018 /* TimelineRoutineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E72DED9288F17BA00605018 /* TimelineRoutineTableViewCell.m */; };
 		8E832E98287F351300BF0024 /* BodyZoneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E832E97287F351300BF0024 /* BodyZoneCollectionViewCell.m */; };
 		8E832E9B287F4B9200BF0024 /* CommonValidations.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E832E9A287F4B9200BF0024 /* CommonValidations.m */; };
 		8E832EA12880B1D000BF0024 /* AddExerciseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E832EA02880B1D000BF0024 /* AddExerciseTableViewCell.m */; };
@@ -106,6 +107,8 @@
 		8E708960287CEF40008B4238 /* BodyZone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BodyZone.m; sourceTree = "<group>"; };
 		8E708962287CEF5A008B4238 /* Exercise.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Exercise.h; sourceTree = "<group>"; };
 		8E708963287CEF5A008B4238 /* Exercise.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Exercise.m; sourceTree = "<group>"; };
+		8E72DED8288F17BA00605018 /* TimelineRoutineTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimelineRoutineTableViewCell.h; sourceTree = "<group>"; };
+		8E72DED9288F17BA00605018 /* TimelineRoutineTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimelineRoutineTableViewCell.m; sourceTree = "<group>"; };
 		8E832E96287F351300BF0024 /* BodyZoneCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BodyZoneCollectionViewCell.h; sourceTree = "<group>"; };
 		8E832E97287F351300BF0024 /* BodyZoneCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BodyZoneCollectionViewCell.m; sourceTree = "<group>"; };
 		8E832E99287F4B9200BF0024 /* CommonValidations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonValidations.h; sourceTree = "<group>"; };
@@ -292,6 +295,8 @@
 				8EF822662885E5FF0000DED9 /* ExerciseInCreateRoutineTableViewCell.m */,
 				8E10A455288887A700DA1D9A /* GoogleMapsView.h */,
 				8E10A456288887A700DA1D9A /* GoogleMapsView.m */,
+				8E72DED8288F17BA00605018 /* TimelineRoutineTableViewCell.h */,
+				8E72DED9288F17BA00605018 /* TimelineRoutineTableViewCell.m */,
 			);
 			path = ViewCells;
 			sourceTree = "<group>";
@@ -588,8 +593,8 @@
 				8E70894428779209008B4238 /* RegisterViewController.m in Sources */,
 				8E7089512878EBFE008B4238 /* ProfileViewController.m in Sources */,
 				8E708961287CEF40008B4238 /* BodyZone.m in Sources */,
+				8E72DEDA288F17BA00605018 /* TimelineRoutineTableViewCell.m in Sources */,
 				8E10A457288887A700DA1D9A /* GoogleMapsView.m in Sources */,
-				8E832E9E28809DF200BF0024 /* SavedExercise.m in Sources */,
 				8E708964287CEF5A008B4238 /* Exercise.m in Sources */,
 				8E70890128775751008B4238 /* AppDelegate.m in Sources */,
 				8E70895D287CDBF4008B4238 /* CreateExerciseViewController.m in Sources */,

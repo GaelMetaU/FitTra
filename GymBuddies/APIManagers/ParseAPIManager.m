@@ -9,6 +9,7 @@
 
 static NSString * const BODY_ZONE_CLASS = @"BodyZone";
 static NSString * const SAVED_EXERCISE_CLASS= @"SavedExercise";
+static NSString * const ROUTINE_CLASS = @"Routine";
 
 
 @implementation ParseAPIManager
