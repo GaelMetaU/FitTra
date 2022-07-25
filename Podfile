@@ -11,8 +11,8 @@ target 'GymBuddies' do
   pod 'DateTools'
   pod 'GoogleMaps', '7.0.0'
   pod 'GooglePlaces'
-  
 
+  
   target 'GymBuddiesTests' do
     inherit! :search_paths
     # Pods for testing

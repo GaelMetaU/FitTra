@@ -7,13 +7,23 @@
 
 #import <UIKit/UIKit.h>
 #import "Parse/PFImageView.h"
+#import "Routine.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TimelineRoutineTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet PFImageView *authorProfilePicture;
-@property (weak, nonatomic) IBOutlet UILabel *authorUsername;
-
+@property (weak, nonatomic) IBOutlet UILabel *authorUsernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *trainingLevelLabel;
+@property (weak, nonatomic) IBOutlet UILabel *workoutPlaceLabel;
+@property (weak, nonatomic) IBOutlet UICollectionView *bodyZoneCollectionView;
+@property (weak, nonatomic) IBOutlet PFImageView *routineImage;
+@property (weak, nonatomic) IBOutlet UIButton *likeButton;
+@property (weak, nonatomic) IBOutlet UILabel *likeCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *captionLabel;
+@property (strong, nonatomic) Routine *routine;
+-(void)setCellContent:(Routine *)routine;
 @end
 
 NS_ASSUME_NONNULL_END

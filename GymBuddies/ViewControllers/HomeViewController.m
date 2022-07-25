@@ -24,14 +24,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.googleMapsView setContent];
+
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight =UITableViewAutomaticDimension;
-    
-    [self.googleMapsView setContent];
-    
+    self.routineFeed = [[NSArray alloc]init];
+
     [self fetchRoutines];
-    
 }
 
 
@@ -51,13 +51,13 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    //return self.routineFeed.count;
-    return 0;
+    return self.routineFeed.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    TimelineRoutineTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"GoogleMapsTableViewCell"];
+    TimelineRoutineTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"TimelineRoutineTableViewCell"];
+    [cell setCellContent:self.routineFeed[indexPath.row]];
     return cell;
 }
 

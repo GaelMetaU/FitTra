@@ -995,7 +995,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="230" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p04-C2-TuT">
-                                                    <rect key="frame" x="66" y="20" width="218" height="17"/>
+                                                    <rect key="frame" x="66" y="20" width="198.5" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1020,17 +1020,19 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oYS-9e-eyU">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oYS-9e-eyU" customClass="PFImageView">
                                                     <rect key="frame" x="0.0" y="139" width="414" height="414"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="oYS-9e-eyU" secondAttribute="height" multiplier="1:1" id="Auy-ZG-gEh"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Park" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nnr-Oj-CjK">
-                                                    <rect key="frame" x="368.5" y="7" width="25.5" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nnr-Oj-CjK">
+                                                    <rect key="frame" x="349" y="7" width="45" height="20"/>
                                                     <color key="backgroundColor" red="0.23277529059999999" green="1" blue="0.79544691229999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="18" id="SLD-XH-4di"/>
+                                                        <constraint firstAttribute="height" constant="20" id="JBS-S6-Rjy"/>
+                                                        <constraint firstAttribute="width" constant="45" id="LQJ-ej-pcd"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
@@ -1057,11 +1059,12 @@
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Intermediate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m3D-tB-fjJ">
-                                                    <rect key="frame" x="294" y="7" width="71.5" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Medium" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m3D-tB-fjJ">
+                                                    <rect key="frame" x="274.5" y="7" width="71.5" height="20"/>
                                                     <color key="backgroundColor" systemColor="systemYellowColor"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="18" id="hWq-zi-xlG"/>
+                                                        <constraint firstAttribute="height" constant="20" id="4vb-yn-2Es"/>
+                                                        <constraint firstAttribute="width" constant="71.5" id="erq-Wo-gQl"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
@@ -1100,7 +1103,15 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="authorProfilePicture" destination="fLJ-IA-shv" id="t3X-b9-ReK"/>
-                                            <outlet property="authorUsername" destination="p04-C2-TuT" id="3Ra-Sf-06G"/>
+                                            <outlet property="authorUsernameLabel" destination="p04-C2-TuT" id="EaI-bC-KDa"/>
+                                            <outlet property="bodyZoneCollectionView" destination="9fF-pu-Amm" id="0vV-VQ-noU"/>
+                                            <outlet property="captionLabel" destination="IiS-Fg-y2F" id="2TB-Ep-OSY"/>
+                                            <outlet property="dateLabel" destination="xUk-ki-ePM" id="LZT-SL-5CD"/>
+                                            <outlet property="likeButton" destination="DWk-Gd-4Ht" id="tY4-U1-5IJ"/>
+                                            <outlet property="likeCountLabel" destination="Gfh-Bb-QsL" id="6cR-LB-m32"/>
+                                            <outlet property="routineImage" destination="oYS-9e-eyU" id="Ff9-11-vgU"/>
+                                            <outlet property="trainingLevelLabel" destination="m3D-tB-fjJ" id="bil-a5-YpB"/>
+                                            <outlet property="workoutPlaceLabel" destination="nnr-Oj-CjK" id="S9O-GF-5cp"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
