@@ -27,7 +27,6 @@
 
 @property (strong, nonatomic) NSString *exerciseTitle;
 @property (strong, nonatomic) NSString *exerciseCaption;
-@property (strong, nonatomic) PFFileObject *exerciseImage;
 @property (strong, nonatomic) PFFileObject *exerciseVideo;
 @property (strong, nonatomic) BodyZone *exerciseBodyZoneTag;
 
@@ -62,7 +61,7 @@
     // Sets the fields value to the posts, set default values if empty
     [self _setTitleValue];
     
-    Exercise *exercise = [Exercise initWithAttributes:self.exerciseTitle author:[PFUser currentUser] video:self.exerciseVideo image:self.exerciseImage bodyZoneTag:self.exerciseBodyZoneTag];
+    Exercise *exercise = [Exercise initWithAttributes:self.exerciseTitle author:[PFUser currentUser] video:self.exerciseVideo image:self.imagePreview.file bodyZoneTag:self.exerciseBodyZoneTag];
     // When uploading the object, it reasigns itself to include the objectID from Parse
     exercise = [ParseAPIManager postExercise:exercise progress:self.postProgressView completion:^(BOOL succeeded, NSError * _Nullable error) {
             if(!succeeded){
@@ -165,10 +164,9 @@
     } else {
         NSURL *urlImage = [info objectForKey:UIImagePickerControllerImageURL];
         NSString *imageName = urlImage.lastPathComponent;
-//        NSString *imageFullName = [NSString stringWithFormat:@"%@.%@", imageName, imageExtension];;
         self.imagePreview.image = [info objectForKey:UIImagePickerControllerOriginalImage];
         PFFileObject *image = [ParseAPIManager getPFFileFromImage:self.imagePreview.image imageName:imageName];
-        self.exerciseImage = image;
+        self.imagePreview.file = image;
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 

@@ -12,7 +12,7 @@
 @dynamic trainingLevel;
 @dynamic saveCount;
 @dynamic author;
-@dynamic title;
+@dynamic image;
 @dynamic caption;
 @dynamic exerciseList;
 @dynamic bodyZoneList;
@@ -25,7 +25,7 @@
 +(Routine *)initWithAttributes:(PFUser *)author
                   exerciseList:(NSMutableArray *)exerciseList
                   bodyZoneList:(NSMutableArray *)bodyZoneList
-                         title:(NSString *)title
+                         image:(PFFileObject *)image
                        caption:(NSString *)caption
                  trainingLevel:(NSNumber *)trainingLevel
                   workoutPlace:(NSNumber *)workoutPlace{
@@ -33,7 +33,7 @@
     routine.author = author;
     routine.exerciseList = exerciseList;
     routine.bodyZoneList = bodyZoneList;
-    routine.title = title;
+    routine.image = image;
     routine.caption = caption;
     routine.trainingLevel = trainingLevel;
     routine.workoutPlace = workoutPlace;

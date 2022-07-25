@@ -17,22 +17,27 @@
 
 static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 
-@interface CreateRoutineViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource, AddExerciseViewControllerDelegate>
+@interface CreateRoutineViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource, AddExerciseViewControllerDelegate>
 @property (nonatomic, strong) NSMutableArray *exerciseList;
 @property (nonatomic, strong) NSMutableArray *bodyZoneList;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet PFImageView *routineImage;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UITextView *titleField;
 @property (weak, nonatomic) IBOutlet UITextView *captionField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *trainingLevelSegmentedControl;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *workoutPlaceSegmentedControl;
 @property (strong, nonatomic) Routine *routine;
+@property (strong, nonatomic) UIImagePickerController *mediaPicker;
 @end
 
 @implementation CreateRoutineViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.mediaPicker = [UIImagePickerController new];
+    self.mediaPicker.delegate = self;
+    self.mediaPicker.allowsEditing = YES;
     
     self.exerciseList = [[NSMutableArray alloc]init];
     self.bodyZoneList = [[NSMutableArray alloc]init];
@@ -67,19 +72,15 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 
 // Retrieves and standarizes all user input fields and adds them to the routine object
 -(void)_collectUserInputFields{
-    NSString *title = [CommonValidations standardizeUserAuthInput:self.titleField.text];
     NSString *caption = [CommonValidations standardizeUserAuthInput:self.captionField.text];
-    if(title.length == 0){
-        title = [NSString stringWithFormat:@"%@'s Routine", [PFUser currentUser].username];
-    }
-    
+
     TrainingLevels trainingLevel = [self.trainingLevelSegmentedControl selectedSegmentIndex];
     WorkoutPlace workoutPlace = [self.workoutPlaceSegmentedControl selectedSegmentIndex];
     
-    self.routine.title = title;
     self.routine.caption = caption;
     self.routine.trainingLevel = [NSNumber numberWithLong:trainingLevel];
     self.routine.workoutPlace = [NSNumber numberWithLong:workoutPlace];
+    self.routine.image = self.routineImage.file;
 }
 
 // Retrieves the data sources and user to add the to the routine object
@@ -97,7 +98,6 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 
 // Clears off all fields after completing a post
 -(void)_resetScreen{
-    self.titleField.text = @"";
     self.captionField.text = @"";
     
     self.trainingLevelSegmentedControl.selectedSegmentIndex = TrainingLevelBeginner;
@@ -108,6 +108,28 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
     
     [self.tableView reloadData];
     [self.collectionView reloadData];
+}
+
+
+#pragma mark - Uploading a photo
+
+- (IBAction)uploadImage:(id)sender {
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
+        self.mediaPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        self.mediaPicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+        [self presentViewController:self.mediaPicker animated:YES completion:nil];
+    }
+}
+
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info{
+    NSURL *urlImage = [info objectForKey:UIImagePickerControllerImageURL];
+    NSString *imageName = urlImage.lastPathComponent;
+    self.routineImage.image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    PFFileObject *image = [ParseAPIManager getPFFileFromImage:self.routineImage.image imageName:imageName];
+    self.routineImage.file = image;
+    [self dismissViewControllerAnimated:YES completion:nil];
+
 }
 
 
@@ -129,19 +151,15 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 #pragma mark - TableView methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.exerciseList.count+1;
+    return self.exerciseList.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.row == [self.tableView numberOfRowsInSection:indexPath.section]-1){
-        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"AddExerciseTableViewCell"];
-        return cell;
-    } else{
-        ExerciseInCreateRoutineTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"ExerciseInCreateRoutineTableViewCell"];
-        [cell setCellContent:self.exerciseList[indexPath.row]];
-        return cell;
-    }
+    ExerciseInCreateRoutineTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"ExerciseInCreateRoutineTableViewCell"];
+    [cell setCellContent:self.exerciseList[indexPath.row]];
+    return cell;
+    
 }
 
 // Allows user to delete an exercise from the table view by swiping left
