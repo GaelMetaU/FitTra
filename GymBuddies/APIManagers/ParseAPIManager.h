@@ -33,7 +33,9 @@ typedef void (^ParseManagerFetchingDataRowsCompletionBlock) (NSArray *elements, 
 
 +(void)fetchUsersExercises:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
-+ (Exercise *)postExercise:(Exercise *)exercise completion:(ParseManagerCreateCompletionBlock) completion;
++ (Exercise *)postExercise:(Exercise *)exercise
+                  progress:(UIProgressView *)progress
+                completion:(ParseManagerCreateCompletionBlock) completion;
 
 + (void)saveExercise:(Exercise *)exercise completion:(ParseManagerCreateCompletionBlock) completion;
 

@@ -800,17 +800,6 @@
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hp8-AB-jIN">
-                                                <rect key="frame" x="322" y="679.5" width="72" height="31"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="31" id="SBP-xj-dDh"/>
-                                                </constraints>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Save it!"/>
-                                                <connections>
-                                                    <action selector="didTapSave:" destination="CT0-GG-GD7" eventType="touchUpInside" id="Y10-R2-h7v"/>
-                                                </connections>
-                                            </button>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nqF-oR-7kz">
                                                 <rect key="frame" x="20" y="275" width="374" height="120"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -866,29 +855,33 @@
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
+                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kJQ-BQ-VT2">
+                                                <rect key="frame" x="20" y="518" width="374" height="4"/>
+                                            </progressView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="dv8-wN-Q83" firstAttribute="top" secondItem="YcJ-oD-ajt" secondAttribute="bottom" constant="10" id="1jx-af-LWy"/>
                                             <constraint firstItem="oMW-H2-O9B" firstAttribute="top" secondItem="nqF-oR-7kz" secondAttribute="bottom" constant="20" id="1v8-8X-Xpf"/>
+                                            <constraint firstAttribute="trailing" secondItem="kJQ-BQ-VT2" secondAttribute="trailing" constant="20" id="4LT-5Z-YiI"/>
                                             <constraint firstItem="lHc-RJ-0rK" firstAttribute="leading" secondItem="bRP-hY-lFK" secondAttribute="leading" constant="20" id="4Tt-FE-0t2"/>
                                             <constraint firstItem="nqF-oR-7kz" firstAttribute="leading" secondItem="bRP-hY-lFK" secondAttribute="leading" constant="20" id="6Ws-ST-RJs"/>
                                             <constraint firstAttribute="trailing" secondItem="YcJ-oD-ajt" secondAttribute="trailing" id="9ac-5M-wiP"/>
+                                            <constraint firstItem="kJQ-BQ-VT2" firstAttribute="leading" secondItem="bRP-hY-lFK" secondAttribute="leading" constant="20" id="AMu-5A-yjS"/>
                                             <constraint firstItem="nqF-oR-7kz" firstAttribute="top" secondItem="lHc-RJ-0rK" secondAttribute="bottom" constant="20" id="ATD-ek-Q6v"/>
                                             <constraint firstItem="lHc-RJ-0rK" firstAttribute="top" secondItem="bRP-hY-lFK" secondAttribute="top" constant="115" id="Be0-fS-Ae5"/>
                                             <constraint firstItem="YcJ-oD-ajt" firstAttribute="top" secondItem="bRP-hY-lFK" secondAttribute="top" id="Hcj-Aj-E2R"/>
                                             <constraint firstAttribute="trailing" secondItem="6kG-IG-Xgd" secondAttribute="trailing" constant="20" id="IDz-cr-l2k"/>
-                                            <constraint firstItem="hp8-AB-jIN" firstAttribute="top" secondItem="6kG-IG-Xgd" secondAttribute="bottom" constant="201" id="JxD-Tx-mLg"/>
+                                            <constraint firstItem="kJQ-BQ-VT2" firstAttribute="top" secondItem="6kG-IG-Xgd" secondAttribute="bottom" constant="39.5" id="MaT-5h-7tI"/>
                                             <constraint firstItem="dv8-wN-Q83" firstAttribute="leading" secondItem="3gc-eE-er8" secondAttribute="trailing" constant="20" id="OFy-WJ-ZtJ"/>
                                             <constraint firstItem="6kG-IG-Xgd" firstAttribute="leading" secondItem="bRP-hY-lFK" secondAttribute="leading" constant="20" id="Ub9-ft-mZS"/>
                                             <constraint firstItem="oMW-H2-O9B" firstAttribute="leading" secondItem="bRP-hY-lFK" secondAttribute="leading" constant="20" id="Ucy-ne-w7l"/>
                                             <constraint firstItem="3gc-eE-er8" firstAttribute="top" secondItem="YcJ-oD-ajt" secondAttribute="bottom" constant="10" id="Xgn-oV-fQ0"/>
                                             <constraint firstAttribute="trailing" secondItem="dv8-wN-Q83" secondAttribute="trailing" constant="20" id="fo5-dg-3bD"/>
-                                            <constraint firstAttribute="trailing" secondItem="hp8-AB-jIN" secondAttribute="trailing" constant="20" id="gHb-sZ-VWF"/>
                                             <constraint firstItem="YcJ-oD-ajt" firstAttribute="leading" secondItem="bRP-hY-lFK" secondAttribute="leading" id="gmX-QB-sAw"/>
                                             <constraint firstAttribute="trailing" secondItem="oMW-H2-O9B" secondAttribute="trailing" constant="20" id="ieq-2W-t3r"/>
+                                            <constraint firstAttribute="bottom" secondItem="kJQ-BQ-VT2" secondAttribute="bottom" constant="238.5" id="kIJ-7d-HR3"/>
                                             <constraint firstItem="6kG-IG-Xgd" firstAttribute="top" secondItem="oMW-H2-O9B" secondAttribute="bottom" id="lew-gc-uWp"/>
-                                            <constraint firstAttribute="bottom" secondItem="hp8-AB-jIN" secondAttribute="bottom" constant="50" id="nSc-gV-zQr"/>
                                             <constraint firstAttribute="trailing" secondItem="nqF-oR-7kz" secondAttribute="trailing" constant="20" id="zgK-LI-Hzu"/>
                                         </constraints>
                                     </view>
@@ -910,16 +903,30 @@
                             <constraint firstItem="bRP-hY-lFK" firstAttribute="width" secondItem="YId-ny-VDl" secondAttribute="width" id="CKa-xs-Ga0"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="G5y-Bb-bgd"/>
+                    <navigationItem key="navigationItem" id="G5y-Bb-bgd">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="5eO-e4-ERV">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="hp8-AB-jIN">
+                                <rect key="frame" x="322" y="5" width="72" height="34.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Done"/>
+                                <connections>
+                                    <action selector="didTapDone:" destination="CT0-GG-GD7" eventType="touchUpInside" id="pF1-aG-Mcn"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="bodyZoneCollectionView" destination="nqF-oR-7kz" id="qwg-mG-G3S"/>
+                        <outlet property="doneButton" destination="hp8-AB-jIN" id="ty3-Y8-iDY"/>
                         <outlet property="imagePreview" destination="lHc-RJ-0rK" id="quH-PC-Zcj"/>
+                        <outlet property="postProgressView" destination="kJQ-BQ-VT2" id="d1k-Sm-3Ei"/>
                         <outlet property="titleField" destination="6kG-IG-Xgd" id="JPl-75-x09"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m5K-k2-dYS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-586" y="3127"/>
+            <point key="canvasLocation" x="-586.95652173913049" y="3126.5625"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="nFr-yc-B62">

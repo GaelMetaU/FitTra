@@ -58,20 +58,33 @@ static NSString * const SAVED_EXERCISE_CLASS= @"SavedExercise";
 
 
 + (Exercise *)postExercise:(Exercise *)exercise
-           completion:(ParseManagerCreateCompletionBlock) completion {
+                  progress:(UIProgressView *)progress
+                completion:(ParseManagerCreateCompletionBlock) completion {
     
     Exercise *newExercise = [Exercise initWithAttributes:exercise.title author:exercise.author video:exercise.video image:exercise.image bodyZoneTag:exercise.bodyZoneTag];
-    
-    ParseManagerCreateCompletionBlock block = ^void(BOOL succeeded, NSError * _Nullable error){
-        completion(succeeded, error);
-        if(!succeeded){
+        
+    ParseManagerCreateCompletionBlock checkBlock = ^void(BOOL succeeded, NSError * _Nullable error){
+        if(error != nil){
+            completion(succeeded, error);
             return;
         }
     };
     
-    [newExercise saveInBackgroundWithBlock:block];
+    [newExercise.image saveInBackgroundWithBlock:checkBlock progressBlock:^(int percentDone) {
+            [progress setProgress: percentDone / 100];
+    }];
+    
+    ParseManagerCreateCompletionBlock finalBlock = ^void(BOOL succeeded, NSError * _Nullable error){
+        if (error!=nil){
+            completion(false, error);
+        } else {
+            completion(true, nil);
+        }
+    };
+    
+    [newExercise saveInBackgroundWithBlock:finalBlock];
 
-    [self saveExercise:newExercise completion:block];
+    [self saveExercise:newExercise completion:checkBlock];
 
     return newExercise;
 }

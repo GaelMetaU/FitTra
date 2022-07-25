@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UITextView *titleField;
 @property (strong, nonatomic) NSArray *bodyZones;
 @property (weak, nonatomic) IBOutlet UICollectionView *bodyZoneCollectionView;
+@property (weak, nonatomic) IBOutlet UIProgressView *postProgressView;
+@property (weak, nonatomic) IBOutlet UIButton *doneButton;
 
 @property (strong, nonatomic) NSString *exerciseTitle;
 @property (strong, nonatomic) NSString *exerciseCaption;
@@ -35,6 +37,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.postProgressView.hidden = YES;
     // Media picker set up
     self.mediaPicker = [UIImagePickerController new];
     self.mediaPicker.delegate = self;
@@ -43,13 +46,15 @@
     self.bodyZoneCollectionView.dataSource = self;
     self.bodyZoneCollectionView.delegate = self;
     [self fetchBodyZones];
-    
 }
 
 
 #pragma mark - Saving exercise query and validations
 
-- (IBAction)didTapSave:(id)sender {
+- (IBAction)didTapDone:(id)sender {
+    self.doneButton.userInteractionEnabled = NO;
+    self.postProgressView.hidden = NO;
+    
     if(self.exerciseBodyZoneTag.title == nil){
         [self _emptyBodyZoneTagAlert];
         return;
@@ -59,7 +64,7 @@
     
     Exercise *exercise = [Exercise initWithAttributes:self.exerciseTitle author:[PFUser currentUser] video:self.exerciseVideo image:self.exerciseImage bodyZoneTag:self.exerciseBodyZoneTag];
     // When uploading the object, it reasigns itself to include the objectID from Parse
-    exercise = [ParseAPIManager postExercise:exercise completion:^(BOOL succeeded, NSError * _Nonnull error) {
+    exercise = [ParseAPIManager postExercise:exercise progress:self.postProgressView completion:^(BOOL succeeded, NSError * _Nullable error) {
             if(!succeeded){
                 [self _failedSavingAlert:error.localizedDescription];
                 return;
@@ -67,7 +72,10 @@
                 [self.delegate didCreateExercise:exercise];
                 [self.navigationController popViewControllerAnimated:YES];
             }
+            self.postProgressView.hidden = YES;
+            self.doneButton.userInteractionEnabled = YES;
     }];
+    
 
 }
 
