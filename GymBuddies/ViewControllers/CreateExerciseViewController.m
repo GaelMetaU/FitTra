@@ -20,7 +20,6 @@
 @property (strong, nonatomic) UIImagePickerController *mediaPicker;
 @property (weak, nonatomic) IBOutlet PFImageView *imagePreview;
 @property (weak, nonatomic) IBOutlet UITextView *titleField;
-@property (weak, nonatomic) IBOutlet UITextView *captionField;
 @property (strong, nonatomic) NSArray *bodyZones;
 @property (weak, nonatomic) IBOutlet UICollectionView *bodyZoneCollectionView;
 
@@ -56,10 +55,9 @@
         return;
     }
     // Sets the fields value to the posts, set default values if empty
-    [self _setTitleCaptionValues];
+    [self _setTitleValue];
     
-    Exercise *exercise = [Exercise initWithAttributes:self.exerciseTitle caption:self.exerciseCaption author:[PFUser currentUser] video:self.exerciseVideo image:self.exerciseImage bodyZoneTag:self.exerciseBodyZoneTag];
-    NSLog(@"%@", exercise);
+    Exercise *exercise = [Exercise initWithAttributes:self.exerciseTitle author:[PFUser currentUser] video:self.exerciseVideo image:self.exerciseImage bodyZoneTag:self.exerciseBodyZoneTag];
     // When uploading the object, it reasigns itself to include the objectID from Parse
     exercise = [ParseAPIManager postExercise:exercise completion:^(BOOL succeeded, NSError * _Nonnull error) {
             if(!succeeded){
@@ -74,18 +72,13 @@
 }
 
 
--(void)_setTitleCaptionValues{
+-(void)_setTitleValue{
     NSString *title = [CommonValidations standardizeUserAuthInput:self.titleField.text];
-    NSString *caption = [CommonValidations standardizeUserAuthInput:self.captionField.text];
     if(title.length == 0){
         title = [NSString stringWithFormat:@"%@ Exercise", self.exerciseBodyZoneTag.title];
     }
-    if(caption.length == 0){
-        caption = [NSString stringWithFormat:@"%@ Exercise", self.exerciseBodyZoneTag.title];
-    }
-    
+
     self.exerciseTitle = title;
-    self.exerciseCaption = caption;
 }
 
 
