@@ -16,7 +16,7 @@
 @dynamic caption;
 @dynamic exerciseList;
 @dynamic bodyZoneList;
-
+@dynamic likeCount;
 + (nonnull NSString *)parseClassName {
     return @"Routine";
 }

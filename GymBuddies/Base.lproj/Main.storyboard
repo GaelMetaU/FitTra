@@ -713,7 +713,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="3iT-7f-Ndz">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="274"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="298"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="yQD-pJ-uNH" customClass="PFImageView">
@@ -757,7 +757,7 @@
                                             <rect key="frame" x="20" y="163" width="374" height="91"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="70" id="SbW-RG-4bX"/>
+                                                <constraint firstAttribute="height" constant="91" id="SbW-RG-4bX"/>
                                             </constraints>
                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ZWK-f4-nNI">
                                                 <size key="itemSize" width="90" height="91"/>
@@ -805,28 +805,43 @@
                                                 </collectionViewCell>
                                             </cells>
                                         </collectionView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iwP-nO-zij">
+                                            <rect key="frame" x="20" y="264" width="45.5" height="29"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" image="suit.heart" catalog="system" title=""/>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HKY-BT-G9c">
+                                            <rect key="frame" x="65.5" y="269" width="10" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstItem="nkp-eF-Mke" firstAttribute="leading" secondItem="yQD-pJ-uNH" secondAttribute="trailing" constant="20" id="2mX-9E-i5j"/>
-                                        <constraint firstAttribute="bottom" secondItem="KJR-gz-BO3" secondAttribute="bottom" constant="20" id="5zG-Na-8nz"/>
                                         <constraint firstItem="6F3-1H-dU3" firstAttribute="leading" secondItem="ZKv-po-MCH" secondAttribute="trailing" constant="5" id="Ewg-2H-z2r"/>
                                         <constraint firstAttribute="trailing" secondItem="6F3-1H-dU3" secondAttribute="trailing" constant="20" symbolic="YES" id="KoZ-1S-Jt7"/>
+                                        <constraint firstItem="HKY-BT-G9c" firstAttribute="leading" secondItem="iwP-nO-zij" secondAttribute="trailing" id="Lj3-OA-ExA"/>
                                         <constraint firstItem="nkp-eF-Mke" firstAttribute="top" secondItem="ZKv-po-MCH" secondAttribute="bottom" constant="10" id="NgI-Qm-9U1"/>
                                         <constraint firstItem="KJR-gz-BO3" firstAttribute="top" secondItem="yQD-pJ-uNH" secondAttribute="bottom" constant="15" id="OHg-vw-Jwu"/>
                                         <constraint firstAttribute="trailing" secondItem="KJR-gz-BO3" secondAttribute="trailing" constant="20" symbolic="YES" id="PNP-ko-VFQ"/>
+                                        <constraint firstAttribute="bottom" secondItem="iwP-nO-zij" secondAttribute="bottom" constant="5" id="Rg0-ct-dZF"/>
                                         <constraint firstItem="ZKv-po-MCH" firstAttribute="top" secondItem="3iT-7f-Ndz" secondAttribute="top" constant="20" symbolic="YES" id="RyG-L3-8hN"/>
                                         <constraint firstItem="nkp-eF-Mke" firstAttribute="top" secondItem="6F3-1H-dU3" secondAttribute="bottom" constant="10" id="XjM-pe-rOy"/>
                                         <constraint firstItem="KJR-gz-BO3" firstAttribute="leading" secondItem="3iT-7f-Ndz" secondAttribute="leading" constant="20" symbolic="YES" id="b3Y-yT-DKa"/>
                                         <constraint firstItem="6F3-1H-dU3" firstAttribute="top" secondItem="3iT-7f-Ndz" secondAttribute="top" constant="20" symbolic="YES" id="baU-b3-Oxc"/>
                                         <constraint firstItem="yQD-pJ-uNH" firstAttribute="leading" secondItem="3iT-7f-Ndz" secondAttribute="leading" constant="20" id="bb3-Ms-yJo"/>
+                                        <constraint firstItem="HKY-BT-G9c" firstAttribute="top" secondItem="KJR-gz-BO3" secondAttribute="bottom" constant="15" id="duH-QT-Z3a"/>
+                                        <constraint firstItem="iwP-nO-zij" firstAttribute="top" secondItem="KJR-gz-BO3" secondAttribute="bottom" constant="10" id="fp6-cW-V74"/>
                                         <constraint firstItem="yQD-pJ-uNH" firstAttribute="top" secondItem="3iT-7f-Ndz" secondAttribute="top" constant="20" id="jIz-MF-yUt"/>
                                         <constraint firstAttribute="trailing" secondItem="nkp-eF-Mke" secondAttribute="trailing" constant="20" id="kEf-sc-gk3"/>
+                                        <constraint firstItem="iwP-nO-zij" firstAttribute="leading" secondItem="3iT-7f-Ndz" secondAttribute="leading" constant="20" symbolic="YES" id="l25-tb-KKY"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="RoutineDetailsExerciseTableViewCell" rowHeight="100" id="1Rp-HY-aps" customClass="RoutineDetailsExerciseTableViewCell">
-                                        <rect key="frame" x="0.0" y="318.5" width="414" height="100"/>
+                                        <rect key="frame" x="0.0" y="342.5" width="414" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1Rp-HY-aps" id="PDW-gA-vg4">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
@@ -907,6 +922,7 @@
                         <outlet property="bodyZoneCollectionView" destination="KJR-gz-BO3" id="udN-qm-Zvw"/>
                         <outlet property="captionLabel" destination="nkp-eF-Mke" id="Rrk-Sp-Sou"/>
                         <outlet property="exerciseListTableView" destination="gF0-6R-PuA" id="7U3-0Q-K48"/>
+                        <outlet property="likeCountLabel" destination="HKY-BT-G9c" id="ArX-aM-oB0"/>
                         <outlet property="routineImage" destination="yQD-pJ-uNH" id="mb7-Nb-aWr"/>
                         <outlet property="trainingLevelLabel" destination="ZKv-po-MCH" id="wmJ-ND-fpM"/>
                         <outlet property="workoutPlaceLabel" destination="6F3-1H-dU3" id="Sno-p9-gxm"/>
