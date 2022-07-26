@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TimelineRoutineTableViewCell : UITableViewCell
+@interface TimelineRoutineTableViewCell : UITableViewCell <UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet PFImageView *authorProfilePicture;
 @property (weak, nonatomic) IBOutlet UILabel *authorUsernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *trainingLevelLabel;

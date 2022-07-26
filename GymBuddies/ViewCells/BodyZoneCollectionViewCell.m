@@ -16,4 +16,10 @@
     self.titleLabel.text = self.bodyZone.title;
 }
 
+-(void)setCellContentNoTitle:(BodyZone *)bodyZone{
+    _bodyZone = bodyZone;
+    self.iconView.file = self.bodyZone.icon;
+    [self.iconView loadInBackground];
+}
+
 @end

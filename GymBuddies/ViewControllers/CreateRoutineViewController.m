@@ -7,6 +7,8 @@
 
 #import "CreateRoutineViewController.h"
 #import "ParseAPIManager.h"
+#import "MobileCoreServices/MobileCoreServices.h"
+#import "UniformTypeIdentifiers/UniformTypeIdentifiers.h"
 #import "CommonValidations.h"
 #import "SegmentedControlBlocksValues.h"
 #import "AlertCreator.h"
@@ -26,6 +28,7 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 @property (weak, nonatomic) IBOutlet UITextView *captionField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *trainingLevelSegmentedControl;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *workoutPlaceSegmentedControl;
+@property (weak, nonatomic) IBOutlet UIButton *doneButton;
 @property (strong, nonatomic) Routine *routine;
 @property (strong, nonatomic) UIImagePickerController *mediaPicker;
 @end
@@ -56,6 +59,14 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 
 - (IBAction)didTapDone:(id)sender {
     
+    self.doneButton.userInteractionEnabled = NO;
+    
+    if(self.exerciseList.count == 0){
+        UIAlertController *alert = [AlertCreator createOkAlert:@"There are no exercises" message:@"Add some exercises to your routine"];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    
     [self _collectDataSources];
     
     [self _collectUserInputFields];
@@ -67,6 +78,7 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
         } else{
             [self _resetScreen];
         }
+        self.doneButton.userInteractionEnabled = YES;
     }];
 }
 
@@ -116,7 +128,7 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 - (IBAction)uploadImage:(id)sender {
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
         self.mediaPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        self.mediaPicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+        self.mediaPicker.mediaTypes = @[(NSString*)kUTTypeImage];
         [self presentViewController:self.mediaPicker animated:YES completion:nil];
     }
 }
