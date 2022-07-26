@@ -8,6 +8,10 @@
 #import "RoutineDetailsExerciseTableViewCell.h"
 #import "SegmentedControlBlocksValues.h"
 
+static NSString * const kRepetitionsLabelValue = @"reps";
+static NSString * const kMinutesLabelValue = @"min";
+static NSString * const kSecondsLabelValue = @"sec";
+
 @implementation RoutineDetailsExerciseTableViewCell
 
 - (void)awakeFromNib {
@@ -41,11 +45,11 @@
     ExerciseAmountUnits exerciseAmountUnits = [self.exerciseInRoutine.amountUnit longValue];
     switch (exerciseAmountUnits){
         case ExerciseAmountUnitReps:
-            return @"reps";
+            return kRepetitionsLabelValue;
         case ExerciseAmountUnitMinutes:
-            return @"min";
+            return kMinutesLabelValue;
         case ExerciseAmountUnitSeconds:
-            return @"sec";
+            return kSecondsLabelValue;
     }
 }
 

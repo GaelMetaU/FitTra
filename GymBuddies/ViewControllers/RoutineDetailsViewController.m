@@ -20,6 +20,8 @@ static NSString * const kWorkoutPlaceHome = @"Home";
 static NSString * const kWorkoutPlacePark = @"Park";
 static NSString * const kWorkoutPlaceGym = @"Gym";
 
+static NSString * const kBodyZoneCollectionViewCellIdentifier = @"RoutineBodyZoneCollectionViewCell";
+static NSString * const kExerciseTableViewCellIdentifier = @"RoutineDetailsExerciseTableViewCell";
 
 @interface RoutineDetailsViewController ()
 @property (weak, nonatomic) IBOutlet PFImageView *routineImage;
@@ -123,7 +125,7 @@ static NSString * const kWorkoutPlaceGym = @"Gym";
 #pragma mark - Collection view methods
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    BodyZoneCollectionViewCell *cell = [self.bodyZoneCollectionView dequeueReusableCellWithReuseIdentifier:@"RoutineBodyZoneCollectionViewCell" forIndexPath:indexPath];
+    BodyZoneCollectionViewCell *cell = [self.bodyZoneCollectionView dequeueReusableCellWithReuseIdentifier: kBodyZoneCollectionViewCellIdentifier forIndexPath:indexPath];
     [cell setCellContent:self.bodyZoneList[indexPath.item]];
     return cell;
 }
@@ -137,7 +139,7 @@ static NSString * const kWorkoutPlaceGym = @"Gym";
 #pragma mark - Table view methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    RoutineDetailsExerciseTableViewCell *cell = [self.exerciseListTableView dequeueReusableCellWithIdentifier:@"RoutineDetailsExerciseTableViewCell"];
+    RoutineDetailsExerciseTableViewCell *cell = [self.exerciseListTableView dequeueReusableCellWithIdentifier:kExerciseTableViewCellIdentifier];
     [cell setCellContent:self.exerciseList[indexPath.row]];
     return cell;
 }
