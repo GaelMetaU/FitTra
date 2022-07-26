@@ -67,6 +67,12 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
         return;
     }
     
+    if(self.routineImage == nil){
+        UIAlertController *alert = [AlertCreator createOkAlert:@"Add a photo" message:@"Don't be shy! Add a photo for your routine"];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    
     [self _collectDataSources];
     
     [self _collectUserInputFields];
