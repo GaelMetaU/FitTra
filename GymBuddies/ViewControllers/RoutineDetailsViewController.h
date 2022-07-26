@@ -6,11 +6,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Routine.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RoutineDetailsViewController : UIViewController
-
+@interface RoutineDetailsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource>
+@property (strong, nonatomic) Routine *routine;
 @end
 
 NS_ASSUME_NONNULL_END

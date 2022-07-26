@@ -141,7 +141,7 @@ static NSString * const ROUTINE_CLASS = @"Routine";
 
 + (void)fetchHomeTimelineRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion{
     PFQuery *query = [PFQuery queryWithClassName:ROUTINE_CLASS];
-    [query includeKeys:@[@"bodyZoneList", @"exerciseList", @"author"]];
+    [query includeKeys:@[@"bodyZoneList", @"exerciseList", @"author", @"exerciseList.baseExercise", @"exerciseList.baseExercise.bodyZoneTag"]];
     
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
         completion(elements, error);

@@ -11,7 +11,7 @@
 #import "BodyZoneCollectionViewCell.h"
 
 static NSString * const kTrainingLevelExpert = @"Expert";
-static NSString * const kTraininLevelMedium = @"Medium";
+static NSString * const kTrainingLevelMedium = @"Medium";
 static NSString * const kTrainingLevelBeginner = @"Beginner";
 
 static NSString * const kWorkoutPlaceHome = @"Home";
@@ -48,13 +48,11 @@ static NSString * const kWorkoutPlaceGym = @"Gym";
     self.dateLabel.text = self.routine.createdAt.shortTimeAgoSinceNow;
     [self setTrainingLevelLabelContent];
     [self setWorkoutPlaceLabelContent];
-    NSLog(@"Count %lu",self.routine.bodyZoneList.count);
 }
 
 
 -(void)setTrainingLevelLabelContent{
     self.trainingLevelLabel.layer.cornerRadius = 5;
-    //self.trainingLevelLabel.layer.borderWidth = 20.0;
     TrainingLevels trainingLevel = [self.routine.trainingLevel longValue];
     switch (trainingLevel) {
         case TrainingLevelExpert:
@@ -63,7 +61,7 @@ static NSString * const kWorkoutPlaceGym = @"Gym";
             break;
         case TrainingLevelIntermediate:
             self.trainingLevelLabel.backgroundColor = [UIColor systemYellowColor];
-            self.trainingLevelLabel.text = kTraininLevelMedium;
+            self.trainingLevelLabel.text = kTrainingLevelMedium;
             break;
         case TrainingLevelBeginner:
             self.trainingLevelLabel.backgroundColor = [UIColor systemGreenColor];
@@ -96,7 +94,6 @@ static NSString * const kWorkoutPlaceGym = @"Gym";
             break;
     }
     self.workoutPlaceLabel.layer.masksToBounds = YES;
-
 }
 
 
@@ -104,10 +101,7 @@ static NSString * const kWorkoutPlaceGym = @"Gym";
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     BodyZoneCollectionViewCell *cell = [self.bodyZoneCollectionView dequeueReusableCellWithReuseIdentifier:@"BodyZoneCollectionViewCellNoTitle" forIndexPath:indexPath];
-    
     [cell setCellContentNoTitle:self.routine.bodyZoneList[indexPath.item]];
-    NSLog(@"BODY ZONE %@", self.routine.bodyZoneList[indexPath.item]);
-    
     return cell;
 }
 
