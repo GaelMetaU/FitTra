@@ -31,6 +31,10 @@
 		8E708961287CEF40008B4238 /* BodyZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E708960287CEF40008B4238 /* BodyZone.m */; };
 		8E708964287CEF5A008B4238 /* Exercise.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E708963287CEF5A008B4238 /* Exercise.m */; };
 		8E72DEDA288F17BA00605018 /* TimelineRoutineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E72DED9288F17BA00605018 /* TimelineRoutineTableViewCell.m */; };
+		8E72DEE12890520000605018 /* RoutineDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E72DEE02890520000605018 /* RoutineDetailsViewController.m */; };
+		8E72DEE428905E3900605018 /* RoutineDetailsExerciseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E72DEE328905E3900605018 /* RoutineDetailsExerciseTableViewCell.m */; };
+		8E72DEE72890892A00605018 /* SegmentedControlBlocksValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E72DEE62890892A00605018 /* SegmentedControlBlocksValues.m */; };
+		8E72DEEC2890B6B600605018 /* ExerciseDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E72DEEB2890B6B600605018 /* ExerciseDetailsViewController.m */; };
 		8E832E98287F351300BF0024 /* BodyZoneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E832E97287F351300BF0024 /* BodyZoneCollectionViewCell.m */; };
 		8E832E9B287F4B9200BF0024 /* CommonValidations.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E832E9A287F4B9200BF0024 /* CommonValidations.m */; };
 		8E832EA12880B1D000BF0024 /* AddExerciseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E832EA02880B1D000BF0024 /* AddExerciseTableViewCell.m */; };
@@ -96,7 +100,6 @@
 		8E7089462878DD81008B4238 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		8E70894F2878EBFE008B4238 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		8E7089502878EBFE008B4238 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
-		8E708952287CA6CC008B4238 /* SegmentedControlBlocksValues.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SegmentedControlBlocksValues.h; sourceTree = "<group>"; };
 		8E708955287CDB69008B4238 /* CreateRoutineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateRoutineViewController.h; sourceTree = "<group>"; };
 		8E708956287CDB69008B4238 /* CreateRoutineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateRoutineViewController.m; sourceTree = "<group>"; };
 		8E708958287CDB8C008B4238 /* AddExerciseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddExerciseViewController.h; sourceTree = "<group>"; };
@@ -109,6 +112,14 @@
 		8E708963287CEF5A008B4238 /* Exercise.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Exercise.m; sourceTree = "<group>"; };
 		8E72DED8288F17BA00605018 /* TimelineRoutineTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimelineRoutineTableViewCell.h; sourceTree = "<group>"; };
 		8E72DED9288F17BA00605018 /* TimelineRoutineTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimelineRoutineTableViewCell.m; sourceTree = "<group>"; };
+		8E72DEDF2890520000605018 /* RoutineDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoutineDetailsViewController.h; sourceTree = "<group>"; };
+		8E72DEE02890520000605018 /* RoutineDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoutineDetailsViewController.m; sourceTree = "<group>"; };
+		8E72DEE228905E3900605018 /* RoutineDetailsExerciseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoutineDetailsExerciseTableViewCell.h; sourceTree = "<group>"; };
+		8E72DEE328905E3900605018 /* RoutineDetailsExerciseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoutineDetailsExerciseTableViewCell.m; sourceTree = "<group>"; };
+		8E72DEE52890892A00605018 /* SegmentedControlBlocksValues.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SegmentedControlBlocksValues.h; sourceTree = "<group>"; };
+		8E72DEE62890892A00605018 /* SegmentedControlBlocksValues.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SegmentedControlBlocksValues.m; sourceTree = "<group>"; };
+		8E72DEEA2890B6B600605018 /* ExerciseDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExerciseDetailsViewController.h; sourceTree = "<group>"; };
+		8E72DEEB2890B6B600605018 /* ExerciseDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExerciseDetailsViewController.m; sourceTree = "<group>"; };
 		8E832E96287F351300BF0024 /* BodyZoneCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BodyZoneCollectionViewCell.h; sourceTree = "<group>"; };
 		8E832E97287F351300BF0024 /* BodyZoneCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BodyZoneCollectionViewCell.m; sourceTree = "<group>"; };
 		8E832E99287F4B9200BF0024 /* CommonValidations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonValidations.h; sourceTree = "<group>"; };
@@ -230,20 +241,16 @@
 		8E70893A28777BD2008B4238 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				8E70893B28777BF4008B4238 /* LoginViewController.h */,
-				8E70893C28777BF4008B4238 /* LoginViewController.m */,
-				8E70894228779209008B4238 /* RegisterViewController.h */,
-				8E70894328779209008B4238 /* RegisterViewController.m */,
+				8E72DEE92890B4BB00605018 /* Create */,
+				8E72DEE82890B48600605018 /* Authentication */,
 				8E7089452878DD81008B4238 /* HomeViewController.h */,
 				8E7089462878DD81008B4238 /* HomeViewController.m */,
 				8E70894F2878EBFE008B4238 /* ProfileViewController.h */,
 				8E7089502878EBFE008B4238 /* ProfileViewController.m */,
-				8E708955287CDB69008B4238 /* CreateRoutineViewController.h */,
-				8E708956287CDB69008B4238 /* CreateRoutineViewController.m */,
-				8E708958287CDB8C008B4238 /* AddExerciseViewController.h */,
-				8E708959287CDB8C008B4238 /* AddExerciseViewController.m */,
-				8E70895B287CDBF4008B4238 /* CreateExerciseViewController.h */,
-				8E70895C287CDBF4008B4238 /* CreateExerciseViewController.m */,
+				8E72DEDF2890520000605018 /* RoutineDetailsViewController.h */,
+				8E72DEE02890520000605018 /* RoutineDetailsViewController.m */,
+				8E72DEEA2890B6B600605018 /* ExerciseDetailsViewController.h */,
+				8E72DEEB2890B6B600605018 /* ExerciseDetailsViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -260,11 +267,12 @@
 		8E708953287CBECC008B4238 /* AppCommonResources */ = {
 			isa = PBXGroup;
 			children = (
-				8E708952287CA6CC008B4238 /* SegmentedControlBlocksValues.h */,
 				8E832E99287F4B9200BF0024 /* CommonValidations.h */,
 				8E832E9A287F4B9200BF0024 /* CommonValidations.m */,
 				8EF8226228820CCE0000DED9 /* AlertCreator.h */,
 				8EF8226328820CCE0000DED9 /* AlertCreator.m */,
+				8E72DEE52890892A00605018 /* SegmentedControlBlocksValues.h */,
+				8E72DEE62890892A00605018 /* SegmentedControlBlocksValues.m */,
 			);
 			path = AppCommonResources;
 			sourceTree = "<group>";
@@ -284,6 +292,30 @@
 			path = DataModels;
 			sourceTree = "<group>";
 		};
+		8E72DEE82890B48600605018 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				8E70893B28777BF4008B4238 /* LoginViewController.h */,
+				8E70893C28777BF4008B4238 /* LoginViewController.m */,
+				8E70894228779209008B4238 /* RegisterViewController.h */,
+				8E70894328779209008B4238 /* RegisterViewController.m */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		8E72DEE92890B4BB00605018 /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				8E708959287CDB8C008B4238 /* AddExerciseViewController.m */,
+				8E708958287CDB8C008B4238 /* AddExerciseViewController.h */,
+				8E70895B287CDBF4008B4238 /* CreateExerciseViewController.h */,
+				8E70895C287CDBF4008B4238 /* CreateExerciseViewController.m */,
+				8E708956287CDB69008B4238 /* CreateRoutineViewController.m */,
+				8E708955287CDB69008B4238 /* CreateRoutineViewController.h */,
+			);
+			path = Create;
+			sourceTree = "<group>";
+		};
 		8E832E95287F34F000BF0024 /* ViewCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -297,6 +329,8 @@
 				8E10A456288887A700DA1D9A /* GoogleMapsView.m */,
 				8E72DED8288F17BA00605018 /* TimelineRoutineTableViewCell.h */,
 				8E72DED9288F17BA00605018 /* TimelineRoutineTableViewCell.m */,
+				8E72DEE228905E3900605018 /* RoutineDetailsExerciseTableViewCell.h */,
+				8E72DEE328905E3900605018 /* RoutineDetailsExerciseTableViewCell.m */,
 			);
 			path = ViewCells;
 			sourceTree = "<group>";
@@ -591,6 +625,7 @@
 				8E10A454288720C600DA1D9A /* Routine.m in Sources */,
 				8E70893D28777BF4008B4238 /* LoginViewController.m in Sources */,
 				8E70894428779209008B4238 /* RegisterViewController.m in Sources */,
+				8E72DEEC2890B6B600605018 /* ExerciseDetailsViewController.m in Sources */,
 				8E7089512878EBFE008B4238 /* ProfileViewController.m in Sources */,
 				8E708961287CEF40008B4238 /* BodyZone.m in Sources */,
 				8E72DEDA288F17BA00605018 /* TimelineRoutineTableViewCell.m in Sources */,
@@ -601,10 +636,13 @@
 				8E70895A287CDB8C008B4238 /* AddExerciseViewController.m in Sources */,
 				8EF822672885E5FF0000DED9 /* ExerciseInCreateRoutineTableViewCell.m in Sources */,
 				8E70891228775752008B4238 /* main.m in Sources */,
+				8E72DEE428905E3900605018 /* RoutineDetailsExerciseTableViewCell.m in Sources */,
+				8E72DEE72890892A00605018 /* SegmentedControlBlocksValues.m in Sources */,
 				8E708957287CDB69008B4238 /* CreateRoutineViewController.m in Sources */,
 				8EF8226A28861F9A0000DED9 /* ExerciseInRoutine.m in Sources */,
 				8E70890428775751008B4238 /* SceneDelegate.m in Sources */,
 				8E7089472878DD81008B4238 /* HomeViewController.m in Sources */,
+				8E72DEE12890520000605018 /* RoutineDetailsViewController.m in Sources */,
 				8E832E9B287F4B9200BF0024 /* CommonValidations.m in Sources */,
 				8E832EA12880B1D000BF0024 /* AddExerciseTableViewCell.m in Sources */,
 				8E70894128778E90008B4238 /* ParseAPIManager.m in Sources */,

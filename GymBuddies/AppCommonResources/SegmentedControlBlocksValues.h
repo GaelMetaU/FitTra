@@ -2,11 +2,13 @@
 //  SegmentedControlBlocksValues.h
 //  GymBuddies
 //
-//  Created by Gael Rodriguez Gomez on 7/11/22.
+//  Created by Gael Rodriguez Gomez on 7/26/22.
 //
 
-#ifndef SegmentedControlBlocksValues_h
-#define SegmentedControlBlocksValues_h
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, TrainingLevels){
     TrainingLevelBeginner,
@@ -26,4 +28,23 @@ typedef NS_ENUM(NSInteger, ExerciseAmountUnits){
     ExerciseAmountUnitReps
 };
 
-#endif /* SegmentedControlBlocksValues_h */
+static NSString * const kTrainingLevelExpert = @"Expert";
+static NSString * const kTrainingLevelMedium = @"Medium";
+static NSString * const kTrainingLevelBeginner = @"Beginner";
+
+static NSString * const kWorkoutPlaceHome = @"Home";
+static NSString * const kWorkoutPlacePark = @"Park";
+static NSString * const kWorkoutPlaceGym = @"Gym";
+
+static NSString * const kRepetitionsLabelValue = @"reps";
+static NSString * const kMinutesLabelValue = @"min";
+static NSString * const kSecondsLabelValue = @"sec";
+
+@interface SegmentedControlBlocksValues : NSObject
++(NSString *)setWorkoutPlaceLabelContent:(NSNumber *)workoutPlaceTag;
++(NSString *)setTrainingLevelLabelText:(NSNumber *)trainingLevelTag;
++(UIColor *)setTrainingLevelLabelColor:(NSNumber *)trainingLevelTag;
++(NSString *)convertRepsMinsOrSecs:(NSNumber *)exerciseAmountUnitTag;
+@end
+
+NS_ASSUME_NONNULL_END
