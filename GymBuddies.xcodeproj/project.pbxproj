@@ -202,10 +202,10 @@
 		8E7088FE28775751008B4238 /* GymBuddies */ = {
 			isa = PBXGroup;
 			children = (
-				8E832E95287F34F000BF0024 /* ViewCells */,
-				8E70895E287CEEC2008B4238 /* DataModels */,
-				8E708953287CBECC008B4238 /* AppCommonResources */,
 				8E70893E28778DE4008B4238 /* APIManagers */,
+				8E708953287CBECC008B4238 /* AppCommonResources */,
+				8E70895E287CEEC2008B4238 /* DataModels */,
+				8E832E95287F34F000BF0024 /* ViewCells */,
 				8E70893A28777BD2008B4238 /* ViewControllers */,
 				8E7088FF28775751008B4238 /* AppDelegate.h */,
 				8E70890028775751008B4238 /* AppDelegate.m */,

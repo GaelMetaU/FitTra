@@ -81,7 +81,7 @@ static NSString * const kLikedRoutineClass= @"LikedRoutine";
         if (error!=nil){
             completion(false, error);
         } else {
-            completion(true, nil);
+            completion(true, error);
         }
     };
     
@@ -175,6 +175,21 @@ static NSString * const kLikedRoutineClass= @"LikedRoutine";
     };
     
     [query findObjectsInBackgroundWithBlock:block];
+}
+
+
++(void)changeProfilePicture:(PFFileObject *)image completion:(ParseManagerCreateCompletionBlock) completion{
+    PFUser *user = [PFUser currentUser];
+    user[@"profilePicture"] = image;
+    
+    ParseManagerCreateCompletionBlock block = ^void(BOOL succeeded, NSError * _Nullable error){
+        completion(succeeded, error);
+        if(!succeeded){
+            return;
+        }
+    };
+    
+    [user saveInBackgroundWithBlock:block];
 }
 
 

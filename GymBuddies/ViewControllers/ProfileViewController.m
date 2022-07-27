@@ -13,6 +13,7 @@
 #import "AlertCreator.h"
 #import "RoutineTableViewCell.h"
 #import "RoutineDetailsViewController.h"
+#import "MobileCoreServices/MobileCoreServices.h"
 
 static NSNumber * kShowCreatedRoutines = @0;
 static NSNumber * kShowLikedRoutines = @1;
@@ -24,9 +25,11 @@ static NSString * kProfileToDetailsSegue = @"ProfileToDetailsSegue";
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *showCreatedRoutinesButton;
 @property (weak, nonatomic) IBOutlet UIButton *showLikedRoutinesButton;
+@property (weak, nonatomic) IBOutlet UIButton *settingsButton;
 @property (strong, nonatomic) NSArray *createdRoutineList;
 @property (strong, nonatomic) NSArray *likedRoutineList;
 @property (strong, nonatomic) NSNumber *showCreatedOrLikedRoutinesIndicator;
+@property (strong, nonatomic) UIImagePickerController *mediaPicker;
 @end
 
 @implementation ProfileViewController
@@ -34,6 +37,10 @@ static NSString * kProfileToDetailsSegue = @"ProfileToDetailsSegue";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.mediaPicker = [UIImagePickerController new];
+    self.mediaPicker.delegate = self;
+    self.mediaPicker.allowsEditing = YES;
     
     self.likedRoutineList = [[NSArray alloc]init];
     self.createdRoutineList = [[NSArray alloc]init];
@@ -50,20 +57,6 @@ static NSString * kProfileToDetailsSegue = @"ProfileToDetailsSegue";
 }
 
 
-- (IBAction)didTapLogOut:(id)sender {
-    [ParseAPIManager logOut:^(NSError * _Nonnull error) {
-        if(error){
-            UIAlertController *alert = [AlertCreator createOkAlert:@"Error logging out" message:error.localizedDescription];
-            [self presentViewController:alert animated:YES completion:nil];
-        } else {
-            SceneDelegate *delegate = (SceneDelegate *)self.view.window.windowScene.delegate;
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            delegate.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginNavigationController"];
-        }
-    }];
-}
-
-
 #pragma mark - Top view set up
 
 -(void)setProfileInfo{
@@ -76,8 +69,57 @@ static NSString * kProfileToDetailsSegue = @"ProfileToDetailsSegue";
     }
     
     self.usernameLabel.text = user.username;
+    [self setSettingsPullDownButton];
 }
 
+
+-(void)setSettingsPullDownButton{
+    
+    UIAction *logOut = [UIAction actionWithTitle:@"Log out" image:nil identifier:nil handler:^(UIAction *action){
+        [ParseAPIManager logOut:^(NSError * _Nonnull error) {
+            if(error){
+                UIAlertController *alert = [AlertCreator createOkAlert:@"Error logging out" message:error.localizedDescription];
+                [self presentViewController:alert animated:YES completion:nil];
+            } else {
+                SceneDelegate *delegate = (SceneDelegate *)self.view.window.windowScene.delegate;
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                delegate.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginNavigationController"];
+            }
+        }];
+    }];
+    
+    UIAction *changeProfilePicture = [UIAction actionWithTitle:@"Change Profile Picture" image:nil identifier:nil handler:^(UIAction *action){
+        self.mediaPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        self.mediaPicker.mediaTypes = @[(NSString*)kUTTypeImage];
+        [self presentViewController:self.mediaPicker animated:YES completion:nil];
+    }];
+    
+    UIMenu *menu = [[UIMenu alloc]menuByReplacingChildren:[NSArray arrayWithObjects:logOut, changeProfilePicture, nil]];
+    self.settingsButton.menu = menu;
+    self.settingsButton.showsMenuAsPrimaryAction = YES;
+}
+
+
+#pragma mark - Change Profile Picture
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info{
+    NSURL *urlImage = [info objectForKey:UIImagePickerControllerImageURL];
+    NSString *imageName = urlImage.lastPathComponent;
+    
+    UIImage *editedImage = [info objectForKey:UIImagePickerControllerEditedImage];
+    PFFileObject *imageFile = [ParseAPIManager getPFFileFromImage:editedImage imageName:imageName];
+    
+    [ParseAPIManager changeProfilePicture:imageFile completion:^(BOOL succeeded, NSError * _Nonnull error) {
+        if(succeeded){
+            self.userProfilePicture.image = [info objectForKey:UIImagePickerControllerEditedImage];
+        } else {
+            UIAlertController *alert = [AlertCreator createOkAlert:@"Error changing your profile picture" message:error.localizedDescription];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+    }];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 
 #pragma mark - Fetching routines

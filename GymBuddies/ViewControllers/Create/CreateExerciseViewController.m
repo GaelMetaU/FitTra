@@ -24,7 +24,6 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *bodyZoneCollectionView;
 @property (weak, nonatomic) IBOutlet UIProgressView *postProgressView;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
-
 @property (strong, nonatomic) NSString *exerciseTitle;
 @property (strong, nonatomic) NSString *exerciseCaption;
 @property (strong, nonatomic) PFFileObject *exerciseVideo;
@@ -36,6 +35,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Dismiss keyboard after tapping outside of the view
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap)];
+    [self.view addGestureRecognizer:tap];
+    
     self.postProgressView.hidden = YES;
     // Media picker set up
     self.mediaPicker = [UIImagePickerController new];
@@ -86,6 +89,13 @@
     }
 
     self.exerciseTitle = title;
+}
+
+
+#pragma mark - Tap gesture handler
+
+-(void)singleTap{
+    [self.view endEditing:YES];
 }
 
 
@@ -164,7 +174,7 @@
     } else {
         NSURL *urlImage = [info objectForKey:UIImagePickerControllerImageURL];
         NSString *imageName = urlImage.lastPathComponent;
-        self.imagePreview.image = [info objectForKey:UIImagePickerControllerOriginalImage];
+        self.imagePreview.image = [info objectForKey:UIImagePickerControllerEditedImage];
         PFFileObject *image = [ParseAPIManager getPFFileFromImage:self.imagePreview.image imageName:imageName];
         self.imagePreview.file = image;
     }

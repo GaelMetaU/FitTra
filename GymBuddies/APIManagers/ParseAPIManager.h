@@ -47,6 +47,8 @@ typedef void (^ParseManagerFetchingDataRowsCompletionBlock) (NSArray *elements, 
 
 +(void)fetchUsersLikedRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
++(void)changeProfilePicture:(PFFileObject *)image completion:(ParseManagerCreateCompletionBlock) completion;
+
 + (PFFileObject *)getPFFileFromURL:(NSURL *)video videoName:(NSString *)videoName;
 
 + (PFFileObject *)getPFFileFromImage:(UIImage *)image imageName:(NSString *)imageName;
