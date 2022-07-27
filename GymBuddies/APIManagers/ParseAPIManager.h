@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void (^ParseManagerAuthenticationCompletionBlock) (PFUser *user, NSError *error);
 typedef void (^ParseManagerCreateCompletionBlock) (BOOL succeeded, NSError *error);
 typedef void (^ParseManagerLogOutCompletionBlock) (NSError * _Nullable errorAPI);
-typedef void (^ParseManagerFetchingDataRowsCompletionBlock) (NSArray *elements, NSError *error);
+typedef void (^ParseManagerFetchingDataRowsCompletionBlock) (NSArray *elements, NSError * _Nullable error);
 
 
 @interface ParseAPIManager : NSObject
@@ -42,6 +42,10 @@ typedef void (^ParseManagerFetchingDataRowsCompletionBlock) (NSArray *elements, 
 + (void)postRoutine:(Routine *)routine completion:(ParseManagerCreateCompletionBlock) completion;
 
 + (void)fetchHomeTimelineRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion;
+
++(void)fetchUsersCreatedRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion;
+
++(void)fetchUsersLikedRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
 + (PFFileObject *)getPFFileFromURL:(NSURL *)video videoName:(NSString *)videoName;
 

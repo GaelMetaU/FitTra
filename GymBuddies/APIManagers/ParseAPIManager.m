@@ -7,9 +7,10 @@
 
 #import "ParseAPIManager.h"
 
-static NSString * const BODY_ZONE_CLASS = @"BodyZone";
-static NSString * const SAVED_EXERCISE_CLASS= @"SavedExercise";
-static NSString * const ROUTINE_CLASS = @"Routine";
+static NSString * const kBodyZoneClass = @"BodyZone";
+static NSString * const kSavedExerciseClass= @"SavedExercise";
+static NSString * const kRoutineClass = @"Routine";
+static NSString * const kLikedRoutineClass= @"LikedRoutine";
 
 
 @implementation ParseAPIManager
@@ -49,7 +50,7 @@ static NSString * const ROUTINE_CLASS = @"Routine";
 
 
 +(void)fetchBodyZones:(ParseManagerFetchingDataRowsCompletionBlock) completion{
-    PFQuery *query = [PFQuery queryWithClassName:BODY_ZONE_CLASS];
+    PFQuery *query = [PFQuery queryWithClassName:kBodyZoneClass];
     
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
         completion(elements, error);
@@ -93,7 +94,7 @@ static NSString * const ROUTINE_CLASS = @"Routine";
 
 
 + (void)saveExercise:(Exercise *)exercise completion:(ParseManagerCreateCompletionBlock)completion{
-    PFObject *savedExercise = [PFObject objectWithClassName:SAVED_EXERCISE_CLASS];
+    PFObject *savedExercise = [PFObject objectWithClassName:kSavedExerciseClass];
     
     savedExercise[@"author"] = exercise.author;
     savedExercise[@"exercise"] = exercise;
@@ -110,15 +111,12 @@ static NSString * const ROUTINE_CLASS = @"Routine";
 
 
 + (void)fetchUsersExercises:(ParseManagerFetchingDataRowsCompletionBlock) completion{
-    PFQuery *query = [PFQuery queryWithClassName:SAVED_EXERCISE_CLASS];
+    PFQuery *query = [PFQuery queryWithClassName:kSavedExerciseClass];
     [query includeKeys:@[@"exercise", @"exercise.author", @"exercise.bodyZoneTag", @"exercise.image"]];
     [query whereKey:@"author" equalTo:[PFUser currentUser]];
 
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
         completion(elements, error);
-        for(PFObject *exercise in elements){
-            NSLog(@"%@", exercise);
-        }
     };
     
     [query findObjectsInBackgroundWithBlock:block];
@@ -140,8 +138,37 @@ static NSString * const ROUTINE_CLASS = @"Routine";
 
 
 + (void)fetchHomeTimelineRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion{
-    PFQuery *query = [PFQuery queryWithClassName:ROUTINE_CLASS];
+    PFQuery *query = [PFQuery queryWithClassName:kRoutineClass];
     [query includeKeys:@[@"bodyZoneList", @"exerciseList", @"author", @"exerciseList.baseExercise", @"exerciseList.baseExercise.bodyZoneTag", @"exerciseList.baseExercise.author"]];
+    
+    ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
+        completion(elements, error);
+    };
+    
+    [query findObjectsInBackgroundWithBlock:block];
+}
+
+
++(void)fetchUsersCreatedRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion{
+    PFQuery *query = [PFQuery queryWithClassName:kRoutineClass];
+    [query includeKeys:@[@"bodyZoneList", @"exerciseList", @"author", @"exerciseList.baseExercise", @"exerciseList.baseExercise.bodyZoneTag", @"exerciseList.baseExercise.author"]];
+    [query whereKey:@"author" equalTo:[PFUser currentUser]];
+    [query orderByDescending:@"createdAt"];
+    
+    ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
+        completion(elements, error);
+    };
+    
+    [query findObjectsInBackgroundWithBlock:block];
+}
+
+
++(void)fetchUsersLikedRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion{
+    PFQuery *query = [PFQuery queryWithClassName:kLikedRoutineClass];
+    [query includeKeys:@[@"routine",@"routine.bodyZoneList", @"routine.exerciseList", @"routine.author", @"routine.exerciseList.baseExercise", @"routine.exerciseList.baseExercise.bodyZoneTag", @"routine.exerciseList.baseExercise.author"]];
+    [query selectKeys:@[@"routine"]];
+    [query whereKey:@"user" equalTo:[PFUser currentUser]];
+    [query orderByDescending:@"createdAt"];
     
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
         completion(elements, error);
