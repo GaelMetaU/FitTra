@@ -9,6 +9,10 @@
 #import "ParseAPIManager.h"
 #import "GoogleMapsView.h"
 #import "AlertCreator.h"
+#import "TimelineRoutineTableViewCell.h"
+#import "RoutineDetailsViewController.h"
+
+static NSString * const kHomeToDetailsSegue = @"HomeToDetailsSegue";
 
 @interface HomeViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -22,14 +26,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.googleMapsView setContent];
+
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight =UITableViewAutomaticDimension;
-    
-    [self.googleMapsView setContent];
-    
+    self.routineFeed = [[NSArray alloc]init];
+
     [self fetchRoutines];
-    
 }
 
 
@@ -54,18 +58,24 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"GoogleMapsTableViewCell"];
+    TimelineRoutineTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"TimelineRoutineTableViewCell"];
+    [cell setCellContent:self.routineFeed[indexPath.row]];
     return cell;
 }
 
-/*
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
+    BOOL isHomeToDetailsSegue = [segue.identifier isEqualToString:kHomeToDetailsSegue];
+    if(isHomeToDetailsSegue){
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        RoutineDetailsViewController *routineDetailsViewController = [segue destinationViewController];
+        routineDetailsViewController.routine = self.routineFeed[indexPath.row];
+    }
+    
 }
-*/
+
 
 @end

@@ -7,7 +7,7 @@
 
 #import "AddExerciseTableViewCell.h"
 
-static NSString * const PROIFILE_PICTURE_KEY = @"profilePicture";
+static NSString * const kProfilePictureKey = @"profilePicture";
 
 @implementation AddExerciseTableViewCell
 
@@ -22,7 +22,7 @@ static NSString * const PROIFILE_PICTURE_KEY = @"profilePicture";
 -(void)setExercise:(Exercise *)exercise{
     self.exerciseImage.file = exercise.image;
     self.bodyZoneIcon.file = exercise.bodyZoneTag.icon;
-    self.authorProfilePicture.file = exercise.author[PROIFILE_PICTURE_KEY];
+    self.authorProfilePicture.file = exercise.author[kProfilePictureKey];
     
     [self.exerciseImage loadInBackground];
     [self.bodyZoneIcon loadInBackground];

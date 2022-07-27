@@ -9,6 +9,7 @@
 
 static NSString * const BODY_ZONE_CLASS = @"BodyZone";
 static NSString * const SAVED_EXERCISE_CLASS= @"SavedExercise";
+static NSString * const ROUTINE_CLASS = @"Routine";
 
 
 @implementation ParseAPIManager
@@ -140,6 +141,7 @@ static NSString * const SAVED_EXERCISE_CLASS= @"SavedExercise";
 
 + (void)fetchHomeTimelineRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion{
     PFQuery *query = [PFQuery queryWithClassName:ROUTINE_CLASS];
+    [query includeKeys:@[@"bodyZoneList", @"exerciseList", @"author", @"exerciseList.baseExercise", @"exerciseList.baseExercise.bodyZoneTag", @"exerciseList.baseExercise.author"]];
     
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
         completion(elements, error);

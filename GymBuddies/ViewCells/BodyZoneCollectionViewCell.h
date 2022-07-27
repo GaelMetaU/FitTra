@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (nonatomic, strong) BodyZone *bodyZone;
 -(void)setCellContent:(BodyZone *)bodyZone;
+-(void)setCellContentNoTitle:(BodyZone *)bodyZone;
+
 @end
 
 NS_ASSUME_NONNULL_END
