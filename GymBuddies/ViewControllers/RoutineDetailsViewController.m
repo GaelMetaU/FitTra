@@ -10,11 +10,14 @@
 #import "SegmentedControlBlocksValues.h"
 #import "RoutineDetailsExerciseTableViewCell.h"
 #import "BodyZoneCollectionViewCell.h"
+#import "ExerciseDetailsViewController.h"
 
 static NSString * const kBodyZoneCollectionViewCellIdentifier = @"RoutineBodyZoneCollectionViewCell";
 static NSString * const kExerciseTableViewCellIdentifier = @"RoutineDetailsExerciseTableViewCell";
 
 static CGFloat const kLabelBorderRadius = 5;
+
+static NSString * const kRoutineToExerciseSegueIdentifier = @"RoutineToExerciseSegue";
 
 @interface RoutineDetailsViewController ()
 @property (weak, nonatomic) IBOutlet PFImageView *routineImage;
@@ -110,14 +113,19 @@ static CGFloat const kLabelBorderRadius = 5;
 }
 
 
-/*
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
+    BOOL isRoutineToExerciseSegue = [segue.identifier isEqualToString:kRoutineToExerciseSegueIdentifier];
+    if(isRoutineToExerciseSegue){
+        NSIndexPath *indexPath = [self.exerciseListTableView indexPathForCell:sender];
+        ExerciseDetailsViewController *exerciseDetailsViewController = [segue destinationViewController];
+        exerciseDetailsViewController.exercise = self.exerciseList[indexPath.row][@"baseExercise"];
+    }
+    
 }
-*/
+
 
 @end
