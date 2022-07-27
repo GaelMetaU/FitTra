@@ -9,7 +9,7 @@
 #import "ParseAPIManager.h"
 #import "GoogleMapsView.h"
 #import "AlertCreator.h"
-#import "TimelineRoutineTableViewCell.h"
+#import "RoutineTableViewCell.h"
 #import "RoutineDetailsViewController.h"
 
 static NSString * const kHomeToDetailsSegue = @"HomeToDetailsSegue";
@@ -58,7 +58,7 @@ static NSString * const kHomeToDetailsSegue = @"HomeToDetailsSegue";
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    TimelineRoutineTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"TimelineRoutineTableViewCell"];
+    RoutineTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"RoutineTableViewCell"];
     [cell setCellContent:self.routineFeed[indexPath.row]];
     return cell;
 }

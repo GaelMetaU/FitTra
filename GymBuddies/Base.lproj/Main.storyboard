@@ -1368,7 +1368,7 @@
                                     </connections>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TimelineRoutineTableViewCell" rowHeight="571" id="mEz-0k-wdQ" customClass="RoutineTableViewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="RoutineTableViewCell" rowHeight="571" id="mEz-0k-wdQ" customClass="RoutineTableViewCell">
                                         <rect key="frame" x="0.0" y="405.5" width="414" height="571"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mEz-0k-wdQ" id="LtY-3S-ayh">
@@ -1620,7 +1620,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TimelineRoutineTableViewCell" rowHeight="571" id="9gn-sd-tXy" customClass="TimelineRoutineTableViewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="RoutineTableViewCell" rowHeight="571" id="9gn-sd-tXy" customClass="RoutineTableViewCell">
                                         <rect key="frame" x="0.0" y="235.5" width="414" height="571"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9gn-sd-tXy" id="Syf-dt-FyZ">
@@ -1780,6 +1780,7 @@
                                             <outlet property="routineImage" destination="QfQ-Wa-mAp" id="0Qh-dQ-wGT"/>
                                             <outlet property="trainingLevelLabel" destination="6Z1-Dm-7yK" id="gls-ja-NBd"/>
                                             <outlet property="workoutPlaceLabel" destination="Wjr-Bk-3vp" id="Bwm-Pg-9ZK"/>
+                                            <segue destination="RvY-4b-U0g" kind="show" identifier="ProfileToDetailsSegue" id="AAt-2Z-ce0"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1839,6 +1840,9 @@
             <point key="canvasLocation" x="743" y="1505"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="AAt-2Z-ce0"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="bookmark" catalog="system" width="112" height="128"/>
         <image name="camera" width="752" height="752"/>

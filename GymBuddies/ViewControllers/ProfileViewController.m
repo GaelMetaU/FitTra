@@ -11,6 +11,12 @@
 #import "Routine.h"
 #import "SceneDelegate.h"
 #import "AlertCreator.h"
+#import "RoutineTableViewCell.h"
+#import "RoutineDetailsViewController.h"
+
+static NSNumber * kShowCreatedRoutines = @0;
+static NSNumber * kShowLikedRoutines = @1;
+static NSString * kProfileToDetailsSegue = @"ProfileToDetailsSegue";
 
 @interface ProfileViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *routinesTableView;
@@ -18,10 +24,27 @@
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) NSArray *createdRoutineList;
 @property (strong, nonatomic) NSArray *likedRoutineList;
-
+@property (strong, nonatomic) NSNumber *showCreatedOrLikedRoutinesIndicator;
 @end
 
 @implementation ProfileViewController
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.likedRoutineList = [[NSArray alloc]init];
+    self.createdRoutineList = [[NSArray alloc]init];
+    self.showCreatedOrLikedRoutinesIndicator = kShowCreatedRoutines;
+    
+    self.routinesTableView.delegate = self;
+    self.routinesTableView.dataSource = self;
+    
+    [self setProfileInfo];
+    [self fetchUsersLikedRoutines];
+    [self fetchUsersCreatedRoutines];
+}
+
 
 - (IBAction)didTapLogOut:(id)sender {
     [ParseAPIManager logOut:^(NSError * _Nonnull error) {
@@ -34,17 +57,6 @@
             delegate.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginNavigationController"];
         }
     }];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    self.likedRoutineList = [[NSArray alloc]init];
-    self.createdRoutineList = [[NSArray alloc]init];
-    
-    [self setProfileInfo];
-    [self fetchUsersLikedRoutines];
-    [self fetchUsersCreatedRoutines];
 }
 
 
@@ -85,22 +97,52 @@
                 self.likedRoutineList = elements;
                 [self.routinesTableView reloadData];
             } else{
-                UIAlertController *alert = [AlertCreator createOkAlert:@"Error loading your routines" message:error.localizedDescription];
+                UIAlertController *alert = [AlertCreator createOkAlert:@"Error loading your liked routines" message:error.localizedDescription];
                 [self presentViewController:alert animated:YES completion:nil];
             }
     }];
 }
 
 
-#pragma mark - 
-/*
+#pragma mark - Table view methods
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if(self.showCreatedOrLikedRoutinesIndicator == kShowLikedRoutines){
+        return self.likedRoutineList.count;
+    } else if(self.showCreatedOrLikedRoutinesIndicator == kShowCreatedRoutines){
+        return self.createdRoutineList.count;
+    } else {
+        return 0;
+    }
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    RoutineTableViewCell *cell = [self.routinesTableView dequeueReusableCellWithIdentifier:@"RoutineTableViewCell"];
+    
+    if(self.showCreatedOrLikedRoutinesIndicator == kShowLikedRoutines){
+        [cell setCellContent:self.likedRoutineList[indexPath.row]];
+    } else {
+        [cell setCellContent:self.createdRoutineList[indexPath.row]];
+    }
+    return cell;
+}
+
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    BOOL isHomeToDetailsSegue = [segue.identifier isEqualToString:kProfileToDetailsSegue];
+    if(isHomeToDetailsSegue){
+        NSIndexPath *indexPath = [self.routinesTableView indexPathForCell:sender];
+        RoutineDetailsViewController *routineDetailsViewController = [segue destinationViewController];
+        if(self.showCreatedOrLikedRoutinesIndicator == kShowLikedRoutines){
+            routineDetailsViewController.routine = self.likedRoutineList[indexPath.row];
+        } else {
+            routineDetailsViewController.routine = self.createdRoutineList[indexPath.row];
+        }
+    }
 }
-*/
+
 
 @end

@@ -1,11 +1,11 @@
 //
-//  TimelineRoutineTableViewCell.m
+//  RoutineTableViewCell.m
 //  GymBuddies
 //
 //  Created by Gael Rodriguez Gomez on 7/25/22.
 //
 
-#import "TimelineRoutineTableViewCell.h"
+#import "RoutineTableViewCell.h"
 #import "DateTools/DateTools.h"
 #import "SegmentedControlBlocksValues.h"
 #import "BodyZoneCollectionViewCell.h"
@@ -14,7 +14,7 @@ static CGFloat const kLabelBorderRadius = 5;
 static NSString * const kBodyZoneCollectionViewCellNoTitleIdentifier = @"BodyZoneCollectionViewCellNoTitle";
 static NSString * const kProfilePictureKey = @"profilePicture";
 
-@implementation TimelineRoutineTableViewCell
+@implementation RoutineTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

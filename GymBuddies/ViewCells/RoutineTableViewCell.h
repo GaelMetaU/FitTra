@@ -1,5 +1,5 @@
 //
-//  TimelineRoutineTableViewCell.h
+//  RoutineTableViewCell.h
 //  GymBuddies
 //
 //  Created by Gael Rodriguez Gomez on 7/25/22.
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TimelineRoutineTableViewCell : UITableViewCell <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface RoutineTableViewCell : UITableViewCell <UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet PFImageView *authorProfilePicture;
 @property (weak, nonatomic) IBOutlet UILabel *authorUsernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *trainingLevelLabel;

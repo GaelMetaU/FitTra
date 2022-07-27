@@ -30,7 +30,7 @@
 		8E70895D287CDBF4008B4238 /* CreateExerciseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E70895C287CDBF4008B4238 /* CreateExerciseViewController.m */; };
 		8E708961287CEF40008B4238 /* BodyZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E708960287CEF40008B4238 /* BodyZone.m */; };
 		8E708964287CEF5A008B4238 /* Exercise.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E708963287CEF5A008B4238 /* Exercise.m */; };
-		8E72DEDA288F17BA00605018 /* TimelineRoutineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E72DED9288F17BA00605018 /* TimelineRoutineTableViewCell.m */; };
+		8E72DEDA288F17BA00605018 /* RoutineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E72DED9288F17BA00605018 /* RoutineTableViewCell.m */; };
 		8E72DEE12890520000605018 /* RoutineDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E72DEE02890520000605018 /* RoutineDetailsViewController.m */; };
 		8E72DEE428905E3900605018 /* RoutineDetailsExerciseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E72DEE328905E3900605018 /* RoutineDetailsExerciseTableViewCell.m */; };
 		8E72DEE72890892A00605018 /* SegmentedControlBlocksValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E72DEE62890892A00605018 /* SegmentedControlBlocksValues.m */; };
@@ -110,8 +110,8 @@
 		8E708960287CEF40008B4238 /* BodyZone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BodyZone.m; sourceTree = "<group>"; };
 		8E708962287CEF5A008B4238 /* Exercise.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Exercise.h; sourceTree = "<group>"; };
 		8E708963287CEF5A008B4238 /* Exercise.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Exercise.m; sourceTree = "<group>"; };
-		8E72DED8288F17BA00605018 /* TimelineRoutineTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimelineRoutineTableViewCell.h; sourceTree = "<group>"; };
-		8E72DED9288F17BA00605018 /* TimelineRoutineTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimelineRoutineTableViewCell.m; sourceTree = "<group>"; };
+		8E72DED8288F17BA00605018 /* RoutineTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoutineTableViewCell.h; sourceTree = "<group>"; };
+		8E72DED9288F17BA00605018 /* RoutineTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoutineTableViewCell.m; sourceTree = "<group>"; };
 		8E72DEDF2890520000605018 /* RoutineDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoutineDetailsViewController.h; sourceTree = "<group>"; };
 		8E72DEE02890520000605018 /* RoutineDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoutineDetailsViewController.m; sourceTree = "<group>"; };
 		8E72DEE228905E3900605018 /* RoutineDetailsExerciseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoutineDetailsExerciseTableViewCell.h; sourceTree = "<group>"; };
@@ -327,8 +327,8 @@
 				8EF822662885E5FF0000DED9 /* ExerciseInCreateRoutineTableViewCell.m */,
 				8E10A455288887A700DA1D9A /* GoogleMapsView.h */,
 				8E10A456288887A700DA1D9A /* GoogleMapsView.m */,
-				8E72DED8288F17BA00605018 /* TimelineRoutineTableViewCell.h */,
-				8E72DED9288F17BA00605018 /* TimelineRoutineTableViewCell.m */,
+				8E72DED8288F17BA00605018 /* RoutineTableViewCell.h */,
+				8E72DED9288F17BA00605018 /* RoutineTableViewCell.m */,
 				8E72DEE228905E3900605018 /* RoutineDetailsExerciseTableViewCell.h */,
 				8E72DEE328905E3900605018 /* RoutineDetailsExerciseTableViewCell.m */,
 			);
@@ -628,7 +628,7 @@
 				8E72DEEC2890B6B600605018 /* ExerciseDetailsViewController.m in Sources */,
 				8E7089512878EBFE008B4238 /* ProfileViewController.m in Sources */,
 				8E708961287CEF40008B4238 /* BodyZone.m in Sources */,
-				8E72DEDA288F17BA00605018 /* TimelineRoutineTableViewCell.m in Sources */,
+				8E72DEDA288F17BA00605018 /* RoutineTableViewCell.m in Sources */,
 				8E10A457288887A700DA1D9A /* GoogleMapsView.m in Sources */,
 				8E708964287CEF5A008B4238 /* Exercise.m in Sources */,
 				8E70890128775751008B4238 /* AppDelegate.m in Sources */,
