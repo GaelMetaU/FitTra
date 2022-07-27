@@ -7,10 +7,18 @@
 
 #import "ProfileViewController.h"
 #import "ParseAPIManager.h"
+#import "Parse/PFImageView.h"
+#import "Routine.h"
 #import "SceneDelegate.h"
 #import "AlertCreator.h"
 
 @interface ProfileViewController ()
+@property (weak, nonatomic) IBOutlet UITableView *routinesTableView;
+@property (weak, nonatomic) IBOutlet PFImageView *userProfilePicture;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (strong, nonatomic) NSArray *createdRoutineList;
+@property (strong, nonatomic) NSArray *likedRoutineList;
+
 @end
 
 @implementation ProfileViewController
@@ -30,10 +38,61 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.likedRoutineList = [[NSArray alloc]init];
+    self.createdRoutineList = [[NSArray alloc]init];
+    
+    [self setProfileInfo];
+    [self fetchUsersLikedRoutines];
+    [self fetchUsersCreatedRoutines];
 }
 
 
+#pragma mark - Top view set up
+
+-(void)setProfileInfo{
+    PFUser *user = [PFUser currentUser];
+    
+    self.userProfilePicture.layer.cornerRadius = self.userProfilePicture.frame.size.width/2;
+    if(user[@"profilePicture"]){
+        self.userProfilePicture.file = user[@"profilePicture"];
+        [self.userProfilePicture loadInBackground];
+    }
+    
+    self.usernameLabel.text = user.username;
+}
+
+
+
+#pragma mark - Fetching routines
+
+-(void)fetchUsersCreatedRoutines{
+    [ParseAPIManager fetchUsersCreatedRoutines:^(NSArray * _Nonnull elements, NSError * _Nullable error) {
+            if(elements != nil){
+                self.createdRoutineList = elements;
+                [self.routinesTableView reloadData];
+            } else{
+                UIAlertController *alert = [AlertCreator createOkAlert:@"Error loading your routines" message:error.localizedDescription];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
+    }];
+}
+
+
+-(void)fetchUsersLikedRoutines{
+    [ParseAPIManager fetchUsersLikedRoutines:^(NSArray * _Nonnull elements, NSError * _Nullable error) {
+            if(elements != nil){
+                self.likedRoutineList = elements;
+                [self.routinesTableView reloadData];
+            } else{
+                UIAlertController *alert = [AlertCreator createOkAlert:@"Error loading your routines" message:error.localizedDescription];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
+    }];
+}
+
+
+#pragma mark - 
 /*
 #pragma mark - Navigation
 
