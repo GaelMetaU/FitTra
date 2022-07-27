@@ -22,6 +22,8 @@ static NSString * kProfileToDetailsSegue = @"ProfileToDetailsSegue";
 @property (weak, nonatomic) IBOutlet UITableView *routinesTableView;
 @property (weak, nonatomic) IBOutlet PFImageView *userProfilePicture;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *showCreatedRoutinesButton;
+@property (weak, nonatomic) IBOutlet UIButton *showLikedRoutinesButton;
 @property (strong, nonatomic) NSArray *createdRoutineList;
 @property (strong, nonatomic) NSArray *likedRoutineList;
 @property (strong, nonatomic) NSNumber *showCreatedOrLikedRoutinesIndicator;
@@ -35,6 +37,8 @@ static NSString * kProfileToDetailsSegue = @"ProfileToDetailsSegue";
     
     self.likedRoutineList = [[NSArray alloc]init];
     self.createdRoutineList = [[NSArray alloc]init];
+    
+    self.showCreatedRoutinesButton.selected = YES;
     self.showCreatedOrLikedRoutinesIndicator = kShowCreatedRoutines;
     
     self.routinesTableView.delegate = self;
@@ -104,10 +108,37 @@ static NSString * kProfileToDetailsSegue = @"ProfileToDetailsSegue";
 }
 
 
+#pragma mark - Button interaction
+
+- (IBAction)didTapCreated:(id)sender {
+    if(self.showCreatedRoutinesButton.isSelected){
+        return;
+    }
+    self.showCreatedRoutinesButton.selected = YES;
+    self.showLikedRoutinesButton.selected = NO;
+    self.showCreatedOrLikedRoutinesIndicator = kShowCreatedRoutines;
+   
+    [self.routinesTableView reloadData];
+}
+
+
+- (IBAction)didTapLiked:(id)sender {
+    if(self.showLikedRoutinesButton.isSelected){
+        return;
+    }
+    self.showLikedRoutinesButton.selected = YES;
+    self.showCreatedRoutinesButton.selected = NO;
+    self.showCreatedOrLikedRoutinesIndicator = kShowLikedRoutines;
+   
+    [self.routinesTableView reloadData];
+}
+
+
 #pragma mark - Table view methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if(self.showCreatedOrLikedRoutinesIndicator == kShowLikedRoutines){
+        NSLog(@"%lu", self.likedRoutineList.count);
         return self.likedRoutineList.count;
     } else if(self.showCreatedOrLikedRoutinesIndicator == kShowCreatedRoutines){
         return self.createdRoutineList.count;
@@ -121,7 +152,7 @@ static NSString * kProfileToDetailsSegue = @"ProfileToDetailsSegue";
     RoutineTableViewCell *cell = [self.routinesTableView dequeueReusableCellWithIdentifier:@"RoutineTableViewCell"];
     
     if(self.showCreatedOrLikedRoutinesIndicator == kShowLikedRoutines){
-        [cell setCellContent:self.likedRoutineList[indexPath.row]];
+        [cell setCellContent:self.likedRoutineList[indexPath.row][@"routine"]];
     } else {
         [cell setCellContent:self.createdRoutineList[indexPath.row]];
     }
