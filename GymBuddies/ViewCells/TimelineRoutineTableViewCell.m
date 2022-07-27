@@ -54,7 +54,6 @@ static NSString * const kBodyZoneCollectionViewCellNoTitleIdentifier = @"BodyZon
     self.workoutPlaceLabel.text = [SegmentedControlBlocksValues setWorkoutPlaceLabelContent:self.routine.workoutPlace];
     self.workoutPlaceLabel.layer.masksToBounds = YES;
     
-
 }
 
 
