@@ -12,6 +12,7 @@
 
 static CGFloat const kLabelBorderRadius = 5;
 static NSString * const kBodyZoneCollectionViewCellNoTitleIdentifier = @"BodyZoneCollectionViewCellNoTitle";
+static NSString * const kProfilePictureKey = @"profilePicture";
 
 @implementation TimelineRoutineTableViewCell
 
@@ -31,8 +32,9 @@ static NSString * const kBodyZoneCollectionViewCellNoTitleIdentifier = @"BodyZon
 - (void)setCellContent:(Routine *)routine{
     _routine = routine;
     
-    if(self.routine.author[@"profilePicture"]){
-        self.authorProfilePicture.file = self.routine.author[@"profilePicture"];
+    if(self.routine.author[kProfilePictureKey]){
+        self.authorProfilePicture.file = self.routine.author[kProfilePictureKey];
+        self.authorProfilePicture.layer.cornerRadius = self.authorProfilePicture.frame.size.width/2;
         [self.authorProfilePicture loadInBackground];
     }
 
