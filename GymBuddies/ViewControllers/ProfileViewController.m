@@ -37,19 +37,18 @@ static NSString * kProfileToDetailsSegue = @"ProfileToDetailsSegue";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.routinesTableView.delegate = self;
+    self.routinesTableView.dataSource = self;
+    // Media picker set up
     self.mediaPicker = [UIImagePickerController new];
     self.mediaPicker.delegate = self;
     self.mediaPicker.allowsEditing = YES;
-    
+    // Initializing data sources
     self.likedRoutineList = [[NSArray alloc]init];
     self.createdRoutineList = [[NSArray alloc]init];
-    
+    // Initial routine views
     self.showCreatedRoutinesButton.selected = YES;
     self.showCreatedOrLikedRoutinesIndicator = kShowCreatedRoutines;
-    
-    self.routinesTableView.delegate = self;
-    self.routinesTableView.dataSource = self;
     
     [self setProfileInfo];
     [self fetchUsersLikedRoutines];
@@ -205,8 +204,8 @@ static NSString * kProfileToDetailsSegue = @"ProfileToDetailsSegue";
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    BOOL isHomeToDetailsSegue = [segue.identifier isEqualToString:kProfileToDetailsSegue];
-    if(isHomeToDetailsSegue){
+    BOOL isProfileToDetailsSegue = [segue.identifier isEqualToString:kProfileToDetailsSegue];
+    if(isProfileToDetailsSegue){
         NSIndexPath *indexPath = [self.routinesTableView indexPathForCell:sender];
         RoutineDetailsViewController *routineDetailsViewController = [segue destinationViewController];
         if(self.showCreatedOrLikedRoutinesIndicator == kShowLikedRoutines){
