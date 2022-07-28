@@ -8,7 +8,11 @@
 #import "SearchViewController.h"
 #import "ParseAPIManager.h"
 #import "RoutineTableViewCell.h"
+#import "Routine.h"
+#import "RoutineDetailsViewController.h"
 #import "AlertCreator.h"
+
+static NSString * const kSearchToDetailsSegue = @"SearchToDetailsSegue";
 
 @interface SearchViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *resultsTableView;
@@ -74,7 +78,12 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
+    BOOL isSearchToDetailsSegue = [segue.identifier isEqualToString:kSearchToDetailsSegue];
+    if(isSearchToDetailsSegue){
+        NSIndexPath *indexPath = [self.resultsTableView indexPathForCell:sender];
+        RoutineDetailsViewController *routineDetailsViewController = [segue destinationViewController];
+        routineDetailsViewController.routine = self.results[indexPath.row];
+    }
 }
 
 
