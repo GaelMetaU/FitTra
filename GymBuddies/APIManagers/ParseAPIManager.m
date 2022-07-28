@@ -193,6 +193,19 @@ static NSString * const kLikedRoutineClass= @"LikedRoutine";
 }
 
 
++(void)searchRoutines:(NSString *)searchTerm completion:(ParseManagerFetchingDataRowsCompletionBlock) completion{
+    PFQuery *query = [PFQuery queryWithClassName:kRoutineClass];
+    [query whereKey:@"caption" containsString:searchTerm];
+    [query includeKeys:@[@"bodyZoneList", @"exerciseList", @"author", @"exerciseList.baseExercise", @"exerciseList.baseExercise.bodyZoneTag", @"exerciseList.baseExercise.author"]];
+    
+    ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
+        completion(elements, error);
+    };
+    
+    [query findObjectsInBackgroundWithBlock:block];
+}
+
+
 + (PFFileObject *)getPFFileFromURL:(NSURL *)video videoName:(NSString *)videoName{
     if(!video){
         return nil;
