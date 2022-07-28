@@ -194,15 +194,22 @@ static NSString * const kLikedRoutineClass= @"LikedRoutine";
 
 
 +(void)searchRoutines:(NSString *)searchTerm completion:(ParseManagerFetchingDataRowsCompletionBlock) completion{
-    PFQuery *query = [PFQuery queryWithClassName:kRoutineClass];
-    [query whereKey:@"caption" containsString:searchTerm];
-    [query includeKeys:@[@"bodyZoneList", @"exerciseList", @"author", @"exerciseList.baseExercise", @"exerciseList.baseExercise.bodyZoneTag", @"exerciseList.baseExercise.author"]];
+    PFQuery *captionQuery = [PFQuery queryWithClassName:kRoutineClass];
+    [captionQuery whereKey:@"caption" containsString:searchTerm];
     
+    PFQuery *authorQuery = [PFQuery queryWithClassName:kRoutineClass];
+    //[authorQuery includeKeys:@[@"bodyZoneList", @"exerciseList", @"author", @"exerciseList.baseExercise", @"exerciseList.baseExercise.bodyZoneTag", @"exerciseList.baseExercise.author"]];
+    [authorQuery whereKey:@"authorUsername" containsString:searchTerm];
+    
+
+    PFQuery *finalQuery = [PFQuery orQueryWithSubqueries:@[authorQuery, captionQuery]];
+    [finalQuery includeKeys:@[@"bodyZoneList", @"exerciseList", @"author", @"exerciseList.baseExercise", @"exerciseList.baseExercise.bodyZoneTag", @"exerciseList.baseExercise.author"]];
+
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
         completion(elements, error);
     };
     
-    [query findObjectsInBackgroundWithBlock:block];
+    [finalQuery findObjectsInBackgroundWithBlock:block];
 }
 
 

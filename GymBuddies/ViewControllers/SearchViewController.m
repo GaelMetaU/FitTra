@@ -19,6 +19,7 @@ static NSString * const kSearchToDetailsSegue = @"SearchToDetailsSegue";
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSArray *results;
 @property (strong, nonatomic) UISearchController *searchController;
+@property (strong, nonatomic) NSTimer *timer;
 @end
 
 @implementation SearchViewController
@@ -42,8 +43,19 @@ static NSString * const kSearchToDetailsSegue = @"SearchToDetailsSegue";
 #pragma mark - Search bar methods
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-    if(searchText.length != 0){
-        [ParseAPIManager searchRoutines:searchText completion:^(NSArray * _Nonnull elements, NSError * _Nullable error) {
+    if(self.timer)
+        {
+            [self.timer invalidate];
+            self.timer = nil;
+        }
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.20 target:self selector:@selector(searchQuery:) userInfo:nil repeats:NO];
+}
+
+
+-(void)searchQuery:(NSTimer *)timer{
+    NSString *searchTerm = self.searchBar.text;
+    if(searchTerm.length != 0){
+        [ParseAPIManager searchRoutines:searchTerm completion:^(NSArray * _Nonnull elements, NSError * _Nullable error) {
                     if(error != nil){
                         UIAlertController *alert = [AlertCreator createOkAlert:@"Error searching" message:error.localizedDescription];
                         [self presentViewController:alert animated:YES completion:nil];
@@ -55,6 +67,7 @@ static NSString * const kSearchToDetailsSegue = @"SearchToDetailsSegue";
         }];
     }
 }
+
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
     [self.view endEditing:YES];

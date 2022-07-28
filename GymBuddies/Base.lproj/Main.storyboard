@@ -242,7 +242,7 @@
                 <navigationController id="gaX-47-1Ds" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Create" image="plus.circle" catalog="system" id="wCf-W4-JGp"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2rg-v2-Rgu">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -251,7 +251,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JxG-x3-z1T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1243" y="179"/>
+            <point key="canvasLocation" x="1126" y="2247"/>
         </scene>
         <!--Home-->
         <scene sceneID="Gde-ya-1ez">
@@ -502,11 +502,11 @@
             <objects>
                 <viewController id="qY7-1U-Eu8" customClass="CreateRoutineViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zIJ-yR-u5d">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="QVi-6L-d8L">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="56" width="414" height="786"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="fkf-Hc-nNO">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="392"/>
@@ -785,7 +785,7 @@
                     <navigationItem key="navigationItem" id="S4F-Ye-TJF">
                         <barButtonItem key="rightBarButtonItem" image="shift.fill" catalog="system" style="plain" id="16p-Fv-rpQ">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="7d9-fS-kgI">
-                                <rect key="frame" x="329.5" y="5" width="64.5" height="34.5"/>
+                                <rect key="frame" x="329.5" y="11" width="64.5" height="34.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Done"/>
@@ -815,18 +815,18 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1729" y="956"/>
+            <point key="canvasLocation" x="1126" y="2958"/>
         </scene>
         <!--Add Exercise View Controller-->
         <scene sceneID="zo9-BX-arA">
             <objects>
                 <viewController id="2gL-kd-hDQ" customClass="AddExerciseViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gcG-QJ-QhU">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pgb-iH-3pr">
-                                <rect key="frame" x="348" y="88" width="46" height="46"/>
+                                <rect key="frame" x="348" y="56" width="46" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="46" id="KNf-9G-aVe"/>
                                     <constraint firstAttribute="height" constant="46" id="v4B-6k-tK0"/>
@@ -838,7 +838,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="07a-ng-VoO">
-                                <rect key="frame" x="0.0" y="154" width="414" height="708"/>
+                                <rect key="frame" x="0.0" y="122" width="414" height="720"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddExerciseTableViewCell" rowHeight="115" id="Fh3-Xh-EAv" customClass="AddExerciseTableViewCell">
@@ -899,7 +899,7 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select an exercise" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bQg-ks-8si">
-                                <rect key="frame" x="20" y="95" width="308" height="31.5"/>
+                                <rect key="frame" x="20" y="63" width="308" height="31.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="26"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -926,7 +926,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YOW-oQ-x0M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1729" y="1728"/>
+            <point key="canvasLocation" x="1126" y="3635"/>
         </scene>
         <!--Routine Details View Controller-->
         <scene sceneID="jc5-4y-p09">
@@ -1326,7 +1326,7 @@
             <objects>
                 <viewController id="CT0-GG-GD7" customClass="CreateExerciseViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YId-ny-VDl">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mgt-2Z-AzD">
@@ -1498,7 +1498,7 @@
                     <navigationItem key="navigationItem" id="G5y-Bb-bgd">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="5eO-e4-ERV">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="hp8-AB-jIN">
-                                <rect key="frame" x="322" y="5" width="72" height="34.5"/>
+                                <rect key="frame" x="322" y="11" width="72" height="34.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Done"/>
@@ -1518,7 +1518,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m5K-k2-dYS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1729" y="2480"/>
+            <point key="canvasLocation" x="1126" y="4337"/>
         </scene>
         <!--Home-->
         <scene sceneID="nFr-yc-B62">
@@ -1771,7 +1771,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="QPG-DY-PmY">
-                        <barButtonItem key="rightBarButtonItem" image="plus.circle" catalog="system" id="7Kf-JS-Y10"/>
+                        <barButtonItem key="rightBarButtonItem" image="plus.circle" catalog="system" id="7Kf-JS-Y10">
+                            <connections>
+                                <segue destination="gaX-47-1Ds" kind="presentation" id="uLe-wz-Pus"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="googleMapsView" destination="s0O-lO-7wb" id="h8h-m8-QSa"/>
@@ -2040,7 +2044,13 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="BWa-hM-fGG"/>
+                    <navigationItem key="navigationItem" id="BWa-hM-fGG">
+                        <barButtonItem key="rightBarButtonItem" image="plus.circle" catalog="system" id="hxW-mb-mzu">
+                            <connections>
+                                <segue destination="gaX-47-1Ds" kind="presentation" id="edN-lV-PU9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="routinesTableView" destination="r5C-9C-HKw" id="gSW-DU-cWG"/>
@@ -2075,6 +2085,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="KfO-Xn-Fxx"/>
+        <segue reference="edN-lV-PU9"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="bookmark" catalog="system" width="112" height="128"/>
