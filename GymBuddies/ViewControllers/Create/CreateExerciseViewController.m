@@ -15,6 +15,9 @@
 #import "CommonValidations.h"
 #import "BodyZoneCollectionViewCell.h"
 #import "BodyZone.h"
+#import "AlertCreator.h"
+
+static NSString * const kBodyZoneCollectionViewCellIdentifier = @"BodyZoneCollectionViewCell";
 
 @interface CreateExerciseViewController ()
 @property (strong, nonatomic) UIImagePickerController *mediaPicker;
@@ -57,8 +60,10 @@
     self.postProgressView.hidden = NO;
     
     if(self.exerciseBodyZoneTag.title == nil){
-        [self _emptyBodyZoneTagAlert];
+        UIAlertController *alert = [AlertCreator createOkAlert:@"The exercise has no body zone" message:@"Pick a body zone for your exercise"];
+        [self presentViewController:alert animated:YES completion:nil];
         self.postProgressView.hidden = YES;
+        self.doneButton.userInteractionEnabled = YES;
         return;
     }
     // Sets the fields value to the posts, set default values if empty
@@ -68,8 +73,8 @@
     // When uploading the object, it reasigns itself to include the objectID from Parse
     exercise = [ParseAPIManager postExercise:exercise progress:self.postProgressView completion:^(BOOL succeeded, NSError * _Nullable error) {
             if(!succeeded){
-                [self _failedSavingAlert:error.localizedDescription];
-                return;
+                UIAlertController *alert = [AlertCreator createOkAlert:@"Error saving exercise" message:error.localizedDescription];
+                [self presentViewController:alert animated:YES completion:nil];
             } else{
                 [self.delegate didCreateExercise:exercise];
                 [self.navigationController popViewControllerAnimated:YES];
@@ -109,7 +114,8 @@
 -(void)fetchBodyZones{
     [ParseAPIManager fetchBodyZones:^(NSArray * _Nonnull elements, NSError * _Nonnull error) {
         if(elements == nil){
-            [self _failedFetchingAlert:error.localizedDescription];
+            UIAlertController *alert = [AlertCreator createOkAlert:@"Error loading screen" message:error.localizedDescription];
+            [self presentViewController:alert animated:YES completion:nil];
         } else {
             self.bodyZones = elements;
             [self.bodyZoneCollectionView reloadData];
@@ -119,7 +125,7 @@
 
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    BodyZoneCollectionViewCell *cell = [self.bodyZoneCollectionView dequeueReusableCellWithReuseIdentifier:@"BodyZoneCollectionViewCell" forIndexPath:indexPath];
+    BodyZoneCollectionViewCell *cell = [self.bodyZoneCollectionView dequeueReusableCellWithReuseIdentifier:kBodyZoneCollectionViewCellIdentifier forIndexPath:indexPath];
     BodyZone *bodyZone = self.bodyZones[indexPath.item];
     [cell setCellContent:bodyZone];
     
@@ -185,38 +191,6 @@
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 
-}
-
-
-#pragma mark -Alerts
-
--(void)_failedFetchingAlert:(NSString *)message{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error fetching data" message:message preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-    [alert addAction:okAction];
-    
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
-
--(void)_failedSavingAlert:(NSString *)message{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error saving exercise" message:message preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-    [alert addAction:okAction];
-    
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
-
--(void)_emptyBodyZoneTagAlert{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"The exercise has no body zone" message:@"Pick a body zone for your exercise" preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-    [alert addAction:okAction];
-    
-    [self presentViewController:alert animated:YES completion:nil];
 }
 
 

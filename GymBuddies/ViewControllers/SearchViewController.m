@@ -14,6 +14,7 @@
 #import "SegmentedControlBlocksValues.h"
 #import "CommonValidations.h"
 
+static NSString * const kRoutineResultTableViewCellIdentifier = @"RoutineResultTableViewCell";
 static NSString * const kSearchToDetailsSegue = @"SearchToDetailsSegue";
 static NSString * const kBeginnerFilterTitle = @"Beginner";
 static NSString * const kMediumFilterTitle = @"Medium";
@@ -189,7 +190,7 @@ static NSString * const kGymFilterTitle = @"Gym";
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    RoutineTableViewCell *cell = [self.resultsTableView dequeueReusableCellWithIdentifier:@"RoutineResultTableViewCell"];
+    RoutineTableViewCell *cell = [self.resultsTableView dequeueReusableCellWithIdentifier:kRoutineResultTableViewCellIdentifier];
     [cell setCellContent:self.results[indexPath.row]];
     return cell;
 }
