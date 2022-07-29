@@ -228,6 +228,23 @@ static NSString * const kLikedRoutineClass= @"LikedRoutine";
 }
 
 
++ (void)likeRoutine:(Routine *)routine completion:(ParseManagerCreateCompletionBlock) completion{
+    PFUser *user = [PFUser currentUser];
+    PFObject *likedRoutine = [PFObject objectWithClassName:kLikedRoutineClass];
+    likedRoutine[@"routine"] = routine;
+    likedRoutine[@"user"] = user;
+    
+    ParseManagerCreateCompletionBlock block = ^void(BOOL succeeded, NSError * _Nullable error){
+        completion(succeeded, error);
+        if(!succeeded){
+            return;
+        }
+    };
+    
+    [likedRoutine saveInBackgroundWithBlock:block];
+}
+
+
 + (PFFileObject *)getPFFileFromURL:(NSURL *)video videoName:(NSString *)videoName{
     if(!video){
         return nil;

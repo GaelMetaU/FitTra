@@ -59,6 +59,8 @@ typedef void (^ParseManagerFetchingDataRowsCompletionBlock) (NSArray *elements, 
   trainingLevelFilter:(NSNumber *)trainingLevelFilter
            completion:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
++(void)likeRoutine:(Routine *)routine;
+
 + (PFFileObject *)getPFFileFromURL:(NSURL *)video
                          videoName:(NSString *)videoName;
 
