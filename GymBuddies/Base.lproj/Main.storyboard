@@ -225,6 +225,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="a0u-S4-F85" kind="relationship" relationship="viewControllers" id="bSo-oe-Xy6"/>
@@ -257,7 +259,9 @@
         <scene sceneID="Gde-ya-1ez">
             <objects>
                 <navigationController id="7xl-gp-vWh" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="9WR-bJ-IJp"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="9WR-bJ-IJp">
+                        <color key="badgeColor" systemColor="systemGreenColor"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="D9M-Gs-JF1">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -299,14 +303,66 @@
                                 <rect key="frame" x="0.0" y="139" width="414" height="674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" id="ENM-SY-xrJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
+                                <scrollView key="tableHeaderView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="K2g-eV-qbQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                </view>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yz2-g2-lrC">
+                                            <rect key="frame" x="0.0" y="0.0" width="321.5" height="44"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6b-gr-1bE">
+                                                    <rect key="frame" x="30" y="7" width="114" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <menu key="menu" id="hEl-Ja-hag">
+                                                        <menuOptions key="menuOptions" displayInline="YES" destructive="YES"/>
+                                                        <children>
+                                                            <command title="Item 1" id="fYe-gg-o1G"/>
+                                                            <command title="Item 2" id="wUz-76-bLb"/>
+                                                        </children>
+                                                    </menu>
+                                                    <state key="normal" title="Training Level" image="chevron.down" catalog="system">
+                                                        <color key="titleColor" name="AccentColor"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="raZ-9s-mlR">
+                                                    <rect key="frame" x="174" y="7" width="117.5" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <menu key="menu" id="2cq-NW-ylJ">
+                                                        <children>
+                                                            <command title="Item 1" id="TeX-Tu-yYV"/>
+                                                            <command title="Item 2" id="lMe-qd-dI0"/>
+                                                        </children>
+                                                    </menu>
+                                                    <state key="normal" title="Workout Place" image="chevron.down" catalog="system">
+                                                        <color key="titleColor" name="AccentColor"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="raZ-9s-mlR" secondAttribute="bottom" constant="7" id="8dW-Lj-MOq"/>
+                                                <constraint firstAttribute="trailing" secondItem="raZ-9s-mlR" secondAttribute="trailing" constant="30" id="El9-ml-Vem"/>
+                                                <constraint firstItem="raZ-9s-mlR" firstAttribute="top" secondItem="Yz2-g2-lrC" secondAttribute="top" constant="7" id="IOg-qS-sc8"/>
+                                                <constraint firstItem="F6b-gr-1bE" firstAttribute="top" secondItem="Yz2-g2-lrC" secondAttribute="top" constant="7" id="jW5-qz-Y3X"/>
+                                                <constraint firstAttribute="bottom" secondItem="F6b-gr-1bE" secondAttribute="bottom" constant="7" id="pZv-9D-aOW"/>
+                                                <constraint firstItem="F6b-gr-1bE" firstAttribute="leading" secondItem="Yz2-g2-lrC" secondAttribute="leading" constant="30" id="rsA-up-dOv"/>
+                                                <constraint firstItem="raZ-9s-mlR" firstAttribute="leading" secondItem="F6b-gr-1bE" secondAttribute="trailing" constant="30" id="xPY-sP-Tio"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Yz2-g2-lrC" firstAttribute="height" secondItem="K2g-eV-qbQ" secondAttribute="height" id="4cS-pI-d9s"/>
+                                        <constraint firstItem="Yz2-g2-lrC" firstAttribute="bottom" secondItem="veH-oK-fmj" secondAttribute="bottom" id="Mrf-3A-UDB"/>
+                                        <constraint firstItem="Yz2-g2-lrC" firstAttribute="top" secondItem="veH-oK-fmj" secondAttribute="top" id="OIJ-vC-U44"/>
+                                        <constraint firstItem="Yz2-g2-lrC" firstAttribute="leading" secondItem="veH-oK-fmj" secondAttribute="leading" id="Sc4-2S-bME"/>
+                                        <constraint firstItem="Yz2-g2-lrC" firstAttribute="trailing" secondItem="veH-oK-fmj" secondAttribute="trailing" id="V45-gp-J4A"/>
+                                    </constraints>
+                                    <viewLayoutGuide key="contentLayoutGuide" id="veH-oK-fmj"/>
+                                    <viewLayoutGuide key="frameLayoutGuide" id="wiF-zY-1Vy"/>
+                                </scrollView>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="RoutineResultTableViewCell" rowHeight="120" id="qSj-fb-TDB" customClass="RoutineTableViewCell">
-                                        <rect key="frame" x="0.0" y="114.5" width="414" height="120"/>
+                                        <rect key="frame" x="0.0" y="88.5" width="414" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qSj-fb-TDB" id="2WP-lf-ngQ">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
@@ -473,6 +529,10 @@
                             <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UWA-3u-XNq">
                                 <rect key="frame" x="0.0" y="88" width="414" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
                             </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7Ny-Ne-vt7"/>
@@ -491,11 +551,13 @@
                     <connections>
                         <outlet property="resultsTableView" destination="zwG-X5-RHD" id="PUl-Wb-sj2"/>
                         <outlet property="searchBar" destination="UWA-3u-XNq" id="G5P-TZ-NtF"/>
+                        <outlet property="trainingLevelFilter" destination="F6b-gr-1bE" id="IlG-l5-ajO"/>
+                        <outlet property="workoutPlaceFilter" destination="raZ-9s-mlR" id="k3L-JP-em1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fDe-hF-ik5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1768" y="2247"/>
+            <point key="canvasLocation" x="-1768.1159420289857" y="2246.6517857142858"/>
         </scene>
         <!--Create Routine View Controller-->
         <scene sceneID="0EV-BM-w1F">
@@ -2085,12 +2147,13 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="KfO-Xn-Fxx"/>
-        <segue reference="edN-lV-PU9"/>
+        <segue reference="uLe-wz-Pus"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="bookmark" catalog="system" width="112" height="128"/>
         <image name="camera" width="752" height="752"/>
         <image name="camera.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="house" catalog="system" width="128" height="106"/>
@@ -2119,6 +2182,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

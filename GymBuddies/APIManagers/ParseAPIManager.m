@@ -193,23 +193,38 @@ static NSString * const kLikedRoutineClass= @"LikedRoutine";
 }
 
 
-+(void)searchRoutines:(NSString *)searchTerm completion:(ParseManagerFetchingDataRowsCompletionBlock) completion{
++(void)searchRoutines:(NSString *)searchTerm
+   workoutPlaceFilter:(NSNumber *)workoutPlaceFilter
+  trainingLevelFilter:(NSNumber *)trainingLevelFilter
+           completion:(ParseManagerFetchingDataRowsCompletionBlock) completion{
+    
+    NSMutableArray *textSearchQueries = [[NSMutableArray alloc]init];
+    
     PFQuery *captionQuery = [PFQuery queryWithClassName:kRoutineClass];
     [captionQuery whereKey:@"caption" containsString:searchTerm];
+    [textSearchQueries addObject:captionQuery];
     
     PFQuery *authorQuery = [PFQuery queryWithClassName:kRoutineClass];
-    //[authorQuery includeKeys:@[@"bodyZoneList", @"exerciseList", @"author", @"exerciseList.baseExercise", @"exerciseList.baseExercise.bodyZoneTag", @"exerciseList.baseExercise.author"]];
     [authorQuery whereKey:@"authorUsername" containsString:searchTerm];
+    [textSearchQueries addObject:authorQuery];
     
+    PFQuery *finalSearchQuery = [PFQuery orQueryWithSubqueries:textSearchQueries];
+    
+    if(workoutPlaceFilter != nil){
+        [finalSearchQuery whereKey:@"workoutPlace" equalTo:workoutPlaceFilter];
+    }
+        
+    if(trainingLevelFilter != nil){
+        [finalSearchQuery whereKey:@"trainingLevel" equalTo:trainingLevelFilter];
+    }
 
-    PFQuery *finalQuery = [PFQuery orQueryWithSubqueries:@[authorQuery, captionQuery]];
-    [finalQuery includeKeys:@[@"bodyZoneList", @"exerciseList", @"author", @"exerciseList.baseExercise", @"exerciseList.baseExercise.bodyZoneTag", @"exerciseList.baseExercise.author"]];
-
+    [finalSearchQuery includeKeys:@[@"bodyZoneList", @"exerciseList", @"author", @"exerciseList.baseExercise", @"exerciseList.baseExercise.bodyZoneTag", @"exerciseList.baseExercise.author"]];
+    
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
         completion(elements, error);
     };
     
-    [finalQuery findObjectsInBackgroundWithBlock:block];
+    [finalSearchQuery findObjectsInBackgroundWithBlock:block];
 }
 
 

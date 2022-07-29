@@ -10,6 +10,8 @@
 #import "Exercise.h"
 #import "Routine.h"
 #import "ExerciseInRoutine.h"
+#import "SegmentedControlBlocksValues.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -37,9 +39,11 @@ typedef void (^ParseManagerFetchingDataRowsCompletionBlock) (NSArray *elements, 
                   progress:(UIProgressView *)progress
                 completion:(ParseManagerCreateCompletionBlock) completion;
 
-+ (void)saveExercise:(Exercise *)exercise completion:(ParseManagerCreateCompletionBlock) completion;
++ (void)saveExercise:(Exercise *)exercise
+          completion:(ParseManagerCreateCompletionBlock) completion;
 
-+ (void)postRoutine:(Routine *)routine completion:(ParseManagerCreateCompletionBlock) completion;
++ (void)postRoutine:(Routine *)routine
+         completion:(ParseManagerCreateCompletionBlock) completion;
 
 + (void)fetchHomeTimelineRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
@@ -47,13 +51,19 @@ typedef void (^ParseManagerFetchingDataRowsCompletionBlock) (NSArray *elements, 
 
 +(void)fetchUsersLikedRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
-+(void)changeProfilePicture:(PFFileObject *)image completion:(ParseManagerCreateCompletionBlock) completion;
++(void)changeProfilePicture:(PFFileObject *)image
+                 completion:(ParseManagerCreateCompletionBlock) completion;
 
-+(void)searchRoutines:(NSString *)searchTerm completion:(ParseManagerFetchingDataRowsCompletionBlock) completion;
++(void)searchRoutines:(NSString *)searchTerm
+   workoutPlaceFilter:(NSNumber *)workoutPlaceFilter
+  trainingLevelFilter:(NSNumber *)trainingLevelFilter
+           completion:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
-+ (PFFileObject *)getPFFileFromURL:(NSURL *)video videoName:(NSString *)videoName;
++ (PFFileObject *)getPFFileFromURL:(NSURL *)video
+                         videoName:(NSString *)videoName;
 
-+ (PFFileObject *)getPFFileFromImage:(UIImage *)image imageName:(NSString *)imageName;
++ (PFFileObject *)getPFFileFromImage:(UIImage *)image
+                           imageName:(NSString *)imageName;
 
 @end
 

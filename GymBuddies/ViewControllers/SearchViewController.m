@@ -11,15 +11,28 @@
 #import "Routine.h"
 #import "RoutineDetailsViewController.h"
 #import "AlertCreator.h"
+#import "SegmentedControlBlocksValues.h"
 
 static NSString * const kSearchToDetailsSegue = @"SearchToDetailsSegue";
+static NSString * const kBeginnerFilterTitle = @"Beginner";
+static NSString * const kMediumFilterTitle = @"Medium";
+static NSString * const kExpertFilterTitle = @"Expert";
+static NSString * const kHomeFilterTitle = @"Home";
+static NSString * const kParkFilterTitle = @"Park";
+static NSString * const kGymFilterTitle = @"Gym";
+
 
 @interface SearchViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *resultsTableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UIButton *workoutPlaceFilter;
+@property (weak, nonatomic) IBOutlet UIButton *trainingLevelFilter;
 @property (strong, nonatomic) NSArray *results;
 @property (strong, nonatomic) UISearchController *searchController;
 @property (strong, nonatomic) NSTimer *timer;
+@property (strong, nonatomic) NSNumber *workoutPlaceFilterValue;
+@property (strong, nonatomic) NSNumber *trainingLevelFilterValue;
+
 @end
 
 @implementation SearchViewController
@@ -33,7 +46,8 @@ static NSString * const kSearchToDetailsSegue = @"SearchToDetailsSegue";
     self.resultsTableView.dataSource = self;
     self.resultsTableView.rowHeight = UITableViewAutomaticDimension;
     
-    self.navigationItem.searchController = self.searchController;
+    [self setTrainingLevelFilterMenu];
+    [self setWorkoutPlaceFilterMenu];
     
     self.results = [[NSArray alloc]init];
     
@@ -48,29 +62,117 @@ static NSString * const kSearchToDetailsSegue = @"SearchToDetailsSegue";
             [self.timer invalidate];
             self.timer = nil;
         }
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.20 target:self selector:@selector(searchQuery:) userInfo:nil repeats:NO];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.20 target:self selector:@selector(searchTimerCall:) userInfo:nil repeats:NO];
 }
 
 
--(void)searchQuery:(NSTimer *)timer{
-    NSString *searchTerm = self.searchBar.text;
-    if(searchTerm.length != 0){
-        [ParseAPIManager searchRoutines:searchTerm completion:^(NSArray * _Nonnull elements, NSError * _Nullable error) {
-                    if(error != nil){
-                        UIAlertController *alert = [AlertCreator createOkAlert:@"Error searching" message:error.localizedDescription];
-                        [self presentViewController:alert animated:YES completion:nil];
-                    } else {
-                        NSLog(@"Done");
-                        self.results = elements;
-                        [self.resultsTableView reloadData];
-                    }
-        }];
-    }
+-(void)searchTimerCall:(NSTimer *)timer{
+    [self searchRoutines];
 }
 
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
     [self.view endEditing:YES];
+}
+
+
+#pragma mark - Filters
+
+-(void)setTrainingLevelFilterMenu{
+    UIAction *beginner = [UIAction actionWithTitle:kBeginnerFilterTitle image:nil identifier:nil handler:^(UIAction *action){
+        NSNumber *filterValue = [NSNumber numberWithLong:TrainingLevelBeginner];
+        [self changeTrainingLevelFilterStates:kBeginnerFilterTitle newFilterValue:filterValue];
+    }];
+    
+    UIAction *medium = [UIAction actionWithTitle:kMediumFilterTitle image:nil identifier:nil handler:^(UIAction *action){
+        NSNumber *filterValue = [NSNumber numberWithLong:TrainingLevelIntermediate];
+        [self changeTrainingLevelFilterStates:kMediumFilterTitle newFilterValue:filterValue];
+    }];
+    
+    UIAction *expert = [UIAction actionWithTitle:kExpertFilterTitle image:nil identifier:nil handler:^(UIAction *action){
+        NSNumber *filterValue = [NSNumber numberWithLong:TrainingLevelExpert];
+        [self changeTrainingLevelFilterStates:kExpertFilterTitle newFilterValue:filterValue];
+    }];
+    
+    UIMenu *menu = [[UIMenu alloc]menuByReplacingChildren:[NSArray arrayWithObjects:beginner, medium, expert, nil]];
+    self.trainingLevelFilter.menu = menu;
+}
+
+
+-(void)changeTrainingLevelFilterStates:(NSString *)actionTitle newFilterValue:(NSNumber *)newFilterValue{
+    for(UIAction *action in self.trainingLevelFilter.menu.children){
+        if(action.title == actionTitle){
+            if(action.state == UIMenuElementStateOn){
+                action.state = UIMenuElementStateOff;
+                self.trainingLevelFilterValue = nil;
+            } else {
+                action.state = UIMenuElementStateOn;
+                self.trainingLevelFilterValue = newFilterValue;
+            }
+        }
+        else {
+            action.state = UIMenuElementStateOff;
+        }
+    }
+    [self searchRoutines];
+}
+
+
+-(void)setWorkoutPlaceFilterMenu{
+    UIAction *home = [UIAction actionWithTitle:kHomeFilterTitle image:nil identifier:nil handler:^(UIAction *action){
+        NSNumber *filterValue = [NSNumber numberWithLong:WorkoutPlaceHome];
+        [self changeWorkoutPlaceFilterStates:kHomeFilterTitle newFilterValue:filterValue];
+    }];
+    
+    UIAction *park = [UIAction actionWithTitle:kParkFilterTitle image:nil identifier:nil handler:^(UIAction *action){
+        NSNumber *filterValue = [NSNumber numberWithLong:WorkoutPlacePark];
+        [self changeWorkoutPlaceFilterStates:kParkFilterTitle newFilterValue:filterValue];
+    }];
+    
+    UIAction *gym = [UIAction actionWithTitle:kGymFilterTitle image:nil identifier:nil handler:^(UIAction *action){
+        NSNumber *filterValue = [NSNumber numberWithLong:WorkoutPlaceGym];
+        [self changeWorkoutPlaceFilterStates:kGymFilterTitle newFilterValue:filterValue];
+    }];
+    
+    UIMenu *menu = [[UIMenu alloc]menuByReplacingChildren:[NSArray arrayWithObjects:home, park, gym, nil]];
+    self.workoutPlaceFilter.menu = menu;
+}
+
+
+-(void)changeWorkoutPlaceFilterStates:(NSString *)actionTitle newFilterValue:(NSNumber *)newFilterValue{
+    for(UIAction *action in self.workoutPlaceFilter.menu.children){
+        if(action.title == actionTitle){
+            if(action.state == UIMenuElementStateOn){
+                action.state = UIMenuElementStateOff;
+                self.workoutPlaceFilterValue = nil;
+            } else {
+                action.state = UIMenuElementStateOn;
+                self.workoutPlaceFilterValue = newFilterValue;
+            }
+        }
+        else{
+            action.state = UIMenuElementStateOff;
+        }
+    }
+    [self searchRoutines];
+}
+
+
+#pragma mark - Search query
+
+-(void)searchRoutines{
+    NSString *searchTerm = self.searchBar.text;
+    if(searchTerm.length != 0){
+        [ParseAPIManager searchRoutines:searchTerm workoutPlaceFilter:self.workoutPlaceFilterValue trainingLevelFilter:self.trainingLevelFilterValue completion:^(NSArray * _Nonnull elements, NSError * _Nullable error) {
+                if(error != nil){
+                    UIAlertController *alert = [AlertCreator createOkAlert:@"Error searching" message:error.localizedDescription];
+                    [self presentViewController:alert animated:YES completion:nil];
+                } else {
+                    self.results = elements;
+                    [self.resultsTableView reloadData];
+                }
+        }];
+    }
 }
 
 
