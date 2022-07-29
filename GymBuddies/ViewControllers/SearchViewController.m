@@ -77,6 +77,10 @@ static NSString * const kGymFilterTitle = @"Gym";
 }
 
 
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    [self.view endEditing:YES];
+}
+
 #pragma mark - Filters
 
 -(void)setTrainingLevelFilterMenu{
