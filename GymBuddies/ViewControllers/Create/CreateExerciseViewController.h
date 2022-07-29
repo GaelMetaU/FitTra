@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
-@interface CreateExerciseViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
+@interface CreateExerciseViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate>
 @property (nonatomic, weak) id<CreateExerciseViewControllerDelegate> delegate;
 
 @end

@@ -871,13 +871,14 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JEP-Xd-vfC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="KJ7-Zw-5rs">
+                <tapGestureRecognizer cancelsTouchesInView="NO" id="KJ7-Zw-5rs">
+                    <eventButtonMask key="buttonMaskRequired" secondary="YES"/>
                     <connections>
                         <action selector="uploadImage:" destination="qY7-1U-Eu8" id="SCa-bn-7WG"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1126" y="2958"/>
+            <point key="canvasLocation" x="387" y="2971"/>
         </scene>
         <!--Add Exercise View Controller-->
         <scene sceneID="zo9-BX-arA">
@@ -988,7 +989,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YOW-oQ-x0M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1126" y="3635"/>
+            <point key="canvasLocation" x="1125" y="2971"/>
         </scene>
         <!--Routine Details View Controller-->
         <scene sceneID="jc5-4y-p09">
@@ -1444,18 +1445,11 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6kG-IG-Xgd">
-                                                <rect key="frame" x="20" y="436" width="374" height="42.5"/>
-                                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="42.5" id="Xts-EJ-oa4"/>
-                                                </constraints>
-                                                <color key="textColor" systemColor="labelColor"/>
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            </textView>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nqF-oR-7kz">
-                                                <rect key="frame" x="20" y="275" width="374" height="120"/>
+                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kJQ-BQ-VT2">
+                                                <rect key="frame" x="20" y="518" width="374" height="4"/>
+                                            </progressView>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nqF-oR-7kz">
+                                                <rect key="frame" x="20" y="276" width="374" height="120"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="120" id="N9Z-F0-jJN"/>
@@ -1509,11 +1503,15 @@
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
-                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kJQ-BQ-VT2">
-                                                <rect key="frame" x="20" y="518" width="374" height="4"/>
-                                            </progressView>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kuM-dG-cty">
+                                                <rect key="frame" x="20" y="444" width="374" height="34"/>
+                                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                            </textField>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="dv8-wN-Q83" firstAttribute="top" secondItem="YcJ-oD-ajt" secondAttribute="bottom" constant="10" id="1jx-af-LWy"/>
                                             <constraint firstItem="oMW-H2-O9B" firstAttribute="top" secondItem="nqF-oR-7kz" secondAttribute="bottom" constant="20" id="1v8-8X-Xpf"/>
@@ -1524,18 +1522,18 @@
                                             <constraint firstItem="kJQ-BQ-VT2" firstAttribute="leading" secondItem="bRP-hY-lFK" secondAttribute="leading" constant="20" id="AMu-5A-yjS"/>
                                             <constraint firstItem="nqF-oR-7kz" firstAttribute="top" secondItem="lHc-RJ-0rK" secondAttribute="bottom" constant="20" id="ATD-ek-Q6v"/>
                                             <constraint firstItem="lHc-RJ-0rK" firstAttribute="top" secondItem="bRP-hY-lFK" secondAttribute="top" constant="115" id="Be0-fS-Ae5"/>
+                                            <constraint firstItem="kuM-dG-cty" firstAttribute="leading" secondItem="bRP-hY-lFK" secondAttribute="leading" constant="20" symbolic="YES" id="FYd-1u-QQL"/>
                                             <constraint firstItem="YcJ-oD-ajt" firstAttribute="top" secondItem="bRP-hY-lFK" secondAttribute="top" id="Hcj-Aj-E2R"/>
-                                            <constraint firstAttribute="trailing" secondItem="6kG-IG-Xgd" secondAttribute="trailing" constant="20" id="IDz-cr-l2k"/>
-                                            <constraint firstItem="kJQ-BQ-VT2" firstAttribute="top" secondItem="6kG-IG-Xgd" secondAttribute="bottom" constant="39.5" id="MaT-5h-7tI"/>
                                             <constraint firstItem="dv8-wN-Q83" firstAttribute="leading" secondItem="3gc-eE-er8" secondAttribute="trailing" constant="20" id="OFy-WJ-ZtJ"/>
-                                            <constraint firstItem="6kG-IG-Xgd" firstAttribute="leading" secondItem="bRP-hY-lFK" secondAttribute="leading" constant="20" id="Ub9-ft-mZS"/>
+                                            <constraint firstItem="kJQ-BQ-VT2" firstAttribute="top" secondItem="kuM-dG-cty" secondAttribute="bottom" constant="40" id="Tyz-J3-luh"/>
                                             <constraint firstItem="oMW-H2-O9B" firstAttribute="leading" secondItem="bRP-hY-lFK" secondAttribute="leading" constant="20" id="Ucy-ne-w7l"/>
                                             <constraint firstItem="3gc-eE-er8" firstAttribute="top" secondItem="YcJ-oD-ajt" secondAttribute="bottom" constant="10" id="Xgn-oV-fQ0"/>
+                                            <constraint firstItem="kuM-dG-cty" firstAttribute="top" secondItem="oMW-H2-O9B" secondAttribute="bottom" constant="8" symbolic="YES" id="bis-iB-OuO"/>
                                             <constraint firstAttribute="trailing" secondItem="dv8-wN-Q83" secondAttribute="trailing" constant="20" id="fo5-dg-3bD"/>
                                             <constraint firstItem="YcJ-oD-ajt" firstAttribute="leading" secondItem="bRP-hY-lFK" secondAttribute="leading" id="gmX-QB-sAw"/>
                                             <constraint firstAttribute="trailing" secondItem="oMW-H2-O9B" secondAttribute="trailing" constant="20" id="ieq-2W-t3r"/>
                                             <constraint firstAttribute="bottom" secondItem="kJQ-BQ-VT2" secondAttribute="bottom" constant="238.5" id="kIJ-7d-HR3"/>
-                                            <constraint firstItem="6kG-IG-Xgd" firstAttribute="top" secondItem="oMW-H2-O9B" secondAttribute="bottom" id="lew-gc-uWp"/>
+                                            <constraint firstAttribute="trailing" secondItem="kuM-dG-cty" secondAttribute="trailing" constant="20" symbolic="YES" id="unx-xt-Pud"/>
                                             <constraint firstAttribute="trailing" secondItem="nqF-oR-7kz" secondAttribute="trailing" constant="20" id="zgK-LI-Hzu"/>
                                         </constraints>
                                     </view>
@@ -1575,12 +1573,12 @@
                         <outlet property="doneButton" destination="hp8-AB-jIN" id="ty3-Y8-iDY"/>
                         <outlet property="imagePreview" destination="lHc-RJ-0rK" id="quH-PC-Zcj"/>
                         <outlet property="postProgressView" destination="kJQ-BQ-VT2" id="d1k-Sm-3Ei"/>
-                        <outlet property="titleField" destination="6kG-IG-Xgd" id="JPl-75-x09"/>
+                        <outlet property="titleField" destination="kuM-dG-cty" id="0Q1-KP-3Ww"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m5K-k2-dYS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1126" y="4337"/>
+            <point key="canvasLocation" x="1866.6666666666667" y="2970.5357142857142"/>
         </scene>
         <!--Home-->
         <scene sceneID="nFr-yc-B62">

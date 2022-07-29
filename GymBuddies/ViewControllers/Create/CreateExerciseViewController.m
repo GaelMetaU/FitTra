@@ -19,7 +19,7 @@
 @interface CreateExerciseViewController ()
 @property (strong, nonatomic) UIImagePickerController *mediaPicker;
 @property (weak, nonatomic) IBOutlet PFImageView *imagePreview;
-@property (weak, nonatomic) IBOutlet UITextView *titleField;
+@property (weak, nonatomic) IBOutlet UITextField *titleField;
 @property (strong, nonatomic) NSArray *bodyZones;
 @property (weak, nonatomic) IBOutlet UICollectionView *bodyZoneCollectionView;
 @property (weak, nonatomic) IBOutlet UIProgressView *postProgressView;
@@ -35,9 +35,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Dismiss keyboard after tapping outside of the view
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap)];
-    [self.view addGestureRecognizer:tap];
+
+    self.titleField.delegate = self;
     
     self.postProgressView.hidden = YES;
     // Media picker set up
@@ -59,6 +58,7 @@
     
     if(self.exerciseBodyZoneTag.title == nil){
         [self _emptyBodyZoneTagAlert];
+        self.postProgressView.hidden = YES;
         return;
     }
     // Sets the fields value to the posts, set default values if empty
@@ -94,10 +94,15 @@
 
 #pragma mark - Tap gesture handler
 
--(void)singleTap{
-    [self.view endEditing:YES];
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return NO;
 }
 
+
+-(void)dismissKeyboard{
+    [self.view endEditing:YES];
+}
 
 #pragma mark -Collection View Methods
 
