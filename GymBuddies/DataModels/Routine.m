@@ -12,8 +12,10 @@
 @dynamic trainingLevel;
 @dynamic saveCount;
 @dynamic author;
+@dynamic standardizedAuthorUsername;
 @dynamic image;
 @dynamic caption;
+@dynamic standardizedCaption;
 @dynamic exerciseList;
 @dynamic bodyZoneList;
 @dynamic likeCount;
@@ -31,10 +33,12 @@
                   workoutPlace:(NSNumber *)workoutPlace{
     Routine *routine = [Routine new];
     routine.author = author;
+    routine.standardizedAuthorUsername = [CommonValidations standardizeSearchTerm:routine.author.username];
     routine.exerciseList = exerciseList;
     routine.bodyZoneList = bodyZoneList;
     routine.image = image;
     routine.caption = caption;
+    routine.standardizedCaption = [CommonValidations standardizeSearchTerm:routine.caption];
     routine.trainingLevel = trainingLevel;
     routine.workoutPlace = workoutPlace;
     routine.saveCount = @0;

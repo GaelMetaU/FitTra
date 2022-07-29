@@ -12,6 +12,7 @@
 #import "RoutineDetailsViewController.h"
 #import "AlertCreator.h"
 #import "SegmentedControlBlocksValues.h"
+#import "CommonValidations.h"
 
 static NSString * const kSearchToDetailsSegue = @"SearchToDetailsSegue";
 static NSString * const kBeginnerFilterTitle = @"Beginner";
@@ -161,7 +162,7 @@ static NSString * const kGymFilterTitle = @"Gym";
 #pragma mark - Search query
 
 -(void)searchRoutines{
-    NSString *searchTerm = self.searchBar.text;
+    NSString *searchTerm = [CommonValidations standardizeSearchTerm:self.searchBar.text];;
     if(searchTerm.length != 0){
         [ParseAPIManager searchRoutines:searchTerm workoutPlaceFilter:self.workoutPlaceFilterValue trainingLevelFilter:self.trainingLevelFilterValue completion:^(NSArray * _Nonnull elements, NSError * _Nullable error) {
                 if(error != nil){

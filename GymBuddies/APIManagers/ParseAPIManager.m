@@ -201,11 +201,11 @@ static NSString * const kLikedRoutineClass= @"LikedRoutine";
     NSMutableArray *textSearchQueries = [[NSMutableArray alloc]init];
     
     PFQuery *captionQuery = [PFQuery queryWithClassName:kRoutineClass];
-    [captionQuery whereKey:@"caption" containsString:searchTerm];
+    [captionQuery whereKey:@"standardizedCaption" containsString:searchTerm];
     [textSearchQueries addObject:captionQuery];
     
     PFQuery *authorQuery = [PFQuery queryWithClassName:kRoutineClass];
-    [authorQuery whereKey:@"authorUsername" containsString:searchTerm];
+    [authorQuery whereKey:@"standardizedAuthorUsername" containsString:searchTerm];
     [textSearchQueries addObject:authorQuery];
     
     PFQuery *finalSearchQuery = [PFQuery orQueryWithSubqueries:textSearchQueries];
