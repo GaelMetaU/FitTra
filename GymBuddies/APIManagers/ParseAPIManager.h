@@ -63,6 +63,8 @@ typedef void (^ParseManagerFindObjectCompletionBlock) (PFObject *object, NSError
 
 + (void)likeRoutine:(Routine *)routine completion:(ParseManagerCreateCompletionBlock) completion;
 
++(void)unlike:(Routine *)routine completion:(ParseManagerCreateCompletionBlock) completion;
+
 +(void)isLiked:(Routine *)routine completion:(ParseManagerFindObjectCompletionBlock) completion;
 
 + (PFFileObject *)getPFFileFromURL:(NSURL *)video

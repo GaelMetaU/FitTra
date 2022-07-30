@@ -85,13 +85,25 @@ static NSString * const kLikedFilledRoutineButtonImage = @"suit.heart.fill";
 
 -(void)likeAction{
     if(self.isLiked){
-        
+        [self.likeButton setImage:[UIImage systemImageNamed:kLikedNormalRoutineButtonImage] forState:UIControlStateNormal];
+        self.likeButton.tintColor = [UIColor systemBlueColor];
+        self.routine.likeCount = [NSNumber numberWithLong:[self.routine.likeCount longValue] - 1 ];
+        self.likeCountLabel.text = [NSString stringWithFormat:@"%@", self.routine.likeCount];
+        [ParseAPIManager unlike:self.routine completion:^(BOOL succeeded, NSError * _Nonnull error) {
+            if(succeeded){
+                self.isLiked = NO;
+            }
+        }];
     } else {
         [self.likeButton setImage:[UIImage systemImageNamed:kLikedFilledRoutineButtonImage] forState:UIControlStateNormal];
         self.likeButton.tintColor = [UIColor systemRedColor];
         self.routine.likeCount = [NSNumber numberWithLong:[self.routine.likeCount longValue] + 1 ];
         self.likeCountLabel.text = [NSString stringWithFormat:@"%@", self.routine.likeCount];
-        [ParseAPIManager likeRoutine:self.routine completion:^(BOOL succeeded, NSError * _Nonnull error) {}];
+        [ParseAPIManager likeRoutine:self.routine completion:^(BOOL succeeded, NSError * _Nonnull error) {
+            if(succeeded){
+                self.isLiked = YES;
+            }
+        }];
     }
 }
 
