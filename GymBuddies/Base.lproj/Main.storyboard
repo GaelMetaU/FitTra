@@ -1104,6 +1104,9 @@
                                             <rect key="frame" x="20" y="264" width="45.5" height="34"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" image="suit.heart" catalog="system" title=""/>
+                                            <connections>
+                                                <action selector="didTapLike:" destination="RvY-4b-U0g" eventType="touchUpInside" id="XvN-Bh-IiA"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HKY-BT-G9c">
                                             <rect key="frame" x="65.5" y="271.5" width="10" height="20.5"/>
@@ -1238,6 +1241,7 @@
                         <outlet property="bodyZoneCollectionView" destination="KJR-gz-BO3" id="udN-qm-Zvw"/>
                         <outlet property="captionLabel" destination="nkp-eF-Mke" id="Rrk-Sp-Sou"/>
                         <outlet property="exerciseListTableView" destination="gF0-6R-PuA" id="7U3-0Q-K48"/>
+                        <outlet property="likeButton" destination="iwP-nO-zij" id="pfo-gy-fQ2"/>
                         <outlet property="likeCountLabel" destination="HKY-BT-G9c" id="ArX-aM-oB0"/>
                         <outlet property="routineImage" destination="yQD-pJ-uNH" id="mb7-Nb-aWr"/>
                         <outlet property="trainingLevelLabel" destination="ZKv-po-MCH" id="wmJ-ND-fpM"/>

@@ -204,6 +204,8 @@ static NSString * const kGymFilterTitle = @"Gym";
         NSIndexPath *indexPath = [self.resultsTableView indexPathForCell:sender];
         RoutineDetailsViewController *routineDetailsViewController = [segue destinationViewController];
         routineDetailsViewController.routine = self.results[indexPath.row];
+        RoutineTableViewCell *cell = [self.resultsTableView cellForRowAtIndexPath:indexPath];
+        routineDetailsViewController.isLiked = cell.isLiked;
     }
 }
 

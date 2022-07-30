@@ -213,6 +213,8 @@ static NSString * kProfileToDetailsSegue = @"ProfileToDetailsSegue";
         } else {
             routineDetailsViewController.routine = self.createdRoutineList[indexPath.row];
         }
+        RoutineTableViewCell *cell = [self.routinesTableView cellForRowAtIndexPath:indexPath];
+        routineDetailsViewController.isLiked = cell.isLiked;
     }
 }
 
