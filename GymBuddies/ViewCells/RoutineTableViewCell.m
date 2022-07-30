@@ -13,6 +13,8 @@
 static CGFloat const kLabelBorderRadius = 5;
 static NSString * const kBodyZoneCollectionViewCellNoTitleIdentifier = @"BodyZoneCollectionViewCellNoTitle";
 static NSString * const kProfilePictureKey = @"profilePicture";
+static NSString * const kLikedNormalRoutineButtonImage = @"suit.heart";
+static NSString * const kLikedFilledRoutineButtonImage = @"suit.heart.fill";
 
 @implementation RoutineTableViewCell
 
@@ -56,6 +58,41 @@ static NSString * const kProfilePictureKey = @"profilePicture";
     self.workoutPlaceLabel.text = [SegmentedControlBlocksValues setWorkoutPlaceLabelContent:self.routine.workoutPlace];
     self.workoutPlaceLabel.layer.masksToBounds = YES;
     
+    [self setLikedRoutine];
+}
+
+
+-(void)setLikedRoutine{
+    [ParseAPIManager isLiked:self.routine completion:^(PFObject * _Nonnull object, NSError * _Nullable error) {
+        if(error == nil){
+            [self.likeButton setImage:[UIImage systemImageNamed:kLikedFilledRoutineButtonImage] forState:UIControlStateNormal];
+            self.likeButton.tintColor = [UIColor systemRedColor];
+            self.isLiked = YES;
+        } else{
+            [self.likeButton setImage:[UIImage systemImageNamed:kLikedNormalRoutineButtonImage] forState:UIControlStateNormal];
+            self.likeButton.tintColor = [UIColor systemBlueColor];
+            self.isLiked = NO;
+        }
+    }];
+}
+
+
+#pragma mark - Like method
+
+- (IBAction)didTapLike:(id)sender {
+    [self likeAction];
+}
+
+-(void)likeAction{
+    if(self.isLiked){
+        
+    } else {
+        [self.likeButton setImage:[UIImage systemImageNamed:kLikedFilledRoutineButtonImage] forState:UIControlStateNormal];
+        self.likeButton.tintColor = [UIColor systemRedColor];
+        self.routine.likeCount = [NSNumber numberWithLong:[self.routine.likeCount longValue] + 1 ];
+        self.likeCountLabel.text = [NSString stringWithFormat:@"%@", self.routine.likeCount];
+        [ParseAPIManager likeRoutine:self.routine completion:^(BOOL succeeded, NSError * _Nonnull error) {}];
+    }
 }
 
 

@@ -19,6 +19,8 @@ typedef void (^ParseManagerAuthenticationCompletionBlock) (PFUser *user, NSError
 typedef void (^ParseManagerCreateCompletionBlock) (BOOL succeeded, NSError *error);
 typedef void (^ParseManagerLogOutCompletionBlock) (NSError * _Nullable errorAPI);
 typedef void (^ParseManagerFetchingDataRowsCompletionBlock) (NSArray *elements, NSError * _Nullable error);
+typedef void (^ParseManagerFindObjectCompletionBlock) (PFObject *object, NSError * _Nullable error);
+
 
 
 @interface ParseAPIManager : NSObject
@@ -59,7 +61,9 @@ typedef void (^ParseManagerFetchingDataRowsCompletionBlock) (NSArray *elements, 
   trainingLevelFilter:(NSNumber *)trainingLevelFilter
            completion:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
-+(void)likeRoutine:(Routine *)routine;
++ (void)likeRoutine:(Routine *)routine completion:(ParseManagerCreateCompletionBlock) completion;
+
++(void)isLiked:(Routine *)routine completion:(ParseManagerFindObjectCompletionBlock) completion;
 
 + (PFFileObject *)getPFFileFromURL:(NSURL *)video
                          videoName:(NSString *)videoName;

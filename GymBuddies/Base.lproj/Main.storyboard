@@ -465,8 +465,12 @@
                                                         <constraint firstAttribute="height" constant="22" id="I4e-vK-scM"/>
                                                         <constraint firstAttribute="width" constant="23" id="LlN-BM-Mhc"/>
                                                     </constraints>
+                                                    <color key="tintColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="suit.heart" catalog="system" title=""/>
+                                                    <connections>
+                                                        <action selector="didTapLike:" destination="qSj-fb-TDB" eventType="touchUpInside" id="wZW-MV-gKY"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="91d-VO-emw">
                                                     <rect key="frame" x="141" y="89" width="11" height="21"/>
