@@ -259,6 +259,7 @@ static NSString * const kLikedRoutineClass= @"LikedRoutine";
         }
     };
     
+    [routine saveInBackground];
     [query getFirstObjectInBackgroundWithBlock:block];
 }
 
