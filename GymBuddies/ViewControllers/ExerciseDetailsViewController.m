@@ -9,6 +9,7 @@
 #import "Parse/PFImageView.h"
 #import "AVFoundation/AVFoundation.h"
 #import "AVKit/AVKit.h"
+#import "VideoView.h"
 
 static NSString * const kProfilePictureKey = @"profilePicture";
 
@@ -19,9 +20,11 @@ static NSString * const kProfilePictureKey = @"profilePicture";
 @property (weak, nonatomic) IBOutlet UILabel *authorUsername;
 @property (weak, nonatomic) IBOutlet PFImageView *bodyZoneIcon;
 @property (weak, nonatomic) IBOutlet UILabel *bodyZoneTitle;
+@property (weak, nonatomic) IBOutlet VideoView *videoView;
+@property (weak, nonatomic) IBOutlet UIImageView *pauseView;
 @property (strong, nonatomic) AVPlayerLooper *player;
 @property (strong, nonatomic) AVPlayerLayer *playerLayer;
-@property (weak, nonatomic) IBOutlet UIView *videoView;
+@property (strong, nonatomic) AVQueuePlayer *queuePlayer;
 @end
 
 @implementation ExerciseDetailsViewController
@@ -60,27 +63,9 @@ static NSString * const kProfilePictureKey = @"profilePicture";
 
 -(void)playVideo{
     if(self.exercise.video != nil){
-        AVQueuePlayer *queuePlayer = [[AVQueuePlayer alloc]init];
-        
         NSURL *url = [NSURL URLWithString:self.exercise.video.url];
-        AVAsset *asset = [AVAsset assetWithURL:url];
-        AVPlayerItem *item = [AVPlayerItem playerItemWithAsset: asset];
-        self.player = [AVPlayerLooper playerLooperWithPlayer:queuePlayer templateItem:item];
-        self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:queuePlayer];
-        self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
-        [self.videoView.layer addSublayer: self.playerLayer];
-        [queuePlayer play];
+        [self.videoView setUpVideo:url];
     }
 }
-
-
-- (void)viewDidLayoutSubviews{
-    [super viewDidLayoutSubviews];
-    self.playerLayer.frame = self.videoView.frame;
-    self.videoView.layer.masksToBounds = YES;
-}
-
-
-
 
 @end

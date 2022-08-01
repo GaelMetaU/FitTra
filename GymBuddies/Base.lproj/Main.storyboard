@@ -1004,7 +1004,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="gF0-6R-PuA">
-                                <rect key="frame" x="0.0" y="88" width="414" height="676"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="3iT-7f-Ndz">
@@ -1261,7 +1261,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c5o-xz-7hu">
-                                <rect key="frame" x="0.0" y="88" width="414" height="676"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6FG-x1-mtj">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="658"/>
@@ -1273,12 +1273,27 @@
                                                     <constraint firstAttribute="height" constant="1" id="Ibj-KJ-pQE"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gd8-LB-ItP">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gd8-LB-ItP" customClass="VideoView">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
+                                                <subviews>
+                                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pause.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="p8V-PH-fvc">
+                                                        <rect key="frame" x="177" y="179" width="60" height="56"/>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="60" id="BYZ-vT-Ftd"/>
+                                                            <constraint firstAttribute="width" constant="60" id="PGs-PX-f22"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                </subviews>
                                                 <color key="backgroundColor" systemColor="labelColor"/>
                                                 <constraints>
+                                                    <constraint firstItem="p8V-PH-fvc" firstAttribute="centerY" secondItem="gd8-LB-ItP" secondAttribute="centerY" id="49r-Dx-UTl"/>
                                                     <constraint firstAttribute="width" secondItem="gd8-LB-ItP" secondAttribute="height" id="G6k-2s-V5a"/>
+                                                    <constraint firstItem="p8V-PH-fvc" firstAttribute="centerX" secondItem="gd8-LB-ItP" secondAttribute="centerX" id="Jts-Wb-A5Q"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outlet property="pauseView" destination="p8V-PH-fvc" id="UVz-iG-Xn4"/>
+                                                </connections>
                                             </view>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QC9-SC-P2k" customClass="PFImageView">
                                                 <rect key="frame" x="12" y="449" width="50" height="50"/>
@@ -1301,8 +1316,8 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Slh-ob-W1b">
-                                                <rect key="frame" x="70" y="464" width="52" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <rect key="frame" x="70" y="464" width="53" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -1315,8 +1330,8 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tKm-GT-cDq">
-                                                <rect key="frame" x="149" y="568" width="245" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <rect key="frame" x="149" y="566" width="245" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -1342,7 +1357,6 @@
                                             <constraint firstItem="aYL-ip-Jkm" firstAttribute="leading" secondItem="e7k-B9-YG8" secondAttribute="trailing" constant="10" id="nFT-6i-xby"/>
                                             <constraint firstItem="Slh-ob-W1b" firstAttribute="leading" secondItem="QC9-SC-P2k" secondAttribute="trailing" constant="8" symbolic="YES" id="q2U-iz-9Hg"/>
                                             <constraint firstItem="XXZ-3N-eZn" firstAttribute="leading" secondItem="6FG-x1-mtj" secondAttribute="leading" constant="12" id="sTy-pq-Mw3"/>
-                                            <constraint firstItem="gd8-LB-ItP" firstAttribute="width" secondItem="6FG-x1-mtj" secondAttribute="width" id="vfP-wL-E2T"/>
                                             <constraint firstItem="gd8-LB-ItP" firstAttribute="leading" secondItem="6FG-x1-mtj" secondAttribute="leading" id="xjy-oa-eXZ"/>
                                         </constraints>
                                     </view>
@@ -1387,12 +1401,13 @@
                         <outlet property="bodyZoneTitle" destination="aYL-ip-Jkm" id="Zah-SM-eMr"/>
                         <outlet property="exerciseImage" destination="IJF-69-XTC" id="58d-p2-tOO"/>
                         <outlet property="exerciseTitle" destination="tKm-GT-cDq" id="H4j-EJ-EZh"/>
-                        <outlet property="videoView" destination="gd8-LB-ItP" id="qKd-a1-tbd"/>
+                        <outlet property="pauseView" destination="p8V-PH-fvc" id="yR2-ad-RXe"/>
+                        <outlet property="videoView" destination="gd8-LB-ItP" id="5nm-qH-1GS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nPq-1y-6r2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-923" y="3688"/>
+            <point key="canvasLocation" x="-923.1884057971015" y="3687.7232142857142"/>
         </scene>
         <!--Create Exercise View Controller-->
         <scene sceneID="vjJ-au-9fJ">
@@ -2160,8 +2175,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="AAt-2Z-ce0"/>
-        <segue reference="edN-lV-PU9"/>
+        <segue reference="Vp9-Pf-db0"/>
+        <segue reference="uLe-wz-Pus"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="bookmark" catalog="system" width="112" height="128"/>
@@ -2172,6 +2187,7 @@
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="pause.fill" catalog="system" width="116" height="128"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="plus.circle" catalog="system" width="128" height="121"/>
         <image name="plus.square.dashed" catalog="system" width="128" height="114"/>
