@@ -13,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Routine : PFObject<PFSubclassing>
 @property (nonatomic, strong) NSNumber *workoutPlace;
 @property (nonatomic, strong) NSNumber *trainingLevel;
-@property (nonatomic, strong) NSNumber *saveCount;
 @property (nonatomic, strong) PFUser *author;
 @property (nonatomic, strong) NSString *standardizedAuthorUsername;
 @property (nonatomic, strong) PFFileObject *image;

@@ -246,21 +246,15 @@ static NSString * const kLikedRoutineClass= @"LikedRoutine";
 }
 
 +(void)unlike:(Routine *)routine completion:(ParseManagerCreateCompletionBlock) completion{
-    PFUser *user = [PFUser currentUser];
-    PFQuery *query = [PFQuery queryWithClassName:kLikedRoutineClass];
-    [query whereKey:@"user" equalTo:user];
-    [query whereKey:@"routine" equalTo:routine];
-    
-    ParseManagerFindObjectCompletionBlock block = ^void(PFObject *object, NSError * _Nullable error){
+    [self isLiked:routine completion:^(PFObject * _Nonnull object, NSError * _Nullable error) {
         if(object != nil){
             [object deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                 completion(succeeded, error);
             }];
         }
-    };
+    }];
     
     [routine saveInBackground];
-    [query getFirstObjectInBackgroundWithBlock:block];
 }
 
 +(void)isLiked:(Routine *)routine completion:(ParseManagerFindObjectCompletionBlock) completion{

@@ -10,7 +10,6 @@
 @implementation Routine
 @dynamic workoutPlace;
 @dynamic trainingLevel;
-@dynamic saveCount;
 @dynamic author;
 @dynamic standardizedAuthorUsername;
 @dynamic image;
@@ -41,7 +40,6 @@
     routine.standardizedCaption = [CommonValidations standardizeSearchTerm:routine.caption];
     routine.trainingLevel = trainingLevel;
     routine.workoutPlace = workoutPlace;
-    routine.saveCount = @0;
     
     return routine;
 }
