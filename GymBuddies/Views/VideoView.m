@@ -23,12 +23,19 @@
     self.player = [AVPlayerLooper playerLooperWithPlayer:self.queuePlayer templateItem:item];
     self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.queuePlayer];
     self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
-    
+     
+    [self.layer addSublayer: self.playerLayer];
+}
+
+
+-(void)setPauseGesture{
     // Adding tap gesture to pause and resume the video
     UITapGestureRecognizer *tapToPause = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pause)];
     [self addGestureRecognizer:tapToPause];
-     
-    [self.layer addSublayer: self.playerLayer];
+}
+
+
+-(void)play{
     [self.queuePlayer play];
 }
 
@@ -39,7 +46,7 @@
         self.pauseView.hidden = NO;
         [self bringSubviewToFront:self.pauseView];
     } else {
-        [self.queuePlayer play];
+        [self play];
         self.pauseView.hidden = YES;
     }
 }

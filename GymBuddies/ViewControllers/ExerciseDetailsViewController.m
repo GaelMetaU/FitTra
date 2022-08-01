@@ -65,6 +65,8 @@ static NSString * const kProfilePictureKey = @"profilePicture";
     if(self.exercise.video != nil){
         NSURL *url = [NSURL URLWithString:self.exercise.video.url];
         [self.videoView setUpVideo:url];
+        [self.videoView setPauseGesture];
+        [self.videoView play];
     }
 }
 
