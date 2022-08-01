@@ -28,6 +28,11 @@
 }
 
 
+-(void)setAlternateView{
+    self.alternateText.hidden = NO;
+}
+
+
 -(void)setPauseGesture{
     // Adding tap gesture to pause and resume the video
     UITapGestureRecognizer *tapToPause = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pause)];

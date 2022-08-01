@@ -67,6 +67,8 @@ static NSString * const kProfilePictureKey = @"profilePicture";
         [self.videoView setUpVideo:url];
         [self.videoView setPauseGesture];
         [self.videoView play];
+    } else{
+        [self.videoView setAlternateView];
     }
 }
 

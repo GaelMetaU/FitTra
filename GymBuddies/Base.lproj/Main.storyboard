@@ -1284,14 +1284,26 @@
                                                             <constraint firstAttribute="width" constant="60" id="PGs-PX-f22"/>
                                                         </constraints>
                                                     </imageView>
+                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There is no video view for this exercise" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YPF-y4-3DG">
+                                                        <rect key="frame" x="117.5" y="171" width="179" height="72"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="179" id="ZiP-VX-NRA"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="labelColor"/>
                                                 <constraints>
                                                     <constraint firstItem="p8V-PH-fvc" firstAttribute="centerY" secondItem="gd8-LB-ItP" secondAttribute="centerY" id="49r-Dx-UTl"/>
                                                     <constraint firstAttribute="width" secondItem="gd8-LB-ItP" secondAttribute="height" id="G6k-2s-V5a"/>
                                                     <constraint firstItem="p8V-PH-fvc" firstAttribute="centerX" secondItem="gd8-LB-ItP" secondAttribute="centerX" id="Jts-Wb-A5Q"/>
+                                                    <constraint firstItem="YPF-y4-3DG" firstAttribute="centerX" secondItem="gd8-LB-ItP" secondAttribute="centerX" id="NU2-bf-WLw"/>
+                                                    <constraint firstItem="YPF-y4-3DG" firstAttribute="centerY" secondItem="gd8-LB-ItP" secondAttribute="centerY" id="WMo-sP-5md"/>
                                                 </constraints>
                                                 <connections>
+                                                    <outlet property="alternateText" destination="YPF-y4-3DG" id="irk-y7-rf5"/>
                                                     <outlet property="pauseView" destination="p8V-PH-fvc" id="UVz-iG-Xn4"/>
                                                 </connections>
                                             </view>
@@ -1470,10 +1482,25 @@
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wLr-Jf-zX8" customClass="VideoView">
                                                 <rect key="frame" x="0.0" y="0.0" width="207" height="207"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pause.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="4Ll-ow-3vo">
+                                                        <rect key="frame" x="8" y="176" width="25" height="21"/>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="25" id="bzU-tV-9vL"/>
+                                                            <constraint firstAttribute="height" constant="25" id="tDl-VB-KLc"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="4Ll-ow-3vo" secondAttribute="bottom" constant="8" id="SKa-3e-rf4"/>
                                                     <constraint firstAttribute="width" secondItem="wLr-Jf-zX8" secondAttribute="height" id="Sd5-OI-kYr"/>
+                                                    <constraint firstItem="4Ll-ow-3vo" firstAttribute="leading" secondItem="wLr-Jf-zX8" secondAttribute="leading" constant="8" id="kUp-FF-BRL"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outlet property="pauseView" destination="4Ll-ow-3vo" id="SJK-fH-6x4"/>
+                                                </connections>
                                             </view>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nqF-oR-7kz">
                                                 <rect key="frame" x="20" y="356" width="374" height="120"/>
@@ -1601,6 +1628,7 @@
                         <outlet property="imagePreview" destination="lHc-RJ-0rK" id="quH-PC-Zcj"/>
                         <outlet property="postProgressView" destination="kJQ-BQ-VT2" id="d1k-Sm-3Ei"/>
                         <outlet property="titleField" destination="kuM-dG-cty" id="0Q1-KP-3Ww"/>
+                        <outlet property="videoPreview" destination="wLr-Jf-zX8" id="cY1-sP-vYe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m5K-k2-dYS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
