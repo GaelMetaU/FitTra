@@ -58,22 +58,7 @@ static NSString * const kLikedFilledRoutineButtonImage = @"suit.heart.fill";
     self.workoutPlaceLabel.text = [SegmentedControlBlocksValues setWorkoutPlaceLabelContent:self.routine.workoutPlace];
     self.workoutPlaceLabel.layer.masksToBounds = YES;
     
-    [self setLikedRoutine];
-}
-
-
--(void)setLikedRoutine{
-    [ParseAPIManager isLiked:self.routine completion:^(PFObject * _Nonnull object, NSError * _Nullable error) {
-        if(error == nil){
-            [self.likeButton setImage:[UIImage systemImageNamed:kLikedFilledRoutineButtonImage] forState:UIControlStateNormal];
-            self.likeButton.tintColor = [UIColor systemRedColor];
-            self.isLiked = YES;
-        } else{
-            [self.likeButton setImage:[UIImage systemImageNamed:kLikedNormalRoutineButtonImage] forState:UIControlStateNormal];
-            self.likeButton.tintColor = [UIColor systemBlueColor];
-            self.isLiked = NO;
-        }
-    }];
+    [self checkIfLiked];
 }
 
 
@@ -86,25 +71,35 @@ static NSString * const kLikedFilledRoutineButtonImage = @"suit.heart.fill";
 
 -(void)likeAction{
     if(self.isLiked){
-        [self.likeButton setImage:[UIImage systemImageNamed:kLikedNormalRoutineButtonImage] forState:UIControlStateNormal];
-        self.likeButton.tintColor = [UIColor systemBlueColor];
         self.routine.likeCount = [NSNumber numberWithLong:[self.routine.likeCount longValue] - 1 ];
         self.likeCountLabel.text = [NSString stringWithFormat:@"%@", self.routine.likeCount];
-        [ParseAPIManager unlike:self.routine completion:^(BOOL succeeded, NSError * _Nonnull error) {
-            if(succeeded){
-                self.isLiked = NO;
-            }
-        }];
+        [ParseAPIManager unlike:self.routine];
+        [self setLikedStatus:NO];
     } else {
-        [self.likeButton setImage:[UIImage systemImageNamed:kLikedFilledRoutineButtonImage] forState:UIControlStateNormal];
-        self.likeButton.tintColor = [UIColor systemRedColor];
         self.routine.likeCount = [NSNumber numberWithLong:[self.routine.likeCount longValue] + 1 ];
         self.likeCountLabel.text = [NSString stringWithFormat:@"%@", self.routine.likeCount];
-        [ParseAPIManager likeRoutine:self.routine completion:^(BOOL succeeded, NSError * _Nonnull error) {
-            if(succeeded){
-                self.isLiked = YES;
-            }
-        }];
+        [ParseAPIManager likeRoutine:self.routine];
+        [self setLikedStatus:YES];
+    }
+}
+
+
+-(void)checkIfLiked{
+    [ParseAPIManager isLiked:self.routine completion:^(PFObject * _Nonnull object, NSError * _Nullable error) {
+        [self setLikedStatus:(error == nil)];
+    }];
+}
+
+
+-(void)setLikedStatus:(BOOL)liked{
+    if(liked){
+        [self.likeButton setImage:[UIImage systemImageNamed:kLikedFilledRoutineButtonImage] forState:UIControlStateNormal];
+        self.likeButton.tintColor = [UIColor systemRedColor];
+        self.isLiked = YES;
+    } else{
+        [self.likeButton setImage:[UIImage systemImageNamed:kLikedNormalRoutineButtonImage] forState:UIControlStateNormal];
+        self.likeButton.tintColor = [UIColor systemBlueColor];
+        self.isLiked = NO;
     }
 }
 

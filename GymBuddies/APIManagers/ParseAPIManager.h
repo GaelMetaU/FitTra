@@ -61,11 +61,12 @@ typedef void (^ParseManagerFindObjectCompletionBlock) (PFObject *object, NSError
   trainingLevelFilter:(NSNumber *)trainingLevelFilter
            completion:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
-+ (void)likeRoutine:(Routine *)routine completion:(ParseManagerCreateCompletionBlock) completion;
++ (void)likeRoutine:(Routine *)routine;
 
-+(void)unlike:(Routine *)routine completion:(ParseManagerCreateCompletionBlock) completion;
++(void)unlike:(Routine *)routine;
 
-+(void)isLiked:(Routine *)routine completion:(ParseManagerFindObjectCompletionBlock) completion;
++(void)isLiked:(Routine *)routine
+    completion:(ParseManagerFindObjectCompletionBlock) completion;
 
 + (PFFileObject *)getPFFileFromURL:(NSURL *)video
                          videoName:(NSString *)videoName;

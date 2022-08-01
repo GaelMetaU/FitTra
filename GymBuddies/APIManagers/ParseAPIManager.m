@@ -228,29 +228,20 @@ static NSString * const kLikedRoutineClass= @"LikedRoutine";
 }
 
 
-+ (void)likeRoutine:(Routine *)routine completion:(ParseManagerCreateCompletionBlock) completion{
++ (void)likeRoutine:(Routine *)routine{
     PFUser *user = [PFUser currentUser];
     PFObject *likedRoutine = [PFObject objectWithClassName:kLikedRoutineClass];
     likedRoutine[@"routine"] = routine;
     likedRoutine[@"user"] = user;
     
-    ParseManagerCreateCompletionBlock block = ^void(BOOL succeeded, NSError * _Nullable error){
-        completion(succeeded, error);
-        if(!succeeded){
-            return;
-        }
-    };
-    
-    [likedRoutine saveInBackgroundWithBlock:block];
+    [likedRoutine saveEventually];
     [routine saveInBackground];
 }
 
-+(void)unlike:(Routine *)routine completion:(ParseManagerCreateCompletionBlock) completion{
++(void)unlike:(Routine *)routine{
     [self isLiked:routine completion:^(PFObject * _Nonnull object, NSError * _Nullable error) {
         if(object != nil){
-            [object deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                completion(succeeded, error);
-            }];
+            [object deleteEventually];
         }
     }];
     
