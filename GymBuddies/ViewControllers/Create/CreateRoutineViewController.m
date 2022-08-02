@@ -8,7 +8,6 @@
 #import "CreateRoutineViewController.h"
 #import "ParseAPIManager.h"
 #import "MobileCoreServices/MobileCoreServices.h"
-#import "UniformTypeIdentifiers/UniformTypeIdentifiers.h"
 #import "CommonValidations.h"
 #import "SegmentedControlBlocksValues.h"
 #import "AlertCreator.h"
@@ -37,6 +36,9 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap)];
+    [self.view addGestureRecognizer:tap];
     
     self.mediaPicker = [UIImagePickerController new];
     self.mediaPicker.delegate = self;
@@ -83,6 +85,7 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
             [self presentViewController:alert animated:YES completion:nil];
         } else{
             [self _resetScreen];
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
         self.doneButton.userInteractionEnabled = YES;
     }];
@@ -129,6 +132,13 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 }
 
 
+#pragma mark - Tap gesture handler
+
+-(void)singleTap{
+    [self.view endEditing:YES];
+}
+
+
 #pragma mark - Uploading a photo
 
 - (IBAction)uploadImage:(id)sender {
@@ -143,7 +153,7 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info{
     NSURL *urlImage = [info objectForKey:UIImagePickerControllerImageURL];
     NSString *imageName = urlImage.lastPathComponent;
-    self.routineImage.image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    self.routineImage.image = [info objectForKey:UIImagePickerControllerEditedImage];
     PFFileObject *image = [ParseAPIManager getPFFileFromImage:self.routineImage.image imageName:imageName];
     self.routineImage.file = image;
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -235,4 +245,6 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
     }
 }
 
+- (IBAction)settingsPullDownButton:(id)sender {
+}
 @end

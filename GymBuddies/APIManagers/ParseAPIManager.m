@@ -7,10 +7,8 @@
 
 #import "ParseAPIManager.h"
 
-static NSString * const BODY_ZONE_CLASS = @"BodyZone";
-static NSString * const SAVED_EXERCISE_CLASS= @"SavedExercise";
-static NSString * const ROUTINE_CLASS = @"Routine";
 
+static long const kJPEGCompressionConstant = 0.75;
 
 @implementation ParseAPIManager
 
@@ -49,7 +47,7 @@ static NSString * const ROUTINE_CLASS = @"Routine";
 
 
 +(void)fetchBodyZones:(ParseManagerFetchingDataRowsCompletionBlock) completion{
-    PFQuery *query = [PFQuery queryWithClassName:BODY_ZONE_CLASS];
+    PFQuery *query = [PFQuery queryWithClassName:kBodyZoneClass];
     
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
         completion(elements, error);
@@ -80,7 +78,7 @@ static NSString * const ROUTINE_CLASS = @"Routine";
         if (error!=nil){
             completion(false, error);
         } else {
-            completion(true, nil);
+            completion(true, error);
         }
     };
     
@@ -93,10 +91,10 @@ static NSString * const ROUTINE_CLASS = @"Routine";
 
 
 + (void)saveExercise:(Exercise *)exercise completion:(ParseManagerCreateCompletionBlock)completion{
-    PFObject *savedExercise = [PFObject objectWithClassName:SAVED_EXERCISE_CLASS];
+    PFObject *savedExercise = [PFObject objectWithClassName:kSavedExerciseClass];
     
-    savedExercise[@"author"] = exercise.author;
-    savedExercise[@"exercise"] = exercise;
+    savedExercise[kAuthorAttributeKey] = exercise.author;
+    savedExercise[kRoutineAttributeKey] = exercise;
     
     ParseManagerCreateCompletionBlock block = ^void(BOOL succeeded, NSError * _Nullable error){
         completion(succeeded, error);
@@ -110,15 +108,12 @@ static NSString * const ROUTINE_CLASS = @"Routine";
 
 
 + (void)fetchUsersExercises:(ParseManagerFetchingDataRowsCompletionBlock) completion{
-    PFQuery *query = [PFQuery queryWithClassName:SAVED_EXERCISE_CLASS];
-    [query includeKeys:@[@"exercise", @"exercise.author", @"exercise.bodyZoneTag", @"exercise.image"]];
-    [query whereKey:@"author" equalTo:[PFUser currentUser]];
+    PFQuery *query = [PFQuery queryWithClassName:kSavedExerciseClass];
+    [query includeKeys:@[kExerciseAttributeKey, kExerciseAuthorAttributeKey, kExerciseBodyZoneTagAttributeKey, kExerciseImageAttributeKey]];
+    [query whereKey:kAuthorAttributeKey equalTo:[PFUser currentUser]];
 
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
         completion(elements, error);
-        for(PFObject *exercise in elements){
-            NSLog(@"%@", exercise);
-        }
     };
     
     [query findObjectsInBackgroundWithBlock:block];
@@ -140,14 +135,127 @@ static NSString * const ROUTINE_CLASS = @"Routine";
 
 
 + (void)fetchHomeTimelineRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion{
-    PFQuery *query = [PFQuery queryWithClassName:ROUTINE_CLASS];
-    [query includeKeys:@[@"bodyZoneList", @"exerciseList", @"author", @"exerciseList.baseExercise", @"exerciseList.baseExercise.bodyZoneTag", @"exerciseList.baseExercise.author"]];
+    PFQuery *query = [PFQuery queryWithClassName:kRoutineClass];
+    [query includeKeys:@[kBodyZoneListAttributeKey, kExerciseListAttributeKey, kAuthorAttributeKey, kExerciseListBaseExerciseAttributeKey, kExerciseListBaseExerciseBodyZoneTagAttributeKey, kExerciseListBaseExerciseAuthorAttributeKey]];
     
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
         completion(elements, error);
     };
     
     [query findObjectsInBackgroundWithBlock:block];
+}
+
+
++(void)fetchUsersCreatedRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion{
+    PFQuery *query = [PFQuery queryWithClassName:kRoutineClass];
+    [query includeKeys:@[kBodyZoneListAttributeKey, kExerciseListAttributeKey, kAuthorAttributeKey, kExerciseListBaseExerciseAttributeKey, kExerciseListBaseExerciseBodyZoneTagAttributeKey, kExerciseListBaseExerciseAuthorAttributeKey]];
+    [query whereKey:kAuthorAttributeKey equalTo:[PFUser currentUser]];
+    [query orderByDescending:kCreatedAtAttributeKey];
+    
+    ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
+        completion(elements, error);
+    };
+    
+    [query findObjectsInBackgroundWithBlock:block];
+}
+
+
++(void)fetchUsersLikedRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion{
+    PFQuery *query = [PFQuery queryWithClassName:kLikedRoutineClass];
+    [query includeKeys:@[kRoutineAttributeKey, kRoutineBodyZoneListAttributeKey, kRoutineExerciseListAttributeKey, kRoutineAuthorAttributeKey, kRoutineExerciseListBaseExerciseAttributeKey, kRoutineExerciseListBaseExerciseBodyZoneTagAttributeKey, kRoutineExerciseListBaseExerciseAuthorAttributeKey]];
+    [query selectKeys:@[kRoutineAttributeKey]];
+    [query whereKey:kUserAttributeKey equalTo:[PFUser currentUser]];
+    [query orderByDescending:kCreatedAtAttributeKey];
+    
+    ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
+        completion(elements, error);
+    };
+    
+    [query findObjectsInBackgroundWithBlock:block];
+}
+
+
++(void)changeProfilePicture:(PFFileObject *)image completion:(ParseManagerCreateCompletionBlock) completion{
+    PFUser *user = [PFUser currentUser];
+    user[kProfilePictureAttributeKey] = image;
+    
+    ParseManagerCreateCompletionBlock block = ^void(BOOL succeeded, NSError * _Nullable error){
+        completion(succeeded, error);
+        if(!succeeded){
+            return;
+        }
+    };
+    
+    [user saveInBackgroundWithBlock:block];
+}
+
+
++(void)searchRoutines:(NSString *)searchTerm
+   workoutPlaceFilter:(NSNumber *)workoutPlaceFilter
+  trainingLevelFilter:(NSNumber *)trainingLevelFilter
+           completion:(ParseManagerFetchingDataRowsCompletionBlock) completion{
+    
+    NSMutableArray *textSearchQueries = [[NSMutableArray alloc]init];
+    
+    PFQuery *captionQuery = [PFQuery queryWithClassName:kRoutineClass];
+    [captionQuery whereKey:kStandardizedCaptionAttributeKey containsString:searchTerm];
+    [textSearchQueries addObject:captionQuery];
+    
+    PFQuery *authorQuery = [PFQuery queryWithClassName:kRoutineClass];
+    [authorQuery whereKey:kStandardizedAuthorUsernameAttributeKey containsString:searchTerm];
+    [textSearchQueries addObject:authorQuery];
+    
+    PFQuery *finalSearchQuery = [PFQuery orQueryWithSubqueries:textSearchQueries];
+    
+    if(workoutPlaceFilter != nil){
+        [finalSearchQuery whereKey:kWorkoutPlaceAttributeKey equalTo:workoutPlaceFilter];
+    }
+        
+    if(trainingLevelFilter != nil){
+        [finalSearchQuery whereKey:kTrainingLevelAttributeKey equalTo:trainingLevelFilter];
+    }
+
+    [finalSearchQuery includeKeys:@[kBodyZoneListAttributeKey, kExerciseListAttributeKey, kAuthorAttributeKey, kExerciseListBaseExerciseAttributeKey, kExerciseListBaseExerciseBodyZoneTagAttributeKey, kExerciseListBaseExerciseAuthorAttributeKey]];
+    
+    ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
+        completion(elements, error);
+    };
+    
+    [finalSearchQuery findObjectsInBackgroundWithBlock:block];
+}
+
+
++ (void)likeRoutine:(Routine *)routine{
+    PFUser *user = [PFUser currentUser];
+    PFObject *likedRoutine = [PFObject objectWithClassName:kLikedRoutineClass];
+    likedRoutine[kRoutineAttributeKey] = routine;
+    likedRoutine[kUserAttributeKey] = user;
+    
+    [likedRoutine saveEventually];
+    [routine saveInBackground];
+}
+
++(void)unlike:(Routine *)routine{
+    [self isLiked:routine completion:^(PFObject * _Nonnull object, NSError * _Nullable error) {
+        if(object != nil){
+            [object deleteEventually];
+        }
+    }];
+    
+    [routine saveInBackground];
+}
+
++(void)isLiked:(Routine *)routine completion:(ParseManagerFindObjectCompletionBlock) completion{
+    PFUser *user = [PFUser currentUser];
+    PFQuery *query = [PFQuery queryWithClassName:kLikedRoutineClass];
+    [query whereKey:kUserAttributeKey equalTo:user];
+    [query whereKey:kRoutineAttributeKey equalTo:routine];
+    
+    ParseManagerFindObjectCompletionBlock block = ^void(PFObject *object, NSError * _Nullable error){
+        completion(object, error);
+    };
+    
+    [query getFirstObjectInBackgroundWithBlock:block];
 }
 
 
@@ -168,7 +276,7 @@ static NSString * const ROUTINE_CLASS = @"Routine";
     if(!image){
         return nil;
     }
-    NSData *imageData = UIImageJPEGRepresentation(image, 0.75);
+    NSData *imageData = UIImageJPEGRepresentation(image, kJPEGCompressionConstant);
     // get image data and check if that is not nil
     if (!imageData) {
         return nil;

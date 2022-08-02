@@ -1,5 +1,5 @@
 //
-//  TimelineRoutineTableViewCell.h
+//  RoutineTableViewCell.h
 //  GymBuddies
 //
 //  Created by Gael Rodriguez Gomez on 7/25/22.
@@ -7,11 +7,13 @@
 
 #import <UIKit/UIKit.h>
 #import "Parse/PFImageView.h"
+#import "ParseAPIManager.h"
+#import "AlertCreator.h"
 #import "Routine.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TimelineRoutineTableViewCell : UITableViewCell <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface RoutineTableViewCell : UITableViewCell <UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet PFImageView *authorProfilePicture;
 @property (weak, nonatomic) IBOutlet UILabel *authorUsernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *trainingLevelLabel;
@@ -23,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 @property (strong, nonatomic) Routine *routine;
+@property (nonatomic) BOOL isLiked;
 -(void)setCellContent:(Routine *)routine;
 @end
 

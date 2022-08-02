@@ -15,16 +15,20 @@
 #import "CommonValidations.h"
 #import "BodyZoneCollectionViewCell.h"
 #import "BodyZone.h"
+#import "AlertCreator.h"
+#import "VideoView.h"
+
+static NSString * const kBodyZoneCollectionViewCellIdentifier = @"BodyZoneCollectionViewCell";
 
 @interface CreateExerciseViewController ()
 @property (strong, nonatomic) UIImagePickerController *mediaPicker;
 @property (weak, nonatomic) IBOutlet PFImageView *imagePreview;
-@property (weak, nonatomic) IBOutlet UITextView *titleField;
+@property (weak, nonatomic) IBOutlet UITextField *titleField;
 @property (strong, nonatomic) NSArray *bodyZones;
 @property (weak, nonatomic) IBOutlet UICollectionView *bodyZoneCollectionView;
 @property (weak, nonatomic) IBOutlet UIProgressView *postProgressView;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
-
+@property (weak, nonatomic) IBOutlet VideoView *videoPreview;
 @property (strong, nonatomic) NSString *exerciseTitle;
 @property (strong, nonatomic) NSString *exerciseCaption;
 @property (strong, nonatomic) PFFileObject *exerciseVideo;
@@ -36,6 +40,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.titleField.delegate = self;
+    
     self.postProgressView.hidden = YES;
     // Media picker set up
     self.mediaPicker = [UIImagePickerController new];
@@ -55,7 +62,10 @@
     self.postProgressView.hidden = NO;
     
     if(self.exerciseBodyZoneTag.title == nil){
-        [self _emptyBodyZoneTagAlert];
+        UIAlertController *alert = [AlertCreator createOkAlert:@"The exercise has no body zone" message:@"Pick a body zone for your exercise"];
+        [self presentViewController:alert animated:YES completion:nil];
+        self.postProgressView.hidden = YES;
+        self.doneButton.userInteractionEnabled = YES;
         return;
     }
     // Sets the fields value to the posts, set default values if empty
@@ -65,8 +75,8 @@
     // When uploading the object, it reasigns itself to include the objectID from Parse
     exercise = [ParseAPIManager postExercise:exercise progress:self.postProgressView completion:^(BOOL succeeded, NSError * _Nullable error) {
             if(!succeeded){
-                [self _failedSavingAlert:error.localizedDescription];
-                return;
+                UIAlertController *alert = [AlertCreator createOkAlert:@"Error saving exercise" message:error.localizedDescription];
+                [self presentViewController:alert animated:YES completion:nil];
             } else{
                 [self.delegate didCreateExercise:exercise];
                 [self.navigationController popViewControllerAnimated:YES];
@@ -89,12 +99,25 @@
 }
 
 
+#pragma mark - Tap gesture handler
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return NO;
+}
+
+
+-(void)dismissKeyboard{
+    [self.view endEditing:YES];
+}
+
 #pragma mark -Collection View Methods
 
 -(void)fetchBodyZones{
     [ParseAPIManager fetchBodyZones:^(NSArray * _Nonnull elements, NSError * _Nonnull error) {
         if(elements == nil){
-            [self _failedFetchingAlert:error.localizedDescription];
+            UIAlertController *alert = [AlertCreator createOkAlert:@"Error loading screen" message:error.localizedDescription];
+            [self presentViewController:alert animated:YES completion:nil];
         } else {
             self.bodyZones = elements;
             [self.bodyZoneCollectionView reloadData];
@@ -104,7 +127,7 @@
 
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    BodyZoneCollectionViewCell *cell = [self.bodyZoneCollectionView dequeueReusableCellWithReuseIdentifier:@"BodyZoneCollectionViewCell" forIndexPath:indexPath];
+    BodyZoneCollectionViewCell *cell = [self.bodyZoneCollectionView dequeueReusableCellWithReuseIdentifier:kBodyZoneCollectionViewCellIdentifier forIndexPath:indexPath];
     BodyZone *bodyZone = self.bodyZones[indexPath.item];
     [cell setCellContent:bodyZone];
     
@@ -161,48 +184,21 @@
         NSString *videoFullName = [NSString stringWithFormat:@"%@.%@", videoName, videoExtension];;
         PFFileObject *video = [ParseAPIManager getPFFileFromURL:urlVideo videoName:videoFullName];
         self.exerciseVideo = video;
+        [self setVideoView:urlVideo];
     } else {
         NSURL *urlImage = [info objectForKey:UIImagePickerControllerImageURL];
         NSString *imageName = urlImage.lastPathComponent;
-        self.imagePreview.image = [info objectForKey:UIImagePickerControllerOriginalImage];
+        self.imagePreview.image = [info objectForKey:UIImagePickerControllerEditedImage];
         PFFileObject *image = [ParseAPIManager getPFFileFromImage:self.imagePreview.image imageName:imageName];
         self.imagePreview.file = image;
     }
     [self dismissViewControllerAnimated:YES completion:nil];
-
 }
 
 
-#pragma mark -Alerts
-
--(void)_failedFetchingAlert:(NSString *)message{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error fetching data" message:message preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-    [alert addAction:okAction];
-    
-    [self presentViewController:alert animated:YES completion:nil];
+-(void)setVideoView:(NSURL *)video{
+    [self.videoPreview setUpVideo:video];
+    [self.videoPreview setPauseGesture];
 }
-
-
--(void)_failedSavingAlert:(NSString *)message{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error saving exercise" message:message preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-    [alert addAction:okAction];
-    
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
-
--(void)_emptyBodyZoneTagAlert{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"The exercise has no body zone" message:@"Pick a body zone for your exercise" preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-    [alert addAction:okAction];
-    
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
 
 @end
