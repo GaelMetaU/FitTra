@@ -7,20 +7,6 @@
 
 #import "ParseAPIManager.h"
 
-static NSString * const kBodyZoneClass = @"BodyZone";
-static NSString * const kSavedExerciseClass= @"SavedExercise";
-static NSString * const kRoutineClass = @"Routine";
-static NSString * const kLikedRoutineClass= @"LikedRoutine";
-
-static NSString * const kStandardizedCaptionAttributeKey = @"standardizedCaption";
-static NSString * const kStandardizedAuthorUsernameAttributeKey = @"standardizedAuthorUsername";
-static NSString * const kWorkoutPlaceAttributeKey = @"workoutPlace";
-static NSString * const kTrainingLevelAttributeKey = @"trainingLevel";
-static NSString * const kAuthorAttributeKey = @"author";
-static NSString * const kUserAttributeKey = @"user";
-static NSString * const kRoutineAttributeKey = @"routine";
-static NSString * const kExerciseAttributeKey = @"exercise";
-static NSString * const kCreatedAtAttributeKey = @"createdAt";
 
 static long const kJPEGCompressionConstant = 0.75;
 
@@ -123,7 +109,7 @@ static long const kJPEGCompressionConstant = 0.75;
 
 + (void)fetchUsersExercises:(ParseManagerFetchingDataRowsCompletionBlock) completion{
     PFQuery *query = [PFQuery queryWithClassName:kSavedExerciseClass];
-    [query includeKeys:@[@"exercise", @"exercise.author", @"exercise.bodyZoneTag", @"exercise.image"]];
+    [query includeKeys:@[kExerciseAttributeKey, kExerciseAuthorAttributeKey, kExerciseBodyZoneTagAttributeKey, kExerciseImageAttributeKey]];
     [query whereKey:kAuthorAttributeKey equalTo:[PFUser currentUser]];
 
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
@@ -150,7 +136,7 @@ static long const kJPEGCompressionConstant = 0.75;
 
 + (void)fetchHomeTimelineRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion{
     PFQuery *query = [PFQuery queryWithClassName:kRoutineClass];
-    [query includeKeys:@[@"bodyZoneList", @"exerciseList", @"author", @"exerciseList.baseExercise", @"exerciseList.baseExercise.bodyZoneTag", @"exerciseList.baseExercise.author"]];
+    [query includeKeys:@[kBodyZoneListAttributeKey, kExerciseListAttributeKey, kAuthorAttributeKey, kExerciseListBaseExerciseAttributeKey, kExerciseListBaseExerciseBodyZoneTagAttributeKey, kExerciseListBaseExerciseAuthorAttributeKey]];
     
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
         completion(elements, error);
@@ -162,7 +148,7 @@ static long const kJPEGCompressionConstant = 0.75;
 
 +(void)fetchUsersCreatedRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion{
     PFQuery *query = [PFQuery queryWithClassName:kRoutineClass];
-    [query includeKeys:@[@"bodyZoneList", @"exerciseList", @"author", @"exerciseList.baseExercise", @"exerciseList.baseExercise.bodyZoneTag", @"exerciseList.baseExercise.author"]];
+    [query includeKeys:@[kBodyZoneListAttributeKey, kExerciseListAttributeKey, kAuthorAttributeKey, kExerciseListBaseExerciseAttributeKey, kExerciseListBaseExerciseBodyZoneTagAttributeKey, kExerciseListBaseExerciseAuthorAttributeKey]];
     [query whereKey:kAuthorAttributeKey equalTo:[PFUser currentUser]];
     [query orderByDescending:kCreatedAtAttributeKey];
     
@@ -176,7 +162,7 @@ static long const kJPEGCompressionConstant = 0.75;
 
 +(void)fetchUsersLikedRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion{
     PFQuery *query = [PFQuery queryWithClassName:kLikedRoutineClass];
-    [query includeKeys:@[@"routine",@"routine.bodyZoneList", @"routine.exerciseList", @"routine.author", @"routine.exerciseList.baseExercise", @"routine.exerciseList.baseExercise.bodyZoneTag", @"routine.exerciseList.baseExercise.author"]];
+    [query includeKeys:@[kRoutineAttributeKey, kRoutineBodyZoneListAttributeKey, kRoutineExerciseListAttributeKey, kRoutineAuthorAttributeKey, kRoutineExerciseListBaseExerciseAttributeKey, kRoutineExerciseListBaseExerciseBodyZoneTagAttributeKey, kRoutineExerciseListBaseExerciseAuthorAttributeKey]];
     [query selectKeys:@[kRoutineAttributeKey]];
     [query whereKey:kUserAttributeKey equalTo:[PFUser currentUser]];
     [query orderByDescending:kCreatedAtAttributeKey];
@@ -191,7 +177,7 @@ static long const kJPEGCompressionConstant = 0.75;
 
 +(void)changeProfilePicture:(PFFileObject *)image completion:(ParseManagerCreateCompletionBlock) completion{
     PFUser *user = [PFUser currentUser];
-    user[@"profilePicture"] = image;
+    user[kProfilePictureAttributeKey] = image;
     
     ParseManagerCreateCompletionBlock block = ^void(BOOL succeeded, NSError * _Nullable error){
         completion(succeeded, error);
@@ -229,7 +215,7 @@ static long const kJPEGCompressionConstant = 0.75;
         [finalSearchQuery whereKey:kTrainingLevelAttributeKey equalTo:trainingLevelFilter];
     }
 
-    [finalSearchQuery includeKeys:@[@"bodyZoneList", @"exerciseList", @"author", @"exerciseList.baseExercise", @"exerciseList.baseExercise.bodyZoneTag", @"exerciseList.baseExercise.author"]];
+    [finalSearchQuery includeKeys:@[kBodyZoneListAttributeKey, kExerciseListAttributeKey, kAuthorAttributeKey, kExerciseListBaseExerciseAttributeKey, kExerciseListBaseExerciseBodyZoneTagAttributeKey, kExerciseListBaseExerciseAuthorAttributeKey]];
     
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
         completion(elements, error);

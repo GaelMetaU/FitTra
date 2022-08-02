@@ -18,6 +18,8 @@
 static NSNumber * kShowCreatedRoutines = @0;
 static NSNumber * kShowLikedRoutines = @1;
 static NSString * kProfileToDetailsSegue = @"ProfileToDetailsSegue";
+static NSString * kLoginViewControllerIdentifier = @"LoginNavigationController";
+static NSString * kRoutineTableViewCellIdentifier = @"RoutineTableViewCell";
 
 @interface ProfileViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *routinesTableView;
@@ -62,8 +64,8 @@ static NSString * kProfileToDetailsSegue = @"ProfileToDetailsSegue";
     PFUser *user = [PFUser currentUser];
     
     self.userProfilePicture.layer.cornerRadius = self.userProfilePicture.frame.size.width/2;
-    if(user[@"profilePicture"]){
-        self.userProfilePicture.file = user[@"profilePicture"];
+    if(user[kProfilePictureAttributeKey]){
+        self.userProfilePicture.file = user[kProfilePictureAttributeKey];
         [self.userProfilePicture loadInBackground];
     }
     
@@ -82,7 +84,7 @@ static NSString * kProfileToDetailsSegue = @"ProfileToDetailsSegue";
             } else {
                 SceneDelegate *delegate = (SceneDelegate *)self.view.window.windowScene.delegate;
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                delegate.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginNavigationController"];
+                delegate.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:kLoginViewControllerIdentifier];
             }
         }];
     }];
@@ -190,10 +192,10 @@ static NSString * kProfileToDetailsSegue = @"ProfileToDetailsSegue";
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    RoutineTableViewCell *cell = [self.routinesTableView dequeueReusableCellWithIdentifier:@"RoutineTableViewCell"];
+    RoutineTableViewCell *cell = [self.routinesTableView dequeueReusableCellWithIdentifier:kRoutineTableViewCellIdentifier];
     
     if(self.showCreatedOrLikedRoutinesIndicator == kShowLikedRoutines){
-        [cell setCellContent:self.likedRoutineList[indexPath.row][@"routine"]];
+        [cell setCellContent:self.likedRoutineList[indexPath.row][kRoutineAttributeKey]];
     } else {
         [cell setCellContent:self.createdRoutineList[indexPath.row]];
     }
@@ -209,7 +211,7 @@ static NSString * kProfileToDetailsSegue = @"ProfileToDetailsSegue";
         NSIndexPath *indexPath = [self.routinesTableView indexPathForCell:sender];
         RoutineDetailsViewController *routineDetailsViewController = [segue destinationViewController];
         if(self.showCreatedOrLikedRoutinesIndicator == kShowLikedRoutines){
-            routineDetailsViewController.routine = self.likedRoutineList[indexPath.row];
+            routineDetailsViewController.routine = self.likedRoutineList[indexPath.row][kRoutineAttributeKey];
         } else {
             routineDetailsViewController.routine = self.createdRoutineList[indexPath.row];
         }

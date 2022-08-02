@@ -21,6 +21,43 @@ typedef void (^ParseManagerLogOutCompletionBlock) (NSError * _Nullable errorAPI)
 typedef void (^ParseManagerFetchingDataRowsCompletionBlock) (NSArray *elements, NSError * _Nullable error);
 typedef void (^ParseManagerFindObjectCompletionBlock) (PFObject *object, NSError * _Nullable error);
 
+// Classes keys
+static NSString * const kBodyZoneClass = @"BodyZone";
+static NSString * const kSavedExerciseClass= @"SavedExercise";
+static NSString * const kRoutineClass = @"Routine";
+static NSString * const kLikedRoutineClass= @"LikedRoutine";
+
+// Search Attribute Keys
+static NSString * const kStandardizedCaptionAttributeKey = @"standardizedCaption";
+static NSString * const kStandardizedAuthorUsernameAttributeKey = @"standardizedAuthorUsername";
+
+// Common used attribute keys
+static NSString * const kWorkoutPlaceAttributeKey = @"workoutPlace";
+static NSString * const kTrainingLevelAttributeKey = @"trainingLevel";
+static NSString * const kAuthorAttributeKey = @"author";
+static NSString * const kUserAttributeKey = @"user";
+static NSString * const kCreatedAtAttributeKey = @"createdAt";
+static NSString * const kProfilePictureAttributeKey = @"profilePicture";
+
+// Routine attributes
+static NSString * const kRoutineAttributeKey = @"routine";
+static NSString * const kRoutineAuthorAttributeKey = @"routine.author";
+static NSString * const kBodyZoneListAttributeKey = @"bodyZoneList";
+static NSString * const kExerciseListAttributeKey = @"exerciseList";
+static NSString * const kExerciseListBaseExerciseAttributeKey = @"exerciseList.baseExercise";
+static NSString * const kExerciseListBaseExerciseBodyZoneTagAttributeKey = @"exerciseList.baseExercise.bodyZoneTag";
+static NSString * const kExerciseListBaseExerciseAuthorAttributeKey = @"exerciseList.baseExercise.author";
+static NSString * const kRoutineBodyZoneListAttributeKey = @"routine.bodyZoneList";
+static NSString * const kRoutineExerciseListAttributeKey = @"routine.exerciseList";
+static NSString * const kRoutineExerciseListBaseExerciseAttributeKey = @"routine.exerciseList.baseExercise";
+static NSString * const kRoutineExerciseListBaseExerciseBodyZoneTagAttributeKey = @"routine.exerciseList.baseExercise.bodyZoneTag";
+static NSString * const kRoutineExerciseListBaseExerciseAuthorAttributeKey = @"routine.exerciseList.baseExercise.author";
+
+// Exercise attributes
+static NSString * const kExerciseAttributeKey = @"exercise";
+static NSString * const kExerciseAuthorAttributeKey = @"exercise.author";
+static NSString * const kExerciseBodyZoneTagAttributeKey = @"exercise.bodyZoneTag";
+static NSString * const kExerciseImageAttributeKey = @"exercise.image";
 
 
 @interface ParseAPIManager : NSObject
