@@ -131,8 +131,7 @@ static NSString * kRoutineTableViewCellIdentifier = @"RoutineTableViewCell";
                 self.createdRoutineList = elements;
                 [self.routinesTableView reloadData];
             } else{
-                UIAlertController *alert = [AlertCreator createOkAlert:@"Error loading your routines" message:error.localizedDescription];
-                [self presentViewController:alert animated:YES completion:nil];
+                [self fetchingAlert:error];
             }
     }];
 }
@@ -144,12 +143,16 @@ static NSString * kRoutineTableViewCellIdentifier = @"RoutineTableViewCell";
                 self.likedRoutineList = elements;
                 [self.routinesTableView reloadData];
             } else{
-                UIAlertController *alert = [AlertCreator createOkAlert:@"Error loading your liked routines" message:error.localizedDescription];
-                [self presentViewController:alert animated:YES completion:nil];
+                [self fetchingAlert:error];
             }
     }];
 }
 
+
+-(void)fetchingAlert:(NSError *)error{
+    UIAlertController *alert = [AlertCreator createOkAlert:@"Error loading your routines" message:error.localizedDescription];
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 #pragma mark - Button interaction
 
