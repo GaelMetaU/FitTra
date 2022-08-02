@@ -16,15 +16,20 @@
 
 
 -(void)setUpVideo:(NSURL *)videoURL{
-    // Loading video on loop
-    self.queuePlayer = [[AVQueuePlayer alloc]init];
-    AVAsset *asset = [AVAsset assetWithURL:videoURL];
-    AVPlayerItem *item = [AVPlayerItem playerItemWithAsset: asset];
-    self.player = [AVPlayerLooper playerLooperWithPlayer:self.queuePlayer templateItem:item];
-    self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.queuePlayer];
-    self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
-     
-    [self.layer addSublayer: self.playerLayer];
+    @try {
+        // Loading video on loop
+        self.queuePlayer = [AVQueuePlayer new];
+        AVAsset *asset = [AVAsset assetWithURL:videoURL];
+        AVPlayerItem *item = [AVPlayerItem playerItemWithAsset: asset];
+        self.player = [AVPlayerLooper playerLooperWithPlayer:self.queuePlayer templateItem:item];
+        self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.queuePlayer];
+        self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
+         
+        [self.layer addSublayer: self.playerLayer];
+    } @catch (NSException *exception) {
+        self.alternateText.text = @"There was an error loading the video";
+        self.alternateText.hidden = NO;
+    }
 }
 
 
