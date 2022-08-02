@@ -156,26 +156,22 @@ static NSString * kRoutineTableViewCellIdentifier = @"RoutineTableViewCell";
 
 #pragma mark - Button interaction
 
-- (IBAction)didTapCreated:(id)sender {
-    if(self.showCreatedRoutinesButton.isSelected){
+-(IBAction)didTapSwitchView:(id)sender{
+    // If button pressed is the same as the view shown
+    if((sender == self.showCreatedRoutinesButton && self.showCreatedOrLikedRoutinesIndicator == kShowCreatedRoutines) || (sender == self.showLikedRoutinesButton && self.showCreatedOrLikedRoutinesIndicator == kShowLikedRoutines)){
         return;
     }
-    self.showCreatedRoutinesButton.selected = YES;
-    self.showLikedRoutinesButton.selected = NO;
-    self.showCreatedOrLikedRoutinesIndicator = kShowCreatedRoutines;
-   
-    [self.routinesTableView reloadData];
-}
-
-
-- (IBAction)didTapLiked:(id)sender {
-    if(self.showLikedRoutinesButton.isSelected){
-        return;
+    
+    if(self.showCreatedOrLikedRoutinesIndicator == kShowLikedRoutines){
+        self.showCreatedRoutinesButton.selected = YES;
+        self.showLikedRoutinesButton.selected = NO;
+        self.showCreatedOrLikedRoutinesIndicator = kShowCreatedRoutines;
+    } else{
+        self.showLikedRoutinesButton.selected = YES;
+        self.showCreatedRoutinesButton.selected = NO;
+        self.showCreatedOrLikedRoutinesIndicator = kShowLikedRoutines;
     }
-    self.showLikedRoutinesButton.selected = YES;
-    self.showCreatedRoutinesButton.selected = NO;
-    self.showCreatedOrLikedRoutinesIndicator = kShowLikedRoutines;
-   
+    
     [self.routinesTableView reloadData];
 }
 
