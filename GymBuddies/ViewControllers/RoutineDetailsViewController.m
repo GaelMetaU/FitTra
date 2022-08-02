@@ -17,6 +17,7 @@ static NSString * const kBodyZoneCollectionViewCellIdentifier = @"RoutineBodyZon
 static NSString * const kExerciseTableViewCellIdentifier = @"RoutineDetailsExerciseTableViewCell";
 static NSString * const kLikedNormalRoutineButtonImage = @"suit.heart";
 static NSString * const kLikedFilledRoutineButtonImage = @"suit.heart.fill";
+static NSString * const kBaseExerciseAttributeKey = @"baseExercise";
 
 static CGFloat const kLabelBorderRadius = 5;
 
@@ -170,7 +171,7 @@ static NSString * const kRoutineToExerciseSegueIdentifier = @"RoutineToExerciseS
     if(isRoutineToExerciseSegue){
         NSIndexPath *indexPath = [self.exerciseListTableView indexPathForCell:sender];
         ExerciseDetailsViewController *exerciseDetailsViewController = [segue destinationViewController];
-        exerciseDetailsViewController.exercise = self.exerciseList[indexPath.row][@"baseExercise"];
+        exerciseDetailsViewController.exercise = self.exerciseList[indexPath.row][kBaseExerciseAttributeKey];
     }
     
 }

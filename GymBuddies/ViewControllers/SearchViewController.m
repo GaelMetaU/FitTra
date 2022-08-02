@@ -22,6 +22,7 @@ static NSString * const kExpertFilterTitle = @"Expert";
 static NSString * const kHomeFilterTitle = @"Home";
 static NSString * const kParkFilterTitle = @"Park";
 static NSString * const kGymFilterTitle = @"Gym";
+static long const kSearchTimerLapse = 0.20;
 
 
 @interface SearchViewController ()
@@ -64,7 +65,7 @@ static NSString * const kGymFilterTitle = @"Gym";
             [self.timer invalidate];
             self.timer = nil;
         }
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.20 target:self selector:@selector(searchTimerCall:) userInfo:nil repeats:NO];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:kSearchTimerLapse target:self selector:@selector(searchTimerCall:) userInfo:nil repeats:NO];
 }
 
 
