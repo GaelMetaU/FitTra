@@ -16,6 +16,7 @@
 #import "BodyZoneCollectionViewCell.h"
 #import "BodyZone.h"
 #import "AlertCreator.h"
+#import "VideoView.h"
 
 static NSString * const kBodyZoneCollectionViewCellIdentifier = @"BodyZoneCollectionViewCell";
 
@@ -27,6 +28,7 @@ static NSString * const kBodyZoneCollectionViewCellIdentifier = @"BodyZoneCollec
 @property (weak, nonatomic) IBOutlet UICollectionView *bodyZoneCollectionView;
 @property (weak, nonatomic) IBOutlet UIProgressView *postProgressView;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
+@property (weak, nonatomic) IBOutlet VideoView *videoPreview;
 @property (strong, nonatomic) NSString *exerciseTitle;
 @property (strong, nonatomic) NSString *exerciseCaption;
 @property (strong, nonatomic) PFFileObject *exerciseVideo;
@@ -182,6 +184,7 @@ static NSString * const kBodyZoneCollectionViewCellIdentifier = @"BodyZoneCollec
         NSString *videoFullName = [NSString stringWithFormat:@"%@.%@", videoName, videoExtension];;
         PFFileObject *video = [ParseAPIManager getPFFileFromURL:urlVideo videoName:videoFullName];
         self.exerciseVideo = video;
+        [self setVideoView:urlVideo];
     } else {
         NSURL *urlImage = [info objectForKey:UIImagePickerControllerImageURL];
         NSString *imageName = urlImage.lastPathComponent;
@@ -190,8 +193,12 @@ static NSString * const kBodyZoneCollectionViewCellIdentifier = @"BodyZoneCollec
         self.imagePreview.file = image;
     }
     [self dismissViewControllerAnimated:YES completion:nil];
-
 }
 
+
+-(void)setVideoView:(NSURL *)video{
+    [self.videoPreview setUpVideo:video];
+    [self.videoPreview setPauseGesture];
+}
 
 @end
