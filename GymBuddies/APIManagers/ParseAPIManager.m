@@ -228,6 +228,40 @@ static NSString * const kLikedRoutineClass= @"LikedRoutine";
 }
 
 
++ (void)likeRoutine:(Routine *)routine{
+    PFUser *user = [PFUser currentUser];
+    PFObject *likedRoutine = [PFObject objectWithClassName:kLikedRoutineClass];
+    likedRoutine[@"routine"] = routine;
+    likedRoutine[@"user"] = user;
+    
+    [likedRoutine saveEventually];
+    [routine saveInBackground];
+}
+
++(void)unlike:(Routine *)routine{
+    [self isLiked:routine completion:^(PFObject * _Nonnull object, NSError * _Nullable error) {
+        if(object != nil){
+            [object deleteEventually];
+        }
+    }];
+    
+    [routine saveInBackground];
+}
+
++(void)isLiked:(Routine *)routine completion:(ParseManagerFindObjectCompletionBlock) completion{
+    PFUser *user = [PFUser currentUser];
+    PFQuery *query = [PFQuery queryWithClassName:kLikedRoutineClass];
+    [query whereKey:@"user" equalTo:user];
+    [query whereKey:@"routine" equalTo:routine];
+    
+    ParseManagerFindObjectCompletionBlock block = ^void(PFObject *object, NSError * _Nullable error){
+        completion(object, error);
+    };
+    
+    [query getFirstObjectInBackgroundWithBlock:block];
+}
+
+
 + (PFFileObject *)getPFFileFromURL:(NSURL *)video videoName:(NSString *)videoName{
     if(!video){
         return nil;

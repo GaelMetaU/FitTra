@@ -73,6 +73,8 @@ static NSString * const kHomeToDetailsSegue = @"HomeToDetailsSegue";
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         RoutineDetailsViewController *routineDetailsViewController = [segue destinationViewController];
         routineDetailsViewController.routine = self.routineFeed[indexPath.row];
+        RoutineTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        routineDetailsViewController.isLiked = cell.isLiked;
     }
     
 }

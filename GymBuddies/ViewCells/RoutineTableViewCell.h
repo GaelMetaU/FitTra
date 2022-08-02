@@ -7,6 +7,8 @@
 
 #import <UIKit/UIKit.h>
 #import "Parse/PFImageView.h"
+#import "ParseAPIManager.h"
+#import "AlertCreator.h"
 #import "Routine.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -23,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 @property (strong, nonatomic) Routine *routine;
+@property (nonatomic) BOOL isLiked;
 -(void)setCellContent:(Routine *)routine;
 @end
 

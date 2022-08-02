@@ -7,6 +7,9 @@
 
 #import "ExerciseDetailsViewController.h"
 #import "Parse/PFImageView.h"
+#import "AVFoundation/AVFoundation.h"
+#import "AVKit/AVKit.h"
+#import "VideoView.h"
 
 static NSString * const kProfilePictureKey = @"profilePicture";
 
@@ -17,6 +20,11 @@ static NSString * const kProfilePictureKey = @"profilePicture";
 @property (weak, nonatomic) IBOutlet UILabel *authorUsername;
 @property (weak, nonatomic) IBOutlet PFImageView *bodyZoneIcon;
 @property (weak, nonatomic) IBOutlet UILabel *bodyZoneTitle;
+@property (weak, nonatomic) IBOutlet VideoView *videoView;
+@property (weak, nonatomic) IBOutlet UIImageView *pauseView;
+@property (strong, nonatomic) AVPlayerLooper *player;
+@property (strong, nonatomic) AVPlayerLayer *playerLayer;
+@property (strong, nonatomic) AVQueuePlayer *queuePlayer;
 @end
 
 @implementation ExerciseDetailsViewController
@@ -25,6 +33,7 @@ static NSString * const kProfilePictureKey = @"profilePicture";
     [super viewDidLoad];
     
     [self setExercise:self.exercise];
+    [self playVideo];
 }
 
 
@@ -49,5 +58,18 @@ static NSString * const kProfilePictureKey = @"profilePicture";
     
 }
 
+
+#pragma mark - Video play
+
+-(void)playVideo{
+    if(self.exercise.video != nil){
+        NSURL *url = [NSURL URLWithString:self.exercise.video.url];
+        [self.videoView setUpVideo:url];
+        [self.videoView setPauseGesture];
+        [self.videoView play];
+    } else{
+        [self.videoView setAlternateView];
+    }
+}
 
 @end

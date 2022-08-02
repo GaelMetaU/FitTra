@@ -7,6 +7,7 @@
 
 #import "RoutineDetailsViewController.h"
 #import "Parse/PFImageView.h"
+#import "ParseAPIManager.h"
 #import "SegmentedControlBlocksValues.h"
 #import "RoutineDetailsExerciseTableViewCell.h"
 #import "BodyZoneCollectionViewCell.h"
@@ -14,6 +15,8 @@
 
 static NSString * const kBodyZoneCollectionViewCellIdentifier = @"RoutineBodyZoneCollectionViewCell";
 static NSString * const kExerciseTableViewCellIdentifier = @"RoutineDetailsExerciseTableViewCell";
+static NSString * const kLikedNormalRoutineButtonImage = @"suit.heart";
+static NSString * const kLikedFilledRoutineButtonImage = @"suit.heart.fill";
 
 static CGFloat const kLabelBorderRadius = 5;
 
@@ -27,6 +30,7 @@ static NSString * const kRoutineToExerciseSegueIdentifier = @"RoutineToExerciseS
 @property (weak, nonatomic) IBOutlet UILabel *trainingLevelLabel;
 @property (weak, nonatomic) IBOutlet UILabel *workoutPlaceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *likeCountLabel;
+@property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (strong, nonatomic) NSArray *bodyZoneList;
 @property (strong, nonatomic) NSArray *exerciseList;
 
@@ -48,6 +52,7 @@ static NSString * const kRoutineToExerciseSegueIdentifier = @"RoutineToExerciseS
     self.exerciseListTableView.rowHeight = UITableViewAutomaticDimension;
     
     [self setRoutine:self.routine];
+    [self checkIfLiked];
 }
 
 #pragma mark - Top view content
@@ -82,6 +87,49 @@ static NSString * const kRoutineToExerciseSegueIdentifier = @"RoutineToExerciseS
     self.workoutPlaceLabel.layer.cornerRadius = kLabelBorderRadius;
     self.workoutPlaceLabel.text = [SegmentedControlBlocksValues setWorkoutPlaceLabelContent:self.routine.workoutPlace];
     self.workoutPlaceLabel.layer.masksToBounds = YES;
+}
+
+
+#pragma mark - Like methods
+
+
+- (IBAction)didTapLike:(id)sender {
+    [self likeAction];
+}
+
+
+-(void)likeAction{
+    if(self.isLiked){
+        self.routine.likeCount = [NSNumber numberWithLong:[self.routine.likeCount longValue] - 1 ];
+        self.likeCountLabel.text = [NSString stringWithFormat:@"%@", self.routine.likeCount];
+        [ParseAPIManager unlike:self.routine];
+        [self setLikedStatus:NO];
+    } else {
+        self.routine.likeCount = [NSNumber numberWithLong:[self.routine.likeCount longValue] + 1 ];
+        self.likeCountLabel.text = [NSString stringWithFormat:@"%@", self.routine.likeCount];
+        [ParseAPIManager likeRoutine:self.routine];
+        [self setLikedStatus:YES];
+    }
+}
+
+
+-(void)checkIfLiked{
+    [ParseAPIManager isLiked:self.routine completion:^(PFObject * _Nonnull object, NSError * _Nullable error) {
+        [self setLikedStatus:(error == nil)];
+    }];
+}
+
+
+-(void)setLikedStatus:(BOOL)liked{
+    if(liked){
+        [self.likeButton setImage:[UIImage systemImageNamed:kLikedFilledRoutineButtonImage] forState:UIControlStateNormal];
+        self.likeButton.tintColor = [UIColor systemRedColor];
+        self.isLiked = YES;
+    } else{
+        [self.likeButton setImage:[UIImage systemImageNamed:kLikedNormalRoutineButtonImage] forState:UIControlStateNormal];
+        self.likeButton.tintColor = [UIColor systemBlueColor];
+        self.isLiked = NO;
+    }
 }
 
 
