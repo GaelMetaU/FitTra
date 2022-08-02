@@ -10,6 +10,8 @@
 #import "Exercise.h"
 #import "Routine.h"
 #import "ExerciseInRoutine.h"
+#import "SegmentedControlBlocksValues.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,6 +19,8 @@ typedef void (^ParseManagerAuthenticationCompletionBlock) (PFUser *user, NSError
 typedef void (^ParseManagerCreateCompletionBlock) (BOOL succeeded, NSError *error);
 typedef void (^ParseManagerLogOutCompletionBlock) (NSError * _Nullable errorAPI);
 typedef void (^ParseManagerFetchingDataRowsCompletionBlock) (NSArray *elements, NSError * _Nullable error);
+typedef void (^ParseManagerFindObjectCompletionBlock) (PFObject *object, NSError * _Nullable error);
+
 
 
 @interface ParseAPIManager : NSObject
@@ -37,9 +41,11 @@ typedef void (^ParseManagerFetchingDataRowsCompletionBlock) (NSArray *elements, 
                   progress:(UIProgressView *)progress
                 completion:(ParseManagerCreateCompletionBlock) completion;
 
-+ (void)saveExercise:(Exercise *)exercise completion:(ParseManagerCreateCompletionBlock) completion;
++ (void)saveExercise:(Exercise *)exercise
+          completion:(ParseManagerCreateCompletionBlock) completion;
 
-+ (void)postRoutine:(Routine *)routine completion:(ParseManagerCreateCompletionBlock) completion;
++ (void)postRoutine:(Routine *)routine
+         completion:(ParseManagerCreateCompletionBlock) completion;
 
 + (void)fetchHomeTimelineRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
@@ -47,11 +53,26 @@ typedef void (^ParseManagerFetchingDataRowsCompletionBlock) (NSArray *elements, 
 
 +(void)fetchUsersLikedRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
-+(void)changeProfilePicture:(PFFileObject *)image completion:(ParseManagerCreateCompletionBlock) completion;
++(void)changeProfilePicture:(PFFileObject *)image
+                 completion:(ParseManagerCreateCompletionBlock) completion;
 
-+ (PFFileObject *)getPFFileFromURL:(NSURL *)video videoName:(NSString *)videoName;
++(void)searchRoutines:(NSString *)searchTerm
+   workoutPlaceFilter:(NSNumber *)workoutPlaceFilter
+  trainingLevelFilter:(NSNumber *)trainingLevelFilter
+           completion:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
-+ (PFFileObject *)getPFFileFromImage:(UIImage *)image imageName:(NSString *)imageName;
++ (void)likeRoutine:(Routine *)routine;
+
++(void)unlike:(Routine *)routine;
+
++(void)isLiked:(Routine *)routine
+    completion:(ParseManagerFindObjectCompletionBlock) completion;
+
++ (PFFileObject *)getPFFileFromURL:(NSURL *)video
+                         videoName:(NSString *)videoName;
+
++ (PFFileObject *)getPFFileFromImage:(UIImage *)image
+                           imageName:(NSString *)imageName;
 
 @end
 

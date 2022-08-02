@@ -85,6 +85,7 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
             [self presentViewController:alert animated:YES completion:nil];
         } else{
             [self _resetScreen];
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
         self.doneButton.userInteractionEnabled = YES;
     }];

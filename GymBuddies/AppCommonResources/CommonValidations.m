@@ -16,4 +16,9 @@
     return input;
 }
 
+
++(NSString *)standardizeSearchTerm:(NSString *)term{
+    return [[term stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] lowercaseString];
+}
+
 @end

@@ -35,6 +35,8 @@
 		8E72DEE428905E3900605018 /* RoutineDetailsExerciseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E72DEE328905E3900605018 /* RoutineDetailsExerciseTableViewCell.m */; };
 		8E72DEE72890892A00605018 /* SegmentedControlBlocksValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E72DEE62890892A00605018 /* SegmentedControlBlocksValues.m */; };
 		8E72DEEC2890B6B600605018 /* ExerciseDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E72DEEB2890B6B600605018 /* ExerciseDetailsViewController.m */; };
+		8E72DEEF2892EC5700605018 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E72DEEE2892EC5700605018 /* SearchViewController.m */; };
+		8E72DEF6289849F900605018 /* VideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E72DEF5289849F900605018 /* VideoView.m */; };
 		8E832E98287F351300BF0024 /* BodyZoneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E832E97287F351300BF0024 /* BodyZoneCollectionViewCell.m */; };
 		8E832E9B287F4B9200BF0024 /* CommonValidations.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E832E9A287F4B9200BF0024 /* CommonValidations.m */; };
 		8E832EA12880B1D000BF0024 /* AddExerciseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E832EA02880B1D000BF0024 /* AddExerciseTableViewCell.m */; };
@@ -120,6 +122,10 @@
 		8E72DEE62890892A00605018 /* SegmentedControlBlocksValues.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SegmentedControlBlocksValues.m; sourceTree = "<group>"; };
 		8E72DEEA2890B6B600605018 /* ExerciseDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExerciseDetailsViewController.h; sourceTree = "<group>"; };
 		8E72DEEB2890B6B600605018 /* ExerciseDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExerciseDetailsViewController.m; sourceTree = "<group>"; };
+		8E72DEED2892EC5700605018 /* SearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		8E72DEEE2892EC5700605018 /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		8E72DEF4289849F900605018 /* VideoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoView.h; sourceTree = "<group>"; };
+		8E72DEF5289849F900605018 /* VideoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoView.m; sourceTree = "<group>"; };
 		8E832E96287F351300BF0024 /* BodyZoneCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BodyZoneCollectionViewCell.h; sourceTree = "<group>"; };
 		8E832E97287F351300BF0024 /* BodyZoneCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BodyZoneCollectionViewCell.m; sourceTree = "<group>"; };
 		8E832E99287F4B9200BF0024 /* CommonValidations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonValidations.h; sourceTree = "<group>"; };
@@ -205,6 +211,7 @@
 				8E70893E28778DE4008B4238 /* APIManagers */,
 				8E708953287CBECC008B4238 /* AppCommonResources */,
 				8E70895E287CEEC2008B4238 /* DataModels */,
+				8E72DEF3289849C100605018 /* Views */,
 				8E832E95287F34F000BF0024 /* ViewCells */,
 				8E70893A28777BD2008B4238 /* ViewControllers */,
 				8E7088FF28775751008B4238 /* AppDelegate.h */,
@@ -251,6 +258,8 @@
 				8E72DEE02890520000605018 /* RoutineDetailsViewController.m */,
 				8E72DEEA2890B6B600605018 /* ExerciseDetailsViewController.h */,
 				8E72DEEB2890B6B600605018 /* ExerciseDetailsViewController.m */,
+				8E72DEED2892EC5700605018 /* SearchViewController.h */,
+				8E72DEEE2892EC5700605018 /* SearchViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -316,6 +325,17 @@
 			path = Create;
 			sourceTree = "<group>";
 		};
+		8E72DEF3289849C100605018 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8E10A455288887A700DA1D9A /* GoogleMapsView.h */,
+				8E10A456288887A700DA1D9A /* GoogleMapsView.m */,
+				8E72DEF4289849F900605018 /* VideoView.h */,
+				8E72DEF5289849F900605018 /* VideoView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		8E832E95287F34F000BF0024 /* ViewCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -325,8 +345,6 @@
 				8E832EA02880B1D000BF0024 /* AddExerciseTableViewCell.m */,
 				8EF822652885E5FF0000DED9 /* ExerciseInCreateRoutineTableViewCell.h */,
 				8EF822662885E5FF0000DED9 /* ExerciseInCreateRoutineTableViewCell.m */,
-				8E10A455288887A700DA1D9A /* GoogleMapsView.h */,
-				8E10A456288887A700DA1D9A /* GoogleMapsView.m */,
 				8E72DED8288F17BA00605018 /* RoutineTableViewCell.h */,
 				8E72DED9288F17BA00605018 /* RoutineTableViewCell.m */,
 				8E72DEE228905E3900605018 /* RoutineDetailsExerciseTableViewCell.h */,
@@ -620,10 +638,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E72DEF6289849F900605018 /* VideoView.m in Sources */,
 				8E832E98287F351300BF0024 /* BodyZoneCollectionViewCell.m in Sources */,
 				8EF8226428820CCE0000DED9 /* AlertCreator.m in Sources */,
 				8E10A454288720C600DA1D9A /* Routine.m in Sources */,
 				8E70893D28777BF4008B4238 /* LoginViewController.m in Sources */,
+				8E72DEEF2892EC5700605018 /* SearchViewController.m in Sources */,
 				8E70894428779209008B4238 /* RegisterViewController.m in Sources */,
 				8E72DEEC2890B6B600605018 /* ExerciseDetailsViewController.m in Sources */,
 				8E7089512878EBFE008B4238 /* ProfileViewController.m in Sources */,
