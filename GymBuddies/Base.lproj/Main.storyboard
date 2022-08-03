@@ -1683,12 +1683,50 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ic7-8z-jgG" customClass="GMSMapView">
                                             <rect key="frame" x="0.0" y="60" width="414" height="331"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lqd-Op-MxK">
+                                                <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lqd-Op-MxK" customClass="DetailedPlaceView">
                                                     <rect key="frame" x="0.0" y="331" width="414" height="100"/>
-                                                    <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ri-Im-Cpt">
+                                                            <rect key="frame" x="20" y="10" width="374" height="24"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Full Address" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hBg-HK-Acb">
+                                                            <rect key="frame" x="20" y="44" width="242.5" height="46"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="255" verticalHuggingPriority="255" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OPr-lI-vnl">
+                                                            <rect key="frame" x="272.5" y="51.5" width="121.5" height="31"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="31" id="idR-ak-xTs"/>
+                                                            </constraints>
+                                                            <state key="normal" title="Button"/>
+                                                            <buttonConfiguration key="configuration" style="filled" image="map.fill" catalog="system" title="Go to Maps"/>
+                                                            <connections>
+                                                                <action selector="didTapVisitPlace:" destination="lqd-Op-MxK" eventType="touchUpInside" id="kUP-G3-k9F"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="100" id="8hF-7r-7fe"/>
+                                                        <constraint firstItem="hBg-HK-Acb" firstAttribute="leading" secondItem="lqd-Op-MxK" secondAttribute="leading" constant="20" symbolic="YES" id="AP3-hT-i5O"/>
+                                                        <constraint firstItem="hBg-HK-Acb" firstAttribute="top" secondItem="2Ri-Im-Cpt" secondAttribute="bottom" constant="10" id="AQZ-al-joi"/>
+                                                        <constraint firstAttribute="bottom" secondItem="hBg-HK-Acb" secondAttribute="bottom" constant="10" id="MvA-SR-ofV"/>
+                                                        <constraint firstItem="OPr-lI-vnl" firstAttribute="centerY" secondItem="hBg-HK-Acb" secondAttribute="centerY" id="O8t-og-4s6"/>
+                                                        <constraint firstAttribute="trailing" secondItem="2Ri-Im-Cpt" secondAttribute="trailing" constant="20" id="Twz-vM-EVE"/>
+                                                        <constraint firstItem="2Ri-Im-Cpt" firstAttribute="top" secondItem="lqd-Op-MxK" secondAttribute="top" constant="10" id="cDi-pv-N3W"/>
+                                                        <constraint firstItem="2Ri-Im-Cpt" firstAttribute="leading" secondItem="lqd-Op-MxK" secondAttribute="leading" constant="20" id="idZ-Oc-XFf"/>
+                                                        <constraint firstItem="OPr-lI-vnl" firstAttribute="leading" secondItem="hBg-HK-Acb" secondAttribute="trailing" constant="10" id="o1t-Nl-HPx"/>
+                                                        <constraint firstAttribute="trailing" secondItem="OPr-lI-vnl" secondAttribute="trailing" constant="20" id="tBY-iD-XkK"/>
                                                     </constraints>
+                                                    <connections>
+                                                        <outlet property="fullAddress" destination="hBg-HK-Acb" id="Bzx-uV-wl3"/>
+                                                        <outlet property="placeName" destination="2Ri-Im-Cpt" id="ct4-LS-1U1"/>
+                                                    </connections>
                                                 </view>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemGray2Color"/>
@@ -1715,8 +1753,8 @@
                                     <connections>
                                         <outlet property="distanceSelectionMenu" destination="4K0-V4-w2d" id="eBa-xU-FVt"/>
                                         <outlet property="map" destination="Ic7-8z-jgG" id="LSU-qL-LXf"/>
-                                        <outlet property="otherView" destination="lqd-Op-MxK" id="GSJ-dS-VQv"/>
                                         <outlet property="placeTypeSelectionMenu" destination="VZ6-1w-5Dv" id="Pog-a1-1ch"/>
+                                        <outlet property="placeView" destination="lqd-Op-MxK" id="s7P-mN-htd"/>
                                         <outlet property="searchEnabledButton" destination="dMy-I6-aZb" id="0uK-bB-55C"/>
                                     </connections>
                                 </view>
@@ -2220,14 +2258,15 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="bookmark" catalog="system" width="112" height="128"/>
-        <image name="camera" width="752" height="752"/>
         <image name="camera" catalog="system" width="128" height="94"/>
+        <image name="camera" width="752" height="752"/>
         <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="default" width="1003" height="1003"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="map.fill" catalog="system" width="128" height="110"/>
         <image name="pause.fill" catalog="system" width="116" height="128"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="plus.circle" catalog="system" width="128" height="121"/>
@@ -2248,14 +2287,14 @@
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
-        <systemColor name="secondarySystemGroupedBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

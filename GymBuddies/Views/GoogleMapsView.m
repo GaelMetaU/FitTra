@@ -30,7 +30,7 @@ static NSString * const kSearchGymsActionTitle = @" Gyms";
     self.map.settings.myLocationButton = YES;
     self.map.delegate = self;
     self.currentPlaceTypeSearch = kPlaceTypePark;
-    [self.map bringSubviewToFront:self.otherView];
+    [self.map bringSubviewToFront:self.placeView];
 
 
     // Setting map's camera based on current location
@@ -64,11 +64,6 @@ static NSString * const kSearchGymsActionTitle = @" Gyms";
         [self placeMarkers];
     }];
 }
-//- (IBAction)didTapVisitPlace:(id)sender {
-//    NSURL *googleMapsURL =[self createGoogleMapsLink];
-//    NSLog(@"%@", googleMapsURL);
-//    [[UIApplication sharedApplication]openURL:googleMapsURL options:@{} completionHandler:nil];
-//}
 
 
 -(void)setPlaceTypeMenu{
@@ -110,24 +105,15 @@ static NSString * const kSearchGymsActionTitle = @" Gyms";
         CLLocationDegrees longitude = [place[@"geometry"][@"location"][@"lng"] doubleValue];
         CLLocationCoordinate2D position = CLLocationCoordinate2DMake(latitude, longitude);
         GMSMarker *marker = [GMSMarker markerWithPosition:position];
-        marker.title = place[@"name"];
+        marker.snippet = place[@"place_id"];
         marker.map = self.map;
         [self.markers addObject:marker];
     }
 }
 
 
-//-(NSURL *)createGoogleMapsLink{
-//    NSString *URLFormattedAddress = [self.currentSearchAddress stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-//    NSString *googleMapsURLString = [NSString stringWithFormat:@"https://www.google.com/maps/place/%@", URLFormattedAddress];
-//    NSLog(@"%@",googleMapsURLString);
-//    return [NSURL URLWithString:googleMapsURLString];
-//}
-
-
-
-
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker{
+    [self.placeView getPlaceInfo:marker.snippet];
     [self showDetails];
     return YES;
 }
@@ -136,7 +122,7 @@ static NSString * const kSearchGymsActionTitle = @" Gyms";
 -(void)showDetails{
     
     CABasicAnimation *presentDetailedView = [CABasicAnimation animationWithKeyPath:@"position.y"];
-    NSNumber *newPosition = [NSNumber numberWithDouble:self.otherView.frame.origin.y -50];
+    NSNumber *newPosition = [NSNumber numberWithDouble:self.placeView.frame.origin.y -50];
     [presentDetailedView setToValue: newPosition];
     presentDetailedView.fillMode = kCAFillModeForwards;
     presentDetailedView.removedOnCompletion = NO;
@@ -146,11 +132,7 @@ static NSString * const kSearchGymsActionTitle = @" Gyms";
         self.map.padding = UIEdgeInsetsMake(0, 0, 100, 0);
     }];
     
-    [self.otherView.layer addAnimation:presentDetailedView forKey:@"position.y"];
-}
-
-- (void)mapView:(GMSMapView *)mapView didTapOverlay:(GMSOverlay *)overlay{
-    
+    [self.placeView.layer addAnimation:presentDetailedView forKey:@"position.y"];
 }
 
 
@@ -199,20 +181,6 @@ static NSString * const kSearchGymsActionTitle = @" Gyms";
     self.searchRadius = distance / 2;
     NSLog(@"%f", self.searchRadius);
 
-}
-
-
--(void)getPlaceDetails:(NSDictionary *)place completion:(void (^)(GMSPlace *))completion{
-    GMSPlacesClient *placesClient = [GMSPlacesClient new];
-    GMSPlaceField fields = (GMSPlaceFieldName|GMSPlaceFieldFormattedAddress|GMSPlaceFieldCoordinate);
-    [placesClient fetchPlaceFromPlaceID:place[@"place_id"] placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable result, NSError * _Nullable error) {
-            if (error != nil) {
-                return completion(nil);
-            }
-            if (result != nil) {
-                return completion(result);
-            }
-    }];
 }
 
 

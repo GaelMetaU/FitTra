@@ -9,6 +9,7 @@
 #import "GoogleMaps/GoogleMaps.h"
 #import "GooglePlaces/GooglePlaces.h"
 #import "CoreLocation/CoreLocation.h"
+#import "DetailedPlaceView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *searchEnabledButton;
 @property (weak, nonatomic) IBOutlet UIButton *placeTypeSelectionMenu;
 @property (weak, nonatomic) IBOutlet UIButton *distanceSelectionMenu;
-@property (weak, nonatomic) IBOutlet UIView *otherView;
+@property (weak, nonatomic) IBOutlet DetailedPlaceView *placeView;
 @property (strong, nonatomic) NSString *currentSearchAddress;
 @property (nonatomic) double searchRadius;
 @property (strong, nonatomic) CLLocationManager *manager;
