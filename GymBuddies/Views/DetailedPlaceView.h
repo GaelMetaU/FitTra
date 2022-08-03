@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DetailedPlaceView : UIView
 @property (weak, nonatomic) IBOutlet UILabel *placeName;
 @property (weak, nonatomic) IBOutlet UILabel *fullAddress;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
 @property (strong, nonatomic) NSURL *googleMapsURL;
 @property (strong, nonatomic) GMSPlace *place;
 -(void)getPlaceInfo:(NSString *)placeID;

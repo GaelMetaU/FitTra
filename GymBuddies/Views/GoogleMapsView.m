@@ -9,7 +9,7 @@
 
 static NSString * const kPlaceTypePark = @"park";
 static NSString * const kPlaceTypeGym = @"gym";
-static float const MAP_CAMERA_ZOOM = 13.0;
+static float const kMapCameraZoom = 13.0;
 
 static NSString * const kSearchParksActionTitle = @" Parks";
 static NSString * const kSearchGymsActionTitle = @" Gyms";
@@ -35,11 +35,14 @@ static NSString * const kSearchGymsActionTitle = @" Gyms";
 
     // Setting map's camera based on current location
     self.currentLocation = self.manager.location.coordinate;
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:self.currentLocation.latitude longitude:self.currentLocation.longitude zoom:MAP_CAMERA_ZOOM];
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:self.currentLocation.latitude longitude:self.currentLocation.longitude zoom:kMapCameraZoom];
     self.map.camera = camera;
     
     [self setPlaceTypeMenu];
     
+    // Setting placed detailed view
+    self.placeView.layer.cornerRadius = 15;
+    self.isShowingDetails = NO;
 }
 
 
@@ -121,8 +124,15 @@ static NSString * const kSearchGymsActionTitle = @" Gyms";
 
 -(void)showDetails{
     
+    NSNumber *newPosition = [NSNumber new];
+
+    if(self.isShowingDetails){
+        newPosition = [NSNumber numberWithDouble:self.placeView.frame.origin.y+50];
+    } else{
+        newPosition = [NSNumber numberWithDouble:self.placeView.frame.origin.y-50];
+    }
+    
     CABasicAnimation *presentDetailedView = [CABasicAnimation animationWithKeyPath:@"position.y"];
-    NSNumber *newPosition = [NSNumber numberWithDouble:self.placeView.frame.origin.y -50];
     [presentDetailedView setToValue: newPosition];
     presentDetailedView.fillMode = kCAFillModeForwards;
     presentDetailedView.removedOnCompletion = NO;
@@ -133,6 +143,13 @@ static NSString * const kSearchGymsActionTitle = @" Gyms";
     }];
     
     [self.placeView.layer addAnimation:presentDetailedView forKey:@"position.y"];
+    
+    
+    self.placeView.bottomConstraint.constant = 0;
+    [self.placeView setNeedsUpdateConstraints];
+    [self.placeView layoutIfNeeded];
+    self.isShowingDetails = YES;
+
 }
 
 
