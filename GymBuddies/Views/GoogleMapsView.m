@@ -14,19 +14,6 @@ static float const MAP_CAMERA_ZOOM = 13.0;
 static NSString * const kSearchParksActionTitle = @" Parks";
 static NSString * const kSearchGymsActionTitle = @" Gyms";
 
-static double const k500MetersRadius = 500;
-static NSString * const k500MetersActionTitle = @"500m";
-static double const k1000MetersRadius = 1000;
-static NSString * const k1000MetersActionTitle = @"1km";
-static double const k2000MetersRadius = 2000;
-static NSString * const k2000MetersActionTitle = @"2km";
-static double const k3000MetersRadius = 3000;
-static NSString * const k3000MetersActionTitle = @"3km";
-static double const k4000MetersRadius = 4000;
-static NSString * const k4000MetersActionTitle = @"4km";
-static double const k5000MetersRadius = 5000;
-static NSString * const k5000MetersActionTitle = @"5km";
-
 
 @implementation GoogleMapsView
 
@@ -43,7 +30,6 @@ static NSString * const k5000MetersActionTitle = @"5km";
     self.map.settings.myLocationButton = YES;
     self.map.delegate = self;
     self.currentPlaceTypeSearch = kPlaceTypePark;
-    self.searchRadius = k500MetersRadius;
 
     // Setting map's camera based on current location
     self.currentLocation = self.manager.location.coordinate;
@@ -70,7 +56,6 @@ static NSString * const k5000MetersActionTitle = @"5km";
 
 -(void)searchPlaces{
     [self fetchPlacesNearby:^(NSArray *results, NSError *error) {
-        NSLog(@"tap");
         if(error == nil){
             self.placesResults = results;
         }
@@ -105,50 +90,6 @@ static NSString * const k5000MetersActionTitle = @"5km";
         if(action.title == actionTitle){
             self.currentPlaceTypeSearch = workoutPlace;
             [self.placeTypeSelectionMenu setTitle:actionTitle forState:UIControlStateNormal];
-            action.state = UIMenuElementStateOn;
-        } else {
-            action.state = UIMenuElementStateOff;
-        }
-    }
-}
-
-
--(void)setSearchRadiusMenu{
-    UIAction *searchRadius500 = [UIAction actionWithTitle:k500MetersActionTitle image:nil identifier:nil handler:^(UIAction *action){
-        [self changeSearchRadius:k500MetersActionTitle radius:k500MetersRadius];
-    }];
-    
-    UIAction *searchRadius1000 = [UIAction actionWithTitle:k1000MetersActionTitle image:nil identifier:nil handler:^(UIAction *action){
-        [self changeSearchRadius:k1000MetersActionTitle radius:k1000MetersRadius];
-    }];
-    
-    UIAction *searchRadius2000 = [UIAction actionWithTitle:k2000MetersActionTitle image:nil identifier:nil handler:^(UIAction *action){
-        [self changeSearchRadius:k2000MetersActionTitle radius:k2000MetersRadius];
-    }];
-    
-    UIAction *searchRadius3000 = [UIAction actionWithTitle:k3000MetersActionTitle image:nil identifier:nil handler:^(UIAction *action){
-        [self changeSearchRadius:k3000MetersActionTitle radius:k3000MetersRadius];
-    }];
-    
-    UIAction *searchRadius4000 = [UIAction actionWithTitle:k4000MetersActionTitle image:nil identifier:nil handler:^(UIAction *action){
-        [self changeSearchRadius:k4000MetersActionTitle radius:k4000MetersRadius];
-    }];
-    
-    UIAction *searchRadius5000 = [UIAction actionWithTitle:k5000MetersActionTitle image:nil identifier:nil handler:^(UIAction *action){
-        [self changeSearchRadius:k5000MetersActionTitle radius:k5000MetersRadius];
-    }];
-    
-    UIMenu *menu = [[UIMenu alloc]menuByReplacingChildren:[NSArray arrayWithObjects: searchRadius500, searchRadius1000, searchRadius2000, searchRadius3000, searchRadius4000, searchRadius5000, nil]];
-    self.distanceSelectionMenu.showsMenuAsPrimaryAction = YES;
-    self.distanceSelectionMenu.menu = menu;
-}
-
-
--(void)changeSearchRadius:(NSString *)actionTitle radius:(double)radius{
-    for(UIAction *action in self.placeTypeSelectionMenu.menu.children){
-        if(action.title == actionTitle){
-            self.searchRadius = radius;
-            [self.distanceSelectionMenu setTitle:actionTitle forState:UIControlStateNormal];
             action.state = UIMenuElementStateOn;
         } else {
             action.state = UIMenuElementStateOff;
@@ -196,6 +137,8 @@ static NSString * const k5000MetersActionTitle = @"5km";
     NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
     NSString *googleAPIKey = [dict objectForKey:@"googleAPIKey"];
     
+    [self getVisibleViewRadius];
+    
     //Creating request URL using the keys, location and type of place to search
     NSString *baseURL = [NSString stringWithFormat: @"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f%%2C%f&radius=%f&key=%@&type=%@", self.currentLocation.latitude, self.currentLocation.longitude, self.searchRadius, googleAPIKey, self.currentPlaceTypeSearch];
     
@@ -214,6 +157,23 @@ static NSString * const k5000MetersActionTitle = @"5km";
             
     }];
     [dataTask resume];
+}
+
+
+-(void)getVisibleViewRadius{
+    GMSVisibleRegion visibleRegion = [self.map.projection visibleRegion];
+    GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc]initWithRegion:visibleRegion];
+    
+    CLLocationCoordinate2D southWest = bounds.southWest;
+    CLLocationCoordinate2D northEast = bounds.northEast;
+    
+    CLLocation *southWestLocation = [[CLLocation alloc]initWithLatitude:southWest.latitude longitude:southWest.longitude];
+    CLLocation *northEastLocation = [[CLLocation alloc]initWithLatitude:northEast.latitude longitude:northEast.longitude];
+    CLLocationDistance distance = [southWestLocation distanceFromLocation:northEastLocation];
+    
+    self.searchRadius = distance / 2;
+    NSLog(@"%f", self.searchRadius);
+
 }
 
 

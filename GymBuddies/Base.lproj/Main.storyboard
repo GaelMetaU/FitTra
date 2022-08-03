@@ -1651,24 +1651,24 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ic7-8z-jgG" customClass="GMSMapView">
-                                            <rect key="frame" x="0.0" y="65.5" width="414" height="250"/>
+                                            <rect key="frame" x="0.0" y="63.5" width="414" height="250"/>
                                             <color key="backgroundColor" systemColor="systemGray2Color"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="250" id="8OX-w9-0uV"/>
                                             </constraints>
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMy-I6-aZb">
-                                            <rect key="frame" x="15" y="15" width="278" height="35.5"/>
+                                            <rect key="frame" x="15" y="15" width="278" height="33.5"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system" title="Search in this area">
-                                                <fontDescription key="titleFontDescription" type="system" pointSize="18"/>
+                                                <fontDescription key="titleFontDescription" type="system" pointSize="16"/>
                                             </buttonConfiguration>
                                             <connections>
                                                 <action selector="didTapSearch:" destination="s0O-lO-7wb" eventType="touchUpInside" id="H5T-RE-GdV"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LSk-W7-TaQ">
-                                            <rect key="frame" x="167" y="327.5" width="80" height="25.5"/>
+                                            <rect key="frame" x="167" y="325.5" width="80" height="27.5"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" title="Let's go!"/>
                                             <connections>
@@ -1677,10 +1677,11 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VZ6-1w-5Dv">
-                                            <rect key="frame" x="313" y="19" width="70" height="26.5"/>
+                                            <rect key="frame" x="313" y="19" width="70" height="24.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="70" id="13c-c0-N1B"/>
                                             </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <menu key="menu" id="4K0-V4-w2d">
                                                 <children>
                                                     <command title="Item 1" id="KgB-96-cQs"/>
@@ -2216,8 +2217,8 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="bookmark" catalog="system" width="112" height="128"/>
-        <image name="camera" catalog="system" width="128" height="94"/>
         <image name="camera" width="752" height="752"/>
+        <image name="camera" catalog="system" width="128" height="94"/>
         <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="default" width="1003" height="1003"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
