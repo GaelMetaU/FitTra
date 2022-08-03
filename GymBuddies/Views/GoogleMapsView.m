@@ -30,6 +30,8 @@ static NSString * const kSearchGymsActionTitle = @" Gyms";
     self.map.settings.myLocationButton = YES;
     self.map.delegate = self;
     self.currentPlaceTypeSearch = kPlaceTypePark;
+    [self.map bringSubviewToFront:self.otherView];
+
 
     // Setting map's camera based on current location
     self.currentLocation = self.manager.location.coordinate;
@@ -109,7 +111,6 @@ static NSString * const kSearchGymsActionTitle = @" Gyms";
         CLLocationCoordinate2D position = CLLocationCoordinate2DMake(latitude, longitude);
         GMSMarker *marker = [GMSMarker markerWithPosition:position];
         marker.title = place[@"name"];
-        //marker.snippet = park.formattedAddress;
         marker.map = self.map;
         [self.markers addObject:marker];
     }
@@ -124,9 +125,33 @@ static NSString * const kSearchGymsActionTitle = @" Gyms";
 //}
 
 
-//- (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker{
-//    return NO;
-//}
+
+
+- (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker{
+    [self showDetails];
+    return YES;
+}
+
+
+-(void)showDetails{
+    
+    CABasicAnimation *presentDetailedView = [CABasicAnimation animationWithKeyPath:@"position.y"];
+    NSNumber *newPosition = [NSNumber numberWithDouble:self.otherView.frame.origin.y -50];
+    [presentDetailedView setToValue: newPosition];
+    presentDetailedView.fillMode = kCAFillModeForwards;
+    presentDetailedView.removedOnCompletion = NO;
+    presentDetailedView.duration = 0.1;
+    
+    [UIView animateWithDuration:0.1 animations:^{
+        self.map.padding = UIEdgeInsetsMake(0, 0, 100, 0);
+    }];
+    
+    [self.otherView.layer addAnimation:presentDetailedView forKey:@"position.y"];
+}
+
+- (void)mapView:(GMSMapView *)mapView didTapOverlay:(GMSOverlay *)overlay{
+    
+}
 
 
 #pragma mark - Places data fetching

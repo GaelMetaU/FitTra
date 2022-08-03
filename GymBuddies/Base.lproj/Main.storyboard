@@ -1647,18 +1647,14 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="s0O-lO-7wb" customClass="GoogleMapsView">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="361"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="411"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ic7-8z-jgG" customClass="GMSMapView">
-                                            <rect key="frame" x="0.0" y="63.5" width="414" height="250"/>
-                                            <color key="backgroundColor" systemColor="systemGray2Color"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="250" id="8OX-w9-0uV"/>
-                                            </constraints>
-                                        </view>
                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMy-I6-aZb">
-                                            <rect key="frame" x="15" y="15" width="278" height="33.5"/>
+                                            <rect key="frame" x="15" y="15" width="278" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="pOZ-qp-MSk"/>
+                                            </constraints>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system" title="Search in this area">
                                                 <fontDescription key="titleFontDescription" type="system" pointSize="16"/>
@@ -1667,19 +1663,11 @@
                                                 <action selector="didTapSearch:" destination="s0O-lO-7wb" eventType="touchUpInside" id="H5T-RE-GdV"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LSk-W7-TaQ">
-                                            <rect key="frame" x="167" y="325.5" width="80" height="27.5"/>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" title="Let's go!"/>
-                                            <connections>
-                                                <action selector="didTapSearch:" destination="s0O-lO-7wb" eventType="touchUpInside" id="FmT-K7-Xhh"/>
-                                                <action selector="didTapSearch:" destination="ABc-aj-dnq" eventType="touchUpInside" id="cMQ-FF-J1D"/>
-                                            </connections>
-                                        </button>
                                         <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VZ6-1w-5Dv">
-                                            <rect key="frame" x="313" y="19" width="70" height="24.5"/>
+                                            <rect key="frame" x="313" y="15" width="70" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="70" id="13c-c0-N1B"/>
+                                                <constraint firstAttribute="height" constant="30" id="Djg-BT-9tC"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <menu key="menu" id="4K0-V4-w2d">
@@ -1692,33 +1680,49 @@
                                                 <color key="titleColor" name="AccentColor"/>
                                             </state>
                                         </button>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ic7-8z-jgG" customClass="GMSMapView">
+                                            <rect key="frame" x="0.0" y="60" width="414" height="331"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lqd-Op-MxK">
+                                                    <rect key="frame" x="0.0" y="331" width="414" height="100"/>
+                                                    <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="100" id="8hF-7r-7fe"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="lqd-Op-MxK" secondAttribute="trailing" id="BAn-Q6-VnK"/>
+                                                <constraint firstAttribute="bottom" secondItem="lqd-Op-MxK" secondAttribute="bottom" constant="-100" id="dXQ-6D-qpM"/>
+                                                <constraint firstItem="lqd-Op-MxK" firstAttribute="leading" secondItem="Ic7-8z-jgG" secondAttribute="leading" id="f1h-Mq-dWt"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="Ic7-8z-jgG" secondAttribute="trailing" id="20M-J1-1ny"/>
-                                        <constraint firstItem="LSk-W7-TaQ" firstAttribute="top" secondItem="Ic7-8z-jgG" secondAttribute="bottom" constant="12" id="2Gv-uS-a4C"/>
                                         <constraint firstItem="Ic7-8z-jgG" firstAttribute="top" secondItem="dMy-I6-aZb" secondAttribute="bottom" constant="15" id="5Uv-UN-1zk"/>
                                         <constraint firstItem="Ic7-8z-jgG" firstAttribute="leading" secondItem="s0O-lO-7wb" secondAttribute="leading" id="By8-Ig-G6H"/>
-                                        <constraint firstItem="Ic7-8z-jgG" firstAttribute="top" secondItem="VZ6-1w-5Dv" secondAttribute="bottom" constant="20" id="D0G-Uf-XKY"/>
-                                        <constraint firstItem="VZ6-1w-5Dv" firstAttribute="top" secondItem="s0O-lO-7wb" secondAttribute="top" constant="19" id="EFc-2m-mC9"/>
+                                        <constraint firstItem="Ic7-8z-jgG" firstAttribute="top" secondItem="VZ6-1w-5Dv" secondAttribute="bottom" constant="15" id="D0G-Uf-XKY"/>
+                                        <constraint firstItem="VZ6-1w-5Dv" firstAttribute="top" secondItem="s0O-lO-7wb" secondAttribute="top" constant="15" id="EFc-2m-mC9"/>
                                         <constraint firstAttribute="trailing" secondItem="VZ6-1w-5Dv" secondAttribute="trailing" constant="31" id="RdC-Ix-fsn"/>
                                         <constraint firstItem="VZ6-1w-5Dv" firstAttribute="leading" secondItem="dMy-I6-aZb" secondAttribute="trailing" constant="20" id="Udg-al-W42"/>
-                                        <constraint firstAttribute="bottom" secondItem="LSk-W7-TaQ" secondAttribute="bottom" constant="8" id="act-QB-wtV"/>
                                         <constraint firstItem="dMy-I6-aZb" firstAttribute="top" secondItem="s0O-lO-7wb" secondAttribute="top" constant="15" id="bH7-q8-H1q"/>
                                         <constraint firstItem="dMy-I6-aZb" firstAttribute="leading" secondItem="s0O-lO-7wb" secondAttribute="leading" constant="15" id="hip-aH-gXU"/>
-                                        <constraint firstItem="LSk-W7-TaQ" firstAttribute="centerX" secondItem="Ic7-8z-jgG" secondAttribute="centerX" id="nEa-uE-ZGL"/>
+                                        <constraint firstAttribute="bottom" secondItem="Ic7-8z-jgG" secondAttribute="bottom" constant="20" id="ssM-ka-WKj"/>
                                     </constraints>
                                     <connections>
                                         <outlet property="distanceSelectionMenu" destination="4K0-V4-w2d" id="eBa-xU-FVt"/>
                                         <outlet property="map" destination="Ic7-8z-jgG" id="LSU-qL-LXf"/>
+                                        <outlet property="otherView" destination="lqd-Op-MxK" id="GSJ-dS-VQv"/>
                                         <outlet property="placeTypeSelectionMenu" destination="VZ6-1w-5Dv" id="Pog-a1-1ch"/>
-                                        <outlet property="searchAddressButton" destination="LSk-W7-TaQ" id="2AI-fW-BY7"/>
                                         <outlet property="searchEnabledButton" destination="dMy-I6-aZb" id="0uK-bB-55C"/>
                                     </connections>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="RoutineTableViewCell" rowHeight="571" id="mEz-0k-wdQ" customClass="RoutineTableViewCell">
-                                        <rect key="frame" x="0.0" y="405.5" width="414" height="571"/>
+                                        <rect key="frame" x="0.0" y="455.5" width="414" height="571"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mEz-0k-wdQ" id="LtY-3S-ayh">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="571"/>
@@ -1889,7 +1893,7 @@
                         <viewLayoutGuide key="safeArea" id="8Ro-dl-8jV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="eTb-fg-87C" firstAttribute="top" secondItem="8Ro-dl-8jV" secondAttribute="top" id="14l-qh-bNw"/>
+                            <constraint firstItem="eTb-fg-87C" firstAttribute="top" secondItem="8Ro-dl-8jV" secondAttribute="top" id="P8n-0c-L5X"/>
                             <constraint firstItem="8Ro-dl-8jV" firstAttribute="trailing" secondItem="eTb-fg-87C" secondAttribute="trailing" id="X9f-qm-Hi3"/>
                             <constraint firstItem="eTb-fg-87C" firstAttribute="leading" secondItem="8Ro-dl-8jV" secondAttribute="leading" id="iOl-ZP-F1Z"/>
                             <constraint firstItem="8Ro-dl-8jV" firstAttribute="bottom" secondItem="eTb-fg-87C" secondAttribute="bottom" id="nMc-Pp-ydb"/>
@@ -1908,7 +1912,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YEJ-JL-HpB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="ABc-aj-dnq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-923.1884057971015" y="2246.6517857142858"/>
         </scene>
@@ -2244,6 +2247,9 @@
         </systemColor>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondarySystemGroupedBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
