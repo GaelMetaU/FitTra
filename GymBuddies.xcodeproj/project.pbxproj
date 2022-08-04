@@ -41,6 +41,7 @@
 		8E832E9B287F4B9200BF0024 /* CommonValidations.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E832E9A287F4B9200BF0024 /* CommonValidations.m */; };
 		8E832EA12880B1D000BF0024 /* AddExerciseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E832EA02880B1D000BF0024 /* AddExerciseTableViewCell.m */; };
 		8ECB3C9E289B172F00C03DD4 /* DetailedPlaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ECB3C9D289B172F00C03DD4 /* DetailedPlaceView.m */; };
+		8ECB3CA3289BA3B800C03DD4 /* GoogleLicenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ECB3CA2289BA3B800C03DD4 /* GoogleLicenseViewController.m */; };
 		8EF8226428820CCE0000DED9 /* AlertCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF8226328820CCE0000DED9 /* AlertCreator.m */; };
 		8EF822672885E5FF0000DED9 /* ExerciseInCreateRoutineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF822662885E5FF0000DED9 /* ExerciseInCreateRoutineTableViewCell.m */; };
 		8EF8226A28861F9A0000DED9 /* ExerciseInRoutine.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF8226928861F9A0000DED9 /* ExerciseInRoutine.m */; };
@@ -135,6 +136,8 @@
 		8E832EA02880B1D000BF0024 /* AddExerciseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddExerciseTableViewCell.m; sourceTree = "<group>"; };
 		8ECB3C9C289B172F00C03DD4 /* DetailedPlaceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailedPlaceView.h; sourceTree = "<group>"; };
 		8ECB3C9D289B172F00C03DD4 /* DetailedPlaceView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailedPlaceView.m; sourceTree = "<group>"; };
+		8ECB3CA1289BA3B800C03DD4 /* GoogleLicenseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleLicenseViewController.h; sourceTree = "<group>"; };
+		8ECB3CA2289BA3B800C03DD4 /* GoogleLicenseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoogleLicenseViewController.m; sourceTree = "<group>"; };
 		8EF8226228820CCE0000DED9 /* AlertCreator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertCreator.h; sourceTree = "<group>"; };
 		8EF8226328820CCE0000DED9 /* AlertCreator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertCreator.m; sourceTree = "<group>"; };
 		8EF822652885E5FF0000DED9 /* ExerciseInCreateRoutineTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExerciseInCreateRoutineTableViewCell.h; sourceTree = "<group>"; };
@@ -251,18 +254,12 @@
 		8E70893A28777BD2008B4238 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8ECB3CA0289BA38C00C03DD4 /* MainTabs */,
+				8ECB3C9F289BA36D00C03DD4 /* DetailedViews */,
 				8E72DEE92890B4BB00605018 /* Create */,
 				8E72DEE82890B48600605018 /* Authentication */,
-				8E7089452878DD81008B4238 /* HomeViewController.h */,
-				8E7089462878DD81008B4238 /* HomeViewController.m */,
-				8E70894F2878EBFE008B4238 /* ProfileViewController.h */,
-				8E7089502878EBFE008B4238 /* ProfileViewController.m */,
-				8E72DEDF2890520000605018 /* RoutineDetailsViewController.h */,
-				8E72DEE02890520000605018 /* RoutineDetailsViewController.m */,
-				8E72DEEA2890B6B600605018 /* ExerciseDetailsViewController.h */,
-				8E72DEEB2890B6B600605018 /* ExerciseDetailsViewController.m */,
-				8E72DEED2892EC5700605018 /* SearchViewController.h */,
-				8E72DEEE2892EC5700605018 /* SearchViewController.m */,
+				8ECB3CA1289BA3B800C03DD4 /* GoogleLicenseViewController.h */,
+				8ECB3CA2289BA3B800C03DD4 /* GoogleLicenseViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -356,6 +353,30 @@
 				8E72DEE328905E3900605018 /* RoutineDetailsExerciseTableViewCell.m */,
 			);
 			path = ViewCells;
+			sourceTree = "<group>";
+		};
+		8ECB3C9F289BA36D00C03DD4 /* DetailedViews */ = {
+			isa = PBXGroup;
+			children = (
+				8E72DEEB2890B6B600605018 /* ExerciseDetailsViewController.m */,
+				8E72DEEA2890B6B600605018 /* ExerciseDetailsViewController.h */,
+				8E72DEE02890520000605018 /* RoutineDetailsViewController.m */,
+				8E72DEDF2890520000605018 /* RoutineDetailsViewController.h */,
+			);
+			path = DetailedViews;
+			sourceTree = "<group>";
+		};
+		8ECB3CA0289BA38C00C03DD4 /* MainTabs */ = {
+			isa = PBXGroup;
+			children = (
+				8E7089452878DD81008B4238 /* HomeViewController.h */,
+				8E7089462878DD81008B4238 /* HomeViewController.m */,
+				8E70894F2878EBFE008B4238 /* ProfileViewController.h */,
+				8E7089502878EBFE008B4238 /* ProfileViewController.m */,
+				8E72DEED2892EC5700605018 /* SearchViewController.h */,
+				8E72DEEE2892EC5700605018 /* SearchViewController.m */,
+			);
+			path = MainTabs;
 			sourceTree = "<group>";
 		};
 		E499C126898E599EA521D5A1 /* Frameworks */ = {
@@ -654,6 +675,7 @@
 				8E7089512878EBFE008B4238 /* ProfileViewController.m in Sources */,
 				8E708961287CEF40008B4238 /* BodyZone.m in Sources */,
 				8E72DEDA288F17BA00605018 /* RoutineTableViewCell.m in Sources */,
+				8ECB3CA3289BA3B800C03DD4 /* GoogleLicenseViewController.m in Sources */,
 				8E10A457288887A700DA1D9A /* GoogleMapsView.m in Sources */,
 				8E708964287CEF5A008B4238 /* Exercise.m in Sources */,
 				8ECB3C9E289B172F00C03DD4 /* DetailedPlaceView.m in Sources */,

@@ -46,7 +46,7 @@ static NSString * const kLongitudeAttributeKey = @"lng";
     self.map.delegate = self;
     self.currentPlaceTypeSearch = kPlaceTypePark;
     [self.map bringSubviewToFront:self.placeView];
-
+    [self bringSubviewToFront:self.showLicenseButton];
 
     // Setting map's camera based on current location
     self.currentLocation = self.manager.location.coordinate;

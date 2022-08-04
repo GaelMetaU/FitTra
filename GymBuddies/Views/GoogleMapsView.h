@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *searchEnabledButton;
 @property (weak, nonatomic) IBOutlet UIButton *placeTypeSelectionMenu;
 @property (weak, nonatomic) IBOutlet UIButton *distanceSelectionMenu;
+@property (weak, nonatomic) IBOutlet UIButton *showLicenseButton;
 @property (weak, nonatomic) IBOutlet DetailedPlaceView *placeView;
 @property (strong, nonatomic) NSString *currentSearchAddress;
 @property (nonatomic) double searchRadius;
