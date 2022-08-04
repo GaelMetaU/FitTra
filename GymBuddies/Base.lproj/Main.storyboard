@@ -1725,12 +1725,12 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMy-I6-aZb">
-                                            <rect key="frame" x="15" y="13" width="278" height="34"/>
+                                            <rect key="frame" x="15" y="13" width="248" height="34"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="34" id="pOZ-qp-MSk"/>
                                             </constraints>
                                             <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="gray" image="magnifyingglass" catalog="system" title="Search in this area">
+                                            <buttonConfiguration key="configuration" style="gray" image="mappin" catalog="system" title="Search in this area">
                                                 <fontDescription key="titleFontDescription" type="system" pointSize="16"/>
                                             </buttonConfiguration>
                                             <connections>
@@ -1738,9 +1738,9 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VZ6-1w-5Dv">
-                                            <rect key="frame" x="313" y="15" width="70" height="30"/>
+                                            <rect key="frame" x="283" y="15" width="100" height="30"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="70" id="13c-c0-N1B"/>
+                                                <constraint firstAttribute="width" constant="100" id="13c-c0-N1B"/>
                                                 <constraint firstAttribute="height" constant="30" id="Djg-BT-9tC"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -2356,8 +2356,8 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="bookmark" catalog="system" width="112" height="128"/>
-        <image name="camera" catalog="system" width="128" height="94"/>
         <image name="camera" width="752" height="752"/>
+        <image name="camera" catalog="system" width="128" height="94"/>
         <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="default" width="1003" height="1003"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
@@ -2366,6 +2366,7 @@
         <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="map.fill" catalog="system" width="128" height="110"/>
+        <image name="mappin" catalog="system" width="105" height="128"/>
         <image name="pause.fill" catalog="system" width="116" height="128"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="plus.circle" catalog="system" width="128" height="121"/>
