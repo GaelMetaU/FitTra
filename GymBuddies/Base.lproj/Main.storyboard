@@ -1646,17 +1646,18 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eTb-fg-87C">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="s0O-lO-7wb" customClass="GoogleMapsView">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="411"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMy-I6-aZb">
-                                            <rect key="frame" x="15" y="15" width="278" height="30"/>
+                                            <rect key="frame" x="15" y="13" width="278" height="34"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="pOZ-qp-MSk"/>
+                                                <constraint firstAttribute="height" constant="34" id="pOZ-qp-MSk"/>
                                             </constraints>
                                             <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system" title="Search in this area">
+                                            <buttonConfiguration key="configuration" style="gray" image="magnifyingglass" catalog="system" title="Search in this area">
                                                 <fontDescription key="titleFontDescription" type="system" pointSize="16"/>
                                             </buttonConfiguration>
                                             <connections>
@@ -1710,7 +1711,7 @@
                                                             </connections>
                                                         </button>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="100" id="8hF-7r-7fe"/>
                                                         <constraint firstItem="hBg-HK-Acb" firstAttribute="leading" secondItem="lqd-Op-MxK" secondAttribute="leading" constant="20" symbolic="YES" id="AP3-hT-i5O"/>
@@ -1737,17 +1738,37 @@
                                                 <constraint firstItem="lqd-Op-MxK" firstAttribute="leading" secondItem="Ic7-8z-jgG" secondAttribute="leading" constant="10" id="f1h-Mq-dWt"/>
                                             </constraints>
                                         </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d6o-aa-Pkl">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
+                                            <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" id="fRR-Ng-vXS"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oNV-iW-q1n">
+                                            <rect key="frame" x="0.0" y="405" width="414" height="1"/>
+                                            <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" id="VJG-1X-r5R"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="d6o-aa-Pkl" secondAttribute="trailing" id="1Zh-EO-XZG"/>
                                         <constraint firstAttribute="trailing" secondItem="Ic7-8z-jgG" secondAttribute="trailing" id="20M-J1-1ny"/>
-                                        <constraint firstItem="Ic7-8z-jgG" firstAttribute="top" secondItem="dMy-I6-aZb" secondAttribute="bottom" constant="15" id="5Uv-UN-1zk"/>
+                                        <constraint firstItem="Ic7-8z-jgG" firstAttribute="top" secondItem="dMy-I6-aZb" secondAttribute="bottom" constant="13" id="5Uv-UN-1zk"/>
+                                        <constraint firstItem="d6o-aa-Pkl" firstAttribute="leading" secondItem="s0O-lO-7wb" secondAttribute="leading" id="5YB-My-kbF"/>
+                                        <constraint firstItem="oNV-iW-q1n" firstAttribute="leading" secondItem="s0O-lO-7wb" secondAttribute="leading" id="5xo-A8-lIj"/>
                                         <constraint firstItem="Ic7-8z-jgG" firstAttribute="leading" secondItem="s0O-lO-7wb" secondAttribute="leading" id="By8-Ig-G6H"/>
                                         <constraint firstItem="Ic7-8z-jgG" firstAttribute="top" secondItem="VZ6-1w-5Dv" secondAttribute="bottom" constant="15" id="D0G-Uf-XKY"/>
                                         <constraint firstItem="VZ6-1w-5Dv" firstAttribute="top" secondItem="s0O-lO-7wb" secondAttribute="top" constant="15" id="EFc-2m-mC9"/>
+                                        <constraint firstItem="d6o-aa-Pkl" firstAttribute="top" secondItem="s0O-lO-7wb" secondAttribute="top" id="HgP-ui-qUl"/>
+                                        <constraint firstAttribute="bottom" secondItem="oNV-iW-q1n" secondAttribute="bottom" constant="5" id="RWH-xf-TaG"/>
                                         <constraint firstAttribute="trailing" secondItem="VZ6-1w-5Dv" secondAttribute="trailing" constant="31" id="RdC-Ix-fsn"/>
                                         <constraint firstItem="VZ6-1w-5Dv" firstAttribute="leading" secondItem="dMy-I6-aZb" secondAttribute="trailing" constant="20" id="Udg-al-W42"/>
-                                        <constraint firstItem="dMy-I6-aZb" firstAttribute="top" secondItem="s0O-lO-7wb" secondAttribute="top" constant="15" id="bH7-q8-H1q"/>
+                                        <constraint firstItem="dMy-I6-aZb" firstAttribute="top" secondItem="s0O-lO-7wb" secondAttribute="top" constant="13" id="bH7-q8-H1q"/>
+                                        <constraint firstAttribute="trailing" secondItem="oNV-iW-q1n" secondAttribute="trailing" id="bWA-59-dIK"/>
                                         <constraint firstItem="dMy-I6-aZb" firstAttribute="leading" secondItem="s0O-lO-7wb" secondAttribute="leading" constant="15" id="hip-aH-gXU"/>
                                         <constraint firstAttribute="bottom" secondItem="Ic7-8z-jgG" secondAttribute="bottom" constant="20" id="ssM-ka-WKj"/>
                                     </constraints>
@@ -2293,6 +2314,9 @@
         </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
