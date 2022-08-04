@@ -9,7 +9,6 @@
 #import "AVKit/AVKit.h"
 #import "AVFoundation/AVFoundation.h"
 #import "MobileCoreServices/MobileCoreServices.h"
-#import "Parse/Parse.h"
 #import "Parse/PFImageView.h"
 #import "ParseAPIManager.h"
 #import "CommonValidations.h"
