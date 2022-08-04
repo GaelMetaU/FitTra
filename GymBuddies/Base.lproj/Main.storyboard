@@ -684,11 +684,33 @@
                                                 <segment title="EXPERT"/>
                                             </segments>
                                         </segmentedControl>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vZG-G9-OIH">
+                                            <rect key="frame" x="20" y="168" width="374" height="100"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Here are the body targets of your routine!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8oe-Mw-7C2">
+                                                    <rect key="frame" x="87" y="31" width="200" height="38.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="200" id="WXz-eY-lSu"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <constraints>
+                                                <constraint firstItem="8oe-Mw-7C2" firstAttribute="centerX" secondItem="vZG-G9-OIH" secondAttribute="centerX" id="B4r-jm-wEf"/>
+                                                <constraint firstItem="8oe-Mw-7C2" firstAttribute="centerY" secondItem="vZG-G9-OIH" secondAttribute="centerY" id="jon-8D-iVz"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstItem="ZiX-E1-lai" firstAttribute="top" secondItem="fkf-Hc-nNO" secondAttribute="top" constant="20" id="4dB-5x-g6h"/>
+                                        <constraint firstItem="vZG-G9-OIH" firstAttribute="centerY" secondItem="vJ3-vh-dyQ" secondAttribute="centerY" id="8JS-hd-B6L"/>
+                                        <constraint firstItem="vZG-G9-OIH" firstAttribute="height" secondItem="vJ3-vh-dyQ" secondAttribute="height" id="BRl-r4-gT6"/>
                                         <constraint firstItem="fLT-bt-cwe" firstAttribute="top" secondItem="EAe-3l-9Dl" secondAttribute="bottom" constant="5" id="NNr-16-YH9"/>
+                                        <constraint firstItem="vZG-G9-OIH" firstAttribute="leading" secondItem="fkf-Hc-nNO" secondAttribute="leading" constant="20" symbolic="YES" id="OZG-F3-aVa"/>
                                         <constraint firstAttribute="trailing" secondItem="fNz-bG-nUJ" secondAttribute="trailing" constant="35" id="Rlw-kt-3W5"/>
                                         <constraint firstItem="mRh-JM-4Wt" firstAttribute="leading" secondItem="fkf-Hc-nNO" secondAttribute="leading" constant="35" id="TOt-1a-aLA"/>
                                         <constraint firstAttribute="trailing" secondItem="mRh-JM-4Wt" secondAttribute="trailing" constant="35" id="UXB-ZK-sQr"/>
@@ -706,6 +728,7 @@
                                         <constraint firstItem="fNz-bG-nUJ" firstAttribute="leading" secondItem="fkf-Hc-nNO" secondAttribute="leading" constant="35" id="rIO-dA-OIv"/>
                                         <constraint firstItem="vJ3-vh-dyQ" firstAttribute="leading" secondItem="fkf-Hc-nNO" secondAttribute="leading" constant="20" symbolic="YES" id="uY9-MD-Zti"/>
                                         <constraint firstAttribute="trailing" secondItem="EAe-3l-9Dl" secondAttribute="trailing" constant="20" id="xrK-be-9vF"/>
+                                        <constraint firstAttribute="trailing" secondItem="vZG-G9-OIH" secondAttribute="trailing" constant="20" symbolic="YES" id="zYr-Dp-yw9"/>
                                     </constraints>
                                 </view>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="DdR-Dk-7zz">
@@ -727,7 +750,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <constraints>
                                         <constraint firstItem="wKI-6B-sKc" firstAttribute="centerX" secondItem="DdR-Dk-7zz" secondAttribute="centerX" id="1U4-qG-fdD"/>
                                         <constraint firstItem="wKI-6B-sKc" firstAttribute="centerY" secondItem="DdR-Dk-7zz" secondAttribute="centerY" id="HrT-7i-NYH"/>
@@ -869,6 +892,7 @@
                     <connections>
                         <outlet property="captionField" destination="fLT-bt-cwe" id="WfP-7G-unC"/>
                         <outlet property="collectionView" destination="vJ3-vh-dyQ" id="DDt-LH-SDq"/>
+                        <outlet property="collectionViewAlternateView" destination="vZG-G9-OIH" id="930-km-fm0"/>
                         <outlet property="doneButton" destination="7d9-fS-kgI" id="JUL-el-LDC"/>
                         <outlet property="routineImage" destination="ZiX-E1-lai" id="0zd-QH-sFq"/>
                         <outlet property="tableView" destination="QVi-6L-d8L" id="soK-wD-0Hm"/>
@@ -884,7 +908,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="387" y="2971"/>
+            <point key="canvasLocation" x="386.95652173913044" y="2970.5357142857142"/>
         </scene>
         <!--Add Exercise View Controller-->
         <scene sceneID="zo9-BX-arA">
