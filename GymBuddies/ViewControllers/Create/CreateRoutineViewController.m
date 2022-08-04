@@ -28,6 +28,7 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 @property (weak, nonatomic) IBOutlet UISegmentedControl *trainingLevelSegmentedControl;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *workoutPlaceSegmentedControl;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
+@property (weak, nonatomic) IBOutlet UIView *collectionViewAlternateView;
 @property (strong, nonatomic) Routine *routine;
 @property (strong, nonatomic) UIImagePickerController *mediaPicker;
 @end
@@ -55,6 +56,7 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.layer.cornerRadius = 10;
+    self.collectionViewAlternateView.layer.cornerRadius = 10;
 }
 
 
@@ -64,13 +66,13 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
     
     self.doneButton.userInteractionEnabled = NO;
     
-    if(self.exerciseList.count == 0){
+    if (self.exerciseList.count == 0){
         UIAlertController *alert = [AlertCreator createOkAlert:@"There are no exercises" message:@"Add some exercises to your routine"];
         [self presentViewController:alert animated:YES completion:nil];
         return;
     }
     
-    if(self.routineImage == nil){
+    if (self.routineImage == nil){
         UIAlertController *alert = [AlertCreator createOkAlert:@"Add a photo" message:@"Don't be shy! Add a photo for your routine"];
         [self presentViewController:alert animated:YES completion:nil];
         return;
@@ -81,10 +83,10 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
     [self _collectUserInputFields];
     
     [ParseAPIManager postRoutine:self.routine completion:^(BOOL succeeded, NSError * _Nonnull error) {
-        if(!succeeded){
+        if (!succeeded){
             UIAlertController *alert = [AlertCreator createOkAlert:@"Error saving routine" message:error.localizedDescription];
             [self presentViewController:alert animated:YES completion:nil];
-        } else{
+        } else {
             [self _resetScreen];
             [self dismissViewControllerAnimated:YES completion:nil];
         }
@@ -93,7 +95,7 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 }
 
 // Retrieves and standarizes all user input fields and adds them to the routine object
--(void)_collectUserInputFields{
+- (void)_collectUserInputFields{
     NSString *caption = [CommonValidations standardizeUserAuthInput:self.captionField.text];
 
     TrainingLevels trainingLevel = [self.trainingLevelSegmentedControl selectedSegmentIndex];
@@ -106,10 +108,10 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 }
 
 // Retrieves the data sources and user to add the to the routine object
--(void)_collectDataSources{
+- (void)_collectDataSources{
     NSMutableArray *exercisesToUpload = [[NSMutableArray alloc]init];
-    for(ExerciseInCreateRoutineTableViewCell *cell in self.tableView.visibleCells){
-        if([cell.reuseIdentifier isEqualToString: @"ExerciseInCreateRoutineTableViewCell"]){
+    for (ExerciseInCreateRoutineTableViewCell *cell in self.tableView.visibleCells){
+        if ([cell.reuseIdentifier isEqualToString: @"ExerciseInCreateRoutineTableViewCell"]){
             [exercisesToUpload addObject:cell.exerciseInRoutine];
         }
     }
@@ -119,7 +121,7 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 }
 
 // Clears off all fields after completing a post
--(void)_resetScreen{
+- (void)_resetScreen{
     self.captionField.text = @"";
     
     self.trainingLevelSegmentedControl.selectedSegmentIndex = TrainingLevelBeginner;
@@ -135,7 +137,7 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 
 #pragma mark - Tap gesture handler
 
--(void)singleTap{
+- (void)singleTap{
     [self.view endEditing:YES];
 }
 
@@ -165,6 +167,7 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 #pragma mark - Collection view methods
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    self.collectionViewAlternateView.hidden = !(self.bodyZoneList.count == 0);
     return self.bodyZoneList.count;
 }
 
@@ -215,7 +218,7 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 }
 
 
--(BOOL) isInBodyZoneList:(BodyZone *)newBodyZone{
+- (BOOL) isInBodyZoneList:(BodyZone *)newBodyZone{
     for(BodyZone *bodyZone in self.bodyZoneList){
         if([bodyZone.title isEqualToString:newBodyZone.title]){
             return true;
@@ -225,7 +228,7 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 }
 
 
--(void) updateBodyZones{
+- (void) updateBodyZones{
     [self.bodyZoneList removeAllObjects];
     for(ExerciseInRoutine *exerciseInRoutine in self.exerciseList){
         if(![self isInBodyZoneList:exerciseInRoutine.baseExercise.bodyZoneTag]){
@@ -246,6 +249,4 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
     }
 }
 
-- (IBAction)settingsPullDownButton:(id)sender {
-}
 @end
