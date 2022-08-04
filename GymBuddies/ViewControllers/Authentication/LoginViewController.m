@@ -11,6 +11,9 @@
 #import "SceneDelegate.h"
 #import "AlertCreator.h"
 
+static NSString * const kAppTabControllerIdentifier = @"AppTabController";
+static NSString * const kMainStoryboardName = @"Main";
+
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
@@ -28,20 +31,22 @@
 
 - (IBAction)didTapLogin:(id)sender {
     
-    if(![self _lookForEmptyFields]){
+    if (![self _lookForEmptyFields]){
         NSString *username = self.usernameField.text;
         NSString *password = self.passwordField.text;
         
-        
+        __weak __typeof(self) weakSelf = self;
+        UIView *rootView = self.view;
         [ParseAPIManager logIn:username password:password completion:^(PFUser * user, NSError *  error){
+            __strong __typeof(self) strongSelf = weakSelf;
             if (error != nil) {
                 UIAlertController *alert = [AlertCreator createOkAlert:@"Error logging in" message:error.localizedDescription];
-                [self presentViewController:alert animated:YES completion:nil];
+                [strongSelf presentViewController:alert animated:YES completion:nil];
             }
             else {
-                SceneDelegate *delegate = (SceneDelegate *)self.view.window.windowScene.delegate;
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                delegate.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"AppTabController"];
+                SceneDelegate *delegate = (SceneDelegate *)rootView.window.windowScene.delegate;
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kMainStoryboardName bundle:nil];
+                delegate.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:kAppTabControllerIdentifier];
             }
         }];
     }

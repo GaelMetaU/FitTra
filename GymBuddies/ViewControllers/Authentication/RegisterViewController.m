@@ -11,6 +11,12 @@
 #import "CommonValidations.h"
 #import "AlertCreator.h"
 
+static NSString * const kEmailKey = @"email";
+static NSString * const kPasswordKey = @"password";
+static NSString * const kUsernameKey = @"username";
+static NSString * const kTrainingLevelKey = @"trainingLevel";
+static NSString * const kWorkoutPlaceKey = @"workoutPlace";
+
 @interface RegisterViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
@@ -25,6 +31,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap)];
+    [self.view addGestureRecognizer:tap];
+}
+
+
+- (void)singleTap{
+    [self.view endEditing:YES];
 }
 
 
@@ -37,13 +50,13 @@
     NSString *password = [CommonValidations standardizeUserAuthInput:self.passwordField.text];
     NSString *confirmPassword = [CommonValidations standardizeUserAuthInput:self.confirmPasswordField.text];
     
-    if([self _lookForEmptyFields:username email:email password:password confirmPassword:confirmPassword]){
+    if ([self _lookForEmptyFields:username email:email password:password confirmPassword:confirmPassword]){
         UIAlertController *alert = [AlertCreator createOkAlert:@"Empty field(s)" message:@"There is one or more empty fields"];
         [self presentViewController:alert animated:YES completion:nil];
         return;
     }
     
-    if(![self _checkPasswordsMatching]){
+    if (![self _checkPasswordsMatching]){
         UIAlertController *alert = [AlertCreator createOkAlert:@"Password not matching" message:@"Make sure both passwords you provide are the same"];
         [self presentViewController:alert animated:YES completion:nil];
         return;
@@ -54,17 +67,21 @@
     WorkoutPlace place = [self.workoutPlaceControl selectedSegmentIndex];
     
     PFUser *user = [[PFUser alloc]init];
-    user[@"email"] = email;
-    user[@"username"] = username;
-    user[@"password"] = password;
-    user[@"trainingLevel"] = [NSNumber numberWithLong:level];
-    user[@"workoutPlace"] = [NSNumber numberWithLong:place];
+    user[kEmailKey] = email;
+    user[kUsernameKey] = username;
+    user[kPasswordKey] = password;
+    user[kTrainingLevelKey] = [NSNumber numberWithLong:level];
+    user[kWorkoutPlaceKey] = [NSNumber numberWithLong:place];
     
+    __weak __typeof(self) weakSelf = self;
+    UINavigationController *navigationController = self.navigationController;
     [ParseAPIManager signUp:user completion:^(BOOL succeeded, NSError * _Nonnull error) {
-        if(error != nil){
+        __strong __typeof(self) strongSelf = weakSelf;
+        if (error != nil){
             UIAlertController *alert = [AlertCreator createOkAlert:@"Error registering" message:error.localizedDescription];
-            [self presentViewController:alert animated:YES completion:nil];        } else {
-            [self.navigationController popViewControllerAnimated:YES];
+            [strongSelf presentViewController:alert animated:YES completion:nil];
+        } else {
+            [navigationController popViewControllerAnimated:YES];
         }
     }];
     
@@ -77,13 +94,11 @@
                       email:(NSString *)email
                    password:(NSString *)password
             confirmPassword:(NSString *)confirmPassword {
-    
     return (username.length == 0 || password.length == 0 || confirmPassword == 0 || email.length == 0);
-
 }
 
 
--(BOOL)_checkPasswordsMatching{
+- (BOOL)_checkPasswordsMatching{
     NSString *password = self.passwordField.text;
     NSString *confirmPassword = self.confirmPasswordField.text;
     
