@@ -116,9 +116,13 @@ static NSString * const kSearchGymsActionTitle = @" Gyms";
 }
 
 
+#pragma mark - Place detailed view methods
+
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker{
     [self.placeView getPlaceInfo:marker.snippet];
     [self animatePlaceView:YES];
+    GMSCameraUpdate *cameraLookingAtMarker = [GMSCameraUpdate setTarget:marker.position];
+    [self.map animateWithCameraUpdate:cameraLookingAtMarker];
     return YES;
 }
 
