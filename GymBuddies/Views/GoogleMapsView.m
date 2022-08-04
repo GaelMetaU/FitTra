@@ -7,13 +7,27 @@
 
 #import "GoogleMapsView.h"
 
-static NSString * const kPlaceTypePark = @"park";
-static NSString * const kPlaceTypeGym = @"gym";
-static float const kMapCameraZoom = 13.0;
-static double const kAnimationDuration = 0.3;
-
 static NSString * const kSearchParksActionTitle = @" Parks";
 static NSString * const kSearchGymsActionTitle = @" Gyms";
+static NSString * const kPlaceTypePark = @"park";
+static NSString * const kPlaceTypeGym = @"gym";
+
+static float const kMapCameraZoom = 13.0;
+
+static double const kAnimationDuration = 0.3;
+static NSString *kAnimationKeyPath = @"position.y";
+
+static NSString * const kKeysFilePath = @"../Keys";
+static NSString * const kPlistType = @"plist";
+static NSString * const kGoogleMapsAPIKeyPath = @"googleAPIKey";
+static NSString * const kNearbyPlacesSearchBaseURL = @"https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
+static NSString * const kResultsKey = @"results";
+
+static NSString * const kPlaceIdAttributeKey = @"place_id";
+static NSString * const kGeometryAttributeKey = @"geometry";
+static NSString * const kLocationAttributeKey = @"location";
+static NSString * const kLatitudeAttributeKey = @"lat";
+static NSString * const kLongitudeAttributeKey = @"lng";
 
 
 @implementation GoogleMapsView
@@ -105,11 +119,11 @@ static NSString * const kSearchGymsActionTitle = @" Gyms";
     [self.markers removeAllObjects];
     
     for(NSDictionary *place in self.placesResults){
-        CLLocationDegrees latitude = [place[@"geometry"][@"location"][@"lat"] doubleValue];
-        CLLocationDegrees longitude = [place[@"geometry"][@"location"][@"lng"] doubleValue];
+        CLLocationDegrees latitude = [place[kGeometryAttributeKey][kLocationAttributeKey][kLatitudeAttributeKey] doubleValue];
+        CLLocationDegrees longitude = [place[kGeometryAttributeKey][kLocationAttributeKey][kLongitudeAttributeKey] doubleValue];
         CLLocationCoordinate2D position = CLLocationCoordinate2DMake(latitude, longitude);
         GMSMarker *marker = [GMSMarker markerWithPosition:position];
-        marker.snippet = place[@"place_id"];
+        marker.snippet = place[kPlaceIdAttributeKey];
         marker.map = self.map;
         [self.markers addObject:marker];
     }
@@ -156,7 +170,7 @@ static NSString * const kSearchGymsActionTitle = @" Gyms";
         newBottomConstraint = -100;
     }
     // Setting animation properties
-    CABasicAnimation *animateDetailedView = [CABasicAnimation animationWithKeyPath:@"position.y"];
+    CABasicAnimation *animateDetailedView = [CABasicAnimation animationWithKeyPath:kAnimationKeyPath];
     [animateDetailedView setToValue: [NSNumber numberWithDouble:currentOriginPosition + offset]];
     animateDetailedView.fillMode = kCAFillModeForwards;
     animateDetailedView.removedOnCompletion = NO;
@@ -170,7 +184,7 @@ static NSString * const kSearchGymsActionTitle = @" Gyms";
         [self.placeView layoutIfNeeded];
         
     }];
-    [self.placeView.layer addAnimation:animateDetailedView forKey:@"position.y"];
+    [self.placeView.layer addAnimation:animateDetailedView forKey:kAnimationKeyPath];
     [CATransaction commit];
     // Moving map buttons
     [UIView animateWithDuration:kAnimationDuration animations:^{
@@ -185,14 +199,14 @@ static NSString * const kSearchGymsActionTitle = @" Gyms";
 
 -(void)fetchPlacesNearby:(void (^)(NSArray * results, NSError * error))completion{
     // Retrieving Google API key
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"../Keys" ofType:@"plist"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:kKeysFilePath ofType:kPlistType];
     NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
-    NSString *googleAPIKey = [dict objectForKey:@"googleAPIKey"];
+    NSString *googleAPIKey = [dict objectForKey:kGoogleMapsAPIKeyPath];
     
     [self getVisibleViewRadius];
     
     //Creating request URL using the keys, location and type of place to search
-    NSString *baseURL = [NSString stringWithFormat: @"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f%%2C%f&radius=%f&key=%@&type=%@", self.mapCenterView.latitude, self.mapCenterView.longitude, self.searchRadius, googleAPIKey, self.currentPlaceTypeSearch];
+    NSString *baseURL = [NSString stringWithFormat: @"%@location=%f%%2C%f&radius=%f&key=%@&type=%@", kNearbyPlacesSearchBaseURL, self.mapCenterView.latitude, self.mapCenterView.longitude, self.searchRadius, googleAPIKey, self.currentPlaceTypeSearch];
     
     NSURL *URLRequest = [NSURL URLWithString:baseURL];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URLRequest cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0];
@@ -202,7 +216,7 @@ static NSString * const kSearchGymsActionTitle = @" Gyms";
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error == nil) {
                 NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-                NSArray *places = [responseDictionary valueForKey:@"results"];
+                NSArray *places = [responseDictionary valueForKey:kResultsKey];
                 completion(places, error);
             }
         });
