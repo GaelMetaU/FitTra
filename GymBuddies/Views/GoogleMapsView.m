@@ -192,7 +192,7 @@ static NSString * const kSearchGymsActionTitle = @" Gyms";
     [self getVisibleViewRadius];
     
     //Creating request URL using the keys, location and type of place to search
-    NSString *baseURL = [NSString stringWithFormat: @"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f%%2C%f&radius=%f&key=%@&type=%@", self.currentLocation.latitude, self.currentLocation.longitude, self.searchRadius, googleAPIKey, self.currentPlaceTypeSearch];
+    NSString *baseURL = [NSString stringWithFormat: @"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f%%2C%f&radius=%f&key=%@&type=%@", self.mapCenterView.latitude, self.mapCenterView.longitude, self.searchRadius, googleAPIKey, self.currentPlaceTypeSearch];
     
     NSURL *URLRequest = [NSURL URLWithString:baseURL];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URLRequest cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0];
@@ -218,15 +218,37 @@ static NSString * const kSearchGymsActionTitle = @" Gyms";
     
     CLLocationCoordinate2D southWest = bounds.southWest;
     CLLocationCoordinate2D northEast = bounds.northEast;
-    
+        
     CLLocation *southWestLocation = [[CLLocation alloc]initWithLatitude:southWest.latitude longitude:southWest.longitude];
     CLLocation *northEastLocation = [[CLLocation alloc]initWithLatitude:northEast.latitude longitude:northEast.longitude];
     CLLocationDistance distance = [southWestLocation distanceFromLocation:northEastLocation];
     
     self.searchRadius = distance / 2;
-    NSLog(@"%f", self.searchRadius);
-
+    
+    [self getMapCenter:southWest northEast:northEast];
 }
 
+
+-(void)getMapCenter:(CLLocationCoordinate2D)southWest
+          northEast:(CLLocationCoordinate2D)northEast{
+        double swRadianLongitude = southWest.longitude * M_PI / 180;
+        double neRadianLongitude = northEast.longitude * M_PI / 180;
+
+        double swRadianLatitude = southWest.latitude * M_PI / 180;
+        double neRadianLatitude = northEast.latitude * M_PI / 180;
+
+        double longitudeDifference = neRadianLongitude - swRadianLongitude;
+
+        double x = cos(neRadianLatitude) * cos(longitudeDifference);
+        double y = cos(neRadianLatitude) * sin(longitudeDifference);
+
+        double centerRadianLatitude = atan2( sin(swRadianLatitude) + sin(neRadianLatitude), sqrt((cos(swRadianLatitude) + x) * (cos(swRadianLatitude) + x) + y * y) );
+        double centerRadianLongitude = swRadianLongitude + atan2(y, cos(swRadianLatitude) + x);
+
+        double centerDegreesLatitude  = centerRadianLatitude * 180 / M_PI;
+        double centerDegreesLongitude = centerRadianLongitude * 180 / M_PI;
+    
+    self.mapCenterView = CLLocationCoordinate2DMake(centerDegreesLatitude, centerDegreesLongitude);
+}
 
 @end

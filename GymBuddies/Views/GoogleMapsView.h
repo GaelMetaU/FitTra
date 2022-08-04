@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet DetailedPlaceView *placeView;
 @property (strong, nonatomic) NSString *currentSearchAddress;
 @property (nonatomic) double searchRadius;
+@property (nonatomic) CLLocationCoordinate2D mapCenterView;
 @property (nonatomic) BOOL isShowingDetails;
 @property (strong, nonatomic) CLLocationManager *manager;
 @property CLLocationCoordinate2D currentLocation;
