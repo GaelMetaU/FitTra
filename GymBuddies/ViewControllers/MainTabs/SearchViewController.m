@@ -60,7 +60,7 @@ static long const kSearchTimerLapse = 0.30;
 #pragma mark - Search bar methods
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-    if(self.timer)
+    if (self.timer)
         {
             [self.timer invalidate];
             self.timer = nil;
@@ -107,7 +107,7 @@ static long const kSearchTimerLapse = 0.30;
 
 
 - (void)changeTrainingLevelFilterStates:(NSString *)actionTitle newFilterValue:(NSNumber *)newFilterValue{
-    for(UIAction *action in self.trainingLevelFilter.menu.children){
+    for (UIAction *action in self.trainingLevelFilter.menu.children){
         if (action.title == actionTitle){
             if (action.state == UIMenuElementStateOn){
                 action.state = UIMenuElementStateOff;
