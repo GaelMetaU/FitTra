@@ -122,8 +122,12 @@ static NSString * const kSearchGymsActionTitle = @" Gyms";
 }
 
 
+-(void)mapView:(GMSMapView *)mapView didTapAtCoordinate:(CLLocationCoordinate2D)coordinate{
+    [self dismissDetails];
+}
+
+
 -(void)showDetails{
-    
     NSNumber *newPosition = [NSNumber new];
 
     if(self.isShowingDetails){
@@ -136,20 +140,56 @@ static NSString * const kSearchGymsActionTitle = @" Gyms";
     [presentDetailedView setToValue: newPosition];
     presentDetailedView.fillMode = kCAFillModeForwards;
     presentDetailedView.removedOnCompletion = NO;
-    presentDetailedView.duration = 0.1;
+    presentDetailedView.duration = 1;
+    presentDetailedView.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     
-    [UIView animateWithDuration:0.1 animations:^{
+    [UIView animateWithDuration:1 animations:^{
         self.map.padding = UIEdgeInsetsMake(0, 0, 100, 0);
     }];
     
+    [CATransaction begin];
+    [CATransaction setCompletionBlock:^{
+        self.placeView.bottomConstraint.constant = 0;
+        [self.placeView setNeedsUpdateConstraints];
+        [self.placeView layoutIfNeeded];
+        
+    }];
     [self.placeView.layer addAnimation:presentDetailedView forKey:@"position.y"];
+    [CATransaction commit];
     
-    
-    self.placeView.bottomConstraint.constant = 0;
-    [self.placeView setNeedsUpdateConstraints];
-    [self.placeView layoutIfNeeded];
     self.isShowingDetails = YES;
+}
 
+
+-(void)dismissDetails{
+    if(!self.isShowingDetails){
+        return;
+    }
+    
+    NSNumber *newPosition = [NSNumber numberWithDouble:self.placeView.frame.origin.y+150];
+    
+    CABasicAnimation *dismissDetailedView = [CABasicAnimation animationWithKeyPath:@"position.y"];
+    [dismissDetailedView setToValue: newPosition];
+    dismissDetailedView.fillMode = kCAFillModeForwards;
+    dismissDetailedView.removedOnCompletion = NO;
+    dismissDetailedView.duration = 1;
+    dismissDetailedView.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    
+    [UIView animateWithDuration:1 animations:^{
+        self.map.padding = UIEdgeInsetsMake(0, 0, 0, 0);
+    }];
+    
+    [CATransaction begin];
+    [CATransaction setCompletionBlock:^{
+        self.placeView.bottomConstraint.constant = -100;
+        [self.placeView setNeedsUpdateConstraints];
+        [self.placeView layoutIfNeeded];
+        
+    }];
+    [self.placeView.layer addAnimation:dismissDetailedView forKey:@"position.y"];
+    [CATransaction commit];
+
+    self.isShowingDetails = NO;
 }
 
 
