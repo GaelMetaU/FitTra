@@ -16,7 +16,7 @@
 #import "ExerciseInCreateRoutineTableViewCell.h"
 #import "ExerciseInRoutine.h"
 
-static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
+static NSString * const kAddExerciseSegueIdentifier = @"AddExerciseSegue";
 
 @interface CreateRoutineViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource, AddExerciseViewControllerDelegate>
 @property (nonatomic, strong) NSMutableArray *exerciseList;
@@ -82,13 +82,15 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
     
     [self _collectUserInputFields];
     
+    __weak __typeof(self) weakSelf = self;
     [ParseAPIManager postRoutine:self.routine completion:^(BOOL succeeded, NSError * _Nonnull error) {
+        __strong __typeof(self) strongSelf = weakSelf;
         if (!succeeded){
             UIAlertController *alert = [AlertCreator createOkAlert:@"Error saving routine" message:error.localizedDescription];
-            [self presentViewController:alert animated:YES completion:nil];
+            [strongSelf presentViewController:alert animated:YES completion:nil];
         } else {
-            [self _resetScreen];
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [strongSelf _resetScreen];
+            [strongSelf dismissViewControllerAnimated:YES completion:nil];
         }
         self.doneButton.userInteractionEnabled = YES;
     }];
@@ -145,7 +147,7 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 #pragma mark - Uploading a photo
 
 - (IBAction)uploadImage:(id)sender {
-    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
         self.mediaPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         self.mediaPicker.mediaTypes = @[(NSString*)kUTTypeImage];
         [self presentViewController:self.mediaPicker animated:YES completion:nil];
@@ -196,7 +198,7 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 
 // Allows user to delete an exercise from the table view by swiping left
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(editingStyle == UITableViewCellEditingStyleDelete){
+    if (editingStyle == UITableViewCellEditingStyleDelete){
         [self.exerciseList removeObjectAtIndex:indexPath.row];
         [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
         [self updateBodyZones];
@@ -206,21 +208,21 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 
 #pragma mark - AddExercise methods
 
-- (void) didAddExercise:(Exercise *)exercise{
+- (void)didAddExercise:(Exercise *)exercise{
     ExerciseInRoutine *exerciseInRoutine = [ExerciseInRoutine initWithExercise:exercise];
     [self.exerciseList addObject:exerciseInRoutine];
     [self.tableView reloadData];
     
-    if(![self isInBodyZoneList:exercise.bodyZoneTag]){
+    if (![self isInBodyZoneList:exercise.bodyZoneTag]){
         [self.bodyZoneList addObject:exercise.bodyZoneTag];
         [self.collectionView reloadData];
     }
 }
 
 
-- (BOOL) isInBodyZoneList:(BodyZone *)newBodyZone{
-    for(BodyZone *bodyZone in self.bodyZoneList){
-        if([bodyZone.title isEqualToString:newBodyZone.title]){
+- (BOOL)isInBodyZoneList:(BodyZone *)newBodyZone{
+    for (BodyZone *bodyZone in self.bodyZoneList){
+        if ([bodyZone.title isEqualToString:newBodyZone.title]){
             return true;
         }
     }
@@ -228,10 +230,10 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 }
 
 
-- (void) updateBodyZones{
+- (void)updateBodyZones{
     [self.bodyZoneList removeAllObjects];
-    for(ExerciseInRoutine *exerciseInRoutine in self.exerciseList){
-        if(![self isInBodyZoneList:exerciseInRoutine.baseExercise.bodyZoneTag]){
+    for (ExerciseInRoutine *exerciseInRoutine in self.exerciseList){
+        if (![self isInBodyZoneList:exerciseInRoutine.baseExercise.bodyZoneTag]){
             [self.bodyZoneList addObject:exerciseInRoutine.baseExercise.bodyZoneTag];
         }
     }
@@ -242,8 +244,8 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    BOOL isAddExerciseSegue = [segue.identifier isEqualToString:ADD_EXERCISE_SEGUE_IDENTIFIER];
-    if(isAddExerciseSegue){
+    BOOL isAddExerciseSegue = [segue.identifier isEqualToString:kAddExerciseSegueIdentifier];
+    if (isAddExerciseSegue){
         AddExerciseViewController *addExerciseViewController = [segue destinationViewController];
         addExerciseViewController.delegate = self;
     }
