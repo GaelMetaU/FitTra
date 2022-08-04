@@ -1090,7 +1090,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="gF0-6R-PuA">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="676"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="3iT-7f-Ndz">
@@ -1347,7 +1347,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c5o-xz-7hu">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="676"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6FG-x1-mtj">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="658"/>
@@ -2129,14 +2129,6 @@
                                                 <constraint firstAttribute="height" constant="1" id="Xc8-Xe-TVr"/>
                                             </constraints>
                                         </view>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cjp-U9-rqK">
-                                            <rect key="frame" x="358" y="8" width="46" height="31"/>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" title="">
-                                                <imageReference key="image" image="gearshape" catalog="system" symbolScale="large"/>
-                                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" scale="large"/>
-                                            </buttonConfiguration>
-                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
@@ -2147,11 +2139,9 @@
                                         <constraint firstItem="G9b-vM-914" firstAttribute="top" secondItem="WOr-mi-xqs" secondAttribute="bottom" constant="20" id="IW6-sL-t5R"/>
                                         <constraint firstItem="n3h-dx-Fjv" firstAttribute="leading" secondItem="bbb-P1-Kaa" secondAttribute="trailing" constant="10" id="MoE-TD-zME"/>
                                         <constraint firstItem="0yr-Ps-wpS" firstAttribute="centerX" secondItem="DqG-kh-uFG" secondAttribute="centerX" id="RBN-0H-n2B"/>
-                                        <constraint firstAttribute="trailing" secondItem="Cjp-U9-rqK" secondAttribute="trailing" constant="10" id="Ym1-f3-gZY"/>
                                         <constraint firstItem="n3h-dx-Fjv" firstAttribute="centerX" secondItem="DqG-kh-uFG" secondAttribute="centerX" id="aYa-ef-1ZF"/>
                                         <constraint firstItem="G9b-vM-914" firstAttribute="leading" secondItem="DqG-kh-uFG" secondAttribute="leading" constant="10" id="cZO-JD-Pee"/>
                                         <constraint firstItem="0yr-Ps-wpS" firstAttribute="top" secondItem="n3h-dx-Fjv" secondAttribute="bottom" constant="8" symbolic="YES" id="kl7-O9-BZl"/>
-                                        <constraint firstItem="Cjp-U9-rqK" firstAttribute="top" secondItem="DqG-kh-uFG" secondAttribute="top" constant="8" id="lF4-9i-3zW"/>
                                         <constraint firstItem="G9b-vM-914" firstAttribute="top" secondItem="bbb-P1-Kaa" secondAttribute="bottom" constant="20" id="sFR-nV-nQ5"/>
                                         <constraint firstItem="WOr-mi-xqs" firstAttribute="top" secondItem="0yr-Ps-wpS" secondAttribute="bottom" constant="20" id="sgM-vP-lGw"/>
                                         <constraint firstItem="n3h-dx-Fjv" firstAttribute="top" secondItem="DqG-kh-uFG" secondAttribute="top" constant="20" id="zDr-8o-Pqu"/>
@@ -2338,6 +2328,17 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="BWa-hM-fGG">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="5yI-ld-Q0C">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Cjp-U9-rqK">
+                                <rect key="frame" x="20" y="8" width="46" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="">
+                                    <imageReference key="image" image="gearshape" catalog="system" symbolScale="large"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" scale="large"/>
+                                </buttonConfiguration>
+                            </button>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="plus.circle" catalog="system" id="hxW-mb-mzu">
                             <connections>
                                 <segue destination="gaX-47-1Ds" kind="presentation" id="edN-lV-PU9"/>
@@ -2377,8 +2378,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Vp9-Pf-db0"/>
-        <segue reference="uLe-wz-Pus"/>
+        <segue reference="AAt-2Z-ce0"/>
+        <segue reference="edN-lV-PU9"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="bookmark" catalog="system" width="112" height="128"/>

@@ -8,7 +8,7 @@
 #import "ParseAPIManager.h"
 
 
-static long const kJPEGCompressionConstant = 0.75;
+static long  const kJPEGCompressionConstant = 0.75;
 
 @implementation ParseAPIManager
 
@@ -17,63 +17,63 @@ static long const kJPEGCompressionConstant = 0.75;
   completion:(ParseManagerAuthenticationCompletionBlock)completion {
 
     ParseManagerAuthenticationCompletionBlock block = ^(PFUser *user, NSError *error) {completion(user,error);};
-    
+
     [PFUser logInWithUsernameInBackground:username password:password block:block];
 }
 
 
 + (void)signUp:(PFUser *)user
     completion:(ParseManagerCreateCompletionBlock)completion{
-    
+
     ParseManagerCreateCompletionBlock block = ^(BOOL succeeded, NSError *error) {completion(succeeded, error);};
-    
+
     [user signUpInBackgroundWithBlock:block];
 }
 
 
-+(void)logOut:(ParseManagerLogOutCompletionBlock) completion{
-    
++(void)logOut:(ParseManagerLogOutCompletionBlock)completion{
+
     ParseManagerLogOutCompletionBlock block = ^void(NSError *errorAPI) {
-        if(errorAPI){
+        if (errorAPI){
             completion(errorAPI);
         }
-        else{
+        else {
             completion(nil);
         }
     };
-    
+
     [PFUser logOutInBackgroundWithBlock:block];
 }
 
 
 +(void)fetchBodyZones:(ParseManagerFetchingDataRowsCompletionBlock) completion{
     PFQuery *query = [PFQuery queryWithClassName:kBodyZoneClass];
-    
+
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
         completion(elements, error);
     };
-    
+
     [query findObjectsInBackgroundWithBlock:block];
 }
 
 
 + (Exercise *)postExercise:(Exercise *)exercise
                   progress:(UIProgressView *)progress
-                completion:(ParseManagerCreateCompletionBlock) completion {
-    
+                completion:(ParseManagerCreateCompletionBlock)completion {
+
     Exercise *newExercise = [Exercise initWithAttributes:exercise.title author:exercise.author video:exercise.video image:exercise.image bodyZoneTag:exercise.bodyZoneTag];
-        
+
     ParseManagerCreateCompletionBlock checkBlock = ^void(BOOL succeeded, NSError * _Nullable error){
         if(error != nil){
             completion(succeeded, error);
             return;
         }
     };
-    
+
     [newExercise.video saveInBackgroundWithBlock:checkBlock progressBlock:^(int percentDone) {
             [progress setProgress: percentDone / 100];
     }];
-    
+
     ParseManagerCreateCompletionBlock finalBlock = ^void(BOOL succeeded, NSError * _Nullable error){
         if (error!=nil){
             completion(false, error);
@@ -81,7 +81,7 @@ static long const kJPEGCompressionConstant = 0.75;
             completion(true, error);
         }
     };
-    
+
     [newExercise saveInBackgroundWithBlock:finalBlock];
 
     [self saveExercise:newExercise completion:checkBlock];
@@ -92,17 +92,17 @@ static long const kJPEGCompressionConstant = 0.75;
 
 + (void)saveExercise:(Exercise *)exercise completion:(ParseManagerCreateCompletionBlock)completion{
     PFObject *savedExercise = [PFObject objectWithClassName:kSavedExerciseClass];
-    
+
     savedExercise[kAuthorAttributeKey] = exercise.author;
     savedExercise[kRoutineAttributeKey] = exercise;
-    
+
     ParseManagerCreateCompletionBlock block = ^void(BOOL succeeded, NSError * _Nullable error){
         completion(succeeded, error);
         if(!succeeded){
             return;
         }
     };
-    
+
     [savedExercise saveInBackgroundWithBlock:block];
 }
 
@@ -115,21 +115,21 @@ static long const kJPEGCompressionConstant = 0.75;
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
         completion(elements, error);
     };
-    
+
     [query findObjectsInBackgroundWithBlock:block];
 }
 
 
 + (void)postRoutine:(Routine *)routine completion:(ParseManagerCreateCompletionBlock) completion{
     Routine *newRoutine = [Routine initWithAttributes:routine.author exerciseList:routine.exerciseList bodyZoneList:routine.bodyZoneList image:routine.image caption:routine.caption trainingLevel:routine.trainingLevel workoutPlace:routine.workoutPlace];
-        
+
     ParseManagerCreateCompletionBlock block = ^void(BOOL succeeded, NSError * _Nullable error){
         completion(succeeded, error);
         if(!succeeded){
             return;
         }
     };
-    
+
     [newRoutine saveInBackgroundWithBlock:block];
 }
 
@@ -137,11 +137,11 @@ static long const kJPEGCompressionConstant = 0.75;
 + (void)fetchHomeTimelineRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion{
     PFQuery *query = [PFQuery queryWithClassName:kRoutineClass];
     [query includeKeys:@[kBodyZoneListAttributeKey, kExerciseListAttributeKey, kAuthorAttributeKey, kExerciseListBaseExerciseAttributeKey, kExerciseListBaseExerciseBodyZoneTagAttributeKey, kExerciseListBaseExerciseAuthorAttributeKey]];
-    
+
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
         completion(elements, error);
     };
-    
+
     [query findObjectsInBackgroundWithBlock:block];
 }
 
@@ -151,11 +151,11 @@ static long const kJPEGCompressionConstant = 0.75;
     [query includeKeys:@[kBodyZoneListAttributeKey, kExerciseListAttributeKey, kAuthorAttributeKey, kExerciseListBaseExerciseAttributeKey, kExerciseListBaseExerciseBodyZoneTagAttributeKey, kExerciseListBaseExerciseAuthorAttributeKey]];
     [query whereKey:kAuthorAttributeKey equalTo:[PFUser currentUser]];
     [query orderByDescending:kCreatedAtAttributeKey];
-    
+
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
         completion(elements, error);
     };
-    
+
     [query findObjectsInBackgroundWithBlock:block];
 }
 
@@ -166,11 +166,11 @@ static long const kJPEGCompressionConstant = 0.75;
     [query selectKeys:@[kRoutineAttributeKey]];
     [query whereKey:kUserAttributeKey equalTo:[PFUser currentUser]];
     [query orderByDescending:kCreatedAtAttributeKey];
-    
+
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
         completion(elements, error);
     };
-    
+
     [query findObjectsInBackgroundWithBlock:block];
 }
 
@@ -178,14 +178,14 @@ static long const kJPEGCompressionConstant = 0.75;
 +(void)changeProfilePicture:(PFFileObject *)image completion:(ParseManagerCreateCompletionBlock) completion{
     PFUser *user = [PFUser currentUser];
     user[kProfilePictureAttributeKey] = image;
-    
+
     ParseManagerCreateCompletionBlock block = ^void(BOOL succeeded, NSError * _Nullable error){
         completion(succeeded, error);
         if(!succeeded){
             return;
         }
     };
-    
+
     [user saveInBackgroundWithBlock:block];
 }
 
@@ -194,33 +194,33 @@ static long const kJPEGCompressionConstant = 0.75;
    workoutPlaceFilter:(NSNumber *)workoutPlaceFilter
   trainingLevelFilter:(NSNumber *)trainingLevelFilter
            completion:(ParseManagerFetchingDataRowsCompletionBlock) completion{
-    
+
     NSMutableArray *textSearchQueries = [[NSMutableArray alloc]init];
-    
+
     PFQuery *captionQuery = [PFQuery queryWithClassName:kRoutineClass];
     [captionQuery whereKey:kStandardizedCaptionAttributeKey containsString:searchTerm];
     [textSearchQueries addObject:captionQuery];
-    
+
     PFQuery *authorQuery = [PFQuery queryWithClassName:kRoutineClass];
     [authorQuery whereKey:kStandardizedAuthorUsernameAttributeKey containsString:searchTerm];
     [textSearchQueries addObject:authorQuery];
-    
+
     PFQuery *finalSearchQuery = [PFQuery orQueryWithSubqueries:textSearchQueries];
-    
+
     if(workoutPlaceFilter != nil){
         [finalSearchQuery whereKey:kWorkoutPlaceAttributeKey equalTo:workoutPlaceFilter];
     }
-        
+
     if(trainingLevelFilter != nil){
         [finalSearchQuery whereKey:kTrainingLevelAttributeKey equalTo:trainingLevelFilter];
     }
 
     [finalSearchQuery includeKeys:@[kBodyZoneListAttributeKey, kExerciseListAttributeKey, kAuthorAttributeKey, kExerciseListBaseExerciseAttributeKey, kExerciseListBaseExerciseBodyZoneTagAttributeKey, kExerciseListBaseExerciseAuthorAttributeKey]];
-    
+
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
         completion(elements, error);
     };
-    
+
     [finalSearchQuery findObjectsInBackgroundWithBlock:block];
 }
 
@@ -230,7 +230,7 @@ static long const kJPEGCompressionConstant = 0.75;
     PFObject *likedRoutine = [PFObject objectWithClassName:kLikedRoutineClass];
     likedRoutine[kRoutineAttributeKey] = routine;
     likedRoutine[kUserAttributeKey] = user;
-    
+
     [likedRoutine saveEventually];
     [routine saveInBackground];
 }
@@ -241,7 +241,7 @@ static long const kJPEGCompressionConstant = 0.75;
             [object deleteEventually];
         }
     }];
-    
+
     [routine saveInBackground];
 }
 
@@ -250,11 +250,11 @@ static long const kJPEGCompressionConstant = 0.75;
     PFQuery *query = [PFQuery queryWithClassName:kLikedRoutineClass];
     [query whereKey:kUserAttributeKey equalTo:user];
     [query whereKey:kRoutineAttributeKey equalTo:routine];
-    
+
     ParseManagerFindObjectCompletionBlock block = ^void(PFObject *object, NSError * _Nullable error){
         completion(object, error);
     };
-    
+
     [query getFirstObjectInBackgroundWithBlock:block];
 }
 
@@ -281,7 +281,7 @@ static long const kJPEGCompressionConstant = 0.75;
     if (!imageData) {
         return nil;
     }
-    
+
     return [PFFileObject fileObjectWithName:imageName data:imageData];
 }
 
