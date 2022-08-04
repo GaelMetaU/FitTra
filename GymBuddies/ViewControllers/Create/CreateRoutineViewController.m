@@ -54,6 +54,7 @@ static NSString * const ADD_EXERCISE_SEGUE_IDENTIFIER = @"AddExerciseSegue";
     
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
+    self.collectionView.layer.cornerRadius = 10;
 }
 
 

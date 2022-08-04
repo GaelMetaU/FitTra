@@ -52,6 +52,7 @@ static NSString * const kBodyZoneCollectionViewCellIdentifier = @"BodyZoneCollec
     self.bodyZoneCollectionView.dataSource = self;
     self.bodyZoneCollectionView.delegate = self;
     [self fetchBodyZones];
+    self.bodyZoneCollectionView.layer.cornerRadius = 10;
 }
 
 
@@ -142,14 +143,14 @@ static NSString * const kBodyZoneCollectionViewCellIdentifier = @"BodyZoneCollec
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     UICollectionViewCell *cell = [self.bodyZoneCollectionView cellForItemAtIndexPath:indexPath];
-    cell.backgroundColor = [UIColor secondarySystemBackgroundColor];
+    cell.backgroundColor = [UIColor systemGray5Color];
     self.exerciseBodyZoneTag = self.bodyZones[indexPath.row];
 }
 
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath{
     UICollectionViewCell *cell = [self.bodyZoneCollectionView cellForItemAtIndexPath:indexPath];
-    cell.backgroundColor = [UIColor systemBackgroundColor];
+    cell.backgroundColor = nil;
 }
 
 
