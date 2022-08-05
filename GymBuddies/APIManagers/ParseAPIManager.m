@@ -216,6 +216,7 @@ static long  const kJPEGCompressionConstant = 0.75;
     }
 
     [finalSearchQuery includeKeys:@[kBodyZoneListAttributeKey, kExerciseListAttributeKey, kAuthorAttributeKey, kExerciseListBaseExerciseAttributeKey, kExerciseListBaseExerciseBodyZoneTagAttributeKey, kExerciseListBaseExerciseAuthorAttributeKey]];
+    [finalSearchQuery orderByDescending:@"interactionScore"];
 
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
         completion(elements, error);

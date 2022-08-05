@@ -61,6 +61,8 @@ static NSString * const kRoutineToExerciseSegueIdentifier = @"RoutineToExerciseS
 // Grabs the routine broguht by the segue and sets the view's content
 - (void)setRoutine:(Routine *)routine{
     _routine = routine;
+    self.routine.interactionScore = [NSNumber numberWithLong:[self.routine.interactionScore longValue] + 1];
+    [self.routine saveEventually];
     [self setTopViewContent];
 
     self.bodyZoneList = self.routine.bodyZoneList;
@@ -101,11 +103,13 @@ static NSString * const kRoutineToExerciseSegueIdentifier = @"RoutineToExerciseS
 
 - (void)likeAction{
     if (self.isLiked){
+        self.routine.interactionScore = [NSNumber numberWithLong:[self.routine.interactionScore longValue] - 2];
         self.routine.likeCount = [NSNumber numberWithLong:[self.routine.likeCount longValue] - 1 ];
         self.likeCountLabel.text = [NSString stringWithFormat:@"%@", self.routine.likeCount];
         [ParseAPIManager unlike:self.routine];
         [self setLikedStatus:NO];
     } else {
+        self.routine.interactionScore = [NSNumber numberWithLong:[self.routine.interactionScore longValue] + 3];
         self.routine.likeCount = [NSNumber numberWithLong:[self.routine.likeCount longValue] + 1 ];
         self.likeCountLabel.text = [NSString stringWithFormat:@"%@", self.routine.likeCount];
         [ParseAPIManager likeRoutine:self.routine];

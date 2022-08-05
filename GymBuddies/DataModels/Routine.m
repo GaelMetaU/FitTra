@@ -18,6 +18,7 @@
 @dynamic exerciseList;
 @dynamic bodyZoneList;
 @dynamic likeCount;
+@dynamic interactionScore;
 + (nonnull NSString *)parseClassName {
     return @"Routine";
 }
