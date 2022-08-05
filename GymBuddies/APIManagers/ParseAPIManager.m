@@ -137,9 +137,45 @@ static long  const kJPEGCompressionConstant = 0.75;
 + (void)fetchHomeTimelineRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion{
     PFQuery *query = [PFQuery queryWithClassName:kRoutineClass];
     [query includeKeys:@[kBodyZoneListAttributeKey, kExerciseListAttributeKey, kAuthorAttributeKey, kExerciseListBaseExerciseAttributeKey, kExerciseListBaseExerciseBodyZoneTagAttributeKey, kExerciseListBaseExerciseAuthorAttributeKey]];
+    [query orderByDescending:kInteractionScoreAttributeKey];
+    [query setLimit:10];
 
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
-        completion(elements, error);
+        PFUser *user = [PFUser currentUser];
+        NSMutableArray *finalResults = [[NSMutableArray alloc]init];
+        for (Routine *routine in elements){
+            double appeal = 0;
+            
+            switch ([user[kWorkoutPlaceAttributeKey] longValue]){
+                case WorkoutPlaceHome:
+                    appeal += [routine.homeUsersInteractionScore doubleValue] / [routine.interactionScore doubleValue];
+                    break;
+                case WorkoutPlacePark:
+                    appeal += [routine.parkUsersInteractionScore doubleValue] / [routine.interactionScore doubleValue];
+                    break;
+                case WorkoutPlaceGym:
+                    appeal += [routine.gymUsersInteractionScore doubleValue] / [routine.interactionScore doubleValue];
+                    break;
+            }
+            
+            switch ([user[kTrainingLevelAttributeKey] longValue]){
+                case TrainingLevelBeginner:
+                    appeal += [routine.beginnerUsersInteractionScore doubleValue] / [routine.interactionScore doubleValue];
+                    break;
+                case TrainingLevelIntermediate:
+                    appeal += [routine.mediumUsersInteractionScore doubleValue] / [routine.interactionScore doubleValue];
+                    break;
+                case TrainingLevelExpert:
+                    appeal += [routine.expertUsersInteractionScore doubleValue] / [routine.interactionScore doubleValue];
+                    break;
+            }
+            
+            routine[@"appeal"] = [NSNumber numberWithDouble:appeal];
+            [finalResults addObject:routine];
+        }
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]initWithKey:@"appeal" ascending:NO];
+        NSArray *sortedResults = [finalResults sortedArrayUsingDescriptors:@[sortDescriptor]];
+        completion(sortedResults, error);
     };
 
     [query findObjectsInBackgroundWithBlock:block];
@@ -216,7 +252,7 @@ static long  const kJPEGCompressionConstant = 0.75;
     }
 
     [finalSearchQuery includeKeys:@[kBodyZoneListAttributeKey, kExerciseListAttributeKey, kAuthorAttributeKey, kExerciseListBaseExerciseAttributeKey, kExerciseListBaseExerciseBodyZoneTagAttributeKey, kExerciseListBaseExerciseAuthorAttributeKey]];
-    [finalSearchQuery orderByDescending:@"interactionScore"];
+    [finalSearchQuery orderByDescending:kInteractionScoreAttributeKey];
 
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
         completion(elements, error);
@@ -237,6 +273,7 @@ static long  const kJPEGCompressionConstant = 0.75;
     //[routine saveInBackground];
 }
 
+
 + (void)unlike:(Routine *)routine{
     [self isLiked:routine completion:^(PFObject * _Nonnull object, NSError * _Nullable error) {
         if (object != nil){
@@ -246,6 +283,7 @@ static long  const kJPEGCompressionConstant = 0.75;
     [self changeRoutinesInteractionScore:routine value:-2];
     //[routine saveInBackground];
 }
+
 
 + (void)isLiked:(Routine *)routine completion:(ParseManagerFindObjectCompletionBlock) completion{
     PFUser *user = [PFUser currentUser];
@@ -260,12 +298,13 @@ static long  const kJPEGCompressionConstant = 0.75;
     [query getFirstObjectInBackgroundWithBlock:block];
 }
 
+
 + (void)changeRoutinesInteractionScore:(Routine *)routine value:(double)value{
     routine.interactionScore = [NSNumber numberWithLong:[routine.interactionScore longValue] + value];
     
     PFUser *user = [PFUser currentUser];
     
-    switch ([user[@"trainingLevel"] longValue]) {
+    switch ([user[kTrainingLevelAttributeKey] longValue]) {
         case TrainingLevelBeginner:
             routine.beginnerUsersInteractionScore = [NSNumber numberWithLong:[routine.beginnerUsersInteractionScore longValue] + value];
             break;
@@ -279,7 +318,7 @@ static long  const kJPEGCompressionConstant = 0.75;
             break;
     }
     
-    switch ([user[@"workoutPlace"] longValue]) {
+    switch ([user[kWorkoutPlaceAttributeKey] longValue]) {
         case WorkoutPlaceHome:
             routine.homeUsersInteractionScore = [NSNumber numberWithLong:[routine.homeUsersInteractionScore longValue] + value];
             break;
@@ -295,7 +334,6 @@ static long  const kJPEGCompressionConstant = 0.75;
     
     [routine saveEventually];
 }
-
 
 
 + (PFFileObject *)getPFFileFromURL:(NSURL *)video videoName:(NSString *)videoName{

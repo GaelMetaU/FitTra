@@ -41,6 +41,7 @@ static NSString * const kProfilePictureAttributeKey = @"profilePicture";
 
 // Routine attributes
 static NSString * const kRoutineAttributeKey = @"routine";
+static NSString * const kInteractionScoreAttributeKey = @"interactionScore";
 static NSString * const kRoutineAuthorAttributeKey = @"routine.author";
 static NSString * const kBodyZoneListAttributeKey = @"bodyZoneList";
 static NSString * const kExerciseListAttributeKey = @"exerciseList";
