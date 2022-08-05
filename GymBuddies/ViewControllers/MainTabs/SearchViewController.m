@@ -22,7 +22,7 @@ static NSString * const kExpertFilterTitle = @"Expert";
 static NSString * const kHomeFilterTitle = @"Home";
 static NSString * const kParkFilterTitle = @"Park";
 static NSString * const kGymFilterTitle = @"Gym";
-static long const kSearchTimerLapse = 0.30;
+static double const kSearchTimerLapse = 0.30;
 
 
 @interface SearchViewController ()
