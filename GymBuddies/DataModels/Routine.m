@@ -19,6 +19,12 @@
 @dynamic bodyZoneList;
 @dynamic likeCount;
 @dynamic interactionScore;
+@dynamic parkUsersInteractionScore;
+@dynamic gymUsersInteractionScore;
+@dynamic homeUsersInteractionScore;
+@dynamic beginnerUsersInteractionScore;
+@dynamic mediumUsersInteractionScore;
+@dynamic expertUsersInteractionScore;
 + (nonnull NSString *)parseClassName {
     return @"Routine";
 }

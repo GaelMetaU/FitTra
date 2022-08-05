@@ -105,6 +105,8 @@ static NSString * const kExerciseImageAttributeKey = @"exercise.image";
 + (void)isLiked:(Routine *)routine
     completion:(ParseManagerFindObjectCompletionBlock) completion;
 
++ (void)changeRoutinesInteractionScore:(Routine *)routine value:(double)value;
+
 + (PFFileObject *)getPFFileFromURL:(NSURL *)video
                          videoName:(NSString *)videoName;
 

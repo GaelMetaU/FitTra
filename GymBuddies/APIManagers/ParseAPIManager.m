@@ -233,7 +233,8 @@ static long  const kJPEGCompressionConstant = 0.75;
     likedRoutine[kUserAttributeKey] = user;
 
     [likedRoutine saveEventually];
-    [routine saveInBackground];
+    [self changeRoutinesInteractionScore:routine value:3];
+    //[routine saveInBackground];
 }
 
 + (void)unlike:(Routine *)routine{
@@ -242,8 +243,8 @@ static long  const kJPEGCompressionConstant = 0.75;
             [object deleteEventually];
         }
     }];
-
-    [routine saveInBackground];
+    [self changeRoutinesInteractionScore:routine value:-2];
+    //[routine saveInBackground];
 }
 
 + (void)isLiked:(Routine *)routine completion:(ParseManagerFindObjectCompletionBlock) completion{
@@ -258,6 +259,43 @@ static long  const kJPEGCompressionConstant = 0.75;
 
     [query getFirstObjectInBackgroundWithBlock:block];
 }
+
++ (void)changeRoutinesInteractionScore:(Routine *)routine value:(double)value{
+    routine.interactionScore = [NSNumber numberWithLong:[routine.interactionScore longValue] + value];
+    
+    PFUser *user = [PFUser currentUser];
+    
+    switch ([user[@"trainingLevel"] longValue]) {
+        case TrainingLevelBeginner:
+            routine.beginnerUsersInteractionScore = [NSNumber numberWithLong:[routine.beginnerUsersInteractionScore longValue] + value];
+            break;
+        case TrainingLevelIntermediate:
+            routine.mediumUsersInteractionScore = [NSNumber numberWithLong:[routine.mediumUsersInteractionScore longValue] + value];
+            break;
+        case TrainingLevelExpert:
+            routine.expertUsersInteractionScore = [NSNumber numberWithLong:[routine.expertUsersInteractionScore longValue] + value];
+            break;
+        default:
+            break;
+    }
+    
+    switch ([user[@"workoutPlace"] longValue]) {
+        case WorkoutPlaceHome:
+            routine.homeUsersInteractionScore = [NSNumber numberWithLong:[routine.homeUsersInteractionScore longValue] + value];
+            break;
+        case WorkoutPlacePark:
+            routine.parkUsersInteractionScore = [NSNumber numberWithLong:[routine.parkUsersInteractionScore longValue] + value];
+            break;
+        case WorkoutPlaceGym:
+            routine.gymUsersInteractionScore = [NSNumber numberWithLong:[routine.gymUsersInteractionScore longValue] + value];
+            break;
+        default:
+            break;
+    }
+    
+    [routine saveEventually];
+}
+
 
 
 + (PFFileObject *)getPFFileFromURL:(NSURL *)video videoName:(NSString *)videoName{
