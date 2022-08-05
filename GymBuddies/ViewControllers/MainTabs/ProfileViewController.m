@@ -156,14 +156,14 @@ static NSString * kRoutineTableViewCellIdentifier = @"RoutineTableViewCell";
 }
 
 
--(void)fetchingAlert:(NSError *)error{
+- (void)fetchingAlert:(NSError *)error{
     UIAlertController *alert = [AlertCreator createOkAlert:@"Error loading your routines" message:error.localizedDescription];
     [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - Button interaction
 
--(IBAction)didTapSwitchView:(id)sender{
+- (IBAction)didTapSwitchView:(id)sender{
     // If button pressed is the same as the view shown
     if ((sender == self.showCreatedRoutinesButton && self.showCreatedOrLikedRoutinesIndicator == kShowCreatedRoutines) || (sender == self.showLikedRoutinesButton && self.showCreatedOrLikedRoutinesIndicator == kShowLikedRoutines)){
         return;
