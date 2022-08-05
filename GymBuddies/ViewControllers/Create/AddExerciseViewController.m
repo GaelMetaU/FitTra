@@ -39,6 +39,7 @@ static NSString * const kCreateExerciseSegueIdentifier = @"CreateExerciseSegue";
     [ParseAPIManager fetchUsersExercises:^(NSArray * _Nonnull elements, NSError * _Nonnull error) {
         __strong __typeof(self) strongSelf = weakSelf;
         if (elements!=nil){
+            NSLog(@"%@", elements);
             for (PFObject *element in elements){
                 [strongSelf->_exercises addObject:element[@"exercise"]];
             }
@@ -74,7 +75,7 @@ static NSString * const kCreateExerciseSegueIdentifier = @"CreateExerciseSegue";
 #pragma mark - Delegate methods
 
 - (void)didCreateExercise:(Exercise *)exercise{
-    [self.exercises insertObject:exercise atIndex:0];
+    [self.exercises addObject:exercise];
     [self.tableView reloadData];
 }
 

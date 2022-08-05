@@ -94,7 +94,7 @@ static long  const kJPEGCompressionConstant = 0.75;
     PFObject *savedExercise = [PFObject objectWithClassName:kSavedExerciseClass];
 
     savedExercise[kAuthorAttributeKey] = exercise.author;
-    savedExercise[kRoutineAttributeKey] = exercise;
+    savedExercise[kExerciseAttributeKey] = exercise;
 
     ParseManagerCreateCompletionBlock block = ^void(BOOL succeeded, NSError * _Nullable error){
         completion(succeeded, error);
