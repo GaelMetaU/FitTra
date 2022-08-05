@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
 @property (strong, nonatomic) NSURL *googleMapsURL;
 @property (strong, nonatomic) GMSPlace *place;
--(void)getPlaceInfo:(NSString *)placeID;
+- (void)getPlaceInfo:(NSString *)placeID;
 @end
 
 NS_ASSUME_NONNULL_END

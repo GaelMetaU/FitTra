@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSString *currentPlaceTypeSearch;
 @property (strong, nonatomic) NSArray *placesResults;
 @property (strong, nonatomic) NSMutableArray *markers;
--(void)setContent;
+- (void)setContent;
 @end
 
 NS_ASSUME_NONNULL_END

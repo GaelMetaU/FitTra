@@ -15,7 +15,7 @@
 }
 
 
--(void)setUpVideo:(NSURL *)videoURL{
+- (void)setUpVideo:(NSURL *)videoURL{
     @try {
         // Loading video on loop
         self.queuePlayer = [AVQueuePlayer new];

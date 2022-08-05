@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) Routine *routine;
 @property (nonatomic) BOOL isLiked;
 @property (nonatomic) BOOL likedCheck;
--(void)setCellContent:(Routine *)routine;
+- (void)setCellContent:(Routine *)routine;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -12,7 +12,7 @@ static long  const kJPEGCompressionConstant = 0.75;
 
 @implementation ParseAPIManager
 
-+(void)logIn:(NSString *)username
++ (void)logIn:(NSString *)username
     password:(NSString *)password
   completion:(ParseManagerAuthenticationCompletionBlock)completion {
 
@@ -31,7 +31,7 @@ static long  const kJPEGCompressionConstant = 0.75;
 }
 
 
-+(void)logOut:(ParseManagerLogOutCompletionBlock)completion{
++ (void)logOut:(ParseManagerLogOutCompletionBlock)completion{
 
     ParseManagerLogOutCompletionBlock block = ^void(NSError *errorAPI) {
         if (errorAPI){
@@ -46,7 +46,7 @@ static long  const kJPEGCompressionConstant = 0.75;
 }
 
 
-+(void)fetchBodyZones:(ParseManagerFetchingDataRowsCompletionBlock) completion{
++ (void)fetchBodyZones:(ParseManagerFetchingDataRowsCompletionBlock) completion{
     PFQuery *query = [PFQuery queryWithClassName:kBodyZoneClass];
 
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
@@ -64,7 +64,7 @@ static long  const kJPEGCompressionConstant = 0.75;
     Exercise *newExercise = [Exercise initWithAttributes:exercise.title author:exercise.author video:exercise.video image:exercise.image bodyZoneTag:exercise.bodyZoneTag];
 
     ParseManagerCreateCompletionBlock checkBlock = ^void(BOOL succeeded, NSError * _Nullable error){
-        if(error != nil){
+        if (error != nil){
             completion(succeeded, error);
             return;
         }
@@ -98,7 +98,7 @@ static long  const kJPEGCompressionConstant = 0.75;
 
     ParseManagerCreateCompletionBlock block = ^void(BOOL succeeded, NSError * _Nullable error){
         completion(succeeded, error);
-        if(!succeeded){
+        if (!succeeded){
             return;
         }
     };
@@ -125,7 +125,7 @@ static long  const kJPEGCompressionConstant = 0.75;
 
     ParseManagerCreateCompletionBlock block = ^void(BOOL succeeded, NSError * _Nullable error){
         completion(succeeded, error);
-        if(!succeeded){
+        if (!succeeded){
             return;
         }
     };
@@ -146,7 +146,7 @@ static long  const kJPEGCompressionConstant = 0.75;
 }
 
 
-+(void)fetchUsersCreatedRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion{
++ (void)fetchUsersCreatedRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion{
     PFQuery *query = [PFQuery queryWithClassName:kRoutineClass];
     [query includeKeys:@[kBodyZoneListAttributeKey, kExerciseListAttributeKey, kAuthorAttributeKey, kExerciseListBaseExerciseAttributeKey, kExerciseListBaseExerciseBodyZoneTagAttributeKey, kExerciseListBaseExerciseAuthorAttributeKey]];
     [query whereKey:kAuthorAttributeKey equalTo:[PFUser currentUser]];
@@ -160,7 +160,7 @@ static long  const kJPEGCompressionConstant = 0.75;
 }
 
 
-+(void)fetchUsersLikedRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion{
++ (void)fetchUsersLikedRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion{
     PFQuery *query = [PFQuery queryWithClassName:kLikedRoutineClass];
     [query includeKeys:@[kRoutineAttributeKey, kRoutineBodyZoneListAttributeKey, kRoutineExerciseListAttributeKey, kRoutineAuthorAttributeKey, kRoutineExerciseListBaseExerciseAttributeKey, kRoutineExerciseListBaseExerciseBodyZoneTagAttributeKey, kRoutineExerciseListBaseExerciseAuthorAttributeKey]];
     [query selectKeys:@[kRoutineAttributeKey]];
@@ -175,13 +175,13 @@ static long  const kJPEGCompressionConstant = 0.75;
 }
 
 
-+(void)changeProfilePicture:(PFFileObject *)image completion:(ParseManagerCreateCompletionBlock) completion{
++ (void)changeProfilePicture:(PFFileObject *)image completion:(ParseManagerCreateCompletionBlock) completion{
     PFUser *user = [PFUser currentUser];
     user[kProfilePictureAttributeKey] = image;
 
     ParseManagerCreateCompletionBlock block = ^void(BOOL succeeded, NSError * _Nullable error){
         completion(succeeded, error);
-        if(!succeeded){
+        if (!succeeded){
             return;
         }
     };
@@ -190,7 +190,7 @@ static long  const kJPEGCompressionConstant = 0.75;
 }
 
 
-+(void)searchRoutines:(NSString *)searchTerm
++ (void)searchRoutines:(NSString *)searchTerm
    workoutPlaceFilter:(NSNumber *)workoutPlaceFilter
   trainingLevelFilter:(NSNumber *)trainingLevelFilter
            completion:(ParseManagerFetchingDataRowsCompletionBlock) completion{
@@ -207,11 +207,11 @@ static long  const kJPEGCompressionConstant = 0.75;
 
     PFQuery *finalSearchQuery = [PFQuery orQueryWithSubqueries:textSearchQueries];
 
-    if(workoutPlaceFilter != nil){
+    if (workoutPlaceFilter != nil){
         [finalSearchQuery whereKey:kWorkoutPlaceAttributeKey equalTo:workoutPlaceFilter];
     }
 
-    if(trainingLevelFilter != nil){
+    if (trainingLevelFilter != nil){
         [finalSearchQuery whereKey:kTrainingLevelAttributeKey equalTo:trainingLevelFilter];
     }
 
@@ -235,9 +235,9 @@ static long  const kJPEGCompressionConstant = 0.75;
     [routine saveInBackground];
 }
 
-+(void)unlike:(Routine *)routine{
++ (void)unlike:(Routine *)routine{
     [self isLiked:routine completion:^(PFObject * _Nonnull object, NSError * _Nullable error) {
-        if(object != nil){
+        if (object != nil){
             [object deleteEventually];
         }
     }];
@@ -245,7 +245,7 @@ static long  const kJPEGCompressionConstant = 0.75;
     [routine saveInBackground];
 }
 
-+(void)isLiked:(Routine *)routine completion:(ParseManagerFindObjectCompletionBlock) completion{
++ (void)isLiked:(Routine *)routine completion:(ParseManagerFindObjectCompletionBlock) completion{
     PFUser *user = [PFUser currentUser];
     PFQuery *query = [PFQuery queryWithClassName:kLikedRoutineClass];
     [query whereKey:kUserAttributeKey equalTo:user];
@@ -260,7 +260,7 @@ static long  const kJPEGCompressionConstant = 0.75;
 
 
 + (PFFileObject *)getPFFileFromURL:(NSURL *)video videoName:(NSString *)videoName{
-    if(!video){
+    if (!video){
         return nil;
     }
     NSData *videoData = [NSData dataWithContentsOfURL:video];
@@ -273,7 +273,7 @@ static long  const kJPEGCompressionConstant = 0.75;
 
 
 + (PFFileObject *)getPFFileFromImage:(UIImage *)image imageName:(NSString *)imageName{
-    if(!image){
+    if (!image){
         return nil;
     }
     NSData *imageData = UIImageJPEGRepresentation(image, kJPEGCompressionConstant);

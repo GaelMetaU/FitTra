@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet PFImageView *bodyZoneIcon;
 @property (weak, nonatomic) IBOutlet PFImageView *authorProfilePicture;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
--(void)setExercise:(Exercise *)exercise;
+- (void)setExercise:(Exercise *)exercise;
 @end
 
 NS_ASSUME_NONNULL_END
