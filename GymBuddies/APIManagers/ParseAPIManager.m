@@ -134,11 +134,12 @@ static long  const kJPEGCompressionConstant = 0.75;
 }
 
 
-+ (void)fetchHomeTimelineRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion{
++ (void)fetchHomeTimelineRoutines:(long)skipValue completion:(ParseManagerFetchingDataRowsCompletionBlock) completion{
     PFQuery *query = [PFQuery queryWithClassName:kRoutineClass];
     [query includeKeys:@[kBodyZoneListAttributeKey, kExerciseListAttributeKey, kAuthorAttributeKey, kExerciseListBaseExerciseAttributeKey, kExerciseListBaseExerciseBodyZoneTagAttributeKey, kExerciseListBaseExerciseAuthorAttributeKey]];
     [query orderByDescending:kInteractionScoreAttributeKey];
-    [query setLimit:10];
+    [query setLimit:kRoutineFetchAmount];
+    [query setSkip:skipValue];
 
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
         PFUser *user = [PFUser currentUser];

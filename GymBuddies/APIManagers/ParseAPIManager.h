@@ -40,6 +40,7 @@ static NSString * const kCreatedAtAttributeKey = @"createdAt";
 static NSString * const kProfilePictureAttributeKey = @"profilePicture";
 
 // Routine attributes
+static double const kRoutineFetchAmount = 20;
 static NSString * const kRoutineAttributeKey = @"routine";
 static NSString * const kInteractionScoreAttributeKey = @"interactionScore";
 static NSString * const kRoutineAuthorAttributeKey = @"routine.author";
@@ -85,7 +86,7 @@ static NSString * const kExerciseImageAttributeKey = @"exercise.image";
 + (void)postRoutine:(Routine *)routine
          completion:(ParseManagerCreateCompletionBlock) completion;
 
-+ (void)fetchHomeTimelineRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion;
++ (void)fetchHomeTimelineRoutines:(long)skipValue completion:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
 + (void)fetchUsersCreatedRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
