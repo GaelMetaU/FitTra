@@ -9,12 +9,12 @@
 
 @implementation DetailedPlaceView
 
--(void)getPlaceInfo:(NSString *)placeID{
+- (void)getPlaceInfo:(NSString *)placeID{
     if (![self.place.placeID isEqualToString:placeID]){
         GMSPlacesClient *placesClient = [GMSPlacesClient new];
         GMSPlaceField fields = (GMSPlaceFieldName|GMSPlaceFieldFormattedAddress|GMSPlaceFieldCoordinate);
         [placesClient fetchPlaceFromPlaceID:placeID placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable result, NSError * _Nullable error) {
-            if(error == nil){
+            if (error == nil){
                 [self setNewPlaceContent:result];
             }
         }];
@@ -22,7 +22,7 @@
 }
 
 
--(void)setNewPlaceContent:(GMSPlace *)newPlace{
+- (void)setNewPlaceContent:(GMSPlace *)newPlace{
     self.place = newPlace;
     self.placeName.text = self.place.name;
     self.fullAddress.text = self.place.formattedAddress;
@@ -34,10 +34,9 @@
 
 
 - (IBAction)didTapVisitPlace:(id)sender {
-    //if(self.googleMapsURL != nil){
-    NSLog(@"%@",self.googleMapsURL);
+    if (self.googleMapsURL != nil){
         [[UIApplication sharedApplication]openURL:self.googleMapsURL options:@{} completionHandler:nil];
-    //}
+    }
 }
 
 @end
