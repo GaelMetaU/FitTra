@@ -20,8 +20,6 @@ static NSString * const kLikedFilledRoutineButtonImage = @"suit.heart.fill";
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.bodyZoneCollectionView.delegate = self;
-    self.bodyZoneCollectionView.dataSource = self;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -59,6 +57,16 @@ static NSString * const kLikedFilledRoutineButtonImage = @"suit.heart.fill";
     self.workoutPlaceLabel.layer.masksToBounds = YES;
     
     [self checkIfLiked];
+    
+    self.bodyZoneCollectionView.delegate = self;
+    self.bodyZoneCollectionView.dataSource = self;
+    [self.bodyZoneCollectionView reloadData];
+}
+
+#pragma mark - Liking
+
+- (IBAction)didTapLike:(id)sender {
+    [self likeAction];
 }
 
 
