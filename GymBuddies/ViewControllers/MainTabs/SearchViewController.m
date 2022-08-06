@@ -30,12 +30,12 @@ static double const kSearchTimerLapse = 0.30;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UIButton *workoutPlaceFilter;
 @property (weak, nonatomic) IBOutlet UIButton *trainingLevelFilter;
-@property (strong, nonatomic) NSArray *results;
+@property (strong, nonatomic) NSMutableArray *results;
 @property (strong, nonatomic) UISearchController *searchController;
 @property (strong, nonatomic) NSTimer *timer;
 @property (strong, nonatomic) NSNumber *workoutPlaceFilterValue;
 @property (strong, nonatomic) NSNumber *trainingLevelFilterValue;
-
+@property (nonatomic) double maxAmountOfResults;
 @end
 
 @implementation SearchViewController
@@ -52,7 +52,7 @@ static double const kSearchTimerLapse = 0.30;
     [self setTrainingLevelFilterMenu];
     [self setWorkoutPlaceFilterMenu];
 
-    self.results = [[NSArray alloc]init];
+    self.results = [[NSMutableArray alloc]init];
 
 }
 
@@ -172,19 +172,27 @@ static double const kSearchTimerLapse = 0.30;
     NSString *searchTerm = [CommonValidations standardizeSearchTerm:self.searchBar.text];
     if (searchTerm.length != 0){
          __weak __typeof(self) weakSelf = self;
-        [ParseAPIManager searchRoutines:searchTerm workoutPlaceFilter:self.workoutPlaceFilterValue trainingLevelFilter:self.trainingLevelFilterValue completion:^(NSArray * _Nonnull elements, NSError * _Nullable error) {
+        [ParseAPIManager searchRoutines:searchTerm workoutPlaceFilter:self.workoutPlaceFilterValue trainingLevelFilter:self.trainingLevelFilterValue skipValue:self.results.count completion:^(NSArray * _Nonnull elements, NSError * _Nullable error) {
                 __strong __typeof(self) strongSelf = weakSelf;
                 if (error != nil && strongSelf != nil){
                     UIAlertController *alert = [AlertCreator createOkAlert:@"Error searching" message:error.localizedDescription];
                     [strongSelf presentViewController:alert animated:YES completion:nil];
                 } else {
-                    strongSelf->_results = elements;
+                    [strongSelf->_results addObjectsFromArray: elements];
+                    strongSelf->_maxAmountOfResults += kRoutineFetchAmount;
                     [strongSelf->_resultsTableView reloadData];
                 }
         }];
     }
 }
 
+
+- (void)loadMoreResults{
+    // If current amount of results is not equal to the current maximum it means there are no results left
+    if (self.results.count == self.maxAmountOfResults){
+        [self searchRoutines];
+    }
+}
 
 #pragma mark - Table view methods
 
@@ -197,6 +205,13 @@ static double const kSearchTimerLapse = 0.30;
     RoutineTableViewCell *cell = [self.resultsTableView dequeueReusableCellWithIdentifier:kRoutineResultTableViewCellIdentifier];
     [cell setCellContent:self.results[indexPath.row]];
     return cell;
+}
+
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.row + 1 == self.results.count){
+        [self loadMoreResults];
+    }
 }
 
 

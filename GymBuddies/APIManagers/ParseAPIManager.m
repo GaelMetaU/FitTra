@@ -228,8 +228,9 @@ static long  const kJPEGCompressionConstant = 0.75;
 
 
 + (void)searchRoutines:(NSString *)searchTerm
-   workoutPlaceFilter:(NSNumber *)workoutPlaceFilter
-  trainingLevelFilter:(NSNumber *)trainingLevelFilter
+    workoutPlaceFilter:(NSNumber *)workoutPlaceFilter
+   trainingLevelFilter:(NSNumber *)trainingLevelFilter
+             skipValue:(double)skipValue
            completion:(ParseManagerFetchingDataRowsCompletionBlock) completion{
 
     NSMutableArray *textSearchQueries = [[NSMutableArray alloc]init];

@@ -98,6 +98,7 @@ static NSString * const kExerciseImageAttributeKey = @"exercise.image";
 + (void)searchRoutines:(NSString *)searchTerm
    workoutPlaceFilter:(NSNumber *)workoutPlaceFilter
   trainingLevelFilter:(NSNumber *)trainingLevelFilter
+             skipValue:(double)skipValue
            completion:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
 + (void)likeRoutine:(Routine *)routine;
