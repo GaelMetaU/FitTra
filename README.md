@@ -1,13 +1,14 @@
 
-# Gym Buddies
+# FitTra
 
 ## Table of Contents
 1. [Overview](#Overview)
 1. [Product Spec](#Product-Spec)
 1. [Wireframes](#Wireframes)
 2. [Schema](#Schema)
+3. [Technical Documents](#Technical-Documents)
 
-## Overview
+## Overview (#Overview)
 ### Description
 An app where you can create excercising routines and share them, you can see other users' routines and like them or save them for you to use them later. You can visit other user's profiles if you liked its routines and follow them for you to know when it posts another routine.
 Also, a routine can be set to be done from home, in a park or in a gym, so you can be recommended the nearest place for you to do it or look for them in the map.
@@ -261,3 +262,9 @@ https://www.figma.com/file/rEp679zAVBdmXpQH7HhDaI/Untitled?node-id=3%3A3
 * Google Maps API: Allows displaying a map and pinging locations. It also has better synergy with the Places API
 * Google Places API: Gives access to a huge list of places which will be used to retrieve parks and gyms near the user's location and display them in the map.
 * Parse: Parse own API and pod to pull all user data and posts.
+  
+## Technical Documents
+### Recommendation System Breakdown
+https://docs.google.com/document/d/1GtSkiZHdKrRyCWwZYN5pzqJ58COriS4027HaUs9X9WQ/edit?usp=sharing  
+### Searching and Filtering System Breakdown
+https://docs.google.com/document/d/1X7SEDYA5t1R8qmmNwiTbpd-ZhGq1Wlf-Keo7jiQnr0c/edit?usp=sharing
