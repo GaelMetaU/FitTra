@@ -18,7 +18,7 @@
     return @"ExerciseInRoutine";
 }
 
-+(ExerciseInRoutine *) initWithExercise:(Exercise *)exercise{
++ (ExerciseInRoutine *) initWithExercise:(Exercise *)exercise{
     ExerciseInRoutine *exerciseInRoutine = [ExerciseInRoutine new];
     exerciseInRoutine.baseExercise = exercise;
     exerciseInRoutine.amount = @10;
@@ -29,7 +29,7 @@
 }
 
 
-+(ExerciseInRoutine *) initWithAttributes:(Exercise *)exercise
++ (ExerciseInRoutine *) initWithAttributes:(Exercise *)exercise
                                    amount:(NSNumber *)amount
                                amountUnit:(NSNumber *)amountUnit
                              numberOfSets:(NSNumber *)numberOfSets{

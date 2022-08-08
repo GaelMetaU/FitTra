@@ -20,8 +20,6 @@ static NSString * const kLikedFilledRoutineButtonImage = @"suit.heart.fill";
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.bodyZoneCollectionView.delegate = self;
-    self.bodyZoneCollectionView.dataSource = self;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -34,7 +32,7 @@ static NSString * const kLikedFilledRoutineButtonImage = @"suit.heart.fill";
 - (void)setCellContent:(Routine *)routine{
     _routine = routine;
     
-    if(self.routine.author[kProfilePictureKey]){
+    if (self.routine.author[kProfilePictureKey]){
         self.authorProfilePicture.file = self.routine.author[kProfilePictureKey];
         self.authorProfilePicture.layer.cornerRadius = self.authorProfilePicture.frame.size.width/2;
         [self.authorProfilePicture loadInBackground];
@@ -59,18 +57,21 @@ static NSString * const kLikedFilledRoutineButtonImage = @"suit.heart.fill";
     self.workoutPlaceLabel.layer.masksToBounds = YES;
     
     [self checkIfLiked];
+    
+    self.bodyZoneCollectionView.delegate = self;
+    self.bodyZoneCollectionView.dataSource = self;
+    [self.bodyZoneCollectionView reloadData];
 }
 
-
-#pragma mark - Like method
+#pragma mark - Liking
 
 - (IBAction)didTapLike:(id)sender {
     [self likeAction];
 }
 
 
--(void)likeAction{
-    if(self.isLiked){
+- (void)likeAction{
+    if (self.isLiked){
         self.routine.likeCount = [NSNumber numberWithLong:[self.routine.likeCount longValue] - 1 ];
         self.likeCountLabel.text = [NSString stringWithFormat:@"%@", self.routine.likeCount];
         [ParseAPIManager unlike:self.routine];
@@ -84,19 +85,21 @@ static NSString * const kLikedFilledRoutineButtonImage = @"suit.heart.fill";
 }
 
 
--(void)checkIfLiked{
+- (void)checkIfLiked{
+    __weak __typeof(self) weakSelf = self;
     [ParseAPIManager isLiked:self.routine completion:^(PFObject * _Nonnull object, NSError * _Nullable error) {
-        [self setLikedStatus:(error == nil)];
+        __strong __typeof(self) strongSelf = weakSelf;
+        [strongSelf setLikedStatus:(error == nil)];
     }];
 }
 
 
--(void)setLikedStatus:(BOOL)liked{
-    if(liked){
+- (void)setLikedStatus:(BOOL)liked{
+    if (liked){
         [self.likeButton setImage:[UIImage systemImageNamed:kLikedFilledRoutineButtonImage] forState:UIControlStateNormal];
         self.likeButton.tintColor = [UIColor systemRedColor];
         self.isLiked = YES;
-    } else{
+    } else {
         [self.likeButton setImage:[UIImage systemImageNamed:kLikedNormalRoutineButtonImage] forState:UIControlStateNormal];
         self.likeButton.tintColor = [UIColor systemBlueColor];
         self.isLiked = NO;

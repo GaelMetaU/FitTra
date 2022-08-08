@@ -40,7 +40,9 @@ static NSString * const kCreatedAtAttributeKey = @"createdAt";
 static NSString * const kProfilePictureAttributeKey = @"profilePicture";
 
 // Routine attributes
+static double const kRoutineFetchAmount = 20;
 static NSString * const kRoutineAttributeKey = @"routine";
+static NSString * const kInteractionScoreAttributeKey = @"interactionScore";
 static NSString * const kRoutineAuthorAttributeKey = @"routine.author";
 static NSString * const kBodyZoneListAttributeKey = @"bodyZoneList";
 static NSString * const kExerciseListAttributeKey = @"exerciseList";
@@ -61,18 +63,18 @@ static NSString * const kExerciseImageAttributeKey = @"exercise.image";
 
 
 @interface ParseAPIManager : NSObject
-+(void)logIn:(NSString *)username
++ (void)logIn:(NSString *)username
     password:(NSString *)password
   completion:(ParseManagerAuthenticationCompletionBlock) completion;
 
-+(void)signUp:(PFUser *)user
++ (void)signUp:(PFUser *)user
    completion:(ParseManagerCreateCompletionBlock) completion;
 
-+(void)logOut:(ParseManagerLogOutCompletionBlock) completion;
++ (void)logOut:(ParseManagerLogOutCompletionBlock) completion;
 
-+(void)fetchBodyZones:(ParseManagerFetchingDataRowsCompletionBlock) completion;
++ (void)fetchBodyZones:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
-+(void)fetchUsersExercises:(ParseManagerFetchingDataRowsCompletionBlock) completion;
++ (void)fetchUsersExercises:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
 + (Exercise *)postExercise:(Exercise *)exercise
                   progress:(UIProgressView *)progress
@@ -84,26 +86,29 @@ static NSString * const kExerciseImageAttributeKey = @"exercise.image";
 + (void)postRoutine:(Routine *)routine
          completion:(ParseManagerCreateCompletionBlock) completion;
 
-+ (void)fetchHomeTimelineRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion;
++ (void)fetchHomeTimelineRoutines:(long)skipValue completion:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
-+(void)fetchUsersCreatedRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion;
++ (void)fetchUsersCreatedRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
-+(void)fetchUsersLikedRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion;
++ (void)fetchUsersLikedRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
-+(void)changeProfilePicture:(PFFileObject *)image
++ (void)changeProfilePicture:(PFFileObject *)image
                  completion:(ParseManagerCreateCompletionBlock) completion;
 
-+(void)searchRoutines:(NSString *)searchTerm
++ (void)searchRoutines:(NSString *)searchTerm
    workoutPlaceFilter:(NSNumber *)workoutPlaceFilter
   trainingLevelFilter:(NSNumber *)trainingLevelFilter
+             skipValue:(double)skipValue
            completion:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
 + (void)likeRoutine:(Routine *)routine;
 
-+(void)unlike:(Routine *)routine;
++ (void)unlike:(Routine *)routine;
 
-+(void)isLiked:(Routine *)routine
++ (void)isLiked:(Routine *)routine
     completion:(ParseManagerFindObjectCompletionBlock) completion;
+
++ (void)changeRoutinesInteractionScore:(Routine *)routine value:(double)value;
 
 + (PFFileObject *)getPFFileFromURL:(NSURL *)video
                          videoName:(NSString *)videoName;

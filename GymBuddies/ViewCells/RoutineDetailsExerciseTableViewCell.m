@@ -21,7 +21,7 @@
 }
 
 
--(void)setCellContent:(ExerciseInRoutine *)exerciseInRoutine{
+- (void)setCellContent:(ExerciseInRoutine *)exerciseInRoutine{
     _exerciseInRoutine = exerciseInRoutine;
     
     self.exerciseImage.file = self.exerciseInRoutine.baseExercise.image;

@@ -18,7 +18,7 @@
     // Do any additional setup after loading the view.
 }
 
-+(UIAlertController *)createOkAlert:(NSString *)title message:(NSString *)message{
++ (UIAlertController *)createOkAlert:(NSString *)title message:(NSString *)message{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];

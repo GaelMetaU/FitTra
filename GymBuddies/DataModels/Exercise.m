@@ -19,7 +19,7 @@
     return @"Exercise";
 }
 
-+(Exercise *) initWithAttributes:(NSString *)exerciseTitle
++ (Exercise *) initWithAttributes:(NSString *)exerciseTitle
                           author:(PFUser *)exerciseAuthor
                            video:(PFFileObject *)exerciseVideo
                            image:(PFFileObject *)exerciseImage

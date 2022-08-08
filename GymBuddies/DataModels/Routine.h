@@ -21,8 +21,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray *exerciseList;
 @property (nonatomic, strong) NSMutableArray *bodyZoneList;
 @property (nonatomic, strong) NSNumber *likeCount;
+@property (nonatomic, strong) NSNumber *interactionScore;
+@property (nonatomic, strong) NSNumber *parkUsersInteractionScore;
+@property (nonatomic, strong) NSNumber *homeUsersInteractionScore;
+@property (nonatomic, strong) NSNumber *gymUsersInteractionScore;
+@property (nonatomic, strong) NSNumber *beginnerUsersInteractionScore;
+@property (nonatomic, strong) NSNumber *mediumUsersInteractionScore;
+@property (nonatomic, strong) NSNumber *expertUsersInteractionScore;
 
-+(Routine *)initWithAttributes:(PFUser *)author
+
++ (Routine *)initWithAttributes:(PFUser *)author
                   exerciseList:(NSMutableArray *)exerciseList
                   bodyZoneList:(NSMutableArray *)bodyZoneList
                          image:(PFFileObject *)image

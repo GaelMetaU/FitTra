@@ -18,12 +18,19 @@
 @dynamic exerciseList;
 @dynamic bodyZoneList;
 @dynamic likeCount;
+@dynamic interactionScore;
+@dynamic parkUsersInteractionScore;
+@dynamic gymUsersInteractionScore;
+@dynamic homeUsersInteractionScore;
+@dynamic beginnerUsersInteractionScore;
+@dynamic mediumUsersInteractionScore;
+@dynamic expertUsersInteractionScore;
 + (nonnull NSString *)parseClassName {
     return @"Routine";
 }
 
 
-+(Routine *)initWithAttributes:(PFUser *)author
++ (Routine *)initWithAttributes:(PFUser *)author
                   exerciseList:(NSMutableArray *)exerciseList
                   bodyZoneList:(NSMutableArray *)bodyZoneList
                          image:(PFFileObject *)image

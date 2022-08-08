@@ -22,7 +22,7 @@ static NSString * const kExpertFilterTitle = @"Expert";
 static NSString * const kHomeFilterTitle = @"Home";
 static NSString * const kParkFilterTitle = @"Park";
 static NSString * const kGymFilterTitle = @"Gym";
-static long const kSearchTimerLapse = 0.20;
+static double const kSearchTimerLapse = 0.30;
 
 
 @interface SearchViewController ()
@@ -30,37 +30,37 @@ static long const kSearchTimerLapse = 0.20;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UIButton *workoutPlaceFilter;
 @property (weak, nonatomic) IBOutlet UIButton *trainingLevelFilter;
-@property (strong, nonatomic) NSArray *results;
+@property (strong, nonatomic) NSMutableArray *results;
 @property (strong, nonatomic) UISearchController *searchController;
 @property (strong, nonatomic) NSTimer *timer;
 @property (strong, nonatomic) NSNumber *workoutPlaceFilterValue;
 @property (strong, nonatomic) NSNumber *trainingLevelFilterValue;
-
+@property (nonatomic) double maxAmountOfResults;
 @end
 
 @implementation SearchViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     self.searchBar.delegate = self;
-    
+
     self.resultsTableView.delegate = self;
     self.resultsTableView.dataSource = self;
     self.resultsTableView.rowHeight = UITableViewAutomaticDimension;
-    
+
     [self setTrainingLevelFilterMenu];
     [self setWorkoutPlaceFilterMenu];
-    
-    self.results = [[NSArray alloc]init];
-    
+
+    self.results = [[NSMutableArray alloc]init];
+
 }
 
 
 #pragma mark - Search bar methods
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-    if(self.timer)
+    if (self.timer)
         {
             [self.timer invalidate];
             self.timer = nil;
@@ -69,7 +69,7 @@ static long const kSearchTimerLapse = 0.20;
 }
 
 
--(void)searchTimerCall:(NSTimer *)timer{
+- (void)searchTimerCall:(NSTimer *)timer{
     [self searchRoutines];
 }
 
@@ -85,31 +85,31 @@ static long const kSearchTimerLapse = 0.20;
 
 #pragma mark - Filters
 
--(void)setTrainingLevelFilterMenu{
+- (void)setTrainingLevelFilterMenu{
     UIAction *beginner = [UIAction actionWithTitle:kBeginnerFilterTitle image:nil identifier:nil handler:^(UIAction *action){
         NSNumber *filterValue = [NSNumber numberWithLong:TrainingLevelBeginner];
         [self changeTrainingLevelFilterStates:kBeginnerFilterTitle newFilterValue:filterValue];
     }];
-    
+
     UIAction *medium = [UIAction actionWithTitle:kMediumFilterTitle image:nil identifier:nil handler:^(UIAction *action){
         NSNumber *filterValue = [NSNumber numberWithLong:TrainingLevelIntermediate];
         [self changeTrainingLevelFilterStates:kMediumFilterTitle newFilterValue:filterValue];
     }];
-    
+
     UIAction *expert = [UIAction actionWithTitle:kExpertFilterTitle image:nil identifier:nil handler:^(UIAction *action){
         NSNumber *filterValue = [NSNumber numberWithLong:TrainingLevelExpert];
         [self changeTrainingLevelFilterStates:kExpertFilterTitle newFilterValue:filterValue];
     }];
-    
+
     UIMenu *menu = [[UIMenu alloc]menuByReplacingChildren:[NSArray arrayWithObjects:beginner, medium, expert, nil]];
     self.trainingLevelFilter.menu = menu;
 }
 
 
--(void)changeTrainingLevelFilterStates:(NSString *)actionTitle newFilterValue:(NSNumber *)newFilterValue{
-    for(UIAction *action in self.trainingLevelFilter.menu.children){
-        if(action.title == actionTitle){
-            if(action.state == UIMenuElementStateOn){
+- (void)changeTrainingLevelFilterStates:(NSString *)actionTitle newFilterValue:(NSNumber *)newFilterValue{
+    for (UIAction *action in self.trainingLevelFilter.menu.children){
+        if (action.title == actionTitle){
+            if (action.state == UIMenuElementStateOn){
                 action.state = UIMenuElementStateOff;
                 self.trainingLevelFilterValue = nil;
             } else {
@@ -125,31 +125,31 @@ static long const kSearchTimerLapse = 0.20;
 }
 
 
--(void)setWorkoutPlaceFilterMenu{
+- (void)setWorkoutPlaceFilterMenu{
     UIAction *home = [UIAction actionWithTitle:kHomeFilterTitle image:nil identifier:nil handler:^(UIAction *action){
         NSNumber *filterValue = [NSNumber numberWithLong:WorkoutPlaceHome];
         [self changeWorkoutPlaceFilterStates:kHomeFilterTitle newFilterValue:filterValue];
     }];
-    
+
     UIAction *park = [UIAction actionWithTitle:kParkFilterTitle image:nil identifier:nil handler:^(UIAction *action){
         NSNumber *filterValue = [NSNumber numberWithLong:WorkoutPlacePark];
         [self changeWorkoutPlaceFilterStates:kParkFilterTitle newFilterValue:filterValue];
     }];
-    
+
     UIAction *gym = [UIAction actionWithTitle:kGymFilterTitle image:nil identifier:nil handler:^(UIAction *action){
         NSNumber *filterValue = [NSNumber numberWithLong:WorkoutPlaceGym];
         [self changeWorkoutPlaceFilterStates:kGymFilterTitle newFilterValue:filterValue];
     }];
-    
+
     UIMenu *menu = [[UIMenu alloc]menuByReplacingChildren:[NSArray arrayWithObjects:home, park, gym, nil]];
     self.workoutPlaceFilter.menu = menu;
 }
 
 
--(void)changeWorkoutPlaceFilterStates:(NSString *)actionTitle newFilterValue:(NSNumber *)newFilterValue{
+- (void)changeWorkoutPlaceFilterStates:(NSString *)actionTitle newFilterValue:(NSNumber *)newFilterValue{
     for(UIAction *action in self.workoutPlaceFilter.menu.children){
-        if(action.title == actionTitle){
-            if(action.state == UIMenuElementStateOn){
+        if (action.title == actionTitle){
+            if (action.state == UIMenuElementStateOn){
                 action.state = UIMenuElementStateOff;
                 self.workoutPlaceFilterValue = nil;
             } else {
@@ -157,7 +157,7 @@ static long const kSearchTimerLapse = 0.20;
                 self.workoutPlaceFilterValue = newFilterValue;
             }
         }
-        else{
+        else {
             action.state = UIMenuElementStateOff;
         }
     }
@@ -167,21 +167,32 @@ static long const kSearchTimerLapse = 0.20;
 
 #pragma mark - Search query
 
--(void)searchRoutines{
-    NSString *searchTerm = [CommonValidations standardizeSearchTerm:self.searchBar.text];;
-    if(searchTerm.length != 0){
-        [ParseAPIManager searchRoutines:searchTerm workoutPlaceFilter:self.workoutPlaceFilterValue trainingLevelFilter:self.trainingLevelFilterValue completion:^(NSArray * _Nonnull elements, NSError * _Nullable error) {
-                if(error != nil){
+
+- (void)searchRoutines{
+    NSString *searchTerm = [CommonValidations standardizeSearchTerm:self.searchBar.text];
+    if (searchTerm.length != 0){
+         __weak __typeof(self) weakSelf = self;
+        [ParseAPIManager searchRoutines:searchTerm workoutPlaceFilter:self.workoutPlaceFilterValue trainingLevelFilter:self.trainingLevelFilterValue skipValue:self.results.count completion:^(NSArray * _Nonnull elements, NSError * _Nullable error) {
+                __strong __typeof(self) strongSelf = weakSelf;
+                if (error != nil && strongSelf != nil){
                     UIAlertController *alert = [AlertCreator createOkAlert:@"Error searching" message:error.localizedDescription];
-                    [self presentViewController:alert animated:YES completion:nil];
+                    [strongSelf presentViewController:alert animated:YES completion:nil];
                 } else {
-                    self.results = elements;
-                    [self.resultsTableView reloadData];
+                    [strongSelf->_results addObjectsFromArray: elements];
+                    strongSelf->_maxAmountOfResults += kRoutineFetchAmount;
+                    [strongSelf->_resultsTableView reloadData];
                 }
         }];
     }
 }
 
+
+- (void)loadMoreResults{
+    // If current amount of results is not equal to the current maximum it means there are no results left
+    if (self.results.count == self.maxAmountOfResults){
+        [self searchRoutines];
+    }
+}
 
 #pragma mark - Table view methods
 
@@ -194,6 +205,13 @@ static long const kSearchTimerLapse = 0.20;
     RoutineTableViewCell *cell = [self.resultsTableView dequeueReusableCellWithIdentifier:kRoutineResultTableViewCellIdentifier];
     [cell setCellContent:self.results[indexPath.row]];
     return cell;
+}
+
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.row + 1 == self.results.count){
+        [self loadMoreResults];
+    }
 }
 
 

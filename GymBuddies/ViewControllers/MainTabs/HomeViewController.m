@@ -13,11 +13,13 @@
 #import "RoutineDetailsViewController.h"
 
 static NSString * const kHomeToDetailsSegue = @"HomeToDetailsSegue";
+static NSString * const kRoutineTableViewCell = @"RoutineTableViewCell";
 
 @interface HomeViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet GoogleMapsView *googleMapsView;
-@property (strong, nonatomic) NSArray *routineFeed;
+@property (strong, nonatomic) NSMutableArray *routineFeed;
+@property (nonatomic) double maxRoutineAmount;
 
 @end
 
@@ -31,26 +33,36 @@ static NSString * const kHomeToDetailsSegue = @"HomeToDetailsSegue";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight =UITableViewAutomaticDimension;
-    self.routineFeed = [[NSArray alloc]init];
-
+    self.routineFeed = [[NSMutableArray alloc]init];
+    self.maxRoutineAmount = 0;
     [self fetchRoutines];
 }
 
 
-#pragma mark - Table view methods
-
--(void)fetchRoutines{
-    [ParseAPIManager fetchHomeTimelineRoutines:^(NSArray * _Nonnull elements, NSError * _Nonnull error) {
-            if(elements != nil){
-                self.routineFeed = elements;
-                [self.tableView reloadData];
-            } else{
+- (void)fetchRoutines{
+    __weak __typeof(self) weakSelf = self;
+    [ParseAPIManager fetchHomeTimelineRoutines:self.routineFeed.count completion:^(NSArray * _Nonnull elements, NSError * _Nonnull error) {
+        __strong __typeof(self) strongSelf = weakSelf;
+            if (elements != nil){
+                [strongSelf->_routineFeed addObjectsFromArray: elements];
+                [strongSelf->_tableView reloadData];
+                self.maxRoutineAmount += kRoutineFetchAmount;
+            } else {
                 UIAlertController *alert = [AlertCreator createOkAlert:@"Error loading timeline" message:error.localizedDescription];
-                [self presentViewController:alert animated:YES completion:nil];
+                [strongSelf presentViewController:alert animated:YES completion:nil];
             }
     }];
 }
 
+
+- (void)loadMoreRoutines{
+    // If current amount of routines is not equal to the current maximum it means there are no routines left
+    if (self.routineFeed.count == self.maxRoutineAmount){
+        [self fetchRoutines];
+    }
+}
+
+#pragma mark - Table view methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.routineFeed.count;
@@ -64,12 +76,18 @@ static NSString * const kHomeToDetailsSegue = @"HomeToDetailsSegue";
 }
 
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row + 1 == self.routineFeed.count){
+        [self loadMoreRoutines];
+    }
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
     BOOL isHomeToDetailsSegue = [segue.identifier isEqualToString:kHomeToDetailsSegue];
-    if(isHomeToDetailsSegue){
+    if (isHomeToDetailsSegue){
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         RoutineDetailsViewController *routineDetailsViewController = [segue destinationViewController];
         routineDetailsViewController.routine = self.routineFeed[indexPath.row];

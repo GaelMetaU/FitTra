@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *amountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numberOfSetsLabel;
--(void)setCellContent:(ExerciseInRoutine *)exerciseInRoutine;
+- (void)setCellContent:(ExerciseInRoutine *)exerciseInRoutine;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -9,7 +9,6 @@
 #import "AVKit/AVKit.h"
 #import "AVFoundation/AVFoundation.h"
 #import "MobileCoreServices/MobileCoreServices.h"
-#import "Parse/Parse.h"
 #import "Parse/PFImageView.h"
 #import "ParseAPIManager.h"
 #import "CommonValidations.h"
@@ -52,6 +51,7 @@ static NSString * const kBodyZoneCollectionViewCellIdentifier = @"BodyZoneCollec
     self.bodyZoneCollectionView.dataSource = self;
     self.bodyZoneCollectionView.delegate = self;
     [self fetchBodyZones];
+    self.bodyZoneCollectionView.layer.cornerRadius = 10;
 }
 
 
@@ -61,7 +61,7 @@ static NSString * const kBodyZoneCollectionViewCellIdentifier = @"BodyZoneCollec
     self.doneButton.userInteractionEnabled = NO;
     self.postProgressView.hidden = NO;
     
-    if(self.exerciseBodyZoneTag.title == nil){
+    if (self.exerciseBodyZoneTag.title == nil){
         UIAlertController *alert = [AlertCreator createOkAlert:@"The exercise has no body zone" message:@"Pick a body zone for your exercise"];
         [self presentViewController:alert animated:YES completion:nil];
         self.postProgressView.hidden = YES;
@@ -72,26 +72,30 @@ static NSString * const kBodyZoneCollectionViewCellIdentifier = @"BodyZoneCollec
     [self _setTitleValue];
     
     Exercise *exercise = [Exercise initWithAttributes:self.exerciseTitle author:[PFUser currentUser] video:self.exerciseVideo image:self.imagePreview.file bodyZoneTag:self.exerciseBodyZoneTag];
+    
     // When uploading the object, it reasigns itself to include the objectID from Parse
+    __weak __typeof(self) weakSelf = self;
+    UINavigationController *navigationController = self.navigationController;
     exercise = [ParseAPIManager postExercise:exercise progress:self.postProgressView completion:^(BOOL succeeded, NSError * _Nullable error) {
-            if(!succeeded){
-                UIAlertController *alert = [AlertCreator createOkAlert:@"Error saving exercise" message:error.localizedDescription];
-                [self presentViewController:alert animated:YES completion:nil];
-            } else{
-                [self.delegate didCreateExercise:exercise];
-                [self.navigationController popViewControllerAnimated:YES];
-            }
-            self.postProgressView.hidden = YES;
-            self.doneButton.userInteractionEnabled = YES;
+        __strong __typeof(self) strongSelf = weakSelf;
+        if (!succeeded){
+            UIAlertController *alert = [AlertCreator createOkAlert:@"Error saving exercise" message:error.localizedDescription];
+            [strongSelf presentViewController:alert animated:YES completion:nil];
+        } else {
+            [strongSelf->_delegate didCreateExercise:exercise];
+            [navigationController popViewControllerAnimated:YES];
+        }
+        strongSelf->_postProgressView.hidden = YES;
+        strongSelf->_doneButton.userInteractionEnabled = YES;
     }];
     
 
 }
 
 
--(void)_setTitleValue{
+- (void)_setTitleValue{
     NSString *title = [CommonValidations standardizeUserAuthInput:self.titleField.text];
-    if(title.length == 0){
+    if (title.length == 0){
         title = [NSString stringWithFormat:@"%@ Exercise", self.exerciseBodyZoneTag.title];
     }
 
@@ -107,20 +111,22 @@ static NSString * const kBodyZoneCollectionViewCellIdentifier = @"BodyZoneCollec
 }
 
 
--(void)dismissKeyboard{
+- (void)dismissKeyboard{
     [self.view endEditing:YES];
 }
 
 #pragma mark -Collection View Methods
 
--(void)fetchBodyZones{
+- (void)fetchBodyZones{
+    __weak __typeof(self) weakSelf = self;
     [ParseAPIManager fetchBodyZones:^(NSArray * _Nonnull elements, NSError * _Nonnull error) {
-        if(elements == nil){
+        __strong __typeof(self) strongSelf = weakSelf;
+        if (elements == nil){
             UIAlertController *alert = [AlertCreator createOkAlert:@"Error loading screen" message:error.localizedDescription];
-            [self presentViewController:alert animated:YES completion:nil];
+            [strongSelf presentViewController:alert animated:YES completion:nil];
         } else {
-            self.bodyZones = elements;
-            [self.bodyZoneCollectionView reloadData];
+            strongSelf->_bodyZones = elements;
+            [strongSelf->_bodyZoneCollectionView reloadData];
         }
     }];
 }
@@ -142,14 +148,14 @@ static NSString * const kBodyZoneCollectionViewCellIdentifier = @"BodyZoneCollec
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     UICollectionViewCell *cell = [self.bodyZoneCollectionView cellForItemAtIndexPath:indexPath];
-    cell.backgroundColor = [UIColor secondarySystemBackgroundColor];
+    cell.backgroundColor = [UIColor systemGray5Color];
     self.exerciseBodyZoneTag = self.bodyZones[indexPath.row];
 }
 
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath{
     UICollectionViewCell *cell = [self.bodyZoneCollectionView cellForItemAtIndexPath:indexPath];
-    cell.backgroundColor = [UIColor systemBackgroundColor];
+    cell.backgroundColor = nil;
 }
 
 
@@ -157,7 +163,7 @@ static NSString * const kBodyZoneCollectionViewCellIdentifier = @"BodyZoneCollec
 
 
 - (IBAction)uploadVideo:(id)sender {
-    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
         self.mediaPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         self.mediaPicker.mediaTypes = @[(NSString*)kUTTypeMovie, (NSString*)kUTTypeAVIMovie, (NSString*)kUTTypeVideo, (NSString*)kUTTypeMPEG4];
         [self presentViewController:self.mediaPicker animated:YES completion:nil];
@@ -166,7 +172,7 @@ static NSString * const kBodyZoneCollectionViewCellIdentifier = @"BodyZoneCollec
 
 
 - (IBAction)uploadImage:(id)sender {
-    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
         self.mediaPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         self.mediaPicker.mediaTypes = @[(NSString*)kUTTypeImage];
         [self presentViewController:self.mediaPicker animated:YES completion:nil];
@@ -177,7 +183,7 @@ static NSString * const kBodyZoneCollectionViewCellIdentifier = @"BodyZoneCollec
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info{
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     
-    if([mediaType isEqualToString:(NSString*)kUTTypeMovie] ||  [mediaType isEqualToString:(NSString*)kUTTypeAVIMovie] || [mediaType isEqualToString:(NSString*)kUTTypeVideo] || [mediaType isEqualToString:(NSString*)kUTTypeMPEG4]){
+    if ([mediaType isEqualToString:(NSString*)kUTTypeMovie] ||  [mediaType isEqualToString:(NSString*)kUTTypeAVIMovie] || [mediaType isEqualToString:(NSString*)kUTTypeVideo] || [mediaType isEqualToString:(NSString*)kUTTypeMPEG4]){
         NSURL *urlVideo = [info objectForKey:UIImagePickerControllerMediaURL];
         NSString *videoName = [urlVideo.lastPathComponent componentsSeparatedByString:@"."][1];
         NSString *videoExtension = urlVideo.pathExtension;
@@ -196,7 +202,7 @@ static NSString * const kBodyZoneCollectionViewCellIdentifier = @"BodyZoneCollec
 }
 
 
--(void)setVideoView:(NSURL *)video{
+- (void)setVideoView:(NSURL *)video{
     [self.videoPreview setUpVideo:video];
     [self.videoPreview setPauseGesture];
 }

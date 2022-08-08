@@ -15,7 +15,7 @@
 }
 
 
--(void)setUpVideo:(NSURL *)videoURL{
+- (void)setUpVideo:(NSURL *)videoURL{
     @try {
         // Loading video on loop
         self.queuePlayer = [AVQueuePlayer new];
@@ -33,25 +33,25 @@
 }
 
 
--(void)setAlternateView{
+- (void)setAlternateView{
     self.alternateText.hidden = NO;
 }
 
 
--(void)setPauseGesture{
+- (void)setPauseGesture{
     // Adding tap gesture to pause and resume the video
     UITapGestureRecognizer *tapToPause = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pause)];
     [self addGestureRecognizer:tapToPause];
 }
 
 
--(void)play{
+- (void)play{
     [self.queuePlayer play];
 }
 
 
--(void)pause{
-    if(self.queuePlayer.rate != 0 && self.queuePlayer.error == nil){
+- (void)pause{
+    if (self.queuePlayer.rate != 0 && self.queuePlayer.error == nil){
         [self.queuePlayer pause];
         self.pauseView.hidden = NO;
         [self bringSubviewToFront:self.pauseView];

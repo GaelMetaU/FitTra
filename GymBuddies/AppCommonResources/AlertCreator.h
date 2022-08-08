@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface AlertCreator : UIAlertController
-+(UIAlertController *)createOkAlert:(NSString *)title message:(NSString *)message;
++ (UIAlertController *)createOkAlert:(NSString *)title message:(NSString *)message;
 @end
 
 NS_ASSUME_NONNULL_END

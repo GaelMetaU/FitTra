@@ -26,7 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 @property (strong, nonatomic) Routine *routine;
 @property (nonatomic) BOOL isLiked;
--(void)setCellContent:(Routine *)routine;
+@property (nonatomic) BOOL likedCheck;
+- (void)setCellContent:(Routine *)routine;
 @end
 
 NS_ASSUME_NONNULL_END
