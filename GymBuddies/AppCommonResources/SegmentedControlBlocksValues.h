@@ -42,6 +42,7 @@ static NSString * const kSecondsLabelValue = @"sec";
 
 @interface SegmentedControlBlocksValues : NSObject
 + (NSString *)setWorkoutPlaceLabelContent:(NSNumber *)workoutPlaceTag;
++ (UIColor *)setWorkoutPlaceLabelColor:(NSNumber *)workoutPlaceTag;
 + (NSString *)setTrainingLevelLabelText:(NSNumber *)trainingLevelTag;
 + (UIColor *)setTrainingLevelLabelColor:(NSNumber *)trainingLevelTag;
 + (NSString *)convertRepsMinsOrSecs:(NSNumber *)exerciseAmountUnitTag;

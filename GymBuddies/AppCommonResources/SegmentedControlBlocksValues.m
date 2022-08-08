@@ -26,6 +26,23 @@
 }
 
 
++ (UIColor *)setWorkoutPlaceLabelColor:(NSNumber *)workoutPlaceTag{
+    
+    WorkoutPlace workoutPlace = [workoutPlaceTag longValue];
+
+    switch (workoutPlace) {
+        case WorkoutPlaceGym:
+            return [UIColor systemPurpleColor];
+        case WorkoutPlacePark:
+            return [UIColor systemBlueColor];
+        case WorkoutPlaceHome:
+            return [UIColor systemMintColor];
+        default:
+            break;
+    }
+}
+
+
 + (NSString *)setTrainingLevelLabelText:(NSNumber *)trainingLevelTag{
     
     TrainingLevels trainingLevel = [trainingLevelTag longValue];

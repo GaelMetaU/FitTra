@@ -54,6 +54,7 @@ static NSString * const kLikedFilledRoutineButtonImage = @"suit.heart.fill";
     // Converts the workout place value to a string
     self.workoutPlaceLabel.layer.cornerRadius = kLabelBorderRadius;
     self.workoutPlaceLabel.text = [SegmentedControlBlocksValues setWorkoutPlaceLabelContent:self.routine.workoutPlace];
+    self.workoutPlaceLabel.backgroundColor = [SegmentedControlBlocksValues setWorkoutPlaceLabelColor:self.routine.workoutPlace];
     self.workoutPlaceLabel.layer.masksToBounds = YES;
     
     [self checkIfLiked];

@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="UIMenu" message="Requires Xcode 11 or later." minToolsVersion="11.0" requiredIntegratedClassName="UICommandDiff"/>
@@ -27,7 +26,6 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G4B-Rg-qXu">
                                 <rect key="frame" x="50" y="354" width="314" height="31"/>
-                                <color key="tintColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Log in"/>
                                 <connections>
@@ -36,7 +34,6 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ETS-Ha-IhT">
                                 <rect key="frame" x="50" y="415" width="314" height="31"/>
-                                <color key="tintColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="Sign up"/>
                                 <connections>
@@ -153,7 +150,6 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IUb-Zo-4i0">
                                 <rect key="frame" x="50" y="566" width="314" height="31"/>
-                                <color key="tintColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Submit"/>
                                 <connections>
@@ -229,8 +225,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="tintColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="selectedImageTintColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" systemColor="systemOrangeColor"/>
                     </tabBar>
                     <connections>
                         <segue destination="a0u-S4-F85" kind="relationship" relationship="viewControllers" id="bSo-oe-Xy6"/>
@@ -263,9 +258,7 @@
         <scene sceneID="Gde-ya-1ez">
             <objects>
                 <navigationController id="7xl-gp-vWh" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="9WR-bJ-IJp">
-                        <color key="badgeColor" systemColor="systemGreenColor"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="9WR-bJ-IJp"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="D9M-Gs-JF1">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -317,7 +310,6 @@
                                                 <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6b-gr-1bE">
                                                     <rect key="frame" x="30" y="7" width="114" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="tintColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <menu key="menu" id="hEl-Ja-hag">
                                                         <menuOptions key="menuOptions" displayInline="YES" destructive="YES"/>
                                                         <children>
@@ -326,13 +318,12 @@
                                                         </children>
                                                     </menu>
                                                     <state key="normal" title="Training Level" image="chevron.down" catalog="system">
-                                                        <color key="titleColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="titleColor" systemColor="systemOrangeColor"/>
                                                     </state>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="raZ-9s-mlR">
                                                     <rect key="frame" x="174" y="7" width="117.5" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="tintColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <menu key="menu" id="2cq-NW-ylJ">
                                                         <children>
                                                             <command title="Item 1" id="TeX-Tu-yYV"/>
@@ -340,7 +331,7 @@
                                                         </children>
                                                     </menu>
                                                     <state key="normal" title="Workout Place" image="chevron.down" catalog="system">
-                                                        <color key="titleColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="titleColor" systemColor="systemOrangeColor"/>
                                                     </state>
                                                 </button>
                                             </subviews>
@@ -400,7 +391,7 @@
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ttd-Y9-848">
                                                     <rect key="frame" x="359" y="10" width="45" height="20"/>
-                                                    <color key="backgroundColor" red="0.23277529059999999" green="1" blue="0.79544691229999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="backgroundColor" red="0.85882352939999995" green="0.47843137250000001" blue="0.031372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="Yea-Co-HMf"/>
@@ -429,7 +420,6 @@
                                                         <constraint firstAttribute="height" constant="22" id="I4e-vK-scM"/>
                                                         <constraint firstAttribute="width" constant="23" id="LlN-BM-Mhc"/>
                                                     </constraints>
-                                                    <color key="tintColor" name="AccentColor"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="suit.heart" catalog="system" title=""/>
                                                     <connections>
@@ -746,7 +736,6 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="31" id="4GN-rb-Vkw"/>
                                             </constraints>
-                                            <color key="tintColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" title="Add an exercise">
                                                 <imageReference key="image" image="plus.square.dashed" catalog="system" symbolScale="large"/>
@@ -796,7 +785,6 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="uDn-Ip-yFe"/>
                                                     </constraints>
-                                                    <color key="tintColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <menu key="menu" id="dzp-Mk-e4p">
                                                         <children>
                                                             <command title="Item 1" id="iNw-pe-Bwc"/>
@@ -886,14 +874,12 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="7d9-fS-kgI">
                                 <rect key="frame" x="329.5" y="11" width="64.5" height="34.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Done"/>
                                 <connections>
                                     <action selector="didTapDone:" destination="qY7-1U-Eu8" eventType="touchUpInside" id="HgP-yp-8QV"/>
                                 </connections>
                             </button>
-                            <color key="tintColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="didTapDone:" destination="qY7-1U-Eu8" id="ybe-3C-Uvf"/>
                             </connections>
@@ -934,7 +920,6 @@
                                     <constraint firstAttribute="width" constant="46" id="KNf-9G-aVe"/>
                                     <constraint firstAttribute="height" constant="46" id="v4B-6k-tK0"/>
                                 </constraints>
-                                <color key="tintColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" image="plus.square.dashed" catalog="system" title=""/>
                                 <connections>
@@ -1101,21 +1086,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="gF0-6R-PuA">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="676"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="3iT-7f-Ndz">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="308"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="yQD-pJ-uNH" customClass="PFImageView">
-                                            <rect key="frame" x="20" y="20" width="128" height="128"/>
-                                            <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="128" id="7bF-se-HNR"/>
-                                                <constraint firstAttribute="width" secondItem="yQD-pJ-uNH" secondAttribute="height" multiplier="1:1" id="zLk-xa-6gK"/>
-                                            </constraints>
-                                        </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nkp-eF-Mke">
                                             <rect key="frame" x="168" y="57" width="226" height="19.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -1135,7 +1112,7 @@
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6F3-1H-dU3">
                                             <rect key="frame" x="339" y="20" width="55" height="20"/>
-                                            <color key="backgroundColor" red="0.23277529059999999" green="1" blue="0.79544691229999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                             <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="55" id="1dy-00-6XH"/>
@@ -1225,6 +1202,15 @@
                                                 <constraint firstAttribute="height" constant="1" id="ZS3-CW-Okh"/>
                                             </constraints>
                                         </view>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="yQD-pJ-uNH" customClass="PFImageView">
+                                            <rect key="frame" x="20" y="20" width="128" height="128"/>
+                                            <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="128" id="7bF-se-HNR"/>
+                                                <constraint firstAttribute="width" secondItem="yQD-pJ-uNH" secondAttribute="height" multiplier="1:1" id="zLk-xa-6gK"/>
+                                            </constraints>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
+                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
@@ -1358,7 +1344,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c5o-xz-7hu">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="676"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6FG-x1-mtj">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="658"/>
@@ -1711,13 +1697,13 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="hp8-AB-jIN">
                                 <rect key="frame" x="322" y="11" width="72" height="34.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.38297408820000001" green="0.87680667639999998" blue="0.89147865770000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Done"/>
                                 <connections>
                                     <action selector="didTapDone:" destination="CT0-GG-GD7" eventType="touchUpInside" id="pF1-aG-Mcn"/>
                                 </connections>
                             </button>
+                            <color key="tintColor" red="0.023529411760000001" green="0.1215686275" blue="0.46274509800000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -1767,7 +1753,6 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="34" id="pOZ-qp-MSk"/>
                                             </constraints>
-                                            <color key="tintColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="filled" image="mappin" catalog="system" title="Search in this area">
                                                 <fontDescription key="titleFontDescription" type="system" pointSize="16"/>
@@ -1783,7 +1768,6 @@
                                                 <constraint firstAttribute="height" constant="30" id="Djg-BT-9tC"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="tintColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <menu key="menu" id="4K0-V4-w2d">
                                                 <children>
                                                     <command title="Item 1" id="KgB-96-cQs"/>
@@ -1791,7 +1775,7 @@
                                                 </children>
                                             </menu>
                                             <state key="normal" title="Parks" image="chevron.down" catalog="system">
-                                                <color key="titleColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="titleColor" systemColor="systemOrangeColor"/>
                                             </state>
                                         </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ic7-8z-jgG" customClass="GMSMapView">
@@ -1948,7 +1932,7 @@
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bQZ-42-pOw">
                                                     <rect key="frame" x="349" y="8" width="45" height="20"/>
-                                                    <color key="backgroundColor" red="0.23277529059999999" green="1" blue="0.79544691229999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                     <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="45" id="4Pj-fb-31s"/>
@@ -2077,7 +2061,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="QPG-DY-PmY">
                         <barButtonItem key="rightBarButtonItem" image="plus.circle" catalog="system" id="7Kf-JS-Y10">
-                            <color key="tintColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" systemColor="systemOrangeColor"/>
                             <connections>
                                 <segue destination="gaX-47-1Ds" kind="presentation" id="uLe-wz-Pus"/>
                             </connections>
@@ -2123,7 +2107,6 @@
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WOr-mi-xqs">
                                             <rect key="frame" x="257" y="149.5" width="81" height="31.5"/>
-                                            <color key="tintColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system" title="Liked"/>
                                             <connections>
@@ -2132,7 +2115,6 @@
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbb-P1-Kaa">
                                             <rect key="frame" x="57" y="149.5" width="100" height="31.5"/>
-                                            <color key="tintColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" image="rectangle.grid.1x2" catalog="system" title="Created"/>
                                             <connections>
@@ -2216,7 +2198,7 @@
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wjr-Bk-3vp">
                                                     <rect key="frame" x="349" y="8" width="45" height="20"/>
-                                                    <color key="backgroundColor" red="0.23277529059999999" green="1" blue="0.79544691229999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="backgroundColor" red="0.85882352939999995" green="0.47843137250000001" blue="0.031372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="BDy-CU-z9K"/>
@@ -2349,17 +2331,15 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Cjp-U9-rqK">
                                 <rect key="frame" x="20" y="5" width="51" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="">
                                     <imageReference key="image" image="gearshape" catalog="system" symbolScale="large"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" scale="large"/>
                                 </buttonConfiguration>
                             </button>
-                            <color key="tintColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="plus.circle" catalog="system" id="hxW-mb-mzu">
-                            <color key="tintColor" red="0.027450980390000001" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" systemColor="systemOrangeColor"/>
                             <connections>
                                 <segue destination="gaX-47-1Ds" kind="presentation" id="edN-lV-PU9"/>
                             </connections>
@@ -2398,13 +2378,14 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="KfO-Xn-Fxx"/>
-        <segue reference="uLe-wz-Pus"/>
+        <segue reference="AAt-2Z-ce0"/>
+        <segue reference="edN-lV-PU9"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" systemColor="systemOrangeColor"/>
     <resources>
         <image name="bookmark" catalog="system" width="112" height="128"/>
-        <image name="camera" width="752" height="752"/>
         <image name="camera" catalog="system" width="128" height="94"/>
+        <image name="camera" width="1003" height="1003"/>
         <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="heart" catalog="system" width="128" height="109"/>
@@ -2421,9 +2402,6 @@
         <image name="rectangle.grid.1x2" catalog="system" width="128" height="101"/>
         <image name="shift.fill" catalog="system" width="128" height="106"/>
         <image name="suit.heart" catalog="system" width="128" height="109"/>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
@@ -2442,8 +2420,8 @@
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
