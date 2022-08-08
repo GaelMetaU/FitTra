@@ -16,8 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSNumber *amountUnit;
 @property (nonatomic, strong) NSNumber *numberOfSets;
 @property (nonatomic, strong) Exercise *baseExercise;
-+(ExerciseInRoutine *) initWithExercise:(Exercise *)exercise;
-+(ExerciseInRoutine *) initWithAttributes:(Exercise *)exercise
++ (ExerciseInRoutine *) initWithExercise:(Exercise *)exercise;
++ (ExerciseInRoutine *) initWithAttributes:(Exercise *)exercise
                                    amount:(NSNumber *)amount
                                amountUnit:(NSNumber *)amountUnit
                              numberOfSets:(NSNumber *)numberOfSets;

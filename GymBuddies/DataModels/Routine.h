@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray *bodyZoneList;
 @property (nonatomic, strong) NSNumber *likeCount;
 
-+(Routine *)initWithAttributes:(PFUser *)author
++ (Routine *)initWithAttributes:(PFUser *)author
                   exerciseList:(NSMutableArray *)exerciseList
                   bodyZoneList:(NSMutableArray *)bodyZoneList
                          image:(PFFileObject *)image

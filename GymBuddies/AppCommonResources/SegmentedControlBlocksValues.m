@@ -9,7 +9,7 @@
 
 @implementation SegmentedControlBlocksValues
 
-+(NSString *)setWorkoutPlaceLabelContent:(NSNumber *)workoutPlaceTag{
++ (NSString *)setWorkoutPlaceLabelContent:(NSNumber *)workoutPlaceTag{
     
     WorkoutPlace workoutPlace = [workoutPlaceTag longValue];
 
@@ -26,7 +26,7 @@
 }
 
 
-+(NSString *)setTrainingLevelLabelText:(NSNumber *)trainingLevelTag{
++ (NSString *)setTrainingLevelLabelText:(NSNumber *)trainingLevelTag{
     
     TrainingLevels trainingLevel = [trainingLevelTag longValue];
     switch (trainingLevel) {
@@ -44,7 +44,7 @@
 }
 
 
-+(UIColor *)setTrainingLevelLabelColor:(NSNumber *)trainingLevelTag{
++ (UIColor *)setTrainingLevelLabelColor:(NSNumber *)trainingLevelTag{
     
     TrainingLevels trainingLevel = [trainingLevelTag longValue];
     switch (trainingLevel) {
@@ -60,7 +60,7 @@
 }
 
 
-+(NSString *)convertRepsMinsOrSecs:(NSNumber *)exerciseAmountUnitTag{
++ (NSString *)convertRepsMinsOrSecs:(NSNumber *)exerciseAmountUnitTag{
     ExerciseAmountUnits exerciseAmountUnits = [exerciseAmountUnitTag longValue];
     switch (exerciseAmountUnits){
         case ExerciseAmountUnitReps:

@@ -41,10 +41,10 @@ static NSString * const kMinutesLabelValue = @"min";
 static NSString * const kSecondsLabelValue = @"sec";
 
 @interface SegmentedControlBlocksValues : NSObject
-+(NSString *)setWorkoutPlaceLabelContent:(NSNumber *)workoutPlaceTag;
-+(NSString *)setTrainingLevelLabelText:(NSNumber *)trainingLevelTag;
-+(UIColor *)setTrainingLevelLabelColor:(NSNumber *)trainingLevelTag;
-+(NSString *)convertRepsMinsOrSecs:(NSNumber *)exerciseAmountUnitTag;
++ (NSString *)setWorkoutPlaceLabelContent:(NSNumber *)workoutPlaceTag;
++ (NSString *)setTrainingLevelLabelText:(NSNumber *)trainingLevelTag;
++ (UIColor *)setTrainingLevelLabelColor:(NSNumber *)trainingLevelTag;
++ (NSString *)convertRepsMinsOrSecs:(NSNumber *)exerciseAmountUnitTag;
 @end
 
 NS_ASSUME_NONNULL_END

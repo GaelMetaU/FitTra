@@ -8,6 +8,14 @@
 #import "ExerciseInCreateRoutineTableViewCell.h"
 #import "SegmentedControlBlocksValues.h"
 
+static NSString * const kRepetitionsActionTitle = @"repetitions";
+static NSString * const kSecondsActionTitle = @"seconds";
+static NSString * const kMinutesActionTitle = @"minutes";
+
+static NSString * const kRepetitionsMenuTitle = @"reps";
+static NSString * const kSecondsMenuTitle = @"sec";
+static NSString * const kMinutesMenuTitle = @"min";
+
 @implementation ExerciseInCreateRoutineTableViewCell
 
 - (void)awakeFromNib {
@@ -33,19 +41,19 @@
 
 // Creates the menu and actions to be displayed when pressing the reps button
 -(void)setDropdownMenu{
-    UIAction *reps = [UIAction actionWithTitle:@"repetitions" image:nil identifier:nil handler:^(UIAction *action){
+    UIAction *reps = [UIAction actionWithTitle:kRepetitionsActionTitle image:nil identifier:nil handler:^(UIAction *action){
         self.exerciseInRoutine.amountUnit = [NSNumber numberWithLong:ExerciseAmountUnitReps];
-        [self.amountUnitDropdownMenu setTitle:@"reps" forState:UIControlStateNormal];
+        [self.amountUnitDropdownMenu setTitle:kRepetitionsMenuTitle forState:UIControlStateNormal];
     }];
     
-    UIAction *sec = [UIAction actionWithTitle:@"seconds" image:nil identifier:nil handler:^(UIAction *action){
+    UIAction *sec = [UIAction actionWithTitle:kSecondsActionTitle image:nil identifier:nil handler:^(UIAction *action){
         self.exerciseInRoutine.amountUnit = [NSNumber numberWithLong:ExerciseAmountUnitSeconds];
-        [self.amountUnitDropdownMenu setTitle:@"sec" forState:UIControlStateNormal];
+        [self.amountUnitDropdownMenu setTitle:kSecondsMenuTitle forState:UIControlStateNormal];
     }];
     
-    UIAction *min = [UIAction actionWithTitle:@"minutes" image:nil identifier:nil handler:^(UIAction *action){
+    UIAction *min = [UIAction actionWithTitle:kMinutesActionTitle image:nil identifier:nil handler:^(UIAction *action){
         self.exerciseInRoutine.amountUnit = [NSNumber numberWithLong:ExerciseAmountUnitMinutes];
-        [self.amountUnitDropdownMenu setTitle:@"min" forState:UIControlStateNormal];
+        [self.amountUnitDropdownMenu setTitle:kMinutesMenuTitle forState:UIControlStateNormal];
     }];
     
     UIMenu *menu = [[UIMenu alloc]menuByReplacingChildren:[NSArray arrayWithObjects:reps, sec, min, nil]];

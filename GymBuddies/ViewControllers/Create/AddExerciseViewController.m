@@ -11,7 +11,7 @@
 #import "CreateExerciseViewController.h"
 #import "AlertCreator.h"
 
-static NSString * const CREATE_EXERCISE_SEGUE_IDENTIFIER = @"CreateExerciseSegue";
+static NSString * const kCreateExerciseSegueIdentifier = @"CreateExerciseSegue";
 
 @interface AddExerciseViewController () <UITableViewDelegate, UITableViewDataSource, CreateExerciseViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -34,16 +34,19 @@ static NSString * const CREATE_EXERCISE_SEGUE_IDENTIFIER = @"CreateExerciseSegue
 
 #pragma mark - Data fetching
 
--(void)loadUsersExercises{
+- (void)loadUsersExercises{
+    __weak __typeof(self) weakSelf = self;
     [ParseAPIManager fetchUsersExercises:^(NSArray * _Nonnull elements, NSError * _Nonnull error) {
-        if(elements!=nil){
-            for(PFObject *element in elements){
-                [self.exercises addObject:element[@"exercise"]];
+        __strong __typeof(self) strongSelf = weakSelf;
+        if (elements!=nil){
+            NSLog(@"%@", elements);
+            for (PFObject *element in elements){
+                [strongSelf->_exercises addObject:element[@"exercise"]];
             }
-            [self.tableView reloadData];
+            [strongSelf->_tableView reloadData];
         } else {
             UIAlertController *alert = [AlertCreator createOkAlert:@"Error fetching exercises" message:error.localizedDescription];
-            [self presentViewController:alert animated:YES completion:nil];
+            [strongSelf presentViewController:alert animated:YES completion:nil];
         }
     }];
 }
@@ -71,8 +74,8 @@ static NSString * const CREATE_EXERCISE_SEGUE_IDENTIFIER = @"CreateExerciseSegue
 
 #pragma mark - Delegate methods
 
-- (void) didCreateExercise:(Exercise *)exercise{
-    [self.exercises insertObject:exercise atIndex:0];
+- (void)didCreateExercise:(Exercise *)exercise{
+    [self.exercises addObject:exercise];
     [self.tableView reloadData];
 }
 
@@ -80,8 +83,8 @@ static NSString * const CREATE_EXERCISE_SEGUE_IDENTIFIER = @"CreateExerciseSegue
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    BOOL isCreateExerciseSegue = [segue.identifier isEqualToString:CREATE_EXERCISE_SEGUE_IDENTIFIER];
-    if(isCreateExerciseSegue){
+    BOOL isCreateExerciseSegue = [segue.identifier isEqualToString:kCreateExerciseSegueIdentifier];
+    if (isCreateExerciseSegue){
         CreateExerciseViewController *createExerciseViewController = [segue destinationViewController];
         createExerciseViewController.delegate = self;
     }

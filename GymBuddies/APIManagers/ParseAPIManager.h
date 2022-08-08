@@ -61,18 +61,18 @@ static NSString * const kExerciseImageAttributeKey = @"exercise.image";
 
 
 @interface ParseAPIManager : NSObject
-+(void)logIn:(NSString *)username
++ (void)logIn:(NSString *)username
     password:(NSString *)password
   completion:(ParseManagerAuthenticationCompletionBlock) completion;
 
-+(void)signUp:(PFUser *)user
++ (void)signUp:(PFUser *)user
    completion:(ParseManagerCreateCompletionBlock) completion;
 
-+(void)logOut:(ParseManagerLogOutCompletionBlock) completion;
++ (void)logOut:(ParseManagerLogOutCompletionBlock) completion;
 
-+(void)fetchBodyZones:(ParseManagerFetchingDataRowsCompletionBlock) completion;
++ (void)fetchBodyZones:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
-+(void)fetchUsersExercises:(ParseManagerFetchingDataRowsCompletionBlock) completion;
++ (void)fetchUsersExercises:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
 + (Exercise *)postExercise:(Exercise *)exercise
                   progress:(UIProgressView *)progress
@@ -86,23 +86,23 @@ static NSString * const kExerciseImageAttributeKey = @"exercise.image";
 
 + (void)fetchHomeTimelineRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
-+(void)fetchUsersCreatedRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion;
++ (void)fetchUsersCreatedRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
-+(void)fetchUsersLikedRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion;
++ (void)fetchUsersLikedRoutines:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
-+(void)changeProfilePicture:(PFFileObject *)image
++ (void)changeProfilePicture:(PFFileObject *)image
                  completion:(ParseManagerCreateCompletionBlock) completion;
 
-+(void)searchRoutines:(NSString *)searchTerm
++ (void)searchRoutines:(NSString *)searchTerm
    workoutPlaceFilter:(NSNumber *)workoutPlaceFilter
   trainingLevelFilter:(NSNumber *)trainingLevelFilter
            completion:(ParseManagerFetchingDataRowsCompletionBlock) completion;
 
 + (void)likeRoutine:(Routine *)routine;
 
-+(void)unlike:(Routine *)routine;
++ (void)unlike:(Routine *)routine;
 
-+(void)isLiked:(Routine *)routine
++ (void)isLiked:(Routine *)routine
     completion:(ParseManagerFindObjectCompletionBlock) completion;
 
 + (PFFileObject *)getPFFileFromURL:(NSURL *)video

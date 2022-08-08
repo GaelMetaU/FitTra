@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) PFFileObject *video;
 @property (nonatomic, strong) PFFileObject *image;
 @property (nonatomic, strong) BodyZone *bodyZoneTag;
-+(Exercise *) initWithAttributes:(NSString *)exerciseTitle
++ (Exercise *) initWithAttributes:(NSString *)exerciseTitle
                           author:(PFUser *)exerciseAuthor
                            video:(PFFileObject *)exerciseVideo
                            image:(PFFileObject *)exerciseImage

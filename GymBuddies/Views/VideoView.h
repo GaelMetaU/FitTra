@@ -16,10 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) AVQueuePlayer *queuePlayer;
 @property (weak, nonatomic) IBOutlet UIImageView *pauseView;
 @property (weak, nonatomic) IBOutlet UILabel *alternateText;
--(void)setUpVideo:(NSURL *)videoURL;
--(void)setAlternateView;
--(void)play;
--(void)setPauseGesture;
+- (void)setUpVideo:(NSURL *)videoURL;
+- (void)setAlternateView;
+- (void)play;
+- (void)setPauseGesture;
 @end
 
 NS_ASSUME_NONNULL_END

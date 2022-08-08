@@ -15,8 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet PFImageView *iconView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (nonatomic, strong) BodyZone *bodyZone;
--(void)setCellContent:(BodyZone *)bodyZone;
--(void)setCellContentNoTitle:(BodyZone *)bodyZone;
+- (void)setCellContent:(BodyZone *)bodyZone;
+- (void)setCellContentNoTitle:(BodyZone *)bodyZone;
 
 @end
 

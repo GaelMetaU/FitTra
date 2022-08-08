@@ -23,7 +23,7 @@
 }
 
 
-+(Routine *)initWithAttributes:(PFUser *)author
++ (Routine *)initWithAttributes:(PFUser *)author
                   exerciseList:(NSMutableArray *)exerciseList
                   bodyZoneList:(NSMutableArray *)bodyZoneList
                          image:(PFFileObject *)image

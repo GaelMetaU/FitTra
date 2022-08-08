@@ -33,7 +33,7 @@ static NSString * const kLongitudeAttributeKey = @"lng";
 @implementation GoogleMapsView
 
 
--(void)setContent{
+- (void)setContent{
     self.manager = [CLLocationManager new];
     self.manager.delegate = self;
     [self.manager requestWhenInUseAuthorization];
@@ -74,7 +74,7 @@ static NSString * const kLongitudeAttributeKey = @"lng";
 }
 
 
--(void)searchPlaces{
+- (void)searchPlaces{
     [self fetchPlacesNearby:^(NSArray *results, NSError *error) {
         if(error == nil){
             self.placesResults = results;
@@ -84,7 +84,7 @@ static NSString * const kLongitudeAttributeKey = @"lng";
 }
 
 
--(void)setPlaceTypeMenu{
+- (void)setPlaceTypeMenu{
     UIAction *searchParks = [UIAction actionWithTitle:kSearchParksActionTitle image:nil identifier:nil handler:^(UIAction *action){
         [self changePlaceTypeSearch:kSearchParksActionTitle workoutPlace:kPlaceTypePark];
     }];
@@ -100,7 +100,7 @@ static NSString * const kLongitudeAttributeKey = @"lng";
 }
 
 
--(void)changePlaceTypeSearch:(NSString *)actionTitle workoutPlace:(NSString *)workoutPlace{
+- (void)changePlaceTypeSearch:(NSString *)actionTitle workoutPlace:(NSString *)workoutPlace{
     for(UIAction *action in self.placeTypeSelectionMenu.menu.children){
         if(action.title == actionTitle){
             self.currentPlaceTypeSearch = workoutPlace;
@@ -114,7 +114,7 @@ static NSString * const kLongitudeAttributeKey = @"lng";
 
 #pragma mark - Map markers
 
--(void)placeMarkers{
+- (void)placeMarkers{
     [self.map clear];
     [self.markers removeAllObjects];
     
@@ -141,13 +141,13 @@ static NSString * const kLongitudeAttributeKey = @"lng";
 }
 
 
--(void)mapView:(GMSMapView *)mapView didTapAtCoordinate:(CLLocationCoordinate2D)coordinate{
+- (void)mapView:(GMSMapView *)mapView didTapAtCoordinate:(CLLocationCoordinate2D)coordinate{
     [self animatePlaceView:NO];
 }
 
 
--(void)animatePlaceView:(BOOL)presentingView{
-    if(!self.isShowingDetails && !presentingView){
+- (void)animatePlaceView:(BOOL)presentingView{
+    if (!self.isShowingDetails && !presentingView){
         return;
     }
     
@@ -156,8 +156,8 @@ static NSString * const kLongitudeAttributeKey = @"lng";
     double googleMapViewPadding;
     double newBottomConstraint;
     
-    if(presentingView){
-        if(self.isShowingDetails){
+    if (presentingView){
+        if (self.isShowingDetails){
             offset = 50;
         } else{
             offset = -50;
@@ -197,7 +197,7 @@ static NSString * const kLongitudeAttributeKey = @"lng";
 
 #pragma mark - Places data fetching
 
--(void)fetchPlacesNearby:(void (^)(NSArray * results, NSError * error))completion{
+- (void)fetchPlacesNearby:(void (^)(NSArray * results, NSError * error))completion{
     // Retrieving Google API key
     NSString *path = [[NSBundle mainBundle] pathForResource:kKeysFilePath ofType:kPlistType];
     NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
@@ -226,7 +226,7 @@ static NSString * const kLongitudeAttributeKey = @"lng";
 }
 
 
--(void)getVisibleViewRadius{
+- (void)getVisibleViewRadius{
     GMSVisibleRegion visibleRegion = [self.map.projection visibleRegion];
     GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc]initWithRegion:visibleRegion];
     
@@ -243,7 +243,7 @@ static NSString * const kLongitudeAttributeKey = @"lng";
 }
 
 
--(void)getMapCenter:(CLLocationCoordinate2D)southWest
+- (void)getMapCenter:(CLLocationCoordinate2D)southWest
           northEast:(CLLocationCoordinate2D)northEast{
         double swRadianLongitude = southWest.longitude * M_PI / 180;
         double neRadianLongitude = northEast.longitude * M_PI / 180;

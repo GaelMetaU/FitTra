@@ -39,14 +39,16 @@ static NSString * const kHomeToDetailsSegue = @"HomeToDetailsSegue";
 
 #pragma mark - Table view methods
 
--(void)fetchRoutines{
+- (void)fetchRoutines{
+    __weak __typeof(self) weakSelf = self;
     [ParseAPIManager fetchHomeTimelineRoutines:^(NSArray * _Nonnull elements, NSError * _Nonnull error) {
-            if(elements != nil){
-                self.routineFeed = elements;
-                [self.tableView reloadData];
-            } else{
+        __strong __typeof(self) strongSelf = weakSelf;
+            if (elements != nil){
+                strongSelf->_routineFeed = elements;
+                [strongSelf->_tableView reloadData];
+            } else {
                 UIAlertController *alert = [AlertCreator createOkAlert:@"Error loading timeline" message:error.localizedDescription];
-                [self presentViewController:alert animated:YES completion:nil];
+                [strongSelf presentViewController:alert animated:YES completion:nil];
             }
     }];
 }
@@ -69,7 +71,7 @@ static NSString * const kHomeToDetailsSegue = @"HomeToDetailsSegue";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
     BOOL isHomeToDetailsSegue = [segue.identifier isEqualToString:kHomeToDetailsSegue];
-    if(isHomeToDetailsSegue){
+    if (isHomeToDetailsSegue){
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         RoutineDetailsViewController *routineDetailsViewController = [segue destinationViewController];
         routineDetailsViewController.routine = self.routineFeed[indexPath.row];

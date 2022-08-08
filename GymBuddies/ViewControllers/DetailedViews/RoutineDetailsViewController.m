@@ -59,7 +59,7 @@ static NSString * const kRoutineToExerciseSegueIdentifier = @"RoutineToExerciseS
 #pragma mark - Top view content
 
 // Grabs the routine broguht by the segue and sets the view's content
--(void)setRoutine:(Routine *)routine{
+- (void)setRoutine:(Routine *)routine{
     _routine = routine;
     [self setTopViewContent];
 
@@ -71,7 +71,7 @@ static NSString * const kRoutineToExerciseSegueIdentifier = @"RoutineToExerciseS
 }
 
 
--(void)setTopViewContent{
+- (void)setTopViewContent{
     self.routineImage.file = self.routine.image;
     [self.routineImage loadInBackground];
     
@@ -99,8 +99,8 @@ static NSString * const kRoutineToExerciseSegueIdentifier = @"RoutineToExerciseS
 }
 
 
--(void)likeAction{
-    if(self.isLiked){
+- (void)likeAction{
+    if (self.isLiked){
         self.routine.likeCount = [NSNumber numberWithLong:[self.routine.likeCount longValue] - 1 ];
         self.likeCountLabel.text = [NSString stringWithFormat:@"%@", self.routine.likeCount];
         [ParseAPIManager unlike:self.routine];
@@ -114,19 +114,19 @@ static NSString * const kRoutineToExerciseSegueIdentifier = @"RoutineToExerciseS
 }
 
 
--(void)checkIfLiked{
+- (void)checkIfLiked{
     [ParseAPIManager isLiked:self.routine completion:^(PFObject * _Nonnull object, NSError * _Nullable error) {
         [self setLikedStatus:(error == nil)];
     }];
 }
 
 
--(void)setLikedStatus:(BOOL)liked{
-    if(liked){
+- (void)setLikedStatus:(BOOL)liked{
+    if (liked){
         [self.likeButton setImage:[UIImage systemImageNamed:kLikedFilledRoutineButtonImage] forState:UIControlStateNormal];
         self.likeButton.tintColor = [UIColor systemRedColor];
         self.isLiked = YES;
-    } else{
+    } else {
         [self.likeButton setImage:[UIImage systemImageNamed:kLikedNormalRoutineButtonImage] forState:UIControlStateNormal];
         self.likeButton.tintColor = [UIColor systemBlueColor];
         self.isLiked = NO;
@@ -168,7 +168,7 @@ static NSString * const kRoutineToExerciseSegueIdentifier = @"RoutineToExerciseS
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
     BOOL isRoutineToExerciseSegue = [segue.identifier isEqualToString:kRoutineToExerciseSegueIdentifier];
-    if(isRoutineToExerciseSegue){
+    if (isRoutineToExerciseSegue){
         NSIndexPath *indexPath = [self.exerciseListTableView indexPathForCell:sender];
         ExerciseDetailsViewController *exerciseDetailsViewController = [segue destinationViewController];
         exerciseDetailsViewController.exercise = self.exerciseList[indexPath.row][kBaseExerciseAttributeKey];

@@ -37,13 +37,13 @@ static NSString * const kProfilePictureKey = @"profilePicture";
 }
 
 
--(void)setExercise:(Exercise *)exercise{
+- (void)setExercise:(Exercise *)exercise{
     _exercise = exercise;
     
     self.exerciseImage.file = self.exercise.image;
     [self.exerciseImage loadInBackground];
     
-    if(self.exercise.author[kProfilePictureKey]){
+    if (self.exercise.author[kProfilePictureKey]){
         self.authorProfilePicture.file = self.exercise.author[kProfilePictureKey];
         self.authorProfilePicture.layer.cornerRadius = self.authorProfilePicture.frame.size.width/2;
         [self.authorProfilePicture loadInBackground];
@@ -61,13 +61,13 @@ static NSString * const kProfilePictureKey = @"profilePicture";
 
 #pragma mark - Video play
 
--(void)playVideo{
-    if(self.exercise.video != nil){
+- (void)playVideo{
+    if (self.exercise.video != nil){
         NSURL *url = [NSURL URLWithString:self.exercise.video.url];
         [self.videoView setUpVideo:url];
         [self.videoView setPauseGesture];
         [self.videoView play];
-    } else{
+    } else {
         [self.videoView setAlternateView];
     }
 }
