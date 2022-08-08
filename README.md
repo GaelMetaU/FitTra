@@ -28,52 +28,68 @@ Also, a routine can be set to be done from home, in a park or in a gym, so you c
 **Required Must-have Stories**
 
 * A user can login
-* A user can see recommended routines on the feed. A ranking algorithm or system will be used (To be decided)
+* A user can see recommended routines on the feed. A ranking algorithm or system will be used
 * The session must be saved for users not having to log in everytime
-* A user can create original exercise and save it to build routines with them.
-* A user can build an exercising routine specifying wich excercise, (from the default library or an original one) and how many repetitions or how much time, and also assign where can it be done (gym, park or home).
-* A user can see its profile to see their own routines
-* A user can search for a routine depending on a particular body zone or excercise
-* A user can like another user's routines to save them in its profile
-* A user get recommended and look for parks or gyms near it using Google Maps API
-* A user can add videos to their routine by using Youtube's API
+* A user can create an original exercise and save it to build routines with them.
+* A user can build an exercising routine specifying which excercise and how many repetitions or how much time, and also assign where can it be done (gym, park or home) and the training level of the routine (beginner, medium or expert).
+* A user can see its profile to see their created and liked routines to keep them accesible.
+* A user can search for a routine by the routine caption and filtering by training level and place tag
+* A user can like another user's routines to save them in their profile
+* A user get recommended and look for parks or gyms near them using Google Maps API
+* After finding a park or gym, users can tap on it and go to the Google Maps app or website
+* A user can add a video to their exercise for other users to see the correct technique
 
 **Optional Nice-to-have Stories**
 
-* A user can filter it's own routines to look for a specific one.
-* A user can filter it's liked routines to look fo a specific one.
-* A user can follow other users to stay tuned of their posts.
-* A user can get recommendations for places to excercise nearby.
-* A user can save exercises from other routines to later build routines with them.
-* Being able to add friends to workout together, you can send routines to the group or chat 
+* Users can tap on another user's profile picture to see their profile with their created routines
+* Users can save other user's exercises to build their routines
+
 
 ### 2. Screen Archetypes
 
 * Login 
    * Users can tap on create an account
    * Users can log into the app
+   
 * Home 
+   * Users can see a map view with their current location in which they can search for parks and gyms and visit them on Google Maps
    * Users can see the recommended excercising routines
-   * Users can click on their profile picture to visit their profile
    * Users can tap on a routine to see the details
-   * Users can double tap to save a routine
+   * Users can tap on a heart button to like a routine
    * Users can tap on a button to create a routine
 * Create routine
     * Users can create a list of excercises, indicating the name, number of repetitions or time 
     * Users can add a place tag to indicate if the routine is for home, exteriors or a gym
+    * Users can add a level tag to indicate if the routine is on a beginner, medium or expert level
     * Users can add a video guide by inserting a Youtube link (optional)
     * Users can tap a button to post the routine
-* Details
-    * Users can see the details of the routine, time, reps, where to do it
+* Add Exercise to routine
+    * Users can pick an exercise to add to their routine
+    * Users can tap a button to create a new exercise
+* Create exercise
+    * Users can upload a video view of their exercise 
+    * Users can uplaod a photo of their exercise
+    * Users can name and specify the body zone target of their new exercise
+    * Users can save that exercise to their account
+* Routine details
+    * Users can see the details of the routine, time, reps, the workout place and training level
     * Users can tap on the author's profile picture to visit it's profile
-    * Users can double tap to save the routine
+    * Users can tap on an exercise to see a video view of it
+    * Users can tap on the heart button to like the routine
+* Exercise details
+    * Users can see the exercise information
+    * Users can see a video preview of the exercise
 * Search 
+    * Users can type in a search bar the part of the body they want to excercise
+    * Users can apply filters to their search depending on the training level or the workout place 
     * Users can type in a search bar the part of the body they want to excercise
     * Users can see in a table view the results of their search
     * Users can tap on a routine to see the details
 * Profile 
     * Users can see their saved routines
     * Users can see their own routines
+    * Users can log out
+    * Users can change their profile picture
     * Users can tap on a button to create a routine
 
 
@@ -114,66 +130,99 @@ https://www.figma.com/file/rEp679zAVBdmXpQH7HhDaI/Untitled?node-id=3%3A3
 
 | Property           | Type   | Description                               |
 | ------------------ | ------ | ----------------------------------------- |
-| objectID           | String | User Identifier (default)                 |
+| objectID           | String | Object Identifier (default)               |
 | createdAt          | Date   | Creation date (default)                   |
 | updatedAt          | Date   | Last modification date (default)          |
 | email              | String | Email associated to the account (default) |
 | username           | String | User's nickname on screen                 |
+| profilePicture     | PFFile | User's profile picture                    |
 | password           | String | User's account password (default)         |
-| likedRoutines      | Array  | User's saved routines                     |
-| exercisesInRoutine | Array  | User's saved exercises                    |
-| skillLevel         | Int    | User's skill level                        |
-| workoutPlace       | Int    | User's preferred workout place            |
+| trainingLevel      | Number | User's training level                     |
+| workoutPlace       | Number | User's preferred workout place            |
 
 
 **Routine**
 
-| Property      | Type           | Description                                        |
-| ------------- | -------------- | -------------------------------------------------- |
-| objectID      | String         | User Identifier (default)                          |
-| createdAt     | Date           | Creation date (default)                            |
-| updatedAt     | Date           | Last modification date (default)                   |
-| author        | Pointer <User> | Reference to the routine's creator                 |
-| likeCount     | Int            | Number of users who liked the post                 |
-| bodyZoneTags  | Array          | Tags to the bodyzone the routine is focused        |
-| title         | String         | Name or identifier of the routine                  |
-| caption       | String         | Any comment or note the author leaves              |
-| exercises     | Array          | Array of exercises that compose the routine        |
-| workoutPlace  | Int            | Tag to say if the routine is for gym, home or park |
-| trainingLevel | Int            | Tag to say if the routine is for gym, home or park |
+| Property                      | Type           | Description                                             |
+| ----------------------------- | -------------- | ------------------------------------------------------- |
+| objectID                      | String         | Object Identifier (default)                             |
+| createdAt                     | Date           | Creation date (default)                                 |
+| updatedAt                     | Date           | Last modification date (default)                        |
+| author                        | Pointer <User> | Reference to the routine's creator                      |
+| likeCount                     | Number         | Number of users who liked the post                      |
+| bodyZoneTags                  | Array          | Tags to the bodyzone the routine is focused             |
+| title                         | String         | Name or identifier of the routine                       |
+| caption                       | String         | Any comment or note the author leaves                   |
+| image                         | PFFile         | Any comment or note the author leaves                   |
+| standardizedCaption           | String         | Any comment or note the author leaves                   |
+| standardizedAuthorUsername    | String         | Any comment or note the author leaves                   |
+| exerciseList                  | Array          | Array of ExerciseInRoutine objects                      |
+| workoutPlace                  | Number         | Tag to say if the routine is for gym, home or park      |
+| trainingLevel                 | Number         | Tag to say if the routine is beginner, medium or expert |
+| interactionScore              | Number         | Total interaction generated by the post                 |
+| homeUsersInteractionScore     | Number         | Interaction with users with home place tag              |
+| parkUsersInteractionScore     | Number         | Interaction with users with park place tag              |
+| gymUsersInteractionScore      | Number         | Interaction with users with gym place tag               |
+| beginnerUsersInteractionScore | Number         | Interaction with users with beginner training level tag |
+| mediumUsersInteractionScore   | Number         | Interaction with users with medium training level tag   |
+| expertUsersInteractionScore   | Number         | Interaction with users with expert training level tag   |
+
+
+**LikedRoutines**
+
+| Property  | Type              | Description                      |
+| --------- | ----------------- | -------------------------------- |
+| objectID  | String            | Object Identifier (default)      |
+| createdAt | Date              | Creation date (default)          |
+| updatedAt | Date              | Last modification date (default) |
+| user      | Pointer <User>    | User that liked the routine      |
+| routine   | Pointer <Routine> | Routine liked                    |
 
 
 **ExcerciseInRoutine**
 
 | Property     | Type               | Description                                        |
 | ------------ | ------------------ | -------------------------------------------------- |
-| Reps         | Bool               | True for reps, false for time                      |
-| amountUnit   | String             | Specify seconds, minutes or reps                   |
-| amount       | Integer            | Amount of either seconds, minutes or reps          |
+| amountUnit   | Number             | Tag to specify seconds, minutes or reps            |
+| amount       | Number             | Amount of either seconds, minutes or reps          |
+| numberOfSets | Number             | Amount of either seconds, minutes or reps          |
 | baseExercise | Pointer <Exercise> | Tag to the exercise model to get videos, name, etc |
 
 
-**Exercises**
+**Exercise**
 
-| Property     | Type                  | Description                                        |
-| ------------ | --------------------- | -------------------------------------------------- |
-| objectID     | String                | User Identifier (default)                          |
-| createdAt    | Date                  | Creation date (default)                            |
-| updatedAt    | Date                  | Last modification date (default)                   |
-| author       | Pointer <User>        | Reference to the exercise's creator                |
-| video        | String                | URL to the video                                   |
-| bodyZoneTag  | Pointer <BodyZoneTag> | Tags to the bodyzone the exercise is focused       |
+| Property     | Type                  | Description                                  |
+| ------------ | --------------------- | -------------------------------------------- |
+| objectID     | String                | Object Identifier (default)                  |
+| createdAt    | Date                  | Creation date (default)                      |
+| updatedAt    | Date                  | Last modification date (default)             |
+| title        | String                | User Identifier (default)                    |
+| author       | Pointer <User>        | Reference to the exercise's creator          |
+| video        | PFFile                | Exercise's video                             |
+| image        | PFFile                | Exercise's image                             |
+| bodyZoneTag  | Pointer <BodyZoneTag> | Tags to the bodyzone the exercise is focused |
 
 
-**BodyZones**
+**SavedExercise**
 
-| Property     | Type       | Description                                        |
-| ------------ | ---------- | -------------------------------------------------- |
-| objectID     | String     | User Identifier (default)                          |
-| createdAt    | Date       | Creation date (default)                            |
-| updatedAt    | Date       | Last modification date (default)                   |
-| icon         | File       | Image representing the body zone                   |
-| title        | String     | Name of the body zone                              |
+| Property  | Type               | Description                      |
+| --------- | ------------------ | -------------------------------- |
+| objectID  | String             | Object Identifier (default)      |
+| createdAt | Date               | Creation date (default)          |
+| updatedAt | Date               | Last modification date (default) |
+| user      | Pointer <User>     | User that liked the routine      |
+| exercise  | Pointer <Exercise> | Routine liked                    |
+
+
+**BodyZone**
+
+| Property     | Type       | Description                      |
+| ------------ | ---------- | -------------------------------- |
+| objectID     | String     | User Identifier (default)        |
+| createdAt    | Date       | Creation date (default)          |
+| updatedAt    | Date       | Last modification date (default) |
+| icon         | PFFile     | Image representing the body zone |
+| title        | String     | Name of the body zone            |
 
 
 
@@ -181,24 +230,31 @@ https://www.figma.com/file/rEp679zAVBdmXpQH7HhDaI/Untitled?node-id=3%3A3
 ##### Requests by screen
 * Login
     * User authentication
+* Register
+    * User sign up
 * Home
     * Get recommended routines
+    * Like a routine
     * Get Google Maps View
+    * Get Google Places API nearby places search
+    * Get Google Places SDK place details
 * Profile
-    * Get user's information
-    * Get user's routines
+    * Get user's created routines
     * Get user's liked routines
+    * Change profile picture update request
     * User Log out
-* Details
+* Routine Details
+    * All data will come from the home feed, so no requests here
+* Exercise Details
     * All data will come from the home feed, so no requests here
 * Search
-    * Get user's request results based on the algortihm or system designed
+    * Get user's request results based on the searching system
 * Create Routine
     * Adding a routine to the database
 * Add Exercise
     * Get user's exercises
 * Create Exercise
-    * Get body zone icons
+    * Get body zones
     * Adding an exercise to the database
     
 ##### API's to be used
