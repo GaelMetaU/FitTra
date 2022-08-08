@@ -70,7 +70,7 @@ static double const kSearchTimerLapse = 0.30;
 
 
 - (void)searchTimerCall:(NSTimer *)timer{
-    [self searchRoutines];
+    [self searchRoutines:YES];
 }
 
 
@@ -121,7 +121,7 @@ static double const kSearchTimerLapse = 0.30;
             action.state = UIMenuElementStateOff;
         }
     }
-    [self searchRoutines];
+    [self searchRoutines:YES];
 }
 
 
@@ -161,14 +161,14 @@ static double const kSearchTimerLapse = 0.30;
             action.state = UIMenuElementStateOff;
         }
     }
-    [self searchRoutines];
+    [self searchRoutines:YES];
 }
 
 
 #pragma mark - Search query
 
 
-- (void)searchRoutines{
+- (void)searchRoutines:(BOOL)isNewSearch{
     NSString *searchTerm = [CommonValidations standardizeSearchTerm:self.searchBar.text];
     if (searchTerm.length != 0){
          __weak __typeof(self) weakSelf = self;
@@ -178,8 +178,13 @@ static double const kSearchTimerLapse = 0.30;
                     UIAlertController *alert = [AlertCreator createOkAlert:@"Error searching" message:error.localizedDescription];
                     [strongSelf presentViewController:alert animated:YES completion:nil];
                 } else {
-                    [strongSelf->_results addObjectsFromArray: elements];
-                    strongSelf->_maxAmountOfResults += kRoutineFetchAmount;
+                    if (isNewSearch){
+                        strongSelf->_results = [elements mutableCopy];
+                        strongSelf->_maxAmountOfResults = kRoutineFetchAmount;
+                    } else {
+                        [strongSelf->_results addObjectsFromArray: elements];
+                        strongSelf->_maxAmountOfResults += kRoutineFetchAmount;
+                    }
                     [strongSelf->_resultsTableView reloadData];
                 }
         }];
@@ -190,7 +195,7 @@ static double const kSearchTimerLapse = 0.30;
 - (void)loadMoreResults{
     // If current amount of results is not equal to the current maximum it means there are no results left
     if (self.results.count == self.maxAmountOfResults){
-        [self searchRoutines];
+        [self searchRoutines:NO];
     }
 }
 
