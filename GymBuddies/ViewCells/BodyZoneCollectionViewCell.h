@@ -12,10 +12,20 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BodyZoneCollectionViewCell : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet PFImageView *iconView;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
+/**
+ * Body zone that gives content to the cell
+ */
 @property (nonatomic, strong) BodyZone *bodyZone;
+
+/**
+ * Setting the cell content with an image view and a title
+ */
 - (void)setCellContent:(BodyZone *)bodyZone;
+
+/**
+ * Setting the cell content with an image view only
+ */
 - (void)setCellContentNoTitle:(BodyZone *)bodyZone;
 
 @end

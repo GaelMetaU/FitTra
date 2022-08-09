@@ -12,13 +12,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ExerciseInCreateRoutineTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet PFImageView *exerciseImage;
-@property (weak, nonatomic) IBOutlet PFImageView *bodyZoneIcon;
-@property (weak, nonatomic) IBOutlet UILabel *exerciseTitle;
-@property (weak, nonatomic) IBOutlet UITextField *numberOfRepsOrTimeField;
-@property (weak, nonatomic) IBOutlet UITextField *numberOfSetsField;
-@property (weak, nonatomic) IBOutlet UIButton *amountUnitDropdownMenu;
+
+/**
+ * Exercise that gives all properties to the cell
+ */
 @property (strong, nonatomic) ExerciseInRoutine *exerciseInRoutine;
+
+ /**
+  * Setting the cell's content with an ExerciseInRoutine
+  */
 - (void) setCellContent:(ExerciseInRoutine *)exerciseInRoutine;
 @end
 

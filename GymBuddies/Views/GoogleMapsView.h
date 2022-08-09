@@ -14,21 +14,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface GoogleMapsView : UIView <CLLocationManagerDelegate, GMSMapViewDelegate>
-@property (weak, nonatomic) IBOutlet GMSMapView *map;
-@property (weak, nonatomic) IBOutlet UIButton *searchEnabledButton;
-@property (weak, nonatomic) IBOutlet UIButton *placeTypeSelectionMenu;
-@property (weak, nonatomic) IBOutlet UIButton *distanceSelectionMenu;
-@property (weak, nonatomic) IBOutlet UIButton *showLicenseButton;
-@property (weak, nonatomic) IBOutlet DetailedPlaceView *placeView;
-@property (strong, nonatomic) NSString *currentSearchAddress;
-@property (nonatomic) double searchRadius;
-@property (nonatomic) CLLocationCoordinate2D mapCenterView;
-@property (nonatomic) BOOL isShowingDetails;
-@property (strong, nonatomic) CLLocationManager *manager;
-@property CLLocationCoordinate2D currentLocation;
-@property NSString *currentPlaceTypeSearch;
-@property (strong, nonatomic) NSArray *placesResults;
-@property (strong, nonatomic) NSMutableArray *markers;
+
+/**
+ * Initiates the view content, loads the map and sets the necessary properties to track location
+ */
 - (void)setContent;
 @end
 

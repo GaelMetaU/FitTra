@@ -11,14 +11,25 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface VideoView : UIView
-@property (strong, nonatomic) AVPlayerLayer *playerLayer;
-@property (strong, nonatomic) AVPlayerLooper *player;
-@property (strong, nonatomic) AVQueuePlayer *queuePlayer;
-@property (weak, nonatomic) IBOutlet UIImageView *pauseView;
-@property (weak, nonatomic) IBOutlet UILabel *alternateText;
+
+/**
+ * Initiates the player with the video URL
+ */
 - (void)setUpVideo:(NSURL *)videoURL;
+
+/**
+ * Initiates the alternate view when there is no video
+ */
 - (void)setAlternateView;
+
+/**
+ * Starts playing the video
+ */
 - (void)play;
+
+/**
+ * Adds a tap to pause gesture
+ */
 - (void)setPauseGesture;
 @end
 

@@ -14,20 +14,21 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RoutineTableViewCell : UITableViewCell <UICollectionViewDelegate, UICollectionViewDataSource>
-@property (weak, nonatomic) IBOutlet PFImageView *authorProfilePicture;
-@property (weak, nonatomic) IBOutlet UILabel *authorUsernameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *trainingLevelLabel;
-@property (weak, nonatomic) IBOutlet UILabel *workoutPlaceLabel;
-@property (weak, nonatomic) IBOutlet UICollectionView *bodyZoneCollectionView;
-@property (weak, nonatomic) IBOutlet PFImageView *routineImage;
-@property (weak, nonatomic) IBOutlet UIButton *likeButton;
-@property (weak, nonatomic) IBOutlet UILabel *likeCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *captionLabel;
+
+/**
+ * Routine that gives content to the cell
+ */
 @property (strong, nonatomic) Routine *routine;
-@property (nonatomic) BOOL isLiked;
-@property (nonatomic) BOOL likedCheck;
+
+/**
+ * Setting the cell content with a routine
+ */
 - (void)setCellContent:(Routine *)routine;
+
+/**
+ * Boolean to indicate if the user has liked the routine or not
+ */
+@property (nonatomic) BOOL isLiked;
 @end
 
 NS_ASSUME_NONNULL_END

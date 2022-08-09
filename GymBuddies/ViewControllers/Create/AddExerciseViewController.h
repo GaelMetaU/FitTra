@@ -17,6 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface AddExerciseViewController : UIViewController
+
+/**
+ * Delegate for the moment where a user taps the on an exercise to send the selected exercise
+ */
 @property (nonatomic, weak) id<AddExerciseViewControllerDelegate> delegate;
 @end
 

@@ -2427,8 +2427,8 @@
     <color key="tintColor" systemColor="systemOrangeColor"/>
     <resources>
         <image name="bookmark" catalog="system" width="112" height="128"/>
-        <image name="camera" catalog="system" width="128" height="94"/>
         <image name="camera" width="1003" height="1003"/>
+        <image name="camera" catalog="system" width="128" height="94"/>
         <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="heart" catalog="system" width="128" height="109"/>

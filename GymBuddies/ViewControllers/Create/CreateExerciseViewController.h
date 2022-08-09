@@ -18,6 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @interface CreateExerciseViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate>
+
+/**
+ * Delegate for the moment where a user taps the "done" button to send the recently created object
+ */
 @property (nonatomic, weak) id<CreateExerciseViewControllerDelegate> delegate;
 
 @end

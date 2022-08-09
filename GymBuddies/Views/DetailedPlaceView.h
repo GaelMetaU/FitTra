@@ -10,11 +10,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DetailedPlaceView : UIView
-@property (weak, nonatomic) IBOutlet UILabel *placeName;
-@property (weak, nonatomic) IBOutlet UILabel *fullAddress;
+
+/**
+ * View's bottom constraint. Modifying it allows animations to take effect correclty
+ */
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
-@property (strong, nonatomic) NSURL *googleMapsURL;
-@property (strong, nonatomic) GMSPlace *place;
+
+/**
+ * After passing it a place ID from the Google Places API, retrieves the place's info to set the view's content
+ */
 - (void)getPlaceInfo:(NSString *)placeID;
 @end
 

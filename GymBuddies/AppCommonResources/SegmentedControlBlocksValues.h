@@ -10,18 +10,27 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * Enums that define the training level assigned to a routine or user
+ */
 typedef NS_ENUM(NSInteger, TrainingLevels){
     TrainingLevelBeginner,
     TrainingLevelIntermediate,
     TrainingLevelExpert
 };
 
+/**
+ * Enums that define the training level assigned to a routine or user
+ */
 typedef NS_ENUM(NSInteger, WorkoutPlace){
     WorkoutPlaceHome,
     WorkoutPlacePark,
     WorkoutPlaceGym
 };
 
+/**
+ * Enums that define the quantity unit of a given exercise (reps, minutes or seconds)
+ */
 typedef NS_ENUM(NSInteger, ExerciseAmountUnits){
     ExerciseAmountUnitSeconds,
     ExerciseAmountUnitMinutes,

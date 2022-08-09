@@ -11,7 +11,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RoutineDetailsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource>
+
+/**
+ * The routine to be displayed in the view
+ */
 @property (strong, nonatomic) Routine *routine;
+
+/**
+ * Boolean to specify if the routine is liked by the user
+ */
 @property (nonatomic) BOOL isLiked;
 
 @end
