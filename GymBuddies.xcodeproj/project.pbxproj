@@ -870,6 +870,7 @@
 				DEVELOPMENT_TEAM = WZZPSA36LP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GymBuddies/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = FitTra;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Need camera access to take video";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We want your location to recommend you the best places to workout around you";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need library access to upload images";
@@ -901,6 +902,7 @@
 				DEVELOPMENT_TEAM = WZZPSA36LP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GymBuddies/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = FitTra;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Need camera access to take video";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We want your location to recommend you the best places to workout around you";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need library access to upload images";

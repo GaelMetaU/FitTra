@@ -8,11 +8,18 @@
 #import "RoutineDetailsExerciseTableViewCell.h"
 #import "SegmentedControlBlocksValues.h"
 
+@interface RoutineDetailsExerciseTableViewCell ()
+@property (weak, nonatomic) IBOutlet PFImageView *exerciseImage;
+@property (weak, nonatomic) IBOutlet PFImageView *bodyZoneIcon;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *amountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *numberOfSetsLabel;
+@end
+
 @implementation RoutineDetailsExerciseTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

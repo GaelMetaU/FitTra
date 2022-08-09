@@ -16,6 +16,15 @@ static NSString * const kRepetitionsMenuTitle = @"reps";
 static NSString * const kSecondsMenuTitle = @"sec";
 static NSString * const kMinutesMenuTitle = @"min";
 
+@interface ExerciseInCreateRoutineTableViewCell ()
+@property (weak, nonatomic) IBOutlet PFImageView *exerciseImage;
+@property (weak, nonatomic) IBOutlet PFImageView *bodyZoneIcon;
+@property (weak, nonatomic) IBOutlet UILabel *exerciseTitle;
+@property (weak, nonatomic) IBOutlet UITextField *numberOfRepsOrTimeField;
+@property (weak, nonatomic) IBOutlet UITextField *numberOfSetsField;
+@property (weak, nonatomic) IBOutlet UIButton *amountUnitDropdownMenu;
+@end
+
 @implementation ExerciseInCreateRoutineTableViewCell
 
 - (void)awakeFromNib {

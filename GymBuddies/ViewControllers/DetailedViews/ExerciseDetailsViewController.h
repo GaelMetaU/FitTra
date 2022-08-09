@@ -11,6 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ExerciseDetailsViewController : UIViewController
+
+/**
+ * The exercise to be displayed on the view
+ */
 @property (strong, nonatomic) Exercise *exercise;
 @end
 

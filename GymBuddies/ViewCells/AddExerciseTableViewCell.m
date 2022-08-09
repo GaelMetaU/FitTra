@@ -9,6 +9,13 @@
 
 static NSString * const kProfilePictureKey = @"profilePicture";
 
+@interface AddExerciseTableViewCell ()
+@property (weak, nonatomic) IBOutlet PFImageView *exerciseImage;
+@property (weak, nonatomic) IBOutlet PFImageView *bodyZoneIcon;
+@property (weak, nonatomic) IBOutlet PFImageView *authorProfilePicture;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@end
+
 @implementation AddExerciseTableViewCell
 
 - (void)awakeFromNib {
@@ -20,9 +27,11 @@ static NSString * const kProfilePictureKey = @"profilePicture";
 }
 
 -(void)setExercise:(Exercise *)exercise{
-    self.exerciseImage.file = exercise.image;
-    self.bodyZoneIcon.file = exercise.bodyZoneTag.icon;
-    self.authorProfilePicture.file = exercise.author[kProfilePictureKey];
+    _exercise = exercise;
+    
+    self.exerciseImage.file = self.exercise.image;
+    self.bodyZoneIcon.file = self.exercise.bodyZoneTag.icon;
+    self.authorProfilePicture.file = self.exercise.author[kProfilePictureKey];
     
     [self.exerciseImage loadInBackground];
     [self.bodyZoneIcon loadInBackground];
@@ -30,7 +39,7 @@ static NSString * const kProfilePictureKey = @"profilePicture";
     
     self.authorProfilePicture.layer.cornerRadius = self.authorProfilePicture.frame.size.width/2;
     
-    self.titleLabel.text = exercise.title;
+    self.titleLabel.text = self.exercise.title;
 }
 
 @end

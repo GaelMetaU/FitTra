@@ -7,6 +7,11 @@
 
 #import "BodyZoneCollectionViewCell.h"
 
+@interface BodyZoneCollectionViewCell ()
+@property (weak, nonatomic) IBOutlet PFImageView *iconView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@end
+
 @implementation BodyZoneCollectionViewCell
 
 -(void)setCellContent:(BodyZone *)bodyZone{

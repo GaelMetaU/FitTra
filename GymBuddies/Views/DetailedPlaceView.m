@@ -7,6 +7,13 @@
 
 #import "DetailedPlaceView.h"
 
+@interface DetailedPlaceView ()
+@property (weak, nonatomic) IBOutlet UILabel *placeName;
+@property (weak, nonatomic) IBOutlet UILabel *fullAddress;
+@property (strong, nonatomic) NSURL *googleMapsURL;
+@property (strong, nonatomic) GMSPlace *place;
+@end
+
 @implementation DetailedPlaceView
 
 - (void)getPlaceInfo:(NSString *)placeID{

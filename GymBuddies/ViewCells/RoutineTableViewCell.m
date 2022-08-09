@@ -16,6 +16,20 @@ static NSString * const kProfilePictureKey = @"profilePicture";
 static NSString * const kLikedNormalRoutineButtonImage = @"suit.heart";
 static NSString * const kLikedFilledRoutineButtonImage = @"suit.heart.fill";
 
+@interface RoutineTableViewCell ()
+@property (weak, nonatomic) IBOutlet PFImageView *authorProfilePicture;
+@property (weak, nonatomic) IBOutlet UILabel *authorUsernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *trainingLevelLabel;
+@property (weak, nonatomic) IBOutlet UILabel *workoutPlaceLabel;
+@property (weak, nonatomic) IBOutlet UICollectionView *bodyZoneCollectionView;
+@property (weak, nonatomic) IBOutlet PFImageView *routineImage;
+@property (weak, nonatomic) IBOutlet UIButton *likeButton;
+@property (weak, nonatomic) IBOutlet UILabel *likeCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *captionLabel;
+@property (nonatomic) BOOL likedCheck;
+@end
+
 @implementation RoutineTableViewCell
 
 - (void)awakeFromNib {
@@ -54,6 +68,7 @@ static NSString * const kLikedFilledRoutineButtonImage = @"suit.heart.fill";
     // Converts the workout place value to a string
     self.workoutPlaceLabel.layer.cornerRadius = kLabelBorderRadius;
     self.workoutPlaceLabel.text = [SegmentedControlBlocksValues setWorkoutPlaceLabelContent:self.routine.workoutPlace];
+    self.workoutPlaceLabel.backgroundColor = [SegmentedControlBlocksValues setWorkoutPlaceLabelColor:self.routine.workoutPlace];
     self.workoutPlaceLabel.layer.masksToBounds = YES;
     
     [self checkIfLiked];

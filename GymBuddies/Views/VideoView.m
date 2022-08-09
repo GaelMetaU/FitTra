@@ -7,6 +7,14 @@
 
 #import "VideoView.h"
 
+@interface VideoView ()
+@property (strong, nonatomic) AVPlayerLayer *playerLayer;
+@property (strong, nonatomic) AVPlayerLooper *player;
+@property (strong, nonatomic) AVQueuePlayer *queuePlayer;
+@property (weak, nonatomic) IBOutlet UIImageView *pauseView;
+@property (weak, nonatomic) IBOutlet UILabel *alternateText;
+@end
+
 @implementation VideoView
 
 - (void)layoutSublayersOfLayer:(CALayer *)layer{
