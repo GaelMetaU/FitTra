@@ -272,7 +272,6 @@ static long  const kJPEGCompressionConstant = 0.75;
 
     [likedRoutine saveEventually];
     [self changeRoutinesInteractionScore:routine value:3];
-    //[routine saveInBackground];
 }
 
 
@@ -283,7 +282,6 @@ static long  const kJPEGCompressionConstant = 0.75;
         }
     }];
     [self changeRoutinesInteractionScore:routine value:-2];
-    //[routine saveInBackground];
 }
 
 

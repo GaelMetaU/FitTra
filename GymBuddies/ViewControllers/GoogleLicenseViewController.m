@@ -21,7 +21,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSString *license = [GMSServices openSourceLicenseInfo];
-    NSLog(@"%lu", [[GMSServices openSourceLicenseInfo] length]);
     self.licenseLabel1.text = [license substringWithRange:NSMakeRange(0, 50000)];
     self.licenseLabel2.text = [license substringWithRange:NSMakeRange(50000, 50000)];
     self.licenseLabel3.text = [license substringWithRange:NSMakeRange(100000, 50000)];

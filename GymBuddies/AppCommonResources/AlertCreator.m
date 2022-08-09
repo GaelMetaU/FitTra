@@ -15,7 +15,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
 + (UIAlertController *)createOkAlert:(NSString *)title message:(NSString *)message{
