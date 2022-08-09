@@ -171,8 +171,11 @@ static double const kSearchTimerLapse = 0.30;
 - (void)searchRoutines:(BOOL)isNewSearch{
     NSString *searchTerm = [CommonValidations standardizeSearchTerm:self.searchBar.text];
     if (searchTerm.length != 0){
+        if (isNewSearch){
+            self.maxAmountOfResults = 0;
+        }
          __weak __typeof(self) weakSelf = self;
-        [ParseAPIManager searchRoutines:searchTerm workoutPlaceFilter:self.workoutPlaceFilterValue trainingLevelFilter:self.trainingLevelFilterValue skipValue:self.results.count completion:^(NSArray * _Nonnull elements, NSError * _Nullable error) {
+        [ParseAPIManager searchRoutines:searchTerm workoutPlaceFilter:self.workoutPlaceFilterValue trainingLevelFilter:self.trainingLevelFilterValue skipValue:self.maxAmountOfResults completion:^(NSArray * _Nonnull elements, NSError * _Nullable error) {
                 __strong __typeof(self) strongSelf = weakSelf;
                 if (error != nil && strongSelf != nil){
                     UIAlertController *alert = [AlertCreator createOkAlert:@"Error searching" message:error.localizedDescription];
@@ -180,11 +183,10 @@ static double const kSearchTimerLapse = 0.30;
                 } else {
                     if (isNewSearch){
                         strongSelf->_results = [elements mutableCopy];
-                        strongSelf->_maxAmountOfResults = kRoutineFetchAmount;
                     } else {
                         [strongSelf->_results addObjectsFromArray: elements];
-                        strongSelf->_maxAmountOfResults += kRoutineFetchAmount;
                     }
+                    strongSelf->_maxAmountOfResults += kRoutineFetchAmount;
                     [strongSelf->_resultsTableView reloadData];
                 }
         }];
