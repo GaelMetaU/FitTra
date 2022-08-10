@@ -46,8 +46,8 @@ static NSString * const kRoutineTableViewCell = @"RoutineTableViewCell";
 #pragma mark - Fetching data
 
 -(void)refreshView:(UIRefreshControl *)refreshControl{
-    [self fetchRoutines];
     self.maxRoutineAmount = 0;
+    [self fetchRoutines];
     [refreshControl endRefreshing];
 }
 
