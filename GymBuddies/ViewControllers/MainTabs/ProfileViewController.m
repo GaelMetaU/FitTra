@@ -200,7 +200,6 @@ static NSString * kRoutineTableViewCellIdentifier = @"RoutineTableViewCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (self.showCreatedOrLikedRoutinesIndicator == kShowLikedRoutines){
-        NSLog(@"%lu", self.likedRoutineList.count);
         return self.likedRoutineList.count;
     } else if (self.showCreatedOrLikedRoutinesIndicator == kShowCreatedRoutines){
         return self.createdRoutineList.count;
