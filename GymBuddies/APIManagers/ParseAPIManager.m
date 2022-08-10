@@ -144,6 +144,7 @@ static long  const kJPEGCompressionConstant = 0.75;
     ParseManagerFetchingDataRowsCompletionBlock block = ^void(NSArray *elements, NSError *error){
         PFUser *user = [PFUser currentUser];
         NSMutableArray *finalResults = [[NSMutableArray alloc]init];
+        NSCalendar* calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
         for (Routine *routine in elements){
             double appeal = 0;
             
@@ -171,6 +172,7 @@ static long  const kJPEGCompressionConstant = 0.75;
                     break;
             }
             
+            appeal /= routine.createdAt.weeksAgo;
             routine[@"appeal"] = [NSNumber numberWithDouble:appeal];
             [finalResults addObject:routine];
         }
