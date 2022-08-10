@@ -45,8 +45,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES" textContentType="password"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GYM BUDDIES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDL-S0-EZl">
-                                <rect key="frame" x="77.5" y="138" width="259.5" height="48"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FitTra" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDL-S0-EZl">
+                                <rect key="frame" x="160.5" y="138" width="93" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1129,7 +1129,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="gF0-6R-PuA">
-                                <rect key="frame" x="0.0" y="88" width="414" height="676"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="3iT-7f-Ndz">
@@ -1387,7 +1387,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c5o-xz-7hu">
-                                <rect key="frame" x="0.0" y="88" width="414" height="676"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6FG-x1-mtj">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="658"/>
@@ -1964,7 +1964,7 @@
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="suit.heart" catalog="system" title=""/>
                                                     <connections>
-                                                        <action selector="didTapLike:" destination="mEz-0k-wdQ" eventType="touchUpInside" id="eTG-fe-dge"/>
+                                                        <action selector="didTapLike:" destination="mEz-0k-wdQ" eventType="touchUpInside" id="9Fs-kb-8UV"/>
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kfl-VM-atH">
@@ -2082,7 +2082,7 @@
                                             <outlet property="bodyZoneCollectionView" destination="JRf-BH-Cmk" id="V1v-7q-Ypu"/>
                                             <outlet property="captionLabel" destination="MbI-SK-CiZ" id="HC4-ud-b0S"/>
                                             <outlet property="dateLabel" destination="Nod-Ip-Pgl" id="Slm-ZC-zHV"/>
-                                            <outlet property="likeButton" destination="Obj-ji-nOL" id="fwf-Kw-QFi"/>
+                                            <outlet property="likeButton" destination="Obj-ji-nOL" id="Iwn-iu-vlL"/>
                                             <outlet property="likeCountLabel" destination="Kfl-VM-atH" id="fBm-JL-sAr"/>
                                             <outlet property="routineImage" destination="FfJ-oR-dIa" id="OoR-yJ-NLH"/>
                                             <outlet property="trainingLevelLabel" destination="jk2-yV-VxO" id="TqZ-pb-xo3"/>
@@ -2421,8 +2421,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="AAt-2Z-ce0"/>
-        <segue reference="edN-lV-PU9"/>
+        <segue reference="Vp9-Pf-db0"/>
+        <segue reference="uLe-wz-Pus"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="systemOrangeColor"/>
     <resources>

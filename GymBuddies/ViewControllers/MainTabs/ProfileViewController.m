@@ -52,9 +52,13 @@ static NSString * kRoutineTableViewCellIdentifier = @"RoutineTableViewCell";
     self.showCreatedRoutinesButton.selected = YES;
     self.showCreatedOrLikedRoutinesIndicator = kShowCreatedRoutines;
     
-    [self setProfileInfo];
     [self fetchUsersLikedRoutines];
     [self fetchUsersCreatedRoutines];
+    [self setProfileInfo];
+    
+    UIRefreshControl *refreshControl = [UIRefreshControl new];
+    [refreshControl addTarget:self action:@selector(refreshView:) forControlEvents:UIControlEventValueChanged];
+    [self.routinesTableView insertSubview:refreshControl atIndex:0];
 }
 
 
@@ -160,6 +164,15 @@ static NSString * kRoutineTableViewCellIdentifier = @"RoutineTableViewCell";
     UIAlertController *alert = [AlertCreator createOkAlert:@"Error loading your routines" message:error.localizedDescription];
     [self presentViewController:alert animated:YES completion:nil];
 }
+
+
+-(void)refreshView:(UIRefreshControl *)refreshControl{
+    [self fetchUsersLikedRoutines];
+    [self fetchUsersCreatedRoutines];
+    [self setProfileInfo];
+    [refreshControl endRefreshing];
+}
+
 
 #pragma mark - Button interaction
 

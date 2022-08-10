@@ -171,6 +171,7 @@ static long  const kJPEGCompressionConstant = 0.75;
                     break;
             }
             
+            appeal /= routine.createdAt.weeksAgo + 1;
             routine[@"appeal"] = [NSNumber numberWithDouble:appeal];
             [finalResults addObject:routine];
         }
