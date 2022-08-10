@@ -2264,7 +2264,7 @@
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" reuseIdentifier="BodyZoneCollectionViewCellNoTitle" translatesAutoresizingMaskIntoConstraints="NO" id="I7C-rt-fc1" customClass="BodyZoneCollectionViewCell">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BodyZoneCollectionViewCellNoTitle" translatesAutoresizingMaskIntoConstraints="NO" id="I7C-rt-fc1" customClass="BodyZoneCollectionViewCell">
                                                             <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="m1d-gb-ct1">

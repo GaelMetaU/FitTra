@@ -36,6 +36,10 @@ static NSString * const kRoutineTableViewCell = @"RoutineTableViewCell";
     self.routineFeed = [[NSMutableArray alloc]init];
     self.maxRoutineAmount = 0;
     [self fetchRoutines];
+    
+    UIRefreshControl *refreshControl = [UIRefreshControl new];
+    [refreshControl addTarget:self action:@selector(fetchRoutines) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:refreshControl atIndex:0];
 }
 
 

@@ -52,9 +52,11 @@ static NSString * kRoutineTableViewCellIdentifier = @"RoutineTableViewCell";
     self.showCreatedRoutinesButton.selected = YES;
     self.showCreatedOrLikedRoutinesIndicator = kShowCreatedRoutines;
     
-    [self setProfileInfo];
-    [self fetchUsersLikedRoutines];
-    [self fetchUsersCreatedRoutines];
+    [self loadContent];
+    
+    UIRefreshControl *refreshControl = [UIRefreshControl new];
+    [refreshControl addTarget:self action:@selector(loadContent) forControlEvents:UIControlEventValueChanged];
+    [self.routinesTableView insertSubview:refreshControl atIndex:0];
 }
 
 
@@ -127,6 +129,13 @@ static NSString * kRoutineTableViewCellIdentifier = @"RoutineTableViewCell";
 
 
 #pragma mark - Fetching routines
+
+-(void)loadContent{
+    [self fetchUsersLikedRoutines];
+    [self fetchUsersCreatedRoutines];
+    [self setProfileInfo];
+}
+
 
 - (void)fetchUsersCreatedRoutines{
     __weak __typeof(self) weakSelf = self;
